@@ -18,7 +18,7 @@ export default function TrendingNow() {
               key={product.id + i}
               span={
                 i + 1 === 3 || i + 1 === 4
-                  ? "col-span-2 bg-gray-100"
+                  ? "lg:col-span-2 md:col-span-2 sm:col-span-1 bg-gray-100"
                   : undefined
               }
               spanning={i + 1 === 3 || i + 1 === 4 ? true : undefined}

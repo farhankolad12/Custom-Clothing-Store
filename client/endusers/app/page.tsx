@@ -1,3 +1,4 @@
+import Footer from "./ui/Footer";
 import Header from "./ui/Header";
 import Categories from "./ui/Home/Categories";
 import FeatureProducts from "./ui/Home/FeatureProducts";
@@ -18,6 +19,7 @@ export default function Home() {
         <Categories />
         <TrendingNow />
       </main>
+      <Footer />
     </>
   );
 }
