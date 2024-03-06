@@ -8,10 +8,11 @@ import { Collapse } from "@material-tailwind/react";
 
 export default function Header() {
   const [menu, setMenu] = useState(false);
-
   return (
     <>
-      <header className="lg:bg-transparent bg-white flex justify-between items-center lg:p-0 py-4 relative z-50">
+      <header
+        className={`bg-transparent flex justify-between items-center lg:ps-5 lg:pt-0 pt-6 absolute top-0 w-full`}
+      >
         <Logo />
         <div className="hidden lg:flex gap-12">
           <CustomLink name="Home" to="/" />
@@ -50,7 +51,7 @@ export default function Header() {
           </button>
         </div>
       </header>
-      <Collapse className="relative z-40" open={menu}>
+      <Collapse className="relative z-40 mt-20" open={menu}>
         <div className="bg-white py-4 px-4">
           <div className="flex flex-col gap-4">
             <CustomLink name="Home" to="/" />
@@ -70,7 +71,7 @@ const CustomLink = ({ to, name }: { to: string; name: string }) => {
   const isPage = pathname === to ? "border-b-2 border-black" : "";
 
   return (
-    <Link className={`py-1 text-xs uppercase font-bold ${isPage}`} href={to}>
+    <Link className={`py-1 text-sm uppercase font-bold ${isPage}`} href={to}>
       {name}
     </Link>
   );

@@ -16,5 +16,10 @@ module.exports = withMT({
       },
     },
   },
+  variants: {
+    extend: {
+      display: ["group-hover"],
+    },
+  },
   plugins: [],
 });

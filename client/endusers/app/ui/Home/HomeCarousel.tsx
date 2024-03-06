@@ -5,7 +5,7 @@ import CarouselH from "./Carousel";
 
 export default function HomeCarousel() {
   return (
-    <section className="absolute top-0 z-0">
+    <section className="w-full">
       <ThemeProvider>
         <CarouselH />
       </ThemeProvider>
