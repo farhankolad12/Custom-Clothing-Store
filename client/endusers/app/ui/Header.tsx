@@ -2,12 +2,29 @@
 
 import Link from "next/link";
 import Logo from "./Logo";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { Collapse } from "@material-tailwind/react";
+import {
+  Button,
+  Collapse,
+  Dialog,
+  DialogHeader,
+} from "@material-tailwind/react";
+import { useAuth } from "../context/AuthProvider";
+import Authentication from "./Home/Authentication";
 
 export default function Header() {
   const [menu, setMenu] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const router = useRouter();
+
+  function handleOpen() {
+    setOpen(!open);
+  }
+
+  const { currentUser } = useAuth();
+
   return (
     <>
       <header
@@ -21,33 +38,37 @@ export default function Header() {
           <CustomLink name="Contact us" to="/contact" />
         </div>
         <div className="flex gap-6 lg:gap-4">
-          <button type="button" className="text-lg bg-transparent">
-            <i className="bi bi-search" />
+          <button type="button" className=" font-bold bg-transparent">
+            <i className=" text-xl bi bi-search" />
+          </button>
+          {currentUser ? (
+            <button
+              className="font-bold bg-transparent"
+              onClick={() => router.push("/profile")}
+            >
+              <i className=" text-xl bi bi-person" />
+            </button>
+          ) : (
+            <Authentication handleOpen={() => handleOpen()} open={open} />
+          )}
+          <button
+            type="button"
+            className=" font-bold bg-transparent hidden lg:block"
+          >
+            <i className=" text-xl bi bi-heart" />
           </button>
           <button
             type="button"
-            className="text-lg bg-transparent hidden lg:block"
+            className=" ms-0 lg:ms-5 text-black lg:text-white font-bold bg-transparent lg:bg-black lg:p-6 p-0"
           >
-            <i className="bi bi-person" />
-          </button>
-          <button
-            type="button"
-            className="text-lg bg-transparent hidden lg:block"
-          >
-            <i className="bi bi-heart" />
-          </button>
-          <button
-            type="button"
-            className="text-lg ms-0 lg:ms-5 text-black lg:text-white bg-transparent lg:bg-black lg:p-6 p-0"
-          >
-            <i className="bi bi-bag" /> 0
+            <i className=" text-xl bi bi-bag" /> 0
           </button>
           <button
             onClick={() => setMenu((prev) => !prev)}
             type="button"
-            className="lg:hidden text-2xl"
+            className="font-bold lg:hidden text-2xl"
           >
-            <i className="bi bi-list" />
+            <i className=" text-xl bi bi-list" />
           </button>
         </div>
       </header>

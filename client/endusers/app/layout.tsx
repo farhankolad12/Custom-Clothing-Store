@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import "./globals.css";
+import AuthProvider from "./context/AuthProvider";
+import "react-toastify/dist/ReactToastify.css";
+import ToastProvider from "./ui/ToastProvider";
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
 
@@ -26,7 +29,11 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
       </head>
-      <body className={`${roboto.className}`}>{children}</body>
+      <body className={`${roboto.className}`}>
+        <AuthProvider>
+          <ToastProvider>{children}</ToastProvider>
+        </AuthProvider>
+      </body>
     </html>
   );
 }

@@ -32,3 +32,19 @@ export type ProductType = {
   gender: string;
   createdAt: number;
 };
+
+export type CurrentUser = {
+  id: string;
+  fname: string;
+  lname: string;
+  phone: string;
+  birthDate: number;
+  gender: string;
+  email: string;
+  created: number;
+};
+
+export type AuthValue = {
+  currentUser: CurrentUser | undefined;
+  setCurrentUser: Function;
+};
