@@ -7,7 +7,58 @@ const Users = require("../models/userModel");
 const sendToken = require("../utils/sendToken");
 
 exports.register = catchAsyncErrors(async (req, res, next) => {
-  const { fname, lname, phone, birthDate, gender, email, pass } = req.body;
+  const {
+    fname,
+    lname,
+    phone,
+    birthDate,
+    gender,
+    email,
+    pass,
+    editing,
+    _id,
+    currPass,
+    newPass,
+  } = req.body;
+
+  if (editing) {
+    const user = await Users.findOne({ _id: _id });
+
+    if (currPass) {
+      if (await bcrypt.compare(currPass, user.password)) {
+        await Users.updateOne(
+          { _id: _id },
+          {
+            $set: {
+              fname,
+              lname,
+              email,
+              phone,
+              password: await bcrypt.hash(newPass, 10),
+            },
+          }
+        );
+      } else {
+        return next(new ErrorHandler("Current password is invalid!"));
+      }
+
+      return res.status(200).json({ success: true });
+    }
+
+    await Users.updateOne(
+      { _id: _id },
+      {
+        $set: {
+          fname,
+          lname,
+          email,
+          phone,
+        },
+      }
+    );
+
+    return res.status(200).json({ success: true });
+  }
 
   const emailExists = await Users.findOne({ email });
 
@@ -40,6 +91,10 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   }
 
   return next(new ErrorHandler("Email/password is incorrect", 401));
+});
+
+exports.logout = catchAsyncErrors(async (req, res, next) => {
+  return res.status(200).clearCookie("token").json({ success: true });
 });
 
 exports.forgetPassword = catchAsyncErrors(async (req, res, next) => {

@@ -34,7 +34,7 @@ export type ProductType = {
 };
 
 export type CurrentUser = {
-  id: string;
+  _id: string;
   fname: string;
   lname: string;
   phone: string;

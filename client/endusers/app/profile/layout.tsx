@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Header from "../ui/Header";
 import Footer from "../ui/Footer";
 import Link from "next/link";
+import LogoutButton from "../ui/profile/LogoutButton";
 
 export const metadata: Metadata = {
   title: "My Profile - Clothing Store",
@@ -28,8 +29,8 @@ export default function Layout({
             <span> | </span>
             <span className="uppercase font-bold text-black">my account</span>
           </div>
-          <div className="pt-20 pb-10 flex justify-between w-full gap-10">
-            <div className="w-1/4 flex flex-col gap-4">
+          <div className="pt-20 pb-10 flex lg:flex-row flex-col justify-between w-full gap-10">
+            <div className="lg:w-1/4 w-full flex flex-col gap-4">
               <div className="py-4 w-full border-b-2 border-gray-300">
                 <Link
                   href="/profile/orders"
@@ -55,15 +56,10 @@ export default function Layout({
                 </Link>
               </div>
               <div className="py-4 w-full border-b-2 border-gray-300">
-                <button
-                  type="button"
-                  className="bg-transparent uppercase font-bold text-xs "
-                >
-                  logout
-                </button>
+                <LogoutButton />
               </div>
             </div>
-            <div className="w-3/4">{children}</div>
+            <div className="lg:w-3/4 w-full">{children}</div>
           </div>
         </section>
       </main>

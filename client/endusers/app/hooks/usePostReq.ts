@@ -35,7 +35,7 @@ export default function usePostReq(url: string) {
         return res.data;
       })
       .catch((err) => {
-        const errString = err.response.data;
+        const errString: string = err.response.data;
 
         return setError(
           errString.slice(errString.indexOf(":"), errString.indexOf("<br>"))

@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-const { register, login } = require("../controllers/userController");
+const { register, login, logout } = require("../controllers/userController");
 const { isAuthenticate } = require("../middlewares/auth");
 
 const router = express.Router();
@@ -17,6 +17,7 @@ router.use(
 
 router.route("/register").post(register);
 router.route("/login").post(login);
+router.route("/logout").post(logout);
 router
   .route("/check-auth")
   .get(isAuthenticate, (req, res) => res.status(200).json({ user: req.user }));

@@ -28,8 +28,10 @@ export default function Login({
         remember: rememberRef.current?.checked,
       });
 
-      setCurrentUser(res?.user);
-      router.replace("/profile");
+      if (res) {
+        setCurrentUser(res?.user);
+        router.replace("/profile");
+      }
     } catch (err: any) {
       console.log(err);
     }
