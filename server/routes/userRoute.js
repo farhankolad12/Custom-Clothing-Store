@@ -17,7 +17,7 @@ router.use(
 
 router.route("/register").post(register);
 router.route("/login").post(login);
-router.route("/logout").post(logout);
+router.route("/logout").post(isAuthenticate, logout);
 router
   .route("/check-auth")
   .get(isAuthenticate, (req, res) => res.status(200).json({ user: req.user }));

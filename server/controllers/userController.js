@@ -82,9 +82,19 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.login = catchAsyncErrors(async (req, res, next) => {
-  const { email, password, remember } = req.body;
+  const { email, password, remember, isAdmin } = req.body;
 
-  const user = await Users.findOne({ email });
+  if (isAdmin) {
+    const user = await Users.findOne({ email, role: "admin" });
+
+    if (user && (await bcrypt.compare(password, user.password))) {
+      return sendToken({ user, cartItems: [] }, 200, res);
+    }
+
+    return next(new ErrorHandler("Email/password is incorrect", 401));
+  }
+
+  const user = await Users.findOne({ email, role: "customer" });
 
   if (user && (await bcrypt.compare(password, user.password))) {
     return sendToken({ user, cartItems: [] }, 200, res);

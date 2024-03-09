@@ -10,11 +10,14 @@ const sendToken = ({ user, cartItems }, statuscode, res) => {
 
   user.password = undefined;
 
-  return res.status(statuscode).cookie("token", token, options).json({
-    success: true,
-    user,
-    cartItems,
-  });
+  return res
+    .status(statuscode)
+    .cookie(user.role === "customer" ? "token" : "adminToken", token, options)
+    .json({
+      success: true,
+      user,
+      cartItems,
+    });
 };
 
 module.exports = sendToken;
