@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import "../globals.css";
 import Image from "next/image";
 import { Metadata } from "next";
 

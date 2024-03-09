@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthProvider from "./context/AuthProvider";
 import ToastProvider from "./utils/ToastProvider";
 import "react-toastify/dist/ReactToastify.css";
+import Navbar from "./ui/Navbar";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -33,7 +34,10 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         <ToastProvider>
-          <AuthProvider>{children}</AuthProvider>
+          <AuthProvider>
+            <Navbar />
+            {children}
+          </AuthProvider>
         </ToastProvider>
         <script
           src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

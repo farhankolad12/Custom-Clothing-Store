@@ -23,7 +23,9 @@ export default function usePostReq(url: string) {
 
     return await axios
       .post(
-        process.env.NEXT_PUBLIC_BACKEND_HOSTNAME + url,
+        `${
+          process.env.NEXT_PUBLIC_BACKEND_HOSTNAME + url
+        }?${new URLSearchParams(`isAdmin=${true}`)}`,
         payload.toString().includes("FormData")
           ? payload
           : JSON.stringify(payload),

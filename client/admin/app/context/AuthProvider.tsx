@@ -33,8 +33,6 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
       )
         .then(async (res) => {
           const data = await res.json();
-          console.log(data.user);
-
           return setCurrentUser(data.user);
         })
         .catch((err) => {
