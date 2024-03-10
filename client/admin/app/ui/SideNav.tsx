@@ -60,21 +60,24 @@ const CustomLink = ({
     <Link
       href={to}
       className={` text-decoration-none d-flex gap-3 align-items-center px-4 ${
-        to === "/" || pathname.split("/")[1]?.includes(to)
+        to.slice(to.indexOf("/") + 1) &&
+        pathname.includes(to.slice(to.indexOf("/") + 1))
           ? "border-start border-5 rounded py-2 border-success"
           : ""
       }`}
     >
       <i
         className={`bi bi-${icon} ${
-          to === "/" || pathname.split("/")[1].includes(to)
+          to.slice(to.indexOf("/") + 1) &&
+          pathname.includes(to.slice(to.indexOf("/") + 1))
             ? "text-success"
             : "text-secondary"
         } fw-bold fs-5`}
       />
       <strong
         className={`${
-          to === "/" || pathname.split("/")[1].includes(to)
+          to.slice(to.indexOf("/") + 1) &&
+          pathname.includes(to.slice(to.indexOf("/") + 1))
             ? "text-success"
             : "text-secondary"
         }`}

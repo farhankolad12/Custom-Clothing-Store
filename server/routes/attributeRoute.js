@@ -2,7 +2,11 @@ const express = require("express");
 const cors = require("cors");
 
 const { isAuthenticate } = require("../middlewares/auth");
-const { addAttributes } = require("../controllers/attributeController");
+const {
+  addAttributes,
+  getAttributes,
+  deleteAttribute,
+} = require("../controllers/attributeController");
 
 const router = express.Router();
 
@@ -16,5 +20,7 @@ router.use(
 );
 
 router.route("/attributes").post(isAuthenticate, addAttributes);
+router.route("/attributes").get(isAuthenticate, getAttributes);
+router.route("/remove-attribute").post(isAuthenticate, deleteAttribute);
 
 module.exports = router;

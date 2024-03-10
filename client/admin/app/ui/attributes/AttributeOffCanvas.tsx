@@ -1,23 +1,33 @@
 import usePostReq from "@/app/hooks/usePostReq";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function AttributeOffCanvas() {
+export default function AttributeOffCanvas({
+  setAttributes,
+  selectedAttribute,
+  setSelectedAttribute,
+}: {
+  setAttributes: Function;
+  setSelectedAttribute: Function;
+  selectedAttribute: any;
+}) {
   const [queryText, setQueryText] = useState("");
   const [variants, setVariants] = useState<{ id: string; variant: string }[]>(
     []
   );
 
-  const titleRef = useRef<HTMLInputElement>(null);
-  const nameRef = useRef<HTMLInputElement>(null);
-  const optionTypeRef = useRef<HTMLSelectElement>(null);
+  useEffect(() => {
+    setVariants(selectedAttribute?.options || []);
+  }, [selectedAttribute]);
+
+  const titleRef = useRef<HTMLInputElement>(null!);
+  const nameRef = useRef<HTMLInputElement>(null!);
+  const optionTypeRef = useRef<HTMLSelectElement>(null!);
 
   const { error, execute, loading } = usePostReq("/attributes");
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
-
-    console.log(optionTypeRef.current?.value);
 
     if (titleRef.current?.value === "" || nameRef.current?.value === "") {
       return toast.error("Please enter required fields", {
@@ -37,6 +47,7 @@ export default function AttributeOffCanvas() {
         displayName: nameRef.current?.value,
         type: optionTypeRef.current?.value,
         options: variants,
+        _id: selectedAttribute ? selectedAttribute._id : undefined,
       });
 
       if (!res) {
@@ -44,6 +55,31 @@ export default function AttributeOffCanvas() {
           position: "top-left",
         });
       }
+
+      toast.success("Changes Saved!", {
+        position: "top-left",
+      });
+
+      titleRef.current.value = "";
+      nameRef.current.value = "";
+      optionTypeRef.current.value = "radio";
+      setVariants([]);
+
+      if (selectedAttribute) {
+        return setAttributes((prev: any) => {
+          return {
+            ...prev,
+            attributes: prev.attributes.map((a: any) =>
+              a._id === selectedAttribute._id ? res?.attribute : a
+            ),
+          };
+        });
+      }
+
+      setAttributes((prev: any) => ({
+        ...prev,
+        attributes: [res?.attribute, ...prev.attributes],
+      }));
     } catch (err: any) {
       console.log(err);
     }
@@ -80,13 +116,14 @@ export default function AttributeOffCanvas() {
         </button>
       </div>
       <div className="offcanvas-body">
-        <form onSubmit={handleSubmit} className="mt-4 d-flex flex-column gap-4">
+        <form className="mt-4 d-flex flex-column gap-4">
           <div className="d-flex flex-lg-row flex-column gap-3 justify-content-between">
             <label htmlFor="title" className="text-secondary">
               Attribute Title
             </label>
             <input
               ref={titleRef}
+              defaultValue={selectedAttribute ? selectedAttribute.title : ""}
               placeholder="Color or Size or Material"
               type="text"
               id="title"
@@ -100,6 +137,9 @@ export default function AttributeOffCanvas() {
             <input
               id="dis-name"
               required
+              defaultValue={
+                selectedAttribute ? selectedAttribute.displayName : ""
+              }
               ref={nameRef}
               placeholder="Display Name"
               type="text"
@@ -116,6 +156,7 @@ export default function AttributeOffCanvas() {
               className="form-select text-light w-lg-50 bg-transparent border-secondary"
               defaultValue="radio"
               id="options"
+              defaultChecked={selectedAttribute ? selectedAttribute.type : ""}
             >
               <option className="bg-dark text-secondary" value="radio">
                 Radio
@@ -131,10 +172,10 @@ export default function AttributeOffCanvas() {
             </label>
             <div className="w-100 h-auto d-flex overflow-y-auto align-items-center flex-wrap form-control pb-0 bg-transparent pt-3-">
               <ul className="list-unstyled d-flex gap-2">
-                {variants.map((variant) => (
+                {variants.map((variant: any) => (
                   <li
-                    style={{ width: "60px" }}
-                    className="d-flex rounded justify-content-between bg-dark px-2 text-light"
+                    key={variant.id}
+                    className="d-flex rounded justify-content-between bg-dark px-3 text-light"
                   >
                     <span>{variant.variant}</span>
                     <button
@@ -176,7 +217,13 @@ export default function AttributeOffCanvas() {
       </div>
       <div style={{ backgroundColor: "#1f2937" }} className="offcanvas-footer">
         <div className="py-4 px-3 d-flex flex-lg-row flex-column gap-3">
-          <button type="button" className="btn btn-secondary w-100 py-2">
+          <button
+            data-bs-dismiss="offcanvas"
+            aria-label="Close"
+            type="button"
+            className="btn btn-secondary w-100 py-2"
+            onClick={() => setSelectedAttribute(undefined)}
+          >
             Cancel
           </button>
           <button
