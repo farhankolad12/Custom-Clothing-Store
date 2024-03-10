@@ -5,7 +5,6 @@ const express = require("express");
 const app = express();
 
 const cookieParser = require("cookie-parser");
-const bodyParser = require("body-parser");
 const connectDatabase = require("./config/database");
 const connectCloudinary = require("./config/cloudinaryUpload");
 
@@ -18,8 +17,10 @@ app.use(cookieParser());
 
 // Import Routers
 const user = require("./routes/userRoute");
+const attribute = require("./routes/attributeRoute");
 
 // Call Routers
 app.use("/api", user);
+app.use("/api", attribute);
 
 app.listen(4000);

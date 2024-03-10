@@ -1,5 +1,6 @@
 "use client";
 
+import AttributeOffCanvas from "../ui/attributes/AttributeOffCanvas";
 import withAuth from "../utils/PrivateRoutes";
 
 function Page() {
@@ -35,28 +36,26 @@ function Page() {
               placeholder="Search..."
             />
           </div>
-        </section>
-        <div
-          style={{ backgroundColor: "#374151" }}
-          className="offcanvas w-50 offcanvas-end"
-          data-bs-backdrop="static"
-          tabIndex={-1}
-          id="attribueCanvas"
-          aria-labelledby="attribueCanvasLabel"
-        >
-          <div className="offcanvas-header">
-            <h5 className="offcanvas-title" id="attribueCanvasLabel">
-              Offcanvas right
-            </h5>
-            <button
-              type="button"
-              className="btn-close"
-              data-bs-dismiss="offcanvas"
-              aria-label="Close"
-            ></button>
+          <div className="table-responsive">
+            <table
+              style={{ backgroundColor: "#1f2937" }}
+              className="table border border-secondary table-dark"
+            >
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>NAME</th>
+                  <th>DISPLAY NAME</th>
+                  <th>TYPE</th>
+                  <th>VALUES</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
           </div>
-          <div className="offcanvas-body">...</div>
-        </div>
+        </section>
+        <AttributeOffCanvas />
       </main>
     </>
   );

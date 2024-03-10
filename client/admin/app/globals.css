@@ -2,7 +2,7 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  color: #fff;
+  /* color: #fff; */
 }
 
 a {
@@ -12,4 +12,18 @@ a {
 
 body {
   background-color: #111827 !important;
+}
+
+.w-lg-50 {
+  width: 50% !important;
+}
+
+::placeholder {
+  color: #fff !important;
+}
+
+@media (max-width: 768px) {
+  .w-lg-50 {
+    width: 100% !important;
+  }
 }

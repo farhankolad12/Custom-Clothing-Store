@@ -15,7 +15,10 @@ exports.isAuthenticate = async (req, res, next) => {
 
   const decodedData = jwt.verify(token, process.env.JWT_SECRET);
 
-  const user = await Users.findById(decodedData.id, { password: 0 });
+  const user = await Users.findOne(
+    { _id: decodedData.id, role: Boolean(isAdmin) ? "admin" : "customer" },
+    { password: 0 }
+  );
 
   if (user) {
     req.user = user;
