@@ -1,5 +1,7 @@
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 
+const filterQuery = require("../utils/filterQuery");
+
 const Attributes = require("../models/attributeModel");
 
 exports.addAttributes = catchAsyncErrors(async (req, res, next) => {
@@ -32,32 +34,22 @@ exports.addAttributes = catchAsyncErrors(async (req, res, next) => {
 exports.getAttributes = catchAsyncErrors(async (req, res, next) => {
   const { searchParams } = req.query;
 
-  const params = new URLSearchParams(searchParams);
-
-  const currentPage = Number(params.get("page")) || 1;
-  const pageSize = 5;
-
-  const filterQuery = {
-    $or: [
-      { displayName: { $regex: params.get("query") || "", $options: "i" } },
-      { title: { $regex: params.get("query") || "", $options: "i" } },
-    ],
-  };
-
-  const totalDocuments = await Attributes.countDocuments(filterQuery);
-
-  const attributes = await Attributes.find(filterQuery)
-    .limit(pageSize)
-    .skip(pageSize * (currentPage - 1))
-    .sort({ createdAt: -1 });
+  const {
+    currentPage,
+    data: attributes,
+    lastDocument,
+    startDocument,
+    totalDocuments,
+    totalPages,
+  } = await filterQuery(searchParams, ["displayName", "title"], Attributes);
 
   return res.status(200).json({
     attributes,
-    totalPages: Math.ceil(totalDocuments / pageSize),
+    totalPages,
     currentPage,
     totalDocuments,
-    startDocument: pageSize * (currentPage - 1) + 1,
-    lastDocument: pageSize * (currentPage - 1) + attributes.length,
+    startDocument,
+    lastDocument,
   });
 });
 

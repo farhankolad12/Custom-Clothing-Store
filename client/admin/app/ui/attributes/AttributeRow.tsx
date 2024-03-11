@@ -1,3 +1,4 @@
+import { AttributesType } from "@/app/definations";
 import usePostReq from "@/app/hooks/usePostReq";
 import { toast } from "react-toastify";
 
@@ -6,7 +7,7 @@ export default function AttributeRow({
   setAttributes,
   setSelectedAttribute,
 }: {
-  attr: any;
+  attr: AttributesType;
   setAttributes: Function;
   setSelectedAttribute: Function;
 }) {
@@ -21,10 +22,12 @@ export default function AttributeRow({
       }
 
       toast.success(`${attr.displayName} deleted`);
-      setAttributes((prev: any) => {
+      setAttributes((prev: { attributes: AttributesType[] }) => {
         return {
           ...prev,
-          attributes: prev.attributes.filter((a: any) => a._id !== attr._id),
+          attributes: prev.attributes.filter(
+            (a: AttributesType) => a._id !== attr._id
+          ),
         };
       });
     } catch (err: any) {
@@ -34,12 +37,14 @@ export default function AttributeRow({
 
   return (
     <tr>
-      <td className="text-secondary">{attr._id}</td>
-      <td className="text-secondary">{attr.title}</td>
-      <td className="text-secondary">{attr.displayName}</td>
-      <td className="text-secondary">{attr.type}</td>
-      <td className="text-secondary">
-        {attr.options.map((attr: any) => attr.variant).join(",")}
+      <td>{attr._id}</td>
+      <td>{attr.title}</td>
+      <td>{attr.displayName}</td>
+      <td>{attr.type}</td>
+      <td>
+        {attr.options
+          .map((attr: { id: string; variant: string }) => attr.variant)
+          .join(",")}
       </td>
       <td>
         <div className="d-flex gap-3">
@@ -51,7 +56,7 @@ export default function AttributeRow({
             onClick={() => setSelectedAttribute(attr)}
             className="btn p-0"
           >
-            <i className="bi bi-pencil-square text-secondary" />
+            <i className="bi bi-pencil-square " />
           </button>
           <button
             disabled={loading}
@@ -59,7 +64,7 @@ export default function AttributeRow({
             type="button"
             className="btn p-0"
           >
-            {loading ? "..." : <i className="bi bi-trash text-secondary" />}
+            {loading ? "..." : <i className="bi bi-trash " />}
           </button>
         </div>
       </td>

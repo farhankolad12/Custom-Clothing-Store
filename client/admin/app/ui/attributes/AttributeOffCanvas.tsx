@@ -1,3 +1,4 @@
+import { AttributesType } from "@/app/definations";
 import usePostReq from "@/app/hooks/usePostReq";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
@@ -9,7 +10,7 @@ export default function AttributeOffCanvas({
 }: {
   setAttributes: Function;
   setSelectedAttribute: Function;
-  selectedAttribute: any;
+  selectedAttribute: AttributesType | undefined;
 }) {
   const [queryText, setQueryText] = useState("");
   const [variants, setVariants] = useState<{ id: string; variant: string }[]>(
@@ -66,17 +67,17 @@ export default function AttributeOffCanvas({
       setVariants([]);
 
       if (selectedAttribute) {
-        return setAttributes((prev: any) => {
+        return setAttributes((prev: { attributes: AttributesType[] }) => {
           return {
             ...prev,
-            attributes: prev.attributes.map((a: any) =>
+            attributes: prev.attributes.map((a: AttributesType) =>
               a._id === selectedAttribute._id ? res?.attribute : a
             ),
           };
         });
       }
 
-      setAttributes((prev: any) => ({
+      setAttributes((prev: { attributes: AttributesType[] }) => ({
         ...prev,
         attributes: [res?.attribute, ...prev.attributes],
       }));
@@ -156,12 +157,25 @@ export default function AttributeOffCanvas({
               className="form-select text-light w-lg-50 bg-transparent border-secondary"
               defaultValue="radio"
               id="options"
-              defaultChecked={selectedAttribute ? selectedAttribute.type : ""}
             >
-              <option className="bg-dark text-secondary" value="radio">
+              <option
+                defaultChecked={
+                  selectedAttribute ? selectedAttribute.type === "radio" : false
+                }
+                className="bg-dark text-secondary"
+                value="radio"
+              >
                 Radio
               </option>
-              <option className="bg-dark text-secondary" value="dropdown">
+              <option
+                defaultChecked={
+                  selectedAttribute
+                    ? selectedAttribute.type === "dropdown"
+                    : false
+                }
+                className="bg-dark text-secondary"
+                value="dropdown"
+              >
                 Dropdown
               </option>
             </select>
@@ -172,7 +186,7 @@ export default function AttributeOffCanvas({
             </label>
             <div className="w-100 h-auto d-flex overflow-y-auto align-items-center flex-wrap form-control pb-0 bg-transparent pt-3-">
               <ul className="list-unstyled d-flex gap-2">
-                {variants.map((variant: any) => (
+                {variants.map((variant: { id: string; variant: string }) => (
                   <li
                     key={variant.id}
                     className="d-flex rounded justify-content-between bg-dark px-3 text-light"

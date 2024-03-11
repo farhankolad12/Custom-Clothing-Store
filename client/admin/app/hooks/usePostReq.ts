@@ -11,7 +11,7 @@ export default function usePostReq(url: string) {
 
     const headers = payload.toString().includes("FormData")
       ? {
-          "Content-Type": "application/x-www-form-urlencoded",
+          // "Content-Type": "application/x-www-form-urlencoded",
           "Access-Control-Allow-Origin":
             process.env.NEXT_PUBLIC_BACKEND_HOSTNAME,
         }

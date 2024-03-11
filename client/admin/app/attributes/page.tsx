@@ -8,6 +8,7 @@ import { useState } from "react";
 import AttributeRow from "../ui/attributes/AttributeRow";
 import { useDebouncedCallback } from "use-debounce";
 import { useRouter, useSearchParams } from "next/navigation";
+import { AttributesType } from "../definations";
 
 function Page() {
   const [selectedAttribute, setSelectedAttribute] = useState();
@@ -98,7 +99,7 @@ function Page() {
                     <td></td>
                   </tr>
                 ) : (
-                  data?.attributes?.map((attr: any) => {
+                  data?.attributes?.map((attr: AttributesType) => {
                     return (
                       <AttributeRow
                         setSelectedAttribute={setSelectedAttribute}
@@ -137,7 +138,7 @@ function Page() {
                                 key={ind}
                                 className={`btn btn-${
                                   (!searchParams.get("page") && ind === 0) ||
-                                  +searchParams.get("page") === ind + 1
+                                  +searchParams?.get("page") === ind + 1
                                     ? ""
                                     : "outline-"
                                 }success`}

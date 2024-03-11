@@ -17,10 +17,12 @@ app.use(cookieParser());
 
 // Import Routers
 const user = require("./routes/userRoute");
+const category = require("./routes/categoryRoute");
 const attribute = require("./routes/attributeRoute");
 
 // Call Routers
 app.use("/api", user);
+app.use("/api", category);
 app.use("/api", attribute);
 
 app.listen(4000);

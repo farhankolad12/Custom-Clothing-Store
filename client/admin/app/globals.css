@@ -18,12 +18,20 @@ body {
   width: 50% !important;
 }
 
+.w-lg-75 {
+  width: 75% !important;
+}
+
 ::placeholder {
   color: #fff !important;
 }
 
 @media (max-width: 768px) {
   .w-lg-50 {
+    width: 100% !important;
+  }
+
+  .w-lg-75 {
     width: 100% !important;
   }
 }
