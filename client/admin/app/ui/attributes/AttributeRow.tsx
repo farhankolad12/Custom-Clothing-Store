@@ -46,27 +46,25 @@ export default function AttributeRow({
           .map((attr: { id: string; variant: string }) => attr.variant)
           .join(",")}
       </td>
-      <td>
-        <div className="d-flex gap-3">
-          <button
-            data-bs-toggle="offcanvas"
-            data-bs-target="#attribueCanvas"
-            aria-controls="attribueCanvas"
-            type="button"
-            onClick={() => setSelectedAttribute(attr)}
-            className="btn p-0"
-          >
-            <i className="bi bi-pencil-square " />
-          </button>
-          <button
-            disabled={loading}
-            onClick={handleDelete}
-            type="button"
-            className="btn p-0"
-          >
-            {loading ? "..." : <i className="bi bi-trash " />}
-          </button>
-        </div>
+      <td className="d-flex gap-3">
+        <button
+          data-bs-toggle="offcanvas"
+          data-bs-target="#attribueCanvas"
+          aria-controls="attribueCanvas"
+          type="button"
+          onClick={() => setSelectedAttribute(attr)}
+          className="btn text-light p-0"
+        >
+          <i className="bi bi-pencil-square " />
+        </button>
+        <button
+          disabled={loading}
+          onClick={handleDelete}
+          type="button"
+          className="btn p-0 text-light"
+        >
+          {loading ? "..." : <i className="bi bi-trash " />}
+        </button>
       </td>
     </tr>
   );

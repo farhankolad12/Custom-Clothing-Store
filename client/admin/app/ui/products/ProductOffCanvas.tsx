@@ -1,6 +1,10 @@
 import { ProductType } from "@/app/definations";
 import usePostReq from "@/app/hooks/usePostReq";
-import { FormEvent, useRef } from "react";
+import { FormEvent, useRef, useState } from "react";
+import ProductBasicInfo from "./ProductBasicInfo";
+import useGetReq from "@/app/hooks/useGetReq";
+import { toast } from "react-toastify";
+import ProdutcCombination from "./ProdutcCombination";
 
 export default function ProductOffCanvas({
   setSelectedProduct,
@@ -11,9 +15,31 @@ export default function ProductOffCanvas({
   setProducts: Function;
   selectedProduct: ProductType | undefined;
 }) {
+  const [images, setImages] = useState([]);
+  const [tags, setTags] = useState([]);
+  const [variants, setVariants] = useState([]);
+  const [combinations, setCombinations] = useState([]);
+
   const { error, execute, loading } = usePostReq("/product");
 
+  const {
+    data,
+    loading: _loading,
+    error: _error,
+  } = useGetReq("/product-filters", {
+    isAdmin: true,
+  });
+
+  if (_error) {
+    toast.error(_error || "Something went wrong!");
+  }
+
   const nameRef = useRef<HTMLInputElement>(null!);
+  const shortDescriptionRef = useRef<HTMLTextAreaElement>(null!);
+  const fullDescriptionRef = useRef<HTMLTextAreaElement>(null!);
+  const priceRef = useRef<HTMLInputElement>(null!);
+  const isFeaturedRef = useRef<HTMLSelectElement>(null!);
+  const categoryRef = useRef<HTMLSelectElement>(null!);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -81,29 +107,21 @@ export default function ProductOffCanvas({
         </ul>
         <form>
           <div className="tab-content" id="pills-tabContent">
-            <div
-              className="tab-pane fade show active"
-              id="basic-info"
-              role="tabpanel"
-              aria-labelledby="basic-info-tab"
-              tabIndex={0}
-            >
-              <div className="mt-4 d-flex flex-column gap-4">
-                <div className="d-flex flex-lg-row flex-column gap-3 justify-content-between">
-                  <label htmlFor="title" className="text-secondary">
-                    Name
-                  </label>
-                  <input
-                    type="text"
-                    ref={nameRef}
-                    defaultValue={selectedProduct ? selectedProduct.name : ""}
-                    placeholder="Category Title"
-                    id="title"
-                    className="form-control w-lg-50 bg-transparent border-secondary text-light text-secondary"
-                  />
-                </div>
-              </div>
-            </div>
+            <ProductBasicInfo
+              priceRef={priceRef}
+              _loading={loading}
+              setImages={setImages}
+              images={images}
+              fullDescriptionRef={fullDescriptionRef}
+              tags={tags}
+              setTags={setTags}
+              isFeaturedRef={isFeaturedRef}
+              categoryRef={categoryRef}
+              data={data}
+              shortDescriptionRef={shortDescriptionRef}
+              selectedProduct={selectedProduct}
+              nameRef={nameRef}
+            />
             <div
               className="tab-pane fade"
               id="combination"
@@ -111,7 +129,13 @@ export default function ProductOffCanvas({
               aria-labelledby="combination-tab"
               tabIndex={0}
             >
-              Combination
+              <ProdutcCombination
+                variants={variants}
+                setVariants={setVariants}
+                attributes={data?.attributes}
+                combinations={combinations}
+                setCombinations={setCombinations}
+              />
             </div>
           </div>
         </form>
