@@ -12,16 +12,17 @@ export default function ProdutcCombination({
   variants,
   combinations,
   setCombinations,
+  selectedAttribute,
+  setSelectedAttribute,
 }: {
   attributes: AttributesType[] | undefined;
   setVariants: Function;
   variants: any;
   combinations: any;
   setCombinations: Function;
+  selectedAttribute: null | [];
+  setSelectedAttribute: Function;
 }) {
-  // const [selectedAtLast, setSelectedAtLast] = useState([]);
-  const [selectedAttribute, setSelectedAttribute] = useState<null | []>(null);
-
   async function handleVariants() {
     if (variants.length !== selectedAttribute?.length) {
       return toast.error("Please required attributes values!", {
@@ -32,8 +33,9 @@ export default function ProdutcCombination({
     const combinations1 = await generateCombinations(variants);
 
     await setCombinations(combinations1);
-    console.log(combinations);
   }
+
+  // console.log(combinations);
 
   return (
     <div className="w-100">
@@ -104,7 +106,6 @@ export default function ProdutcCombination({
           >
             <thead>
               <tr>
-                <th className="text-secondary">IMAGE</th>
                 <th className="text-secondary">COMBINATION</th>
                 <th className="text-secondary">PRICE</th>
                 <th className="text-secondary">SALE PRICE</th>
@@ -112,7 +113,7 @@ export default function ProdutcCombination({
               </tr>
             </thead>
             <tbody>
-              {/* {combinations.map((combination: any, i: number) => {
+              {combinations.map((combination: any, i: number) => {
                 return (
                   <ProductCombinationRow
                     key={i}
@@ -120,7 +121,7 @@ export default function ProdutcCombination({
                     combination={combination}
                   />
                 );
-              })} */}
+              })}
             </tbody>
           </table>
         </div>

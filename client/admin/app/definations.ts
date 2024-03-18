@@ -31,6 +31,19 @@ export type CategoriesType = {
 };
 
 export type ProductType = {
+  combinations: [
+    {
+      id: { type: string };
+      price: { type: number };
+      salePrice: { type: number };
+      combinations: [
+        {
+          id: { type: string };
+          varaint: { type: string };
+        }
+      ];
+    }
+  ];
   _id: string;
   name: string;
   shortDescription: string;

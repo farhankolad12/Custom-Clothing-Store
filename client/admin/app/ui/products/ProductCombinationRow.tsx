@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 export default function ProductCombinationRow({
   combination,
@@ -7,14 +7,25 @@ export default function ProductCombinationRow({
   combination: any;
   setCombinations: Function;
 }) {
-  const priceRef = useRef<HTMLInputElement>(null!);
-  const salePriceRef = useRef<HTMLInputElement>(null!);
+  const [price, setPrice] = useState("");
+  const [salePrice, setSalePrice] = useState("");
+
+  useEffect(() => {
+    setCombinations((prev: any) => {
+      return prev.map((p: any) => {
+        return p?.id === combination.id
+          ? { ...p, price: +price, salePrice: +salePrice }
+          : p;
+      });
+    });
+  }, [salePrice, price]);
+
+  // console.log(combination);
 
   return (
     <tr>
-      <td>img</td>
       <td>
-        {combination.map((comb: any) => {
+        {combination.combinations.map((comb: any) => {
           return (
             <span key={comb.id} className="mx-1">
               {comb.variant}
@@ -24,7 +35,8 @@ export default function ProductCombinationRow({
       </td>
       <td>
         <input
-          ref={priceRef}
+          value={price}
+          onChange={(e) => setPrice(e.target.value)}
           type="number"
           id="price"
           className="form-control bg-transparent text-light w-50"
@@ -32,7 +44,8 @@ export default function ProductCombinationRow({
       </td>
       <td>
         <input
-          ref={salePriceRef}
+          value={salePrice}
+          onChange={(e) => setSalePrice(e.target.value)}
           type="number"
           id="sale-price"
           className="form-control bg-transparent text-light w-50"

@@ -15,10 +15,17 @@ export default function ProductOffCanvas({
   setProducts: Function;
   selectedProduct: ProductType | undefined;
 }) {
-  const [images, setImages] = useState([]);
-  const [tags, setTags] = useState([]);
-  const [variants, setVariants] = useState([]);
-  const [combinations, setCombinations] = useState([]);
+  const [images, setImages] = useState(
+    /* selectedProduct ? selectedProduct.images :  */ []
+  );
+  const [tags, setTags] = useState(selectedProduct ? selectedProduct.tags : []);
+  const [variants, setVariants] = useState(
+    selectedProduct ? selectedProduct.variations : []
+  );
+  const [combinations, setCombinations] = useState(
+    selectedProduct ? selectedProduct.combinations : []
+  );
+  const [selectedAttribute, setSelectedAttribute] = useState<null | []>(null);
 
   const { error, execute, loading } = usePostReq("/product");
 
@@ -43,6 +50,70 @@ export default function ProductOffCanvas({
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
+
+    const name = nameRef.current.value;
+    const shortDescription = shortDescriptionRef.current.value;
+    const fullDescription = fullDescriptionRef.current.value;
+    const price = priceRef.current.value;
+    const isFeatured = isFeaturedRef.current.value;
+    const category = categoryRef.current.value;
+
+    if (
+      name === "" ||
+      shortDescription === "" ||
+      fullDescription === "" ||
+      price === "" ||
+      isFeatured === "0" ||
+      category === "0"
+    ) {
+      return toast.error("Please fill required fields!", {
+        position: "top-left",
+      });
+    }
+
+    if (variants.length !== selectedAttribute?.length) {
+      return toast.error("Please required attributes values!", {
+        position: "top-left",
+      });
+    }
+
+    try {
+      const formData = new FormData();
+
+      if (selectedProduct) {
+        formData.append("_id", selectedProduct._id);
+      }
+
+      formData.append("name", name);
+      formData.append("shortDescription", shortDescription);
+      formData.append("fullDescription", fullDescription);
+      formData.append("price", price);
+      formData.append("isFeatured", isFeatured === "yes" ? "true" : "false");
+      formData.append("category", category);
+      formData.append("tags", JSON.stringify(tags));
+      formData.append("variants", JSON.stringify(variants));
+      formData.append("combinations", JSON.stringify(combinations));
+      for (let i = 0; i < images.length; i++) {
+        const img = images[i];
+        formData.append(`image_${i + 1}`, img);
+      }
+
+      const res = await execute(formData);
+
+      if (!res) {
+        return toast.error("Something went wrong!" || error, {
+          position: "top-left",
+        });
+      }
+
+      setProducts((prev: ProductType[]) => [res.newProduct, ...prev]);
+
+      return toast.success("Product added!", {
+        position: "top-right",
+      });
+    } catch (err: any) {
+      console.log(err);
+    }
   }
 
   return (
@@ -131,6 +202,8 @@ export default function ProductOffCanvas({
             >
               <ProdutcCombination
                 variants={variants}
+                selectedAttribute={selectedAttribute}
+                setSelectedAttribute={setSelectedAttribute}
                 setVariants={setVariants}
                 attributes={data?.attributes}
                 combinations={combinations}

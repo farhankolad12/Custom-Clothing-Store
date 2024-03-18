@@ -1,3 +1,4 @@
+import { RedirectType } from "next/navigation";
 import { useEffect, useState } from "react";
 import Select from "react-select";
 
@@ -32,7 +33,14 @@ export default function AttributeSelection({
             color: "#000",
           }),
         }}
-        onChange={(val: any) => {
+        onChange={async (val: any) => {
+          // await setSelectedAtLast((prev: any) => {
+          //   return prev.filter((p: any) => {
+          //     return (
+          //       p.values.length
+          //     );
+          //   });
+          // });
           setSelectedAtLast((prev: any) => {
             if (
               prev.some(

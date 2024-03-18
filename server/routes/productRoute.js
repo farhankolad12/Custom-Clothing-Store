@@ -3,7 +3,10 @@ const cors = require("cors");
 const Multer = require("multer");
 
 const { isAuthenticate } = require("../middlewares/auth");
-const { getProductFilters } = require("../controllers/productController");
+const {
+  getProductFilters,
+  addProduct,
+} = require("../controllers/productController");
 
 const storage = new Multer.memoryStorage();
 const upload = Multer({
@@ -22,5 +25,6 @@ router.use(
 );
 
 router.route("/product-filters").get(getProductFilters);
+router.route("/product").post(isAuthenticate, upload.any(), addProduct);
 
 module.exports = router;

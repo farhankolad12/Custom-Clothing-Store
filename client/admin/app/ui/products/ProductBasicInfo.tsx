@@ -94,6 +94,7 @@ export default function ProductBasicInfo({
             <select
               defaultValue={selectedProduct ? selectedProduct.category : "0"}
               id="category"
+              ref={categoryRef}
               className="form-select w-lg-50 bg-transparent"
             >
               <option disabled value="0">
@@ -178,6 +179,7 @@ export default function ProductBasicInfo({
                   : "no"
                 : "0"
             }
+            ref={isFeaturedRef}
             id="isfeatured"
             className="form-select w-lg-50 bg-transparent"
           >
