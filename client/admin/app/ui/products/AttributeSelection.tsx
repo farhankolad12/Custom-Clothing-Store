@@ -1,5 +1,3 @@
-import { RedirectType } from "next/navigation";
-import { useEffect, useState } from "react";
 import Select from "react-select";
 
 export default function AttributeSelection({
@@ -11,14 +9,12 @@ export default function AttributeSelection({
   setSelectedAtLast: Function;
   selectedAttribute: any;
 }) {
-  const [selectedOptions, setSelectedOptions] = useState<null | []>(null);
-
   return (
     <div className="d-flex flex-column gap-2">
-      <label htmlFor="attributes">Select {attr.value}</label>
+      <label htmlFor="attributes">Select {attr.displayName}</label>
       <Select
         isMulti={true}
-        defaultValue={selectedOptions}
+        defaultValue={null}
         options={attr.values.map((option: any) => ({
           value: option.variant,
           label: option.variant,
@@ -34,13 +30,6 @@ export default function AttributeSelection({
           }),
         }}
         onChange={async (val: any) => {
-          // await setSelectedAtLast((prev: any) => {
-          //   return prev.filter((p: any) => {
-          //     return (
-          //       p.values.length
-          //     );
-          //   });
-          // });
           setSelectedAtLast((prev: any) => {
             if (
               prev.some(

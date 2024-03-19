@@ -48,7 +48,7 @@ export type ProductType = {
   name: string;
   shortDescription: string;
   price: number;
-  variations: AttributesType[];
+  variants: AttributesType[];
   images: [
     {
       id: string;

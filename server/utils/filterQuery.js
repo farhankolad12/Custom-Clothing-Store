@@ -1,12 +1,26 @@
-async function filterQuery(searchParams, fields, Model) {
+async function filterQuery(searchParams, fields, Model, sort) {
   const params = new URLSearchParams(searchParams);
 
   const currentPage = Number(params.get("page")) || 1;
   const pageSize = 5;
 
+  const sortQuery =
+    sort === "low-high"
+      ? { price: 1 }
+      : sort === "high-low"
+      ? { price: -1 }
+      : sort === "date-asc"
+      ? { createdAt: 1 }
+      : { createdAt: -1 };
+
   const filterQuery = {
     $or: fields.map((field) => {
-      return { [field]: { $regex: params.get("query") || "", $options: "i" } };
+      return {
+        [field]: {
+          $regex: params.get("query") || "",
+          $options: "i",
+        },
+      };
     }),
   };
 
@@ -15,7 +29,7 @@ async function filterQuery(searchParams, fields, Model) {
   const data = await Model.find(filterQuery)
     .limit(pageSize)
     .skip(pageSize * (currentPage - 1))
-    .sort({ createdAt: -1 });
+    .sort(sortQuery);
 
   return {
     data,

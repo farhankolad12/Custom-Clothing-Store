@@ -32,7 +32,7 @@ const productSchema = new mongoose.Schema({
       values: [
         {
           id: { type: String },
-          varaint: { type: String },
+          variant: { type: String },
         },
       ],
     },
@@ -45,7 +45,8 @@ const productSchema = new mongoose.Schema({
       combinations: [
         {
           id: { type: String },
-          varaint: { type: String },
+          variant: { type: String },
+          parentName: { type: String },
         },
       ],
     },

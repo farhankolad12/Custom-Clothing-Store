@@ -6,6 +6,8 @@ const { isAuthenticate } = require("../middlewares/auth");
 const {
   getProductFilters,
   addProduct,
+  getProducts,
+  deleteProduct,
 } = require("../controllers/productController");
 
 const storage = new Multer.memoryStorage();
@@ -26,5 +28,7 @@ router.use(
 
 router.route("/product-filters").get(getProductFilters);
 router.route("/product").post(isAuthenticate, upload.any(), addProduct);
+router.route("/remove-product").post(isAuthenticate, deleteProduct);
+router.route("/products").get(isAuthenticate, getProducts);
 
 module.exports = router;

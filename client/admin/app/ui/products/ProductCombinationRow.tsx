@@ -7,8 +7,12 @@ export default function ProductCombinationRow({
   combination: any;
   setCombinations: Function;
 }) {
-  const [price, setPrice] = useState("");
-  const [salePrice, setSalePrice] = useState("");
+  const [price, setPrice] = useState(
+    combination.price ? combination.price : ""
+  );
+  const [salePrice, setSalePrice] = useState(
+    combination.salePrice ? combination.salePrice : ""
+  );
 
   useEffect(() => {
     setCombinations((prev: any) => {

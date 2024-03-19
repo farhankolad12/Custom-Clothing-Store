@@ -92,9 +92,9 @@ export default function ProductBasicInfo({
             <span>Loading...</span>
           ) : (
             <select
-              defaultValue={selectedProduct ? selectedProduct.category : "0"}
               id="category"
               ref={categoryRef}
+              defaultValue={selectedProduct ? selectedProduct.category : "0"}
               className="form-select w-lg-50 bg-transparent"
             >
               <option disabled value="0">
@@ -102,7 +102,17 @@ export default function ProductBasicInfo({
               </option>
               {data?.categories.map((cat) => {
                 return (
-                  <option key={cat._id} value={cat.name}>
+                  <option
+                    selected={
+                      selectedProduct
+                        ? selectedProduct.category === cat.name
+                          ? true
+                          : false
+                        : false
+                    }
+                    key={cat._id}
+                    value={cat.name}
+                  >
                     {cat.name}
                   </option>
                 );
@@ -125,10 +135,10 @@ export default function ProductBasicInfo({
             />
           </div>
           {images.length && (
-            <div className=" w-lg-50 my-4 d-flex flex-wrap gap-3 ms-auto">
+            <div className="w-lg-50 my-4 d-flex overflow-auto flex-wrap gap-3 ms-auto">
               {images.map((img: any) => {
                 return (
-                  <div className="position-relative">
+                  <div key={img.id || img.name} className="position-relative">
                     <Image
                       src={img.id ? img.link : URL.createObjectURL(img)}
                       alt="Product"
@@ -186,8 +196,30 @@ export default function ProductBasicInfo({
             <option disabled value="0">
               Please select
             </option>
-            <option value="yes">Yes</option>
-            <option value="no">No</option>
+            <option
+              selected={
+                selectedProduct
+                  ? selectedProduct.isFeatured
+                    ? true
+                    : false
+                  : false
+              }
+              value="yes"
+            >
+              Yes
+            </option>
+            <option
+              selected={
+                selectedProduct
+                  ? selectedProduct.isFeatured
+                    ? false
+                    : true
+                  : false
+              }
+              value="no"
+            >
+              No
+            </option>
           </select>
         </div>
         <div className="d-flex flex-lg-row flex-column gap-3 justify-content-between">

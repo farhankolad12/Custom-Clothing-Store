@@ -20,7 +20,7 @@ export default function ProdutcCombination({
   variants: any;
   combinations: any;
   setCombinations: Function;
-  selectedAttribute: null | [];
+  selectedAttribute: null | AttributesType[];
   setSelectedAttribute: Function;
 }) {
   async function handleVariants() {
@@ -34,8 +34,6 @@ export default function ProdutcCombination({
 
     await setCombinations(combinations1);
   }
-
-  // console.log(combinations);
 
   return (
     <div className="w-100">

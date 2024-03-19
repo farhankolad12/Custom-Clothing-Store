@@ -1,8 +1,7 @@
-import { ProductType } from "@/app/definations";
+import { AttributesType, ProductType } from "@/app/definations";
 import usePostReq from "@/app/hooks/usePostReq";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import ProductBasicInfo from "./ProductBasicInfo";
-import useGetReq from "@/app/hooks/useGetReq";
 import { toast } from "react-toastify";
 import ProdutcCombination from "./ProdutcCombination";
 
@@ -10,36 +9,44 @@ export default function ProductOffCanvas({
   setSelectedProduct,
   setProducts,
   selectedProduct,
+  filters,
 }: {
   setSelectedProduct: Function;
   setProducts: Function;
   selectedProduct: ProductType | undefined;
+  filters: any;
 }) {
-  const [images, setImages] = useState(
-    /* selectedProduct ? selectedProduct.images :  */ []
+  const [images, setImages] = useState<any>(
+    selectedProduct ? selectedProduct.images : []
   );
   const [tags, setTags] = useState(selectedProduct ? selectedProduct.tags : []);
   const [variants, setVariants] = useState(
-    selectedProduct ? selectedProduct.variations : []
+    selectedProduct ? selectedProduct.variants : []
   );
   const [combinations, setCombinations] = useState(
     selectedProduct ? selectedProduct.combinations : []
   );
-  const [selectedAttribute, setSelectedAttribute] = useState<null | []>(null);
+  const [selectedAttribute, setSelectedAttribute] = useState<
+    null | AttributesType[]
+  >(selectedProduct ? selectedProduct.variants : null);
 
   const { error, execute, loading } = usePostReq("/product");
 
-  const {
-    data,
-    loading: _loading,
-    error: _error,
-  } = useGetReq("/product-filters", {
-    isAdmin: true,
-  });
-
-  if (_error) {
-    toast.error(_error || "Something went wrong!");
-  }
+  useEffect(() => {
+    setImages((prev: any) =>
+      selectedProduct?.images ? selectedProduct.images : prev
+    );
+    setTags((prev: any) => (selectedProduct ? selectedProduct.tags : prev));
+    setVariants((prev: any) =>
+      selectedProduct ? selectedProduct.variants : prev
+    );
+    setCombinations((prev: any) =>
+      selectedProduct ? selectedProduct.combinations : prev
+    );
+    setSelectedAttribute((prev) =>
+      selectedProduct ? selectedProduct.variants : prev
+    );
+  }, [selectedProduct]);
 
   const nameRef = useRef<HTMLInputElement>(null!);
   const shortDescriptionRef = useRef<HTMLTextAreaElement>(null!);
@@ -64,7 +71,8 @@ export default function ProductOffCanvas({
       fullDescription === "" ||
       price === "" ||
       isFeatured === "0" ||
-      category === "0"
+      category === "0" ||
+      images.length === 0
     ) {
       return toast.error("Please fill required fields!", {
         position: "top-left",
@@ -84,6 +92,8 @@ export default function ProductOffCanvas({
         formData.append("_id", selectedProduct._id);
       }
 
+      const newImage = [];
+
       formData.append("name", name);
       formData.append("shortDescription", shortDescription);
       formData.append("fullDescription", fullDescription);
@@ -95,7 +105,15 @@ export default function ProductOffCanvas({
       formData.append("combinations", JSON.stringify(combinations));
       for (let i = 0; i < images.length; i++) {
         const img = images[i];
-        formData.append(`image_${i + 1}`, img);
+        if (img.id) {
+          newImage.push(img);
+        } else {
+          formData.append(`image_${i + 1}`, img);
+        }
+      }
+
+      if (newImage.length) {
+        formData.append("images", JSON.stringify(newImage));
       }
 
       const res = await execute(formData);
@@ -106,7 +124,10 @@ export default function ProductOffCanvas({
         });
       }
 
-      setProducts((prev: ProductType[]) => [res.newProduct, ...prev]);
+      setProducts((prev: any) => ({
+        ...prev,
+        products: [res?.newProduct, ...prev.products],
+      }));
 
       return toast.success("Product added!", {
         position: "top-right",
@@ -178,21 +199,25 @@ export default function ProductOffCanvas({
         </ul>
         <form>
           <div className="tab-content" id="pills-tabContent">
-            <ProductBasicInfo
-              priceRef={priceRef}
-              _loading={loading}
-              setImages={setImages}
-              images={images}
-              fullDescriptionRef={fullDescriptionRef}
-              tags={tags}
-              setTags={setTags}
-              isFeaturedRef={isFeaturedRef}
-              categoryRef={categoryRef}
-              data={data}
-              shortDescriptionRef={shortDescriptionRef}
-              selectedProduct={selectedProduct}
-              nameRef={nameRef}
-            />
+            {selectedProduct || !selectedProduct ? (
+              <ProductBasicInfo
+                priceRef={priceRef}
+                _loading={loading}
+                setImages={setImages}
+                images={images}
+                fullDescriptionRef={fullDescriptionRef}
+                tags={tags}
+                setTags={setTags}
+                isFeaturedRef={isFeaturedRef}
+                categoryRef={categoryRef}
+                data={filters}
+                shortDescriptionRef={shortDescriptionRef}
+                selectedProduct={selectedProduct}
+                nameRef={nameRef}
+              />
+            ) : (
+              ""
+            )}
             <div
               className="tab-pane fade"
               id="combination"
@@ -200,15 +225,19 @@ export default function ProductOffCanvas({
               aria-labelledby="combination-tab"
               tabIndex={0}
             >
-              <ProdutcCombination
-                variants={variants}
-                selectedAttribute={selectedAttribute}
-                setSelectedAttribute={setSelectedAttribute}
-                setVariants={setVariants}
-                attributes={data?.attributes}
-                combinations={combinations}
-                setCombinations={setCombinations}
-              />
+              {selectedProduct || !selectedProduct ? (
+                <ProdutcCombination
+                  variants={variants}
+                  selectedAttribute={selectedAttribute}
+                  setSelectedAttribute={setSelectedAttribute}
+                  setVariants={setVariants}
+                  attributes={filters?.attributes}
+                  combinations={combinations}
+                  setCombinations={setCombinations}
+                />
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </form>
