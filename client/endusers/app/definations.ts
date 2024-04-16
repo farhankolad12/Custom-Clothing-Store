@@ -1,9 +1,10 @@
 export type ProductType = {
-  id: string;
+  _id: string;
   name: string;
   shortDescription: string;
-  variations: [
+  variants: [
     {
+      _id: string;
       name: string;
       options: [
         {
@@ -47,4 +48,14 @@ export type CurrentUser = {
 export type AuthValue = {
   currentUser: CurrentUser | undefined;
   setCurrentUser: Function;
+  data:
+    | {
+        featuredProducts: ProductType[];
+        newCollections: ProductType[];
+        categories: any;
+      }
+    | undefined;
+  setData: Function;
+  cartItems: any;
+  setCartItems: Function;
 };

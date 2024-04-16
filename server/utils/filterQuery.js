@@ -1,4 +1,4 @@
-async function filterQuery(searchParams, fields, Model, sort) {
+async function filterQuery(searchParams, fields, Model, sort, andOr = "or") {
   const params = new URLSearchParams(searchParams);
 
   const currentPage = Number(params.get("page")) || 1;
@@ -16,10 +16,13 @@ async function filterQuery(searchParams, fields, Model, sort) {
   const filterQuery = {
     $or: fields.map((field) => {
       return {
-        [field]: {
-          $regex: params.get("query") || "",
-          $options: "i",
-        },
+        [field]:
+          field === "category"
+            ? params.get("category")
+            : {
+                $regex: params.get("query") || "",
+                $options: "i",
+              },
       };
     }),
   };

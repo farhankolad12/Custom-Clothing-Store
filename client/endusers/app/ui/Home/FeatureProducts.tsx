@@ -1,12 +1,14 @@
 "use client";
 
-import { ProductType } from "@/app/definations";
-import { Products } from "../../test";
 import { useState } from "react";
 import ProductList from "./ProductList";
+import { useAuth } from "@/app/context/AuthProvider";
+import { ProductType } from "@/app/definations";
 
 export default function FeatureProducts() {
   const [selectCategory, setSelectCategory] = useState("all");
+
+  const { data } = useAuth();
 
   return (
     <section className="my-20 lg:px-10 px-5">
@@ -32,38 +34,46 @@ export default function FeatureProducts() {
           >
             Show All
           </label>
-          <input
-            onChange={(e) => setSelectCategory(e.target.value)}
-            value="fitness"
-            type="radio"
-            name="category"
-            id="fitness"
-            className="hidden"
-          />
-          <label
-            className={`cursor-pointer ${
-              selectCategory === "fitness" ? "border-b-4 border-black" : ""
-            }`}
-            htmlFor="fitness"
-          >
-            Fitness
-          </label>
+          {data?.categories.map((category: any) => {
+            return (
+              <div key={category._id}>
+                <input
+                  onChange={(e) => setSelectCategory(e.target.value)}
+                  value={category.name}
+                  type="radio"
+                  name="category"
+                  id={category.name}
+                  className="hidden"
+                />
+                <label
+                  className={`cursor-pointer ${
+                    selectCategory === category.name
+                      ? "border-b-4 border-black"
+                      : ""
+                  }`}
+                  htmlFor={category.name}
+                >
+                  {category.name}
+                </label>
+              </div>
+            );
+          })}
         </div>
         <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-grey">
-          {Products.map((product: any, i: number) => {
+          {data?.featuredProducts.map((product: ProductType) => {
             return selectCategory === "all" ? (
               <ProductList
                 span={undefined}
                 spanning={undefined}
-                key={product.id + i}
+                key={product._id}
                 product={product}
               />
             ) : (
-              product.category.toLowerCase() === selectCategory && (
+              product.category === selectCategory && (
                 <ProductList
                   span={undefined}
                   spanning={undefined}
-                  key={product.id + i}
+                  key={product._id}
                   product={product}
                 />
               )

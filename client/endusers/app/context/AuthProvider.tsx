@@ -9,6 +9,8 @@ import React, {
 } from "react";
 import { AuthValue } from "../definations";
 import LoadingSkeleton from "../loading";
+import { useGetReq } from "../hooks/useGetReq";
+import { toast } from "react-toastify";
 
 const AuthContext = createContext<AuthValue>(null!);
 
@@ -19,6 +21,24 @@ export function useAuth() {
 export default function AuthProvider({ children }: { children: ReactNode }) {
   const [currentUser, setCurrentUser] = useState();
   const [loading, setLoading] = useState(true);
+
+  const {
+    data,
+    error,
+    loading: _loading,
+    setData,
+  } = useGetReq("/home-page", {});
+
+  const {
+    data: cartItems,
+    setData: setCartItems,
+    error: _error,
+    loading: __loading,
+  } = useGetReq("/get-cart", {});
+
+  if (error) {
+    toast.error(error || "Something went wrong!");
+  }
 
   useEffect(() => {
     (async () => {
@@ -41,11 +61,15 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const value: AuthValue = {
     currentUser,
     setCurrentUser,
+    data,
+    setData,
+    cartItems,
+    setCartItems,
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {loading ? <LoadingSkeleton /> : children}
+      {loading || _loading || __loading ? <LoadingSkeleton /> : children}
     </AuthContext.Provider>
   );
 }

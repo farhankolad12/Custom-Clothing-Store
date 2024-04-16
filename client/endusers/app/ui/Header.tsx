@@ -9,11 +9,15 @@ import {
   Collapse,
   Dialog,
   DialogHeader,
+  Drawer,
+  IconButton,
 } from "@material-tailwind/react";
 import { useAuth } from "../context/AuthProvider";
 import Authentication from "./Home/Authentication";
+import CartCanvas from "./CartCanvas";
 
 export default function Header() {
+  const [openCart, setOpenCart] = useState(false);
   const [menu, setMenu] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -24,6 +28,9 @@ export default function Header() {
   }
 
   const { currentUser } = useAuth();
+
+  const openDrawer = () => setOpenCart(true);
+  const closeDrawer = () => setOpenCart(false);
 
   return (
     <>
@@ -55,10 +62,11 @@ export default function Header() {
             type="button"
             className=" font-bold bg-transparent hidden lg:block"
           >
-            <i className=" text-xl bi bi-heart" />
+            <i className="text-xl bi bi-heart" />
           </button>
           <button
             type="button"
+            onClick={openDrawer}
             className=" ms-0 lg:ms-5 text-black lg:text-white font-bold bg-transparent lg:bg-black lg:p-6 p-0"
           >
             <i className=" text-xl bi bi-bag" /> 0
@@ -82,6 +90,7 @@ export default function Header() {
           </div>
         </div>
       </Collapse>
+      <CartCanvas closeDrawer={closeDrawer} openCart={openCart} />
     </>
   );
 }

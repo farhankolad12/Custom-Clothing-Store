@@ -1,8 +1,12 @@
+import { useAuth } from "@/app/context/AuthProvider";
 import { ProductType } from "@/app/definations";
+import usePostReq from "@/app/hooks/usePostReq";
+import { formatCurrency } from "@/app/utils/formatCurrency";
 import { Carousel, IconButton, ThemeProvider } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 
 export default function ProductList({
   product,
@@ -13,6 +17,71 @@ export default function ProductList({
   spanning: boolean | undefined;
   span: string | undefined;
 }) {
+  const { setCartItems, currentUser, cartItems } = useAuth();
+
+  const { error, execute, loading, setError } = usePostReq("/update-cart");
+
+  async function handleCart() {
+    let quantity = 1;
+    if (
+      cartItems.products.some((productC: any) => product._id === productC._id)
+    ) {
+      quantity =
+        cartItems.products.filter(
+          (productC: any) => productC._id === product._id
+        )[0].quantity + 1;
+    }
+
+    try {
+      const res = await execute({
+        productId: product._id,
+        selectedVariantIds: product.variants.map((variation) => {
+          return {
+            id: variation._id,
+            title: variation.name,
+            values: variation.values[0],
+          };
+        }),
+        quantity,
+      });
+
+      if (!res.success) {
+        return toast.error(res.message || "Wrong!");
+      }
+
+      setCartItems((prev: any) => {
+        return {
+          ...prev,
+          products: prev.products.some(
+            (productC: any) => productC._id === product._id
+          )
+            ? prev.products.map((productC: any) => {
+                return productC._id === product._id
+                  ? { ...productC, quantity }
+                  : productC;
+              })
+            : [
+                ...prev?.products,
+                {
+                  ...product,
+                  quantity: 1,
+                  selectedVariantIds: product.variants.map((variation) => {
+                    return {
+                      id: variation._id,
+                      title: variation.name,
+                      values: variation.values[0],
+                    };
+                  }),
+                },
+              ],
+        };
+      });
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err || "Wrong!");
+    }
+  }
+
   return (
     <ThemeProvider>
       <div
@@ -97,20 +166,37 @@ export default function ProductList({
           })}
         </Carousel>
 
-        <Link
-          href="/product/id"
-          className="flex justify-between items-end mt-4 w-full"
-        >
+        <div className="flex justify-between items-end mt-4 w-full">
           <div className="flex flex-col w-full h-full">
-            <span className="text-gray-700 text-sm">NIKE</span>
-            <span className="fw-bold uppercase">black nike</span>
-            <span className="text-gray-700 font-bold text-sm">Fitness</span>
-            <span className="font-bold text-sm mt-4">$45</span>
+            <Link
+              href={`/product/${product._id}`}
+              className="text-gray-700 text-sm"
+            >
+              TeeVerse
+            </Link>
+            <Link
+              href={`/product/${product._id}`}
+              className="fw-bold uppercase"
+            >
+              {product.name}
+            </Link>
+            <Link
+              href={`/product/${product._id}`}
+              className="text-gray-700 font-bold text-sm"
+            >
+              {product.category}
+            </Link>
+            <span className="font-bold text-sm mt-4">
+              {formatCurrency(product.price)}
+            </span>
           </div>
-          <button className="bg-transparent w-20 h-16 rounded-full items-center hover:bg-black hover:text-white cursor-pointer">
-            <i className="bi bi-bag text-lg font-bold" />
+          <button
+            onClick={handleCart}
+            className="bg-transparent w-20 h-16 rounded-full items-center hover:bg-black hover:text-white cursor-pointer"
+          >
+            {loading ? "..." : <i className="bi bi-bag text-lg font-bold" />}
           </button>
-        </Link>
+        </div>
       </div>
     </ThemeProvider>
   );

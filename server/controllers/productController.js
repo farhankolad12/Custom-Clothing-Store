@@ -27,7 +27,13 @@ exports.getProducts = catchAsyncErrors(async (req, res, next) => {
     totalDocuments,
     startDocument,
     lastDocument,
-  } = await filterQuery(searchParams, ["name", "category"], Products, sort);
+  } = await filterQuery(
+    searchParams,
+    ["name", "category"],
+    Products,
+    sort,
+    "and"
+  );
 
   return res.status(200).json({
     products,
