@@ -60,6 +60,7 @@ export default function Header() {
           )}
           <button
             type="button"
+            onClick={() => router.push("/wishlist")}
             className=" font-bold bg-transparent hidden lg:block"
           >
             <i className="text-xl bi bi-heart" />

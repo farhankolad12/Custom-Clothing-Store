@@ -7,6 +7,7 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
+import WishlistButton from "../WishlistButton";
 
 export default function ProductList({
   product,
@@ -90,9 +91,10 @@ export default function ProductList({
         }`}
         style={{ height: "600px" }}
       >
-        <button className="bg-transparent w-14 h-14 rounded-full items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-50">
-          <i className="bi bi-heart text-lg font-bold" />
-        </button>
+        <WishlistButton
+          classes="bg-transparent w-14 h-14 rounded-full items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-50"
+          product={product}
+        />
         <Carousel
           className="z-49"
           style={{ height: "600px" }}
@@ -191,6 +193,7 @@ export default function ProductList({
             </span>
           </div>
           <button
+            disabled={loading}
             onClick={handleCart}
             className="bg-transparent w-20 h-16 rounded-full items-center hover:bg-black hover:text-white cursor-pointer"
           >

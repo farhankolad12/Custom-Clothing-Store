@@ -1,8 +1,12 @@
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
-const Categories = require("../models/categoryModel");
+
+const jwt = require("jsonwebtoken");
 
 const Cart = require("../models/cartModel");
+const Users = require("../models/userModel");
 const Products = require("../models/productModel");
+const Categories = require("../models/categoryModel");
+const Wishlists = require("../models/wishlistModel");
 
 exports.homePage = catchAsyncErrors(async (req, res, next) => {
   const date = new Date();
@@ -17,9 +21,135 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
   const newCollections = await Products.find({
     createdAt: { $gte: myEpoch, $lte: Date.now() },
   }).limit(8);
+
   const categories = await Categories.find();
 
-  return res.status(200).json({ featuredProducts, newCollections, categories });
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(200).json({
+      featuredProducts: featuredProducts,
+      newCollections,
+      categories,
+    });
+  }
+
+  const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+
+  const user = await Users.findOne(
+    { _id: decodedData.id, role: "customer" },
+    { password: 0 }
+  );
+
+  const fProducts = [];
+
+  if (user) {
+    for (let i = 0; i < featuredProducts.length; i++) {
+      const product = featuredProducts[i];
+
+      const inWishlist = await Wishlists.countDocuments({
+        uid: user._id,
+        products: { $elemMatch: { productId: product._id } },
+      });
+
+      if (inWishlist > 0) {
+        fProducts.push({ ...product._doc, inWishlist: true });
+      } else {
+        fProducts.push({ ...product._doc, inWishlist: false });
+      }
+    }
+  }
+
+  return res.status(200).json({
+    featuredProducts: user ? fProducts : featuredProducts,
+    newCollections,
+    categories,
+  });
+});
+
+exports.getWishlists = catchAsyncErrors(async (req, res, next) => {
+  const currentUser = req.user;
+
+  const wishlists = await Wishlists.findOne({ uid: currentUser._id });
+
+  const resWishlists = [];
+
+  for (let i = 0; i < wishlists.products.length; i++) {
+    const wishlistProduct = wishlists.products[i];
+
+    const product = await Products.findOne({ _id: wishlistProduct.productId });
+
+    resWishlists.push({ ...product._doc, inWishlist: true });
+  }
+
+  return res.status(200).json(resWishlists);
+});
+
+exports.deleteWishlist = catchAsyncErrors(async (req, res, next) => {
+  const { productId } = req.body;
+  const currentUser = req.user;
+
+  await Wishlists.updateOne(
+    { uid: currentUser._id },
+    { $pull: { products: { productId } } }
+  );
+
+  return res.status(200).json({ success: true });
+});
+
+exports.updateWishlist = catchAsyncErrors(async (req, res, next) => {
+  const { productId } = req.body;
+  const currentUser = req.user;
+
+  const inWishlist = await Wishlists.findOne({
+    uid: currentUser._id,
+  });
+
+  if (
+    inWishlist &&
+    inWishlist.products.some((product) => product.productId === productId)
+  ) {
+    await Wishlists.updateOne(
+      {
+        uid: currentUser._id,
+        products: { $elemMatch: { productId } },
+      },
+      {
+        $pull: {
+          products: { productId },
+        },
+      }
+    );
+  } else if (
+    inWishlist &&
+    !inWishlist.products.some((product) => product.productId === productId)
+  ) {
+    await Wishlists.updateOne(
+      {
+        uid: currentUser._id,
+      },
+      {
+        $push: {
+          products: {
+            productId,
+          },
+        },
+      }
+    );
+  } else {
+    const newWishlist = new Wishlists({
+      uid: currentUser._id,
+      products: [
+        {
+          productId,
+        },
+      ],
+    });
+
+    await newWishlist.save();
+  }
+
+  return res.status(200).json({ success: true });
 });
 
 exports.getCart = catchAsyncErrors(async (req, res, next) => {

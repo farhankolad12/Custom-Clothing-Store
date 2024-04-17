@@ -1,10 +1,14 @@
+const jwt = require("jsonwebtoken");
+
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 
+const Users = require("../models/userModel");
+const Products = require("../models/productModel");
+const Wishlists = require("../models/wishlistModel");
 const Attributes = require("../models/attributeModel");
 const Categories = require("../models/categoryModel");
-const Products = require("../models/productModel");
-const filterQuery = require("../utils/filterQuery");
 
+const filterQuery = require("../utils/filterQuery");
 const handleUpload = require("../utils/uploadImage");
 
 exports.getProductFilters = catchAsyncErrors(async (req, res, next) => {
@@ -128,4 +132,36 @@ exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
   await Products.deleteOne({ _id: _id });
 
   return res.status(200).json({ success: true });
+});
+
+exports.getProduct = catchAsyncErrors(async (req, res, next) => {
+  const { id } = req.query;
+
+  const product = await Products.findOne({ _id: id });
+  const token = req.cookies.token;
+
+  if (!token) {
+    return res.status(200).json({ ...product?._doc });
+  }
+
+  const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+
+  const user = await Users.findOne(
+    { _id: decodedData.id, role: "customer" },
+    { password: 0 }
+  );
+
+  if (user) {
+    const inWishlist = await Wishlists.findOne({
+      uid: user._id,
+      products: { $elemMatch: { productId: id } },
+    });
+
+    return res.status(200).json({
+      ...product?._doc,
+      inWishlist: product ? (inWishlist ? true : false) : undefined,
+    });
+  }
+
+  return res.status(200).json({ ...product?._doc });
 });

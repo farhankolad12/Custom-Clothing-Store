@@ -83,6 +83,7 @@ export default function Login({
         </button>
       </div>
       <button
+        disabled={loading}
         type="submit"
         className="bg-transparent w-full border border-black hover:bg-black hover:text-white text-black cursor-pointer uppercase font-bold py-3 my-5"
       >

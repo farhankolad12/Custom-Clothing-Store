@@ -8,6 +8,7 @@ const {
   addProduct,
   getProducts,
   deleteProduct,
+  getProduct,
 } = require("../controllers/productController");
 
 const storage = new Multer.memoryStorage();
@@ -27,8 +28,13 @@ router.use(
 );
 
 router.route("/product-filters").get(getProductFilters);
+
 router.route("/product").post(isAuthenticate, upload.any(), addProduct);
+
+router.route("/product").get(getProduct);
+
 router.route("/remove-product").post(isAuthenticate, deleteProduct);
+
 router.route("/products").get(isAuthenticate, getProducts);
 
 module.exports = router;

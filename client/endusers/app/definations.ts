@@ -31,6 +31,7 @@ export type ProductType = {
   category: string;
   subcategory: string;
   gender: string;
+  inWishlist: boolean;
   createdAt: number;
 };
 

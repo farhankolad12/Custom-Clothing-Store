@@ -147,6 +147,7 @@ function Page() {
       </div>
       <button
         type="submit"
+        disabled={loading}
         className="bg-transparent px-5 border border-black uppercase  font-bold hover:bg-black hover:text-white py-4"
       >
         {loading ? <Spinner className="w-6 h-6 mx-auto" /> : "save changes"}

@@ -1,5 +1,10 @@
+"use client";
+
+import { useAuth } from "@/app/context/AuthProvider";
+import { formatCurrency } from "@/app/utils/formatCurrency";
 import { Gochi_Hand } from "next/font/google";
 import Link from "next/link";
+import WishlistButton from "../WishlistButton";
 
 const gochi = Gochi_Hand({
   weight: "400",
@@ -8,6 +13,8 @@ const gochi = Gochi_Hand({
 });
 
 export default function FirstBanner() {
+  const { data } = useAuth();
+
   return (
     <section className="container lg:mx-auto px-5 pt-20">
       <div
@@ -15,9 +22,9 @@ export default function FirstBanner() {
         className="flex lg:flex-row flex-col w-full lg:flex-row"
       >
         <Link
-          href="/"
+          href={`/product/${data?.featuredProducts[0]._id}`}
           style={{
-            backgroundImage: "url('/main-home-product-1.jpg')",
+            backgroundImage: `url('${data?.featuredProducts[0].images[0].link}')`,
             // backgroundPosition: "center",
             backgroundSize: "100%",
             backgroundRepeat: "no-repeat",
@@ -35,24 +42,29 @@ export default function FirstBanner() {
           <div className="flex-col justify-between animate__animated animate__slideInUp absolute top-0 bottom-0 left-0 right-0 lg:bottom-20 lg:w-1/2 w-full lg:h-1/2 h-full lg:right-10 lg:top-auto lg:left-auto bg-white p-5 hidden group-hover:flex">
             <div className="flex justify-between items-start">
               <div className="flex flex-col gap-2">
-                <span className="mb-1 text-xs">SALOMON</span>
-                <h3 className="font-bold">CASUAL T-SHIRT</h3>
-                <span>Fashion</span>
+                <span className="mb-1 text-xs">TeeVerse</span>
+                <h3 className="font-bold">{data?.featuredProducts[0].name}</h3>
+                <span>{data?.featuredProducts[0].category}</span>
               </div>
 
-              <button className="bg-white w-14 h-14 flex items-center justify-center rounded-full hover:bg-black hover:text-white animate__animated hover:animate__fadeIn">
-                <i className="bi bi-heart text-lg " />
-              </button>
+              <div className="bg-white w-14 h-14 flex items-center justify-center rounded-full hover:bg-black hover:text-white animate__animated hover:animate__fadeIn">
+                <WishlistButton
+                  classes="bg-transparent w-14 h-14 rounded-full items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-50"
+                  product={data?.featuredProducts[0]}
+                />
+              </div>
             </div>
             <div>
-              <h1 className="ms-auto font-bold text-4xl">$180</h1>
+              <h1 className="ms-auto font-bold text-4xl">
+                {formatCurrency(data?.featuredProducts[0].price || 0)}
+              </h1>
             </div>
           </div>
         </Link>
         <Link
-          href="/"
+          href={`/product/${data?.newCollections[2]._id}`}
           style={{
-            backgroundImage: "url('/main-home-product-2.jpg')",
+            backgroundImage: `url('${data?.newCollections[2].images[0].link}')`,
             // backgroundPosition: "center",
             backgroundSize: "100%",
             backgroundRepeat: "no-repeat",
@@ -70,17 +82,26 @@ export default function FirstBanner() {
           <div className="flex-col justify-between animate__animated animate__slideInUp absolute top-0 bottom-0 left-0 right-0 lg:bottom-20 lg:w-1/2 w-full lg:h-1/2 h-full lg:right-10 lg:top-auto lg:left-auto bg-white p-5 hidden group-hover:flex">
             <div className="flex justify-between items-start">
               <div className="flex flex-col gap-2">
-                <span className="mb-1 text-xs">NIKE | ADIDAS</span>
-                <h3 className="font-bold">Adidas Sneakers</h3>
-                <span>Fashion</span>
+                <span className="mb-1 text-xs">TeeVerse</span>
+                <h3 className="font-bold">{data?.newCollections[2].name}</h3>
+                <span>{data?.newCollections[2].category}</span>
               </div>
 
-              <button className="bg-white w-14 h-14 flex items-center justify-center rounded-full hover:bg-black hover:text-white animate__animated hover:animate__fadeIn">
+              <div className="bg-white w-14 h-14 flex items-center justify-center rounded-full hover:bg-black hover:text-white animate__animated hover:animate__fadeIn">
+                <WishlistButton
+                  classes="bg-transparent w-14 h-14 rounded-full items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-50"
+                  product={data?.newCollections[2]}
+                />
+              </div>
+
+              {/* <button className="">
                 <i className="bi bi-heart text-lg " />
-              </button>
+              </button> */}
             </div>
             <div>
-              <h1 className="ms-auto font-bold text-4xl">$90</h1>
+              <h1 className="ms-auto font-bold text-4xl">
+                {formatCurrency(data?.newCollections[2].price || 0)}
+              </h1>
             </div>
           </div>
         </Link>

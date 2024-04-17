@@ -32,6 +32,7 @@ export default function LogoutButton() {
 
   return (
     <button
+      disabled={loading}
       onClick={handleLogout}
       type="button"
       className="bg-transparent uppercase font-bold text-xs "

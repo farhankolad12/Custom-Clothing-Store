@@ -5,6 +5,9 @@ const {
   homePage,
   getCart,
   updateCart,
+  updateWishlist,
+  getWishlists,
+  deleteWishlist,
 } = require("../controllers/homeController");
 const { isAuthenticate } = require("../middlewares/auth");
 
@@ -24,5 +27,11 @@ router.route("/home-page").get(homePage);
 router.route("/get-cart").get(isAuthenticate, getCart);
 
 router.route("/update-cart").post(isAuthenticate, updateCart);
+
+router.route("/update-wishlist").post(isAuthenticate, updateWishlist);
+
+router.route("/wishlists").get(isAuthenticate, getWishlists);
+
+router.route("/delete-wishlist").post(isAuthenticate, deleteWishlist);
 
 module.exports = router;

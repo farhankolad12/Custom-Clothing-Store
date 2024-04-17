@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 export function useGetReq(url: string, params: any) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [data, setData] = useState();
+  const [data, setData] = useState<any>();
 
   useEffect(() => {
     (async () => {
@@ -13,6 +13,7 @@ export function useGetReq(url: string, params: any) {
       await fetch(
         process.env.NEXT_PUBLIC_BACKEND_HOSTNAME +
           url +
+          "?" +
           new URLSearchParams(params),
         {
           credentials: "include",
