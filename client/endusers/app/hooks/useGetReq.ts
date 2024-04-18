@@ -33,7 +33,7 @@ export function useGetReq(url: string, params: any) {
         .catch((err) => setError(err))
         .finally(() => setLoading(false));
     })();
-  }, []);
+  }, [params.selectedVariants, params.productId]);
 
   return { error, data, loading, setData };
 }

@@ -2,11 +2,13 @@ export type ProductType = {
   _id: string;
   name: string;
   shortDescription: string;
+  combinations: any;
+  selectedCombination: any;
   variants: [
     {
       _id: string;
-      name: string;
-      options: [
+      title: string;
+      values: [
         {
           id: string;
           name: string;
@@ -15,6 +17,17 @@ export type ProductType = {
           discountedPrice: number;
         }
       ];
+    }
+  ];
+  selectedVariantIds: [
+    {
+      id: string;
+      title: string;
+      _id: string;
+      values: {
+        id: string;
+        variant: string;
+      };
     }
   ];
   discountedPrice: number;
@@ -30,8 +43,10 @@ export type ProductType = {
   isFeatured: boolean;
   category: string;
   subcategory: string;
+
   gender: string;
   inWishlist: boolean;
+  quantity: number;
   createdAt: number;
 };
 

@@ -1,8 +1,8 @@
-import { Drawer, IconButton } from "@material-tailwind/react";
+import { Drawer } from "@material-tailwind/react";
 import React from "react";
 import { useAuth } from "../context/AuthProvider";
 import { ProductType } from "../definations";
-import { formatCurrency } from "../utils/formatCurrency";
+import CartCanvasRow from "./CartCanvasRow";
 
 export default function CartCanvas({
   openCart,
@@ -11,7 +11,7 @@ export default function CartCanvas({
   openCart: boolean;
   closeDrawer: any;
 }) {
-  const { cartItems } = useAuth();
+  const { cartItems, currentUser } = useAuth();
 
   return (
     <Drawer
@@ -28,29 +28,14 @@ export default function CartCanvas({
           <i className="bi bi-x-lg" />
         </button>
       </div>
-      <div className="flex flex-col my-8">
-        {cartItems?.products.map((product: ProductType) => {
-          return (
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-4">
-                <img
-                  src={product.images[0].link}
-                  width="100px"
-                  height="100px"
-                  alt="product"
-                />
-                <div className="flex flex-col gap-1">
-                  <span>{product.category}</span>
-                  <strong>{product.name}</strong>
-                  <strong>{formatCurrency(product.price)}</strong>
-                </div>
-              </div>
-              <button>
-                <i className="bi bi-x-lg" />
-              </button>
-            </div>
-          );
-        })}
+      <div className="flex flex-col gap-4 my-8">
+        {currentUser ? (
+          cartItems?.products.map((product: ProductType) => {
+            return <CartCanvasRow key={product._id} product={product} />;
+          })
+        ) : (
+          <h1 className="text-center">Please login</h1>
+        )}
       </div>
     </Drawer>
   );

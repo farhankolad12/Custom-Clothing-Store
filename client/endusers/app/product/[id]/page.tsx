@@ -3,6 +3,7 @@
 import { useAuth } from "@/app/context/AuthProvider";
 import { ProductType } from "@/app/definations";
 import { useGetReq } from "@/app/hooks/useGetReq";
+import usePostReq from "@/app/hooks/usePostReq";
 import LoadingSkeleton from "@/app/loading";
 import Footer from "@/app/ui/Footer";
 import Header from "@/app/ui/Header";
@@ -10,8 +11,10 @@ import ProductList from "@/app/ui/Home/ProductList";
 import WishlistButton from "@/app/ui/WishlistButton";
 import ImageShowcase from "@/app/ui/product/ImageShowcase";
 import LightHouse from "@/app/ui/product/LightHouse";
+import VariationsList from "@/app/ui/product/VariationsList";
 import { formatCurrency } from "@/app/utils/formatCurrency";
 import {
+  Spinner,
   Tab,
   TabPanel,
   Tabs,
@@ -20,28 +23,61 @@ import {
 } from "@material-tailwind/react";
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 
 export default function Page() {
   const [openLighthouse, setOpenLighthouse] = useState(false);
   const [selectedVariants, setSelectedVariants] = useState<any>([]);
+  const [selectedVariantPrice, setSelectedVariantPrice] = useState<any>();
   const [value, setValue] = useState(0);
 
   const { id } = useParams();
-  const { data } = useAuth();
+  const { data, setCartItems } = useAuth();
   const {
     data: product,
     error,
     loading,
-    setData: setProduct,
   } = useGetReq("/product", {
     id,
   });
+  const {
+    error: _error,
+    execute,
+    loading: _loading,
+  } = usePostReq("/update-cart");
 
-  if (error) {
-    toast.error(error || "Something went wrong!");
+  if (error || _error) {
+    toast.error(error || _error || "Something went wrong!");
   }
+
+  useEffect(() => {
+    if (product) {
+      setSelectedVariants(
+        product.variants.map((variant: any) => {
+          return { ...variant, values: variant.values[0] };
+        })
+      );
+    }
+  }, [product]);
+
+  useEffect(() => {
+    if (selectedVariants.length && product) {
+      for (const combination of product.combinations) {
+        if (
+          combination.combinations.every((variant: any) => {
+            return selectedVariants.find(
+              (selVariant: any) =>
+                selVariant.values.id === variant.id &&
+                selVariant.values.variant === variant.variant
+            );
+          })
+        ) {
+          setSelectedVariantPrice(combination);
+        }
+      }
+    }
+  }, [selectedVariants, product]);
 
   const decrement = () => {
     setValue(value - 1);
@@ -50,6 +86,54 @@ export default function Page() {
   const increment = () => {
     setValue(value + 1);
   };
+
+  async function handleCart() {
+    if (value === 0) {
+      return toast.error("Please select quantity bigger than 0");
+    }
+    try {
+      const res = await execute({
+        productId: product._id,
+        selectedVariantIds: selectedVariants,
+        quantity: value,
+        selectedCombination: selectedVariantPrice,
+      });
+
+      if (!res.success) {
+        return toast.error(res.message || "Something went wrong!");
+      }
+
+      setCartItems((prev: any) => {
+        return {
+          ...prev,
+          products: prev.products.some(
+            (productC: any) => productC._id === product._id
+          )
+            ? prev.products.map((productC: any) => {
+                return productC._id === product._id
+                  ? {
+                      ...productC,
+                      quantity: value,
+                      selectedCombination: selectedVariantPrice,
+                    }
+                  : productC;
+              })
+            : [
+                ...prev?.products,
+                {
+                  ...product,
+                  quantity: value,
+                  selectedVariantIds: selectedVariants,
+                  selectedCombination: selectedVariantPrice,
+                },
+              ],
+        };
+      });
+    } catch (err: any) {
+      console.log(err);
+      toast.error(err || "Something went wrong!");
+    }
+  }
 
   return loading ? (
     <LoadingSkeleton />
@@ -87,9 +171,7 @@ export default function Page() {
             </h1>
             <div className="my-5 flex gap-10">
               <strong className="font-bold text-xl">
-                {formatCurrency(
-                  product.discountedPrice || product.price - 1000
-                )}
+                {formatCurrency(selectedVariantPrice?.salePrice || 0)}
               </strong>
               <strong className="font-bold text-xl">
                 <del>{formatCurrency(product.price)}</del>
@@ -102,47 +184,12 @@ export default function Page() {
             <div className="border-y-2 w-full flex flex-col  gap-5 py-4">
               {product.variants.map((variant: any) => {
                 return (
-                  <div className="flex border-b-2 last:border-b-0 items-center justify-between pb-4">
-                    <strong className="uppercase font-bold">
-                      {variant.title}
-                    </strong>
-                    <div className="flex gap-3">
-                      {variant.values.map((val: any) => {
-                        return (
-                          <>
-                            <input
-                              type="radio"
-                              name={variant.title}
-                              id={val.variant}
-                              value={val.variant}
-                              className="hidden"
-                              onChange={(e) => {
-                                /* setSelectedVariants((prev: any) => [
-                                  ...prev,
-                                  { ...variant, values: [val] },
-                                ]); */
-                              }}
-                            />
-                            <label
-                              className={`border-2 border-black px-6 py-1 hover:bg-black hover:text-white transition cursor-pointer /* ${
-                                selectedVariants.some((variants: any) => {
-                                  return variants.values.some(
-                                    (value: any) =>
-                                      value.variant === val.variant
-                                  );
-                                })
-                                  ? "bg-white text-black"
-                                  : ""
-                              } */`}
-                              htmlFor={val.variant}
-                            >
-                              {val.variant}
-                            </label>
-                          </>
-                        );
-                      })}
-                    </div>
-                  </div>
+                  <VariationsList
+                    setSelectedVariants={setSelectedVariants}
+                    selectedVariants={selectedVariants}
+                    key={variant._id}
+                    variant={variant}
+                  />
                 );
               })}
             </div>
@@ -167,8 +214,17 @@ export default function Page() {
                   <i className="bi bi-plus-lg" />
                 </button>
               </div>
-              <button className="uppercase lg:px-10 px-4 py-3 border-2 border-black font-bold transition hover:bg-black hover:text-white">
-                add to cart &nbsp; <i className="bi bi-bag" />
+              <button
+                onClick={handleCart}
+                className="uppercase lg:px-10 px-4 py-3 border-2 border-black font-bold transition hover:bg-black hover:text-white"
+              >
+                {_loading ? (
+                  <Spinner className="w-4 h-4" />
+                ) : (
+                  <>
+                    add to cart &nbsp; <i className="bi bi-bag" />
+                  </>
+                )}
               </button>
             </div>
             <WishlistButton

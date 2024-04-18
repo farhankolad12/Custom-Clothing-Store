@@ -27,7 +27,7 @@ export default function Header() {
     setOpen(!open);
   }
 
-  const { currentUser } = useAuth();
+  const { currentUser, cartItems } = useAuth();
 
   const openDrawer = () => setOpenCart(true);
   const closeDrawer = () => setOpenCart(false);
@@ -70,7 +70,9 @@ export default function Header() {
             onClick={openDrawer}
             className=" ms-0 lg:ms-5 text-black lg:text-white font-bold bg-transparent lg:bg-black lg:p-6 p-0"
           >
-            <i className=" text-xl bi bi-bag" /> 0
+            <i className=" text-xl bi bi-bag" />
+            &nbsp;&nbsp;
+            {currentUser ? cartItems?.products?.length : 0}
           </button>
           <button
             onClick={() => setMenu((prev) => !prev)}

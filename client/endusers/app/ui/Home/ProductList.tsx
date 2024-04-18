@@ -20,9 +20,17 @@ export default function ProductList({
 }) {
   const { setCartItems, currentUser, cartItems } = useAuth();
 
-  const { error, execute, loading, setError } = usePostReq("/update-cart");
+  const { error, execute, loading } = usePostReq("/update-cart");
+
+  if (error) {
+    toast.error(error || "Something went wrong!");
+  }
 
   async function handleCart() {
+    if (!currentUser) {
+      return toast.error("Please login!");
+    }
+
     let quantity = 1;
     if (
       cartItems.products.some((productC: any) => product._id === productC._id)
@@ -34,16 +42,34 @@ export default function ProductList({
     }
 
     try {
+      const selectedVariants = product.variants.map((variation) => {
+        return {
+          id: variation._id,
+          title: variation.title,
+          values: variation.values[0],
+        };
+      });
+
+      let selectedCombination = {};
+
+      for (const combination of product.combinations) {
+        if (
+          combination.combinations.every((variant: any) => {
+            return selectedVariants.find(
+              (selVariant: any) =>
+                selVariant.values.id === variant.id &&
+                selVariant.values.variant === variant.variant
+            );
+          })
+        ) {
+          selectedCombination = combination;
+        }
+      }
       const res = await execute({
         productId: product._id,
-        selectedVariantIds: product.variants.map((variation) => {
-          return {
-            id: variation._id,
-            title: variation.name,
-            values: variation.values[0],
-          };
-        }),
+        selectedVariantIds: selectedVariants,
         quantity,
+        selectedCombination,
       });
 
       if (!res.success) {
@@ -69,7 +95,7 @@ export default function ProductList({
                   selectedVariantIds: product.variants.map((variation) => {
                     return {
                       id: variation._id,
-                      title: variation.name,
+                      title: variation.title,
                       values: variation.values[0],
                     };
                   }),

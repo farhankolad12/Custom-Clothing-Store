@@ -7,6 +7,7 @@ const Users = require("../models/userModel");
 const Products = require("../models/productModel");
 const Categories = require("../models/categoryModel");
 const Wishlists = require("../models/wishlistModel");
+const ErrorHandler = require("../utils/errorhandler");
 
 exports.homePage = catchAsyncErrors(async (req, res, next) => {
   const date = new Date();
@@ -172,6 +173,7 @@ exports.getCart = catchAsyncErrors(async (req, res, next) => {
       ...product._doc,
       quantity: cartProduct.quantity,
       selectedVariantIds: cartProduct.selectedVariationIds,
+      selectedCombination: cartProduct.selectedCombination,
     });
   }
 
@@ -182,7 +184,12 @@ exports.getCart = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.updateCart = catchAsyncErrors(async (req, res, next) => {
-  const { productId, selectedVariantIds, quantity } = req.body;
+  const { productId, selectedVariantIds, quantity, selectedCombination } =
+    req.body;
+
+  if (quantity === 0) {
+    return next(new ErrorHandler("Please select quantity bigger than 0", 401));
+  }
 
   const currentUser = req.user;
 
@@ -191,22 +198,25 @@ exports.updateCart = catchAsyncErrors(async (req, res, next) => {
   if (!userCart) {
     const newCart = new Cart({
       uid: currentUser._id,
+      subTotalPrice: selectedCombination.salePrice * quantity,
+      totalPrice: selectedCombination.salePrice * quantity,
       products: [
         {
           productId: productId,
           selectedVariationIds: selectedVariantIds,
           quantity,
+          selectedCombination,
         },
       ],
     });
 
-    console.log("hello");
+    // console.log("hello");
 
     await newCart.save();
     return res.status(200).json({ success: true });
   }
 
-  console.log("world");
+  // console.log("world");
 
   const updatedProducts = [];
 
@@ -219,7 +229,9 @@ exports.updateCart = catchAsyncErrors(async (req, res, next) => {
       isProductId = true;
       updatedProducts.push({
         ...cartProduct._doc,
+        selectedCombination,
         quantity: ++cartProduct.quantity,
+        subTotalPrice: selectedCombination.salePrice + userCart.subTotalPrice,
       });
     } else {
       updatedProducts.push({
@@ -236,9 +248,12 @@ exports.updateCart = catchAsyncErrors(async (req, res, next) => {
           products: {
             productId: productId,
             selectedVariationIds: selectedVariantIds,
+            selectedCombination,
             quantity,
           },
+          // subTotalPrice: { $inc:  },
         },
+        $inc: { subTotalPrice: selectedCombination.salePrice * quantity },
       }
     );
 
@@ -252,6 +267,19 @@ exports.updateCart = catchAsyncErrors(async (req, res, next) => {
         products: updatedProducts,
       },
     }
+  );
+
+  return res.status(200).json({ success: true });
+});
+
+exports.deleteCart = catchAsyncErrors(async (req, res, next) => {
+  console.log(req.body);
+  const { productId } = req.body;
+  const currentUser = req.user;
+
+  await Cart.updateOne(
+    { uid: currentUser._id },
+    { $pull: { products: { productId } } }
   );
 
   return res.status(200).json({ success: true });
