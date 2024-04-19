@@ -1,17 +1,14 @@
-import { Spinner } from "@material-tailwind/react";
-import { ProductType } from "../definations";
-import { formatCurrency } from "../utils/formatCurrency";
-import usePostReq from "../hooks/usePostReq";
+import { useAuth } from "@/app/context/AuthProvider";
+import { ProductType } from "@/app/definations";
+import usePostReq from "@/app/hooks/usePostReq";
+import { formatCurrency } from "@/app/utils/formatCurrency";
+import Link from "next/link";
+import React from "react";
 import { toast } from "react-toastify";
-import { useAuth } from "../context/AuthProvider";
 
-export default function CartCanvasRow({ product }: { product: ProductType }) {
-  const { setCartItems, cartItems } = useAuth();
+export default function CartRow({ product }: { product: ProductType }) {
   const { error, execute, loading } = usePostReq("/delete-cart");
-
-  if (error) {
-    toast.error(error || "Something went wrong!");
-  }
+  const { setCartItems } = useAuth();
 
   async function handleDelete() {
     try {
@@ -62,38 +59,35 @@ export default function CartCanvasRow({ product }: { product: ProductType }) {
   }
 
   return (
-    <div className="flex items-start justify-between">
-      <div className="flex items-center gap-4">
-        <img
-          src={product.images[0].link}
-          width="100px"
-          height="100px"
-          alt="product"
-        />
-        <div className="flex flex-col gap-1">
-          <span>{product.category}</span>
-          <strong className="text-sm">{product.name}</strong>
-          <strong className="text-sm">
-            {formatCurrency(product.selectedCombination.salePrice)}
-          </strong>
-          <strong className="text-sm">Qty: {product.quantity}</strong>
-
-          {product.selectedVariantIds.map((selectedVariant) => {
-            return (
-              <strong key={selectedVariant._id} className="text-xs">
-                {selectedVariant.title}: {selectedVariant.values.variant}
-              </strong>
-            );
-          })}
+    <tr>
+      <td className="p-4 border-b border-blue-gray-50">
+        <div className="flex items-center gap-5">
+          <button onClick={handleDelete}>
+            <i className="bi bi-x-lg" />
+          </button>
+          <Link href={"/product/" + product._id}>
+            <img
+              src={product.images[0].link}
+              width="100px"
+              height="100px"
+              className="border-2"
+              alt="Product"
+            />
+          </Link>
+          <Link href={"/product/" + product._id}>
+            <strong className="uppercase">{product.name}</strong>
+          </Link>
         </div>
-      </div>
-      <button disabled={loading} onClick={handleDelete}>
-        {loading ? (
-          <Spinner className="w-4 h-4" />
-        ) : (
-          <i className="bi bi-x-lg" />
+      </td>
+      <td className="p-4 border-b border-blue-gray-50">
+        {formatCurrency(product.selectedCombination.salePrice)}
+      </td>
+      <td className="p-4 border-b border-blue-gray-50">{product.quantity}</td>
+      <td className="p-4 border-b border-blue-gray-50">
+        {formatCurrency(
+          product.selectedCombination.salePrice * product.quantity
         )}
-      </button>
-    </div>
+      </td>
+    </tr>
   );
 }

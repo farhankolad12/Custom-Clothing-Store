@@ -46,6 +46,7 @@ function Page() {
               wishlists.map((wishlist: ProductType) => {
                 return (
                   <WishlistItem
+                    key={wishlist._id}
                     setWishlists={setWishlists}
                     wishlist={wishlist}
                   />

@@ -1,3 +1,5 @@
+import { Fragment } from "react";
+
 export default function VariationsList({
   variant,
   selectedVariants,
@@ -13,7 +15,7 @@ export default function VariationsList({
       <div className="flex gap-3">
         {variant.values.map((val: any) => {
           return (
-            <>
+            <Fragment key={val.id}>
               <input
                 type="radio"
                 name={variant.title}
@@ -50,7 +52,7 @@ export default function VariationsList({
               >
                 {val.variant}
               </label>
-            </>
+            </Fragment>
           );
         })}
       </div>

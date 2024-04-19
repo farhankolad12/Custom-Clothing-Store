@@ -13,6 +13,7 @@ import ImageShowcase from "@/app/ui/product/ImageShowcase";
 import LightHouse from "@/app/ui/product/LightHouse";
 import VariationsList from "@/app/ui/product/VariationsList";
 import { formatCurrency } from "@/app/utils/formatCurrency";
+import { updateCart } from "@/app/utils/updateCart";
 import {
   Spinner,
   Tab,
@@ -33,7 +34,7 @@ export default function Page() {
   const [value, setValue] = useState(0);
 
   const { id } = useParams();
-  const { data, setCartItems } = useAuth();
+  const { data, setCartItems, currentUser } = useAuth();
   const {
     data: product,
     error,
@@ -46,10 +47,6 @@ export default function Page() {
     execute,
     loading: _loading,
   } = usePostReq("/update-cart");
-
-  if (error || _error) {
-    toast.error(error || _error || "Something went wrong!");
-  }
 
   useEffect(() => {
     if (product) {
@@ -88,47 +85,23 @@ export default function Page() {
   };
 
   async function handleCart() {
+    if (!currentUser) {
+      return toast.error("Please login!");
+    }
+
     if (value === 0) {
       return toast.error("Please select quantity bigger than 0");
     }
+
     try {
-      const res = await execute({
-        productId: product._id,
-        selectedVariantIds: selectedVariants,
-        quantity: value,
-        selectedCombination: selectedVariantPrice,
-      });
-
-      if (!res.success) {
-        return toast.error(res.message || "Something went wrong!");
-      }
-
-      setCartItems((prev: any) => {
-        return {
-          ...prev,
-          products: prev.products.some(
-            (productC: any) => productC._id === product._id
-          )
-            ? prev.products.map((productC: any) => {
-                return productC._id === product._id
-                  ? {
-                      ...productC,
-                      quantity: value,
-                      selectedCombination: selectedVariantPrice,
-                    }
-                  : productC;
-              })
-            : [
-                ...prev?.products,
-                {
-                  ...product,
-                  quantity: value,
-                  selectedVariantIds: selectedVariants,
-                  selectedCombination: selectedVariantPrice,
-                },
-              ],
-        };
-      });
+      await updateCart(
+        execute,
+        product,
+        selectedVariants,
+        value,
+        selectedVariantPrice,
+        setCartItems
+      );
     } catch (err: any) {
       console.log(err);
       toast.error(err || "Something went wrong!");
@@ -174,7 +147,7 @@ export default function Page() {
                 {formatCurrency(selectedVariantPrice?.salePrice || 0)}
               </strong>
               <strong className="font-bold text-xl">
-                <del>{formatCurrency(product.price)}</del>
+                <del>{formatCurrency(selectedVariantPrice?.price || 0)}</del>
               </strong>
             </div>
             <div className="my-5">Customer Reviews</div>
@@ -187,7 +160,7 @@ export default function Page() {
                   <VariationsList
                     setSelectedVariants={setSelectedVariants}
                     selectedVariants={selectedVariants}
-                    key={variant._id}
+                    key={variant._id || variant.id}
                     variant={variant}
                   />
                 );

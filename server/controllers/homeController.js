@@ -43,15 +43,28 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
   );
 
   const fProducts = [];
+  const cProducts = [];
 
   if (user) {
     for (let i = 0; i < featuredProducts.length; i++) {
       const product = featuredProducts[i];
+      const collectionProduct = newCollections[i];
 
       const inWishlist = await Wishlists.countDocuments({
         uid: user._id,
         products: { $elemMatch: { productId: product._id } },
       });
+
+      const inWishlist1 = await Wishlists.countDocuments({
+        uid: user._id,
+        products: { $elemMatch: { productId: collectionProduct._id } },
+      });
+
+      if (inWishlist1 > 0) {
+        cProducts.push({ ...collectionProduct._doc, inWishlist: true });
+      } else {
+        cProducts.push({ ...collectionProduct._doc, inWishlist: false });
+      }
 
       if (inWishlist > 0) {
         fProducts.push({ ...product._doc, inWishlist: true });
@@ -63,7 +76,7 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
 
   return res.status(200).json({
     featuredProducts: user ? fProducts : featuredProducts,
-    newCollections,
+    newCollections: user ? cProducts : newCollections,
     categories,
   });
 });
@@ -218,27 +231,48 @@ exports.updateCart = catchAsyncErrors(async (req, res, next) => {
 
   // console.log("world");
 
-  const updatedProducts = [];
+  let updatedProducts = [];
 
   let isProductId = false;
+  const subTotalPrice = userCart?.products.some(
+    (productC) =>
+      productC.productId === productId &&
+      productC.selectedCombination.id === selectedCombination.id
+  )
+    ? (userCart?.subTotalPrice || 0) +
+      selectedCombination.salePrice * quantity -
+      selectedCombination.salePrice
+    : (userCart?.subTotalPrice || 0) + selectedCombination.salePrice * quantity;
 
-  for (let i = 0; i < userCart?.products.length; i++) {
-    const cartProduct = userCart.products[i];
-
-    if (cartProduct.productId === productId) {
-      isProductId = true;
-      updatedProducts.push({
-        ...cartProduct._doc,
-        selectedCombination,
-        quantity: ++cartProduct.quantity,
-        subTotalPrice: selectedCombination.salePrice + userCart.subTotalPrice,
-      });
-    } else {
-      updatedProducts.push({
-        ...cartProduct._doc,
-      });
-    }
-  }
+  await (async () => {
+    userCart?.products.some(
+      (productC) =>
+        productC.productId === productId &&
+        productC.selectedCombination.id === selectedCombination.id
+    )
+      ? (updatedProducts = userCart?.products.map((productC) => {
+          isProductId = true;
+          return productC.productId === productId &&
+            productC.selectedCombination.id === selectedCombination.id
+            ? { ...productC._doc, quantity }
+            : productC._doc;
+        }))
+      : userCart?.products.some(
+          (productC) =>
+            productC.productId === productId &&
+            productC.selectedCombination.id !== selectedCombination.id
+        )
+      ? (updatedProducts = [
+          ...userCart?.products,
+          {
+            productId,
+            quantity,
+            selectedVariantIds,
+            selectedCombination,
+          },
+        ])
+      : [];
+  })();
 
   if (!isProductId) {
     await Cart.updateOne(
@@ -251,9 +285,10 @@ exports.updateCart = catchAsyncErrors(async (req, res, next) => {
             selectedCombination,
             quantity,
           },
-          // subTotalPrice: { $inc:  },
         },
-        $inc: { subTotalPrice: selectedCombination.salePrice * quantity },
+        $set: {
+          subTotalPrice,
+        },
       }
     );
 
@@ -265,6 +300,7 @@ exports.updateCart = catchAsyncErrors(async (req, res, next) => {
     {
       $set: {
         products: updatedProducts,
+        subTotalPrice,
       },
     }
   );
@@ -273,13 +309,28 @@ exports.updateCart = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.deleteCart = catchAsyncErrors(async (req, res, next) => {
-  console.log(req.body);
-  const { productId } = req.body;
+  const { productId, selectedCombination, quantity } = req.body;
   const currentUser = req.user;
+
+  const cartItems = await Cart.findOne({ uid: currentUser._id });
 
   await Cart.updateOne(
     { uid: currentUser._id },
-    { $pull: { products: { productId } } }
+    {
+      $pull: { products: { "selectedCombination.id": selectedCombination.id } },
+      $set: {
+        subTotalPrice: cartItems?.products.some(
+          (productC) =>
+            productC.productId === productId &&
+            productC.selectedCombination.id === selectedCombination.id
+        )
+          ? (cartItems?.subTotalPrice || 0) -
+            selectedCombination.salePrice * quantity /*  -
+              product.selectedCombination.salePrice */
+          : (cartItems?.subTotalPrice || 0) +
+            selectedCombination.salePrice * quantity,
+      },
+    }
   );
 
   return res.status(200).json({ success: true });

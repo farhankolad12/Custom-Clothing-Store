@@ -5,9 +5,10 @@ import { formatCurrency } from "@/app/utils/formatCurrency";
 import { Carousel, IconButton, ThemeProvider } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import WishlistButton from "../WishlistButton";
+import { updateCart } from "@/app/utils/updateCart";
 
 export default function ProductList({
   product,
@@ -18,6 +19,8 @@ export default function ProductList({
   spanning: boolean | undefined;
   span: string | undefined;
 }) {
+  const [selectedCombination, setSelectedCombination] = useState<any>({});
+  const [selectedVariants, setSelectedVariants] = useState<any>();
   const { setCartItems, currentUser, cartItems } = useAuth();
 
   const { error, execute, loading } = usePostReq("/update-cart");
@@ -26,6 +29,36 @@ export default function ProductList({
     toast.error(error || "Something went wrong!");
   }
 
+  useEffect(() => {
+    setSelectedVariants(
+      product.variants?.map((variation) => {
+        return {
+          id: variation._id,
+          title: variation.title,
+          values: variation.values[0],
+        };
+      })
+    );
+  }, []);
+
+  useEffect(() => {
+    if (product.combinations) {
+      for (const combination of product.combinations) {
+        if (
+          combination.combinations.every((variant: any) => {
+            return selectedVariants?.find(
+              (selVariant: any) =>
+                selVariant.values.id === variant.id &&
+                selVariant.values.variant === variant.variant
+            );
+          })
+        ) {
+          setSelectedCombination(combination);
+        }
+      }
+    }
+  }, [selectedVariants]);
+
   async function handleCart() {
     if (!currentUser) {
       return toast.error("Please login!");
@@ -33,76 +66,44 @@ export default function ProductList({
 
     let quantity = 1;
     if (
+      cartItems.products.some(
+        (productC: any) =>
+          product._id === productC._id &&
+          productC.selectedCombination.id === selectedCombination?.id
+      )
+    ) {
+      quantity =
+        cartItems.products.filter(
+          (productC: any) =>
+            product._id === productC._id &&
+            productC.selectedCombination.id === selectedCombination?.id
+        )[0]?.quantity + 1;
+    } else if (
+      cartItems.products.some(
+        (productC: any) =>
+          product._id === productC._id &&
+          productC.selectedCombination.id !== selectedCombination?.id
+      )
+    ) {
+      quantity = 1;
+    } else if (
       cartItems.products.some((productC: any) => product._id === productC._id)
     ) {
       quantity =
         cartItems.products.filter(
           (productC: any) => productC._id === product._id
-        )[0].quantity + 1;
+        )[0]?.quantity + 1;
     }
 
     try {
-      const selectedVariants = product.variants.map((variation) => {
-        return {
-          id: variation._id,
-          title: variation.title,
-          values: variation.values[0],
-        };
-      });
-
-      let selectedCombination = {};
-
-      for (const combination of product.combinations) {
-        if (
-          combination.combinations.every((variant: any) => {
-            return selectedVariants.find(
-              (selVariant: any) =>
-                selVariant.values.id === variant.id &&
-                selVariant.values.variant === variant.variant
-            );
-          })
-        ) {
-          selectedCombination = combination;
-        }
-      }
-      const res = await execute({
-        productId: product._id,
-        selectedVariantIds: selectedVariants,
+      await updateCart(
+        execute,
+        product,
+        selectedVariants,
         quantity,
         selectedCombination,
-      });
-
-      if (!res.success) {
-        return toast.error(res.message || "Wrong!");
-      }
-
-      setCartItems((prev: any) => {
-        return {
-          ...prev,
-          products: prev.products.some(
-            (productC: any) => productC._id === product._id
-          )
-            ? prev.products.map((productC: any) => {
-                return productC._id === product._id
-                  ? { ...productC, quantity }
-                  : productC;
-              })
-            : [
-                ...prev?.products,
-                {
-                  ...product,
-                  quantity: 1,
-                  selectedVariantIds: product.variants.map((variation) => {
-                    return {
-                      id: variation._id,
-                      title: variation.title,
-                      values: variation.values[0],
-                    };
-                  }),
-                },
-              ],
-        };
-      });
+        setCartItems
+      );
     } catch (err: any) {
       console.log(err);
       toast.error(err || "Wrong!");
@@ -214,9 +215,14 @@ export default function ProductList({
             >
               {product.category}
             </Link>
-            <span className="font-bold text-sm mt-4">
-              {formatCurrency(product.price)}
-            </span>
+            <div className="flex gap-2">
+              <span className="font-bold text-xs mt-4">
+                {formatCurrency(selectedCombination?.salePrice || 0)}
+              </span>
+              <span className="font-bold text-gray-500 text-xs mt-4">
+                <del>{formatCurrency(selectedCombination?.price || 0)}</del>
+              </span>
+            </div>
           </div>
           <button
             disabled={loading}
