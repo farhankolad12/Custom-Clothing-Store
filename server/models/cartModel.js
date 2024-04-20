@@ -5,8 +5,20 @@ const cartSchema = new mongoose.Schema({
     type: String,
   },
   coupon: {
-    id: { type: String },
+    image: {
+      id: { type: String },
+      link: { type: String },
+    },
     name: { type: String },
+    code: { type: String },
+    expiresAt: { type: Number },
+    type: { type: String },
+    discount: { type: Number },
+    minimumCartValue: { type: Number },
+    createdAt: {
+      type: Number,
+      default: Date.now(),
+    },
   },
   products: [
     {
