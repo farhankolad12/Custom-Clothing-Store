@@ -30,8 +30,8 @@ export default function CartCanvasRow({ product }: { product: ProductType }) {
       setCartItems((prev: any) => {
         return {
           ...prev,
-          shippingPrice: 200,
-          discountedPrice: 0,
+          // shippingPrice: 200,
+          // discountedPrice: 0,
           subTotalPrice: prev.products.some(
             (productC: any) =>
               productC._id === product._id &&

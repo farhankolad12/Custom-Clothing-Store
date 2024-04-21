@@ -21,6 +21,7 @@ const home = require("./routes/homeRoute");
 const coupon = require("./routes/couponRoute");
 const product = require("./routes/productRoute");
 const queries = require("./routes/queriesRoute");
+const payment = require("./routes/paymentRoute");
 const category = require("./routes/categoryRoute");
 const attribute = require("./routes/attributeRoute");
 
@@ -30,6 +31,7 @@ app.use("/api", home);
 app.use("/api", coupon);
 app.use("/api", product);
 app.use("/api", queries);
+app.use("/api/payment", payment);
 app.use("/api", category);
 app.use("/api", attribute);
 
