@@ -190,9 +190,15 @@ exports.getCart = catchAsyncErrors(async (req, res, next) => {
     });
   }
 
+  if (resData.length) {
+    return res.status(200).json({
+      ...userCart._doc,
+      products: resData,
+    });
+  }
+
   return res.status(200).json({
-    ...userCart._doc,
-    products: resData,
+    products: [],
   });
 });
 

@@ -70,15 +70,35 @@ exports.authorizePayment = catchAsyncErrors(async (req, res, next) => {
       .json({ success: false, message: "Transaction is not valid" });
   }
 
+  const razorpay = new Razorpay({
+    key_id: process.env.RAZORPAY_KEYID,
+    key_secret: process.env.RAZORPAY_SECRET_KEY,
+  });
+
+  const paymentInstance = await razorpay.payments.fetch(razorpay_payment_id);
   const cartItem = await Cart.findOne({ uid: currentUser._id });
 
   let isCoupon = false;
+  const products = [];
 
   if (cartItem.coupon) {
     isCoupon = await Coupons.findOne({
       code: cartItem.coupon.code,
       expiresAt: { $gt: Date.now() },
       minimumCartValue: { $lte: cartItem.subTotalPrice },
+    });
+  }
+
+  for (let i = 0; i < cartItem.products.length; i++) {
+    const cartProduct = cartItem.products[i];
+
+    const cartProducts = await Products.findOne({
+      _id: cartProduct.productId,
+    });
+
+    products.push({
+      ...cartProducts._doc,
+      selectedCombination: cartProduct.selectedCombination,
     });
   }
 
@@ -98,14 +118,15 @@ exports.authorizePayment = catchAsyncErrors(async (req, res, next) => {
         ? cartItem.coupon.discount
         : (cartItem.coupon.discount / 100) * cartItem.subTotalPrice
       : 0,
-    products: await Products.find(
-      cartItem.products.map((product) => ({ _id: product.productId }))
-    ),
+    products,
     shippingPrice: cartItem.shippingPrice,
     subtotal: cartItem.subTotalPrice,
+    method: paymentInstance.method,
   });
 
   await newOrder.save();
+
+  await Cart.deleteOne({ uid: currentUser._id });
 
   return res.status(200).json({ success: true });
 });

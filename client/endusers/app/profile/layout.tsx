@@ -29,7 +29,7 @@ export default function Layout({
             <span> | </span>
             <span className="uppercase font-bold text-black">my account</span>
           </div>
-          <div className="pt-20 pb-10 flex lg:flex-row flex-col justify-between w-full gap-10">
+          <div className="pt-20 pb-10 flex lg:flex-row flex-col justify-between w-full gap-10 lg:px-0 px-5">
             <div className="lg:w-1/4 w-full flex flex-col gap-4">
               <div className="py-4 w-full border-b-2 border-gray-300">
                 <Link

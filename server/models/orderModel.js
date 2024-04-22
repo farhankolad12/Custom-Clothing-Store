@@ -42,20 +42,20 @@ const orderSchema = new mongoose.Schema({
           ],
         },
       ],
-      combinations: [
-        {
-          id: { type: String },
-          price: { type: Number },
-          salePrice: { type: Number },
-          combinations: [
-            {
-              id: { type: String },
-              variant: { type: String },
-              parentName: { type: String },
-            },
-          ],
-        },
-      ],
+      // combinations: [
+      //   {
+      //     id: { type: String },
+      //     price: { type: Number },
+      //     salePrice: { type: Number },
+      //     combinations: [
+      //       {
+      //         id: { type: String },
+      //         variant: { type: String },
+      //         parentName: { type: String },
+      //       },
+      //     ],
+      //   },
+      // ],
       images: [
         {
           id: {
@@ -106,20 +106,35 @@ const orderSchema = new mongoose.Schema({
   deliveredAt: {
     type: Date,
   },
+  method: {
+    type: String,
+  },
   address: {
+    fname: {
+      type: String,
+    },
+    lname: {
+      type: String,
+    },
+    phone: {
+      type: String,
+    },
+    email: {
+      type: String,
+    },
     city: {
       type: String,
     },
     country: {
       type: String,
     },
-    line1: {
+    streetAddr1: {
       type: String,
     },
-    line2: {
+    streetAddr2: {
       type: String,
     },
-    postal_code: {
+    zipCode: {
       type: String,
     },
     state: {

@@ -2,10 +2,41 @@ import { useAuth } from "@/app/context/AuthProvider";
 import usePostReq from "@/app/hooks/usePostReq";
 import { Spinner } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { Ref, RefObject, useState } from "react";
 import { toast } from "react-toastify";
 
-export default function CheckoutButton({ isCoupon }: { isCoupon: boolean }) {
+declare global {
+  interface Window {
+    // ⚠️ notice that "Window" is capitalized here
+    Razorpay: any;
+  }
+}
+
+export default function CheckoutButton({
+  isCoupon,
+  fnameRef,
+  lnameRef,
+  countryRef,
+  streetAddr1Ref,
+  streetAddr2Ref,
+  cityRef,
+  stateRef,
+  zipCodeRef,
+  phoneRef,
+  emailRef,
+}: {
+  isCoupon: boolean;
+  fnameRef: RefObject<HTMLInputElement>;
+  lnameRef: RefObject<HTMLInputElement>;
+  countryRef: RefObject<HTMLInputElement>;
+  streetAddr1Ref: RefObject<HTMLInputElement>;
+  streetAddr2Ref: RefObject<HTMLInputElement>;
+  cityRef: RefObject<HTMLInputElement>;
+  stateRef: RefObject<HTMLInputElement>;
+  zipCodeRef: RefObject<HTMLInputElement>;
+  phoneRef: RefObject<HTMLInputElement>;
+  emailRef: RefObject<HTMLInputElement>;
+}) {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -44,13 +75,30 @@ export default function CheckoutButton({ isCoupon }: { isCoupon: boolean }) {
         image: "https://example.com/your_logo",
         order_id: res.orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
         handler: async (response: any) => {
-          const res = await _execute(response);
+          const res = await _execute({
+            ...response,
+            address: {
+              fname: fnameRef.current?.value,
+              lname: lnameRef.current?.value,
+              country: countryRef.current?.value,
+              streetAddr: streetAddr1Ref.current?.value,
+              streetAddr2: streetAddr2Ref.current?.value,
+              city: cityRef.current?.value,
+              state: stateRef.current?.value,
+              zipCode: zipCodeRef.current?.value,
+              phone: phoneRef.current?.value,
+              email: emailRef.current?.value,
+            },
+          });
 
           if (!res?.success) {
+            setLoading(false);
             toast.error(res.message || _error || "Something went wrong");
           }
 
-          setCartItems({});
+          setCartItems(undefined);
+          setLoading(false);
+          toast.success("Order succesfully placed!");
           router.push("/profile");
         },
         prefill: {
@@ -69,6 +117,7 @@ export default function CheckoutButton({ isCoupon }: { isCoupon: boolean }) {
       const rzp1 = new window.Razorpay(options);
       rzp1.on("payment.failed", (response: any) => {
         console.log(response);
+        setLoading(false);
         toast.error(response.error.description);
         toast.error(response.error.reason);
       });
