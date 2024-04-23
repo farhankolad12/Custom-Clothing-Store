@@ -31,15 +31,28 @@ export type CategoriesType = {
 };
 
 export type ProductType = {
+  quantity: number;
+  selectedCombination: {
+    id: string;
+    price: number;
+    salePrice: number;
+    combinations: [
+      {
+        id: string;
+        variant: string;
+        parentName: string;
+      }
+    ];
+  };
   combinations: [
     {
-      id: { type: string };
-      price: { type: number };
-      salePrice: { type: number };
+      id: string;
+      price: number;
+      salePrice: number;
       combinations: [
         {
-          id: { type: string };
-          varaint: { type: string };
+          id: string;
+          varaint: string;
         }
       ];
     }

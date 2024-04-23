@@ -129,3 +129,37 @@ exports.getOrders = catchAsyncErrors(async (req, res, next) => {
     lastDocument: pageSize * (currentPage - 1) + orders.length,
   });
 });
+
+exports.getOrder = catchAsyncErrors(async (req, res, next) => {
+  const { id } = req.query;
+
+  return res.status(200).json(await Orders.findOne({ _id: id }));
+});
+
+exports.updateStatus = catchAsyncErrors(async (req, res, next) => {
+  const { status, orderId } = req.body;
+
+  await Orders.updateOne(
+    { _id: orderId },
+    {
+      $push: {
+        status: {
+          name: status,
+          message:
+            status === "Pending"
+              ? "Your order has been received"
+              : status === "Processing"
+              ? "Your order is in the process"
+              : status === "Delivered"
+              ? "Your order has been delivered to you"
+              : status === "Cancel"
+              ? "Your order has been cancelled"
+              : "",
+          changedAt: Date.now(),
+        },
+      },
+    }
+  );
+
+  return res.status(200).json({ success: true });
+});

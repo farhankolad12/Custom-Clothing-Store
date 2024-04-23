@@ -2,7 +2,11 @@ const express = require("express");
 const cors = require("cors");
 
 const { isAuthenticate } = require("../middlewares/auth");
-const { getOrders } = require("../controllers/orderController");
+const {
+  getOrders,
+  getOrder,
+  updateStatus,
+} = require("../controllers/orderController");
 
 const router = express.Router();
 
@@ -16,5 +20,9 @@ router.use(
 );
 
 router.route("/orders").get(isAuthenticate, getOrders);
+
+router.route("/order").get(isAuthenticate, getOrder);
+
+router.route("/update-status").post(isAuthenticate, updateStatus);
 
 module.exports = router;

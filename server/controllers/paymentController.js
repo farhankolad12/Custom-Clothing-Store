@@ -98,7 +98,7 @@ exports.authorizePayment = catchAsyncErrors(async (req, res, next) => {
 
     products.push({
       ...cartProducts._doc,
-      selectedCombination: cartProduct.selectedCombination,
+      ...cartProduct._doc,
     });
   }
 

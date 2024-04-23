@@ -6,6 +6,12 @@ const orderSchema = new mongoose.Schema({
   },
   products: [
     {
+      productId: {
+        type: String,
+      },
+      quantity: {
+        type: Number,
+      },
       name: {
         type: String,
       },
@@ -80,7 +86,22 @@ const orderSchema = new mongoose.Schema({
       },
     },
   ],
-  coupon: {},
+  coupon: {
+    image: {
+      id: { type: String },
+      link: { type: String },
+    },
+    name: { type: String },
+    code: { type: String },
+    expiresAt: { type: Number },
+    type: { type: String },
+    discount: { type: Number },
+    minimumCartValue: { type: Number },
+    createdAt: {
+      type: Number,
+      default: Date.now(),
+    },
+  },
   status: [
     {
       name: {

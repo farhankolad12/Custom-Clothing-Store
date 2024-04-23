@@ -35,3 +35,15 @@ body {
     width: 100% !important;
   }
 }
+
+/* @media print {
+  body {
+    visibility: hidden;
+  }
+  #divToPrint {
+    visibility: visible;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+} */

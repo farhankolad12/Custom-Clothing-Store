@@ -172,7 +172,6 @@ function Page() {
                 <th className="text-secondary">METHOD</th>
                 <th className="text-secondary">AMOUNT</th>
                 <th className="text-secondary">STATUS</th>
-                <th className="text-secondary">ACTIONS</th>
                 <th className="text-secondary">INVOICE</th>
               </tr>
             </thead>

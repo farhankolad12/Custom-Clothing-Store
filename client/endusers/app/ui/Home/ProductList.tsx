@@ -66,20 +66,20 @@ export default function ProductList({
 
     let quantity = 1;
     if (
-      cartItems.products.some(
+      cartItems?.products.some(
         (productC: any) =>
           product._id === productC._id &&
           productC.selectedCombination.id === selectedCombination?.id
       )
     ) {
       quantity =
-        cartItems.products.filter(
+        cartItems?.products.filter(
           (productC: any) =>
             product._id === productC._id &&
             productC.selectedCombination.id === selectedCombination?.id
         )[0]?.quantity + 1;
     } else if (
-      cartItems.products.some(
+      cartItems?.products.some(
         (productC: any) =>
           product._id === productC._id &&
           productC.selectedCombination.id !== selectedCombination?.id
@@ -87,10 +87,10 @@ export default function ProductList({
     ) {
       quantity = 1;
     } else if (
-      cartItems.products.some((productC: any) => product._id === productC._id)
+      cartItems?.products.some((productC: any) => product._id === productC._id)
     ) {
       quantity =
-        cartItems.products.filter(
+        cartItems?.products.filter(
           (productC: any) => productC._id === product._id
         )[0]?.quantity + 1;
     }
