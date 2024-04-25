@@ -6,6 +6,9 @@ const nextConfig = {
       {
         hostname: "dunker.qodeinteractive.com",
       },
+      {
+        hostname: "res.cloudinary.com",
+      },
     ],
   },
 };

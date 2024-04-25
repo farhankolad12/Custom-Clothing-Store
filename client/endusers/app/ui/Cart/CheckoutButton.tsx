@@ -81,7 +81,7 @@ export default function CheckoutButton({
               fname: fnameRef.current?.value,
               lname: lnameRef.current?.value,
               country: countryRef.current?.value,
-              streetAddr: streetAddr1Ref.current?.value,
+              streetAddr1: streetAddr1Ref.current?.value,
               streetAddr2: streetAddr2Ref.current?.value,
               city: cityRef.current?.value,
               state: stateRef.current?.value,

@@ -163,3 +163,41 @@ exports.updateStatus = catchAsyncErrors(async (req, res, next) => {
 
   return res.status(200).json({ success: true });
 });
+
+exports.getUserOrders = catchAsyncErrors(async (req, res, next) => {
+  const currentUser = req.user;
+  const { searchParams } = req.query;
+
+  const params = new URLSearchParams(searchParams);
+  const currentPage = Number(params.get("page")) || 1;
+  const pageSize = 5;
+
+  const sortQuery = { paidAt: -1 };
+
+  const filterQuery = { uid: currentUser._id };
+
+  const totalDocuments = await Orders.countDocuments(filterQuery);
+
+  const orders = await Orders.find(filterQuery)
+    .limit(pageSize)
+    .skip(pageSize * (currentPage - 1))
+    .sort(sortQuery);
+
+  return res.status(200).json({
+    orders,
+    totalPages: Math.ceil(totalDocuments / pageSize),
+    currentPage,
+    totalDocuments,
+    startDocument: pageSize * (currentPage - 1) + 1,
+    lastDocument: pageSize * (currentPage - 1) + orders.length,
+  });
+});
+
+exports.getUserOrder = catchAsyncErrors(async (req, res, next) => {
+  const currentUser = req.user;
+  const { id } = req.query;
+
+  const order = await Orders.findOne({ uid: currentUser._id, _id: id });
+
+  return res.status(200).json(order);
+});

@@ -18,6 +18,7 @@ app.use(cookieParser());
 // Import Routers
 const user = require("./routes/userRoute");
 const home = require("./routes/homeRoute");
+const shop = require("./routes/shopRoute");
 const order = require("./routes/orderRoute");
 const coupon = require("./routes/couponRoute");
 const product = require("./routes/productRoute");
@@ -29,6 +30,7 @@ const attribute = require("./routes/attributeRoute");
 // Call Routers
 app.use("/api", user);
 app.use("/api", home);
+app.use("/api", shop);
 app.use("/api", order);
 app.use("/api", coupon);
 app.use("/api", product);

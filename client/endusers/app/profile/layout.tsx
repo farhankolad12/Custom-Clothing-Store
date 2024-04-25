@@ -3,6 +3,7 @@ import Header from "../ui/Header";
 import Footer from "../ui/Footer";
 import Link from "next/link";
 import LogoutButton from "../ui/profile/LogoutButton";
+import { useParams } from "next/navigation";
 
 export const metadata: Metadata = {
   title: "My Profile - Clothing Store",
@@ -19,7 +20,7 @@ export default function Layout({
       <Header />
       <main className="container mx-auto">
         <section>
-          <div className="flex gap-2 text-xs my-4">
+          <div className="flex gap-2 text-xs lg:px-0 px-5 my-4">
             <Link
               className="uppercase font-bold text-gray-700 hover:text-black"
               href="/"

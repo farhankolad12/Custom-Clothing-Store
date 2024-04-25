@@ -4,14 +4,7 @@ import Link from "next/link";
 import Logo from "./Logo";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import {
-  Button,
-  Collapse,
-  Dialog,
-  DialogHeader,
-  Drawer,
-  IconButton,
-} from "@material-tailwind/react";
+import { Collapse } from "@material-tailwind/react";
 import { useAuth } from "../context/AuthProvider";
 import Authentication from "./Home/Authentication";
 import CartCanvas from "./CartCanvas";
@@ -35,7 +28,7 @@ export default function Header() {
   return (
     <>
       <header
-        className={`bg-transparent flex justify-between items-center lg:ps-5 lg:pt-0 pt-6 absolute top-0 w-full`}
+        className={`bg-transparent flex justify-between items-center lg:ps-5 lg:pt-0 pt-6 absolute top-0 w-full border-b `}
       >
         <Logo />
         <div className="hidden lg:flex gap-12">

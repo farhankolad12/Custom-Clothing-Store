@@ -6,6 +6,8 @@ const {
   getOrders,
   getOrder,
   updateStatus,
+  getUserOrders,
+  getUserOrder,
 } = require("../controllers/orderController");
 
 const router = express.Router();
@@ -22,6 +24,10 @@ router.use(
 router.route("/orders").get(isAuthenticate, getOrders);
 
 router.route("/order").get(isAuthenticate, getOrder);
+
+router.route("/user-orders").get(isAuthenticate, getUserOrders);
+
+router.route("/user-order").get(isAuthenticate, getUserOrder);
 
 router.route("/update-status").post(isAuthenticate, updateStatus);
 
