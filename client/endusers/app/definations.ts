@@ -69,6 +69,7 @@ export type AuthValue = {
         featuredProducts: ProductType[];
         newCollections: ProductType[];
         categories: any;
+        homePageContent: any;
       }
     | undefined;
   setData: Function;

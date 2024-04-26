@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const Multer = require("multer");
 
 const {
   homePage,
@@ -9,11 +10,16 @@ const {
   getWishlists,
   deleteWishlist,
   deleteCart,
-  getProductPrice,
+  updateHomePage,
 } = require("../controllers/homeController");
-const { isAuthenticate } = require("../middlewares/auth");
+const { isAuthenticate, authorizeRoles } = require("../middlewares/auth");
 
 const router = express.Router();
+
+const storage = new Multer.memoryStorage();
+const upload = Multer({
+  storage,
+});
 
 router.use(
   cors({
@@ -25,6 +31,10 @@ router.use(
 );
 
 router.route("/home-page").get(homePage);
+
+router
+  .route("/home-page")
+  .post(isAuthenticate, authorizeRoles("admin"), upload.any(), updateHomePage);
 
 router.route("/update-cart").post(isAuthenticate, updateCart);
 

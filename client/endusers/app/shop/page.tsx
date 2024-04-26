@@ -98,7 +98,7 @@ export default function Page() {
   return loading ? (
     <LoadingSkeleton />
   ) : (
-    <>
+    <div className="not-home">
       <Header />
       <div className="flex gap-3 lg:px-10 lg:px-16 px-5 mt-8">
         <Link href="/" className="uppercase text-xs text-gray-600 font-bold">
@@ -219,6 +219,6 @@ export default function Page() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

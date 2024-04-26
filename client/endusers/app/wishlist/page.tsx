@@ -28,7 +28,7 @@ function Page() {
   return loading ? (
     <LoadingSkeleton />
   ) : (
-    <>
+    <div className="not-home">
       <Header />
       <main className="px-10 my-5">
         <div className="flex gap-2">
@@ -61,7 +61,7 @@ function Page() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }
 

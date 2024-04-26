@@ -105,7 +105,7 @@ function Page() {
   }
 
   return (
-    <>
+    <div className="not-home">
       <Header />
       {loadingCode ? (
         <LoadingSkeleton />
@@ -349,7 +349,7 @@ function Page() {
         </main>
       )}
       <Footer />
-    </>
+    </div>
   );
 }
 

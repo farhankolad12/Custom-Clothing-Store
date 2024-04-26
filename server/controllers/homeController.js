@@ -7,7 +7,126 @@ const Users = require("../models/userModel");
 const Products = require("../models/productModel");
 const Categories = require("../models/categoryModel");
 const Wishlists = require("../models/wishlistModel");
-const ErrorHandler = require("../utils/errorhandler");
+const HomePageContent = require("../models/homePageContentModel");
+
+const handleUpload = require("../utils/uploadImage");
+
+exports.updateHomePage = catchAsyncErrors(async (req, res, next) => {
+  const { changeType, data } = req.body;
+
+  const homePageContent = await HomePageContent.find();
+
+  const imgFiles = req.files;
+
+  const img1 = [];
+
+  for (let i = 0; i < imgFiles.length; i++) {
+    const file = imgFiles[i];
+    const b64 = Buffer.from(file.buffer).toString("base64");
+    const dataURI = "data:" + file.mimetype + ";base64," + b64;
+    const cldRes = await handleUpload(dataURI);
+    const icon = { id: cldRes.public_id, link: cldRes.url };
+    img1.push({ icon, sliderId: file.fieldname });
+  }
+
+  if (!homePageContent.length) {
+    const newData = new HomePageContent({
+      [changeType]: JSON.parse(data).map((d) => {
+        return {
+          ...d,
+          img: img1.filter((img) => +img.sliderId === +d.id)[0].icon,
+        };
+      }),
+    });
+    await newData.save();
+
+    return res.status(200).json({ success: true });
+  }
+
+  // console.log(img1);
+
+  switch (changeType) {
+    case "headerText":
+      await HomePageContent.updateOne(
+        { _id: homePageContent[0]._id },
+        { $set: { headerText: data } }
+      );
+      break;
+
+    case "mainSliders":
+      await HomePageContent.updateOne(
+        { _id: homePageContent[0]._id },
+        {
+          $set: {
+            mainSliders: img1.length
+              ? JSON.parse(data).map((d) => {
+                  return {
+                    ...d,
+                    img: d.img.id
+                      ? d.img
+                      : img1.filter((img) => +img.sliderId === +d.id)[0].icon,
+                  };
+                })
+              : JSON.parse(data),
+          },
+        }
+      );
+      break;
+
+    case "videoSection":
+      await HomePageContent.updateOne(
+        { _id: homePageContent[0]._id },
+        {
+          $set: {
+            videoSection: {
+              thumbnailImg: img1.filter(
+                (img) => img.sliderId === "thumbnail"
+              )[0].icon,
+              video: img1.filter((img) => img.sliderId === "video")[0].icon,
+            },
+          },
+        }
+      );
+      break;
+
+    case "firstBanner":
+      await HomePageContent.updateOne(
+        { _id: homePageContent[0]._id },
+        {
+          $set: {
+            firstBanner: {
+              ...JSON.parse(data),
+              img: img1.filter((img) => img.sliderId === "firstBannerImg")[0]
+                .icon,
+            },
+          },
+        }
+      );
+      break;
+
+    case "secondBanner":
+      await HomePageContent.updateOne(
+        { _id: homePageContent[0]._id },
+        {
+          $set: {
+            secondBanner: {
+              ...JSON.parse(data),
+              img: img1.filter((img) => img.sliderId === "secondBannerImg")[0]
+                .icon,
+            },
+          },
+        }
+      );
+      break;
+
+    default:
+      return res
+        .status(500)
+        .json({ success: false, message: "Unknow changeType given" });
+  }
+
+  return res.status(200).json({ success: true });
+});
 
 exports.homePage = catchAsyncErrors(async (req, res, next) => {
   const date = new Date();
@@ -23,7 +142,19 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
     createdAt: { $gte: myEpoch, $lte: Date.now() },
   }).limit(8);
 
-  const categories = await Categories.find();
+  const categoriesC = await Categories.find();
+
+  const categories = [];
+
+  for (let i = 0; i < categoriesC.length; i++) {
+    const category = categoriesC[i];
+
+    const productsInCat = await Products.countDocuments({
+      category: category.name,
+    });
+
+    categories.push({ ...category._doc, totalProducts: productsInCat });
+  }
 
   const token = req.cookies.token;
 
@@ -32,10 +163,13 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
       featuredProducts: featuredProducts,
       newCollections,
       categories,
+      homePageContent: await HomePageContent.findOne(),
     });
   }
 
   const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+
+  // console.log(decodedData);
 
   const user = await Users.findOne(
     { _id: decodedData.id, role: "customer" },
@@ -78,6 +212,7 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
     featuredProducts: user ? fProducts : featuredProducts,
     newCollections: user ? cProducts : newCollections,
     categories,
+    homePageContent: await HomePageContent.findOne(),
   });
 });
 
@@ -207,6 +342,10 @@ exports.updateCart = catchAsyncErrors(async (req, res, next) => {
     req.body;
 
   if (quantity === 0) {
+    return res.status(401).json({
+      success: false,
+      message: "Please select quantity bigger than 0",
+    });
     return next(new ErrorHandler("Please select quantity bigger than 0", 401));
   }
 

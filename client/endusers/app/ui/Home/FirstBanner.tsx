@@ -17,7 +17,10 @@ export default function FirstBanner() {
   const { data } = useAuth();
 
   return (
-    <section className="container lg:mx-auto px-5 pt-20">
+    <section
+      className="container lg:mx-auto px-5"
+      style={{ paddingTop: "45rem" }}
+    >
       <div
         style={{ height: "700px" }}
         className="flex lg:flex-row flex-col w-full lg:flex-row"

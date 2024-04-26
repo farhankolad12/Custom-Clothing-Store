@@ -129,6 +129,10 @@
   position: relative;
 }
 
+.not-home .desktop-header .carousel {
+  display: none;
+}
+
 @media (max-width: 768px) {
   .w-lg-50 {
     width: 100% !important;

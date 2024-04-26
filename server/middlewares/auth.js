@@ -34,3 +34,19 @@ exports.isAuthenticate = async (req, res, next) => {
     return next(new ErrorHandler("Please Login", 401, res));
   }
 };
+
+exports.authorizeRoles = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return next(
+        ErrorHandler(
+          `Role: ${req.user.role} is not allowed to access this resouce `,
+          403,
+          res
+        )
+      );
+    }
+
+    next();
+  };
+};

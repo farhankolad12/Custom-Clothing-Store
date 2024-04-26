@@ -16,7 +16,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <div className="not-home">
       <Header />
       <main className="container mx-auto">
         <section>
@@ -65,6 +65,6 @@ export default function Layout({
         </section>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

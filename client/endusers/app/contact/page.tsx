@@ -41,7 +41,7 @@ export default function Page() {
   }
 
   return (
-    <>
+    <div className="not-home">
       <Header />
       <main>
         <div className="relative">
@@ -155,6 +155,6 @@ export default function Page() {
         </div>
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

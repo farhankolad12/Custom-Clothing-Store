@@ -26,6 +26,10 @@ body {
   color: #fff !important;
 }
 
+.settings .nav-link.active {
+  background-color: #10b981 !important;
+}
+
 @media (max-width: 768px) {
   .w-lg-50 {
     width: 100% !important;

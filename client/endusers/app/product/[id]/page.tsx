@@ -111,7 +111,7 @@ export default function Page() {
   return loading ? (
     <LoadingSkeleton />
   ) : product?._id ? (
-    <>
+    <div className="not-home">
       <Header />
       <main className="px-10 my-5">
         <div className="flex gap-2">
@@ -262,7 +262,7 @@ export default function Page() {
       {openLighthouse && (
         <LightHouse setOpenLighthouse={setOpenLighthouse} product={product} />
       )}
-    </>
+    </div>
   ) : (
     notFound()
   );

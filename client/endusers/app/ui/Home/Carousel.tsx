@@ -1,9 +1,14 @@
+import { useAuth } from "@/app/context/AuthProvider";
 import { Carousel, IconButton } from "@material-tailwind/react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
 export default function CarouselH() {
   const [animation, setAnimation] = useState(false);
+
+  const { data } = useAuth();
+  const router = useRouter();
 
   return (
     <Carousel
@@ -81,93 +86,38 @@ export default function CarouselH() {
       )}
       placeholder=""
     >
-      <div className="relative">
-        <Image
-          unoptimized
-          style={{ width: "100%", height: "700px" }}
-          width={0}
-          height={0}
-          src="/carousel-1.jpg"
-          alt="image 1"
-          className="h-full w-full animate__animated animate__fadeIn"
-        />
-        <div
-          className={`absolute lg:inset-0 p-0 lg:ps-20 top-0 grid h-full w-full items-center ${
-            animation ? "animate__animated  animate__fadeInDown" : ""
-          }`}
-        >
-          <div className="w-full flex flex-col lg:w-1/2 lg:text-start text-center">
-            <h1 className="text-7xl uppercase">running clothes brands</h1>
-            <span className="my-4">
-              Search the Dunker and find the ideal prices for you
-            </span>
-            <button
-              className=" text-black-900 hover:text-white border border-black hover:bg-black focus:ring-4 focus:outline-none focus:ring-black-300 font-medium px-16 py-5 text-lg text-center me-auto ms-auto lg:ms-0 lg:me-auto"
-              type="button"
+      {data?.homePageContent?.mainSliders?.map((slider: any, i: number) => {
+        return (
+          <div className="relative">
+            <Image
+              unoptimized
+              style={{ width: "100%", height: "700px" }}
+              width={0}
+              height={0}
+              src={slider.img.link}
+              alt={`Carousel ${i + 1}`}
+              className="h-full w-full animate__animated animate__fadeIn"
+            />
+            <div
+              className={`absolute lg:inset-0 p-0 lg:ps-20 pe-25 top-0 grid h-full w-full items-center ${
+                animation ? "animate__animated  animate__fadeInDown" : ""
+              }`}
             >
-              Shop now
-            </button>
+              <div className="w-full flex flex-col lg:w-1/2 lg:text-start text-center">
+                <h1 className="text-7xl uppercase">{slider.title}</h1>
+                <span className="my-4">{slider.description}</span>
+                <button
+                  onClick={() => router.push(slider.buttonLink)}
+                  className=" text-black-900 hover:text-white border border-black hover:bg-black focus:ring-4 focus:outline-none focus:ring-black-300 font-medium px-16 py-5 text-lg text-center me-auto ms-auto lg:ms-0 lg:me-auto"
+                  type="button"
+                >
+                  {slider.buttonName}
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <div className="relative">
-        <Image
-          unoptimized
-          style={{ width: "100%", height: "700px" }}
-          width={0}
-          height={0}
-          src="/carousel-2.jpg"
-          alt="image 1"
-          className="h-full  w-full animate__animated animate__fadeIn"
-        />
-        <div
-          className={`absolute lg:inset-0 p-0 lg:ps-20 top-0 grid h-full w-full items-center ${
-            animation ? "animate__animated  animate__fadeInDown" : ""
-          }`}
-        >
-          <div className="w-full lg:w-1/2 lg:text-start text-center flex flex-col">
-            <h1 className="text-7xl uppercase">running clothes brands</h1>
-            <span className="my-4">
-              Search the Dunker and find the ideal prices for you
-            </span>
-            <button
-              className="me-auto ms-auto lg:ms-0 lg:me-auto text-black-900 hover:text-white border border-black hover:bg-black focus:ring-4 focus:outline-none focus:ring-black-300 font-medium px-16 py-5 text-lg text-center "
-              type="button"
-            >
-              Shop now
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="relative">
-        <Image
-          unoptimized
-          style={{ width: "100%", height: "700px" }}
-          width={0}
-          height={0}
-          src="/carousel-3.jpg"
-          alt="image 1"
-          className="h-full  w-full animate__animated animate__fadeIn"
-        />
-        <div
-          className={`absolute lg:inset-0 p-0 lg:ps-20 top-0 grid h-full w-full items-center ${
-            animation ? "animate__animated  animate__fadeInDown" : ""
-          }`}
-        >
-          <div className="w-full lg:w-1/2 lg:text-start text-center flex flex-col ">
-            <h1 className="text-7xl uppercase">running clothes brands</h1>
-            <span className="my-4">
-              Search the Dunker and find the ideal prices for you
-            </span>
-            <button
-              className="me-auto ms-auto lg:ms-0 lg:me-auto text-black-900 hover:text-white border border-black hover:bg-black focus:ring-4 focus:outline-none focus:ring-black-300 font-medium text-sm px-16 py-5 text-sm text-center "
-              type="button"
-            >
-              Shop now
-            </button>
-          </div>
-        </div>
-      </div>
+        );
+      })}
     </Carousel>
   );
 }
