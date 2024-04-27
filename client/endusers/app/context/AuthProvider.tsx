@@ -63,13 +63,18 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
     setCurrentUser,
     data,
     setData,
+    homePageContentLoading: _loading,
     cartItems,
     setCartItems,
   };
 
   return (
     <AuthContext.Provider value={value}>
-      {loading || _loading || __loading ? <LoadingSkeleton /> : children}
+      {loading /* ||  _loading ||  __loading */ ? (
+        <LoadingSkeleton />
+      ) : (
+        children
+      )}
     </AuthContext.Provider>
   );
 }

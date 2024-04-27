@@ -74,5 +74,6 @@ export type AuthValue = {
     | undefined;
   setData: Function;
   cartItems: any;
+  homePageContentLoading: boolean;
   setCartItems: Function;
 };

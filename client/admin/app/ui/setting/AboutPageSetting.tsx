@@ -28,8 +28,8 @@ export default function AboutPageSetting({ data }: { data: any }) {
       }
 
       if (changeType === "videoSection") {
-        if (!data.thumbnailImg.id) {
-          formData.append("thumbnail", data.thumbnailImg);
+        if (!data.thumbnail.id) {
+          formData.append("thumbnail", data.thumbnail);
         }
 
         if (!data.video.id) {
@@ -372,7 +372,7 @@ export default function AboutPageSetting({ data }: { data: any }) {
                     }
                     width={100}
                     height={100}
-                    alt="thumbnailImg"
+                    alt="thumbnail"
                   />
                 </div>
               )}

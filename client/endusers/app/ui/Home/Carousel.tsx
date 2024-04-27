@@ -1,14 +1,13 @@
 import { useAuth } from "@/app/context/AuthProvider";
 import { Carousel, IconButton } from "@material-tailwind/react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
 import React, { useState } from "react";
+import CarouselSkeleton from "./CarouselSkeleton";
+import CarouselItem from "./CarouselItem";
 
 export default function CarouselH() {
-  const [animation, setAnimation] = useState(false);
+  const [active, setActive] = useState(1);
 
-  const { data } = useAuth();
-  const router = useRouter();
+  const { data, homePageContentLoading } = useAuth();
 
   return (
     <Carousel
@@ -33,9 +32,10 @@ export default function CarouselH() {
           color="black"
           size="lg"
           onClick={() => {
-            setAnimation(false);
+            // setAnimation(false);
+            setActive((prev) => (prev === 1 ? 4 : prev - 1));
             handlePrev();
-            setAnimation(true);
+            // setAnimation(true);
           }}
           className="!absolute top-2/4 left-4 -translate-y-2/4"
         >
@@ -62,9 +62,11 @@ export default function CarouselH() {
           color="black"
           size="lg"
           onClick={() => {
-            setAnimation(false);
+            // setAnimation(false);
+            setActive((prev) => (prev === 4 ? 1 : prev + 1));
             handleNext();
-            setAnimation(true);
+
+            // setAnimation(true);
           }}
           className="!absolute top-2/4 !right-4 -translate-y-2/4"
         >
@@ -85,39 +87,15 @@ export default function CarouselH() {
         </IconButton>
       )}
       placeholder=""
+      transition={{ duration: 0 }}
     >
-      {data?.homePageContent?.mainSliders?.map((slider: any, i: number) => {
-        return (
-          <div className="relative">
-            <Image
-              unoptimized
-              style={{ width: "100%", height: "700px" }}
-              width={0}
-              height={0}
-              src={slider.img.link}
-              alt={`Carousel ${i + 1}`}
-              className="h-full w-full animate__animated animate__fadeIn"
-            />
-            <div
-              className={`absolute lg:inset-0 p-0 lg:ps-20 pe-25 top-0 grid h-full w-full items-center ${
-                animation ? "animate__animated  animate__fadeInDown" : ""
-              }`}
-            >
-              <div className="w-full flex flex-col lg:w-1/2 lg:text-start text-center">
-                <h1 className="text-7xl uppercase">{slider.title}</h1>
-                <span className="my-4">{slider.description}</span>
-                <button
-                  onClick={() => router.push(slider.buttonLink)}
-                  className=" text-black-900 hover:text-white border border-black hover:bg-black focus:ring-4 focus:outline-none focus:ring-black-300 font-medium px-16 py-5 text-lg text-center me-auto ms-auto lg:ms-0 lg:me-auto"
-                  type="button"
-                >
-                  {slider.buttonName}
-                </button>
-              </div>
-            </div>
-          </div>
-        );
-      })}
+      {homePageContentLoading ? (
+        <CarouselSkeleton />
+      ) : (
+        data?.homePageContent?.mainSliders?.map((slider: any, i: number) => {
+          return <CarouselItem key={i} active={active} i={i} slider={slider} />;
+        })
+      )}
     </Carousel>
   );
 }

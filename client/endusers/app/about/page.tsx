@@ -44,9 +44,9 @@ export default function Page() {
             About Us
           </h1>
         </div>
-        <section className="lg:px-20 px-10 flex lg:flex-row flex-col items-center justify-center w-full mt-20">
+        <section className="lg:px-20 px-5 flex lg:flex-row flex-col items-center justify-center w-full mt-20">
           <div className="flex flex-col w-full gap-5 ">
-            <h1 className="text-6xl lg:me-60 me-0 text-bold text-left">
+            <h1 className="lg:text-6xl text-4xl lg:me-60 me-0 font-bold text-left">
               {data.firstAbout.title}
             </h1>
             <span className="lg:me-60 me-0">{data.firstAbout.description}</span>
@@ -68,9 +68,9 @@ export default function Page() {
             />
           </div>
         </section>
-        <section className="lg:px-20 px-10 flex lg:flex-row-reverse flex-col-reverse items-center justify-center w-full  ">
+        <section className="lg:px-20 px-5 flex lg:flex-row-reverse flex-col-reverse items-center justify-center w-full  ">
           <div className="flex flex-col w-full gap-5">
-            <h1 className="text-4xl text-bold lg:ms-60 ms-0">
+            <h1 className="lg:text-6xl text-4xl font-bold lg:ms-60 ms-0">
               {data.secondAbout.title}
             </h1>
             <span className="lg:ms-60 ms-0">

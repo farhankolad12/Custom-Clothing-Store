@@ -11,6 +11,8 @@ const {
   deleteWishlist,
   deleteCart,
   updateHomePage,
+  updateNewsletter,
+  getProductsSitemap,
 } = require("../controllers/homeController");
 const { isAuthenticate, authorizeRoles } = require("../middlewares/auth");
 
@@ -47,5 +49,9 @@ router.route("/update-wishlist").post(isAuthenticate, updateWishlist);
 router.route("/wishlists").get(isAuthenticate, getWishlists);
 
 router.route("/delete-wishlist").post(isAuthenticate, deleteWishlist);
+
+router.route("/newsletter").post(updateNewsletter);
+
+router.route("/products-sitemap").get(getProductsSitemap);
 
 module.exports = router;

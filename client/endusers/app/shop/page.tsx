@@ -149,6 +149,7 @@ export default function Page() {
           <div className="flex justify-between gap-3 lg:flex-row flex-col">
             <input
               type="text"
+              defaultValue={searchParams.get("query") || ""}
               onChange={(e) => debounced(e.target.value)}
               placeholder="Search"
               className="outline-none border-b border-black py-3 px-2 w-full"

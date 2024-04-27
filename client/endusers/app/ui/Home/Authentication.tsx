@@ -60,7 +60,10 @@ export default function Authentication({
           )}
         </DialogBody>
       </Dialog>
-      <button className="font-bold bg-transparent" onClick={() => handleOpen()}>
+      <button
+        className="icon-people font-bold bg-transparent"
+        onClick={() => handleOpen()}
+      >
         <i className=" text-xl bi bi-person" />
       </button>
     </>

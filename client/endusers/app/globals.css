@@ -8,6 +8,10 @@
   box-sizing: border-box;
 }
 
+body {
+  overflow-x: hidden;
+}
+
 .w-lg-50 {
   width: 50% !important;
 }
@@ -130,6 +134,10 @@
 }
 
 .not-home .desktop-header .carousel {
+  display: none;
+}
+
+.footer-auth .icon-people {
   display: none;
 }
 

@@ -5,7 +5,14 @@ export default function Logo() {
   return (
     <div>
       <Link href="/" className="text-5xl">
-        <Image src="/logo.png" alt="Logo" width={150} height={150} />
+        <Image
+          unoptimized
+          src="/logo.png"
+          alt="Logo"
+          className="w-28 h-7"
+          width={0}
+          height={0}
+        />
       </Link>
     </div>
   );

@@ -5,6 +5,7 @@ const jwt = require("jsonwebtoken");
 const Cart = require("../models/cartModel");
 const Users = require("../models/userModel");
 const Products = require("../models/productModel");
+const Newsletter = require("../models/newsletterModel");
 const Categories = require("../models/categoryModel");
 const Wishlists = require("../models/wishlistModel");
 const HomePageContent = require("../models/homePageContentModel");
@@ -479,4 +480,47 @@ exports.deleteCart = catchAsyncErrors(async (req, res, next) => {
   );
 
   return res.status(200).json({ success: true });
+});
+
+exports.updateNewsletter = catchAsyncErrors(async (req, res, next) => {
+  const { email } = req.body;
+
+  if (await Newsletter.findOne({ email })) {
+    return res
+      .status(200)
+      .json({ success: true, message: "Already subscribed" });
+  }
+
+  const newLetter = new Newsletter({
+    email,
+  });
+
+  await newLetter.save();
+
+  return res
+    .status(200)
+    .json({ success: true, message: "Successfully subscribed" });
+});
+
+exports.getProductsSitemap = catchAsyncErrors(async (req, res, next) => {
+  return res
+    .status(200)
+    .json(
+      await Products.find(
+        {},
+        {
+          category: 0,
+          combinations: 0,
+          createdAt: 0,
+          fullDescription: 0,
+          images: 0,
+          isFeatured: 0,
+          name: 0,
+          price: 0,
+          shortDescription: 0,
+          tags: 0,
+          variants: 0,
+        }
+      )
+    );
 });

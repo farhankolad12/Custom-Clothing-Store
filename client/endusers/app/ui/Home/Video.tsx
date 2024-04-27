@@ -4,16 +4,20 @@ import { useAuth } from "@/app/context/AuthProvider";
 import { Dialog, DialogBody } from "@material-tailwind/react";
 import Image from "next/image";
 import React, { useState } from "react";
+import VideoSkeleton from "./VideoSkeleton";
 
 export default function Video() {
   const [open, setOpen] = useState(false);
 
-  const { data } = useAuth();
+  const { data, homePageContentLoading } = useAuth();
 
   function handleOpen() {
     setOpen(!open);
   }
-  return (
+
+  return homePageContentLoading ? (
+    <VideoSkeleton />
+  ) : (
     <>
       <section>
         <div className="relative">
