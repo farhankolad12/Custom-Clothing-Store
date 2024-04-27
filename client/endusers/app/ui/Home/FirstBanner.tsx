@@ -27,7 +27,7 @@ export default function FirstBanner() {
       >
         <div className="featured-box bg-gray-100 relative z-50 lg:h-auto h-96 lg:w-1/2 w-full group">
           <Image
-            src={data?.featuredProducts[0].images[0].link || ""}
+            src={data?.featuredProducts[0]?.images[0].link || ""}
             unoptimized
             style={{
               mixBlendMode: "multiply",
@@ -93,7 +93,7 @@ export default function FirstBanner() {
             width={0}
             height={0}
             alt="Product"
-            src={data?.newCollections[2].images[0].link || ""}
+            src={data?.newCollections[2]?.images[0].link || ""}
           />
           <h1
             className={`absolute text-5xl top-14 lg:text-left text-center left-0 right-0 lg:left-10 ${gochi.className} text-white`}
