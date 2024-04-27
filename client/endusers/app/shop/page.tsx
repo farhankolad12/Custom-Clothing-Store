@@ -198,7 +198,7 @@ export default function Page() {
                         key={ind}
                         className={`border-2 border-black p-3 transition hover:bg-black hover:text-white rounded ${
                           (!searchParams.get("page") && ind === 0) ||
-                          +searchParams?.get("page") === ind + 1
+                          +(searchParams?.get("page") || 1) === ind + 1
                             ? "bg-black text-white"
                             : ""
                         }`}

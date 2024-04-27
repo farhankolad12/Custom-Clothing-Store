@@ -196,7 +196,7 @@ function Page() {
                               key={ind}
                               className={`btn btn-${
                                 (!searchParams.get("page") && ind === 0) ||
-                                +searchParams?.get("page") === ind + 1
+                                +(searchParams?.get("page") || 1) === ind + 1
                                   ? ""
                                   : "outline-"
                               }success`}
