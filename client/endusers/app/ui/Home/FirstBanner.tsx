@@ -97,7 +97,7 @@ export default function FirstBanner() {
               width={0}
               height={0}
               alt="Product"
-              src={data?.newCollections[2]?.images[0].link || ""}
+              src={data?.newCollections[0]?.images[0].link || ""}
             />
             <h1
               className={`absolute text-5xl top-14 lg:text-left text-center left-0 right-0 lg:left-10 ${gochi.className} text-white`}

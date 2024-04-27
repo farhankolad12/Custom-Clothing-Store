@@ -29,6 +29,10 @@ export default function RootLayout({
             rel="stylesheet"
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
           />
+          <meta
+            http-equiv="Content-Security-Policy"
+            content="upgrade-insecure-requests"
+          />
         </head>
         <body className={`${roboto.className}`}>
           <AuthProvider>
