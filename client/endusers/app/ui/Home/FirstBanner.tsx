@@ -20,7 +20,7 @@ export default function FirstBanner() {
   return homePageContentLoading ? (
     <FirstBannerSkeleton />
   ) : (
-    data?.featuredProducts?.length && (
+    data?.featuredProducts?.length && data?.newCollections?.length && (
       <section
         className="container mx-auto px-5"
         style={{ paddingTop: "45rem" }}
