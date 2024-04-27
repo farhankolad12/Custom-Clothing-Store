@@ -34,7 +34,7 @@ export default function RootLayout({
           <AuthProvider>
             <ToastProvider>{children}</ToastProvider>
           </AuthProvider>
-          <script src="https://checkout.razorpay.com/v1/checkout.js" />
+          <script src="https://checkout.razorpay.com/v1/checkout.js" async />
         </body>
       </html>
     </>
