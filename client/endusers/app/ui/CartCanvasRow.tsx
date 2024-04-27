@@ -4,6 +4,7 @@ import { formatCurrency } from "../utils/formatCurrency";
 import usePostReq from "../hooks/usePostReq";
 import { toast } from "react-toastify";
 import { useAuth } from "../context/AuthProvider";
+import Image from "next/image";
 
 export default function CartCanvasRow({ product }: { product: ProductType }) {
   const { setCartItems, cartItems } = useAuth();
@@ -64,10 +65,10 @@ export default function CartCanvasRow({ product }: { product: ProductType }) {
   return (
     <div className="flex items-start justify-between">
       <div className="flex items-center gap-4">
-        <img
+        <Image
           src={product.images[0].link}
-          width="100px"
-          height="100px"
+          width={100}
+          height={100}
           alt="product"
         />
         <div className="flex flex-col gap-1">

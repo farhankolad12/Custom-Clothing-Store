@@ -1,4 +1,5 @@
 import { ProductType } from "@/app/definations";
+import Image from "next/image";
 import { useRef, useState } from "react";
 
 export default function ImageShowcase({
@@ -14,13 +15,14 @@ export default function ImageShowcase({
   return (
     <div className="flex flex-col w-lg-50 border-2">
       <div className="overflow-hidden inline-block">
-        <img
-          className=" transition transition-transform hover:scale-150 cursor-pointer"
+        <Image
+          unoptimized
+          className="w-full h-full transition transition-transform hover:scale-150 cursor-pointer"
           src={selectedImg.link}
           alt="Product"
-          width="100%"
+          width={0}
           onClick={() => setOpenLighthouse(true)}
-          height="100%"
+          height={0}
         />
       </div>
       <div className="flex">
@@ -43,12 +45,7 @@ export default function ImageShowcase({
                 key={img.id}
                 onClick={() => setSelectedImg(img)}
               >
-                <img
-                  alt="Product"
-                  width="150px"
-                  height="150px"
-                  src={img.link}
-                />
+                <Image alt="Product" width={150} height={150} src={img.link} />
               </button>
             );
           })}

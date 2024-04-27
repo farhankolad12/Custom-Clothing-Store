@@ -102,7 +102,7 @@ function Page() {
           <tbody>
             {order.products.map((product: any, i: number) => {
               return (
-                <tr>
+                <tr key={i + 1}>
                   <td className="p-4 border-b border-blue-gray-50">{i + 1}</td>
                   <td className="p-4 border-b border-blue-gray-50">
                     <div className="flex gap-2 items-center">
@@ -117,7 +117,7 @@ function Page() {
                         {product.selectedCombination.combinations.map(
                           (combination: any) => {
                             return (
-                              <span>
+                              <span key={combination.variant}>
                                 {combination.parentName}: {combination.variant}
                               </span>
                             );
@@ -164,9 +164,9 @@ function Page() {
             </tr>
           </thead>
           <tbody>
-            {order.status.map((st: any) => {
+            {order.status.map((st: any, i: number) => {
               return (
-                <tr>
+                <tr key={st.name + i}>
                   <td className="p-4 border-b border-blue-gray-50">
                     {st.name}
                   </td>

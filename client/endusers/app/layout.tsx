@@ -4,7 +4,6 @@ import "./globals.css";
 import AuthProvider from "./context/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
 import ToastProvider from "./ui/ToastProvider";
-import Script from "next/script";
 
 const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
 

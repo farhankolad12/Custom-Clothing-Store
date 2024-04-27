@@ -39,6 +39,7 @@ export default function ProductList({
         };
       })
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -57,6 +58,7 @@ export default function ProductList({
         }
       }
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedVariants]);
 
   async function handleCart() {

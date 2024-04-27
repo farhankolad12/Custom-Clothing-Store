@@ -7,6 +7,7 @@ import { FormEvent, useRef } from "react";
 import { toast } from "react-toastify";
 import usePostReq from "../hooks/usePostReq";
 import { Spinner } from "@material-tailwind/react";
+import Image from "next/image";
 
 export default function Page() {
   const messageRef = useRef<HTMLTextAreaElement>(null!);
@@ -45,9 +46,12 @@ export default function Page() {
       <Header />
       <main>
         <div className="relative">
-          <img
+          <Image
+            unoptimized
             src="/contact1.jpg"
             className="h-96 lg:h-screen"
+            width={0}
+            height={0}
             style={{ width: "100%", objectFit: "cover" }}
             alt="Contact"
           />

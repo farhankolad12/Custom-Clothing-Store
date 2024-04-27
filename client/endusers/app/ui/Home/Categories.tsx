@@ -27,6 +27,7 @@ export default function Categories() {
           data?.categories?.map((cat: any) => {
             return (
               <Link
+                key={cat.name}
                 href={`/shop?category=${cat.name}`}
                 className="lg:text-7xl text-4xl font-bold uppercase"
               >

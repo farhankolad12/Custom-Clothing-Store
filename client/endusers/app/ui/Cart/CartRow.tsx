@@ -2,6 +2,7 @@ import { useAuth } from "@/app/context/AuthProvider";
 import { ProductType } from "@/app/definations";
 import usePostReq from "@/app/hooks/usePostReq";
 import { formatCurrency } from "@/app/utils/formatCurrency";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { toast } from "react-toastify";
@@ -66,10 +67,10 @@ export default function CartRow({ product }: { product: ProductType }) {
             <i className="bi bi-x-lg" />
           </button>
           <Link href={"/product/" + product._id}>
-            <img
+            <Image
               src={product.images[0].link}
-              width="100px"
-              height="100px"
+              width={100}
+              height={100}
               className="border-2"
               alt="Product"
             />

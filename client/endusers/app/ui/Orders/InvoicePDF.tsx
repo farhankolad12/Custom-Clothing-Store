@@ -178,6 +178,7 @@ export default function InvoicePDF({
             {order.products.map((product: ProductType, i: number) => {
               return (
                 <tr
+                  key={i}
                   style={{ padding: "1rem", borderBottom: "1px solid black" }}
                 >
                   <td style={{ padding: "1rem", fontWeight: "bold" }}>
@@ -189,7 +190,7 @@ export default function InvoicePDF({
                       {product.selectedCombination.combinations.map(
                         (combination: any) => {
                           return (
-                            <span>
+                            <span key={combination.variant}>
                               {combination.parentName}: {combination.variant}
                             </span>
                           );

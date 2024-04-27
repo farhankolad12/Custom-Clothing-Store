@@ -53,7 +53,7 @@ function Page() {
               /* isLast ? "p-4" :  */ "p-4 border-b border-blue-gray-50";
 
             return (
-              <tr>
+              <tr key={order._id}>
                 <td className={classes}>{order._id}</td>
                 <td className={classes}>
                   {new Date(order.paidAt).toLocaleString()}

@@ -1,4 +1,5 @@
 import { ProductType } from "@/app/definations";
+import Image from "next/image";
 import { useState } from "react";
 
 export default function LightHouse({
@@ -39,10 +40,11 @@ export default function LightHouse({
         <button onClick={() => setOpenLighthouse(false)} className="mt-5">
           <i className="bi bi-x-lg text-white" />
         </button>
-        <img
+        <Image
+          unoptimized
           src={product.images[currentImage].link}
-          width="700px"
-          height="500px"
+          width={700}
+          height={500}
           alt="Product"
         />
       </div>

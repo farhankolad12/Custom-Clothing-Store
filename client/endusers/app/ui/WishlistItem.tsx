@@ -3,6 +3,7 @@ import { ProductType } from "../definations";
 import { formatCurrency } from "../utils/formatCurrency";
 import usePostReq from "../hooks/usePostReq";
 import { Spinner } from "@material-tailwind/react";
+import Image from "next/image";
 
 export default function WishlistItem({
   wishlist,
@@ -48,11 +49,11 @@ export default function WishlistItem({
             <i className="bi bi-x-lg" />
           )}
         </button>
-        <img
+        <Image
           src={wishlist.images[0].link}
           alt="Product"
-          width="100px"
-          height="100px"
+          width={100}
+          height={100}
         />
         <div className="flex flex-col gap-1">
           <strong>{wishlist.name}</strong>
