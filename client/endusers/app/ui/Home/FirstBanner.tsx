@@ -112,22 +112,22 @@ export default function FirstBanner() {
                 <div className="flex flex-col gap-2">
                   <span className="mb-1 text-xs">TeeVerse</span>
                   <Link
-                    href={`/product/${data?.newCollections[2]._id}`}
+                    href={`/product/${data?.newCollections[0]._id}`}
                     className="font-bold"
                   >
-                    {data?.newCollections[2].name}
+                    {data?.newCollections[0].name}
                   </Link>
                   <Link
-                    href={`/shop?category=${data?.newCollections[2].category}`}
+                    href={`/shop?category=${data?.newCollections[0].category}`}
                   >
-                    {data?.newCollections[2].category}
+                    {data?.newCollections[0].category}
                   </Link>
                 </div>
 
                 <div className="bg-white w-14 h-14 flex items-center justify-center rounded-full hover:bg-black hover:text-white animate__animated hover:animate__fadeIn">
                   <WishlistButton
                     classes="bg-transparent w-14 h-14 rounded-full items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-50"
-                    product={data?.newCollections[2]}
+                    product={data?.newCollections[0]}
                   />
                 </div>
 
@@ -137,7 +137,7 @@ export default function FirstBanner() {
               </div>
               <div>
                 <h1 className="ms-auto font-bold text-4xl">
-                  {formatCurrency(data?.newCollections[2].price || 0)}
+                  {formatCurrency(data?.newCollections[0].price || 0)}
                 </h1>
               </div>
             </div>
