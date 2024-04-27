@@ -5,8 +5,8 @@ import { toast } from "react-toastify";
 
 export default function HomePageSetting({ data }: { data: any }) {
   const [mainSlider, setMainSlider] = useState<any>(
-    data?.homePageContent.mainSliders
-      ? data?.homePageContent.mainSliders
+    data?.homePageContent?.mainSliders
+      ? data?.homePageContent?.mainSliders
       : [
           {
             id: Math.floor(Math.random() * 999999),
@@ -43,18 +43,18 @@ export default function HomePageSetting({ data }: { data: any }) {
         ]
   );
   const [videoSection, setVideoSection] = useState<any>(
-    data?.homePageContent.videoSection
-      ? data?.homePageContent.videoSection
+    data?.homePageContent?.videoSection
+      ? data?.homePageContent?.videoSection
       : undefined
   );
   const [firstBanner, setFirstBanner] = useState<any>(
-    data?.homePageContent.firstBanner
-      ? data?.homePageContent.firstBanner
+    data?.homePageContent?.firstBanner
+      ? data?.homePageContent?.firstBanner
       : undefined
   );
   const [secondBanner, setSecondBanner] = useState<any>(
-    data?.homePageContent.secondBanner
-      ? data?.homePageContent.secondBanner
+    data?.homePageContent?.secondBanner
+      ? data?.homePageContent?.secondBanner
       : undefined
   );
 
@@ -129,7 +129,7 @@ export default function HomePageSetting({ data }: { data: any }) {
               Header Text
             </label>
             <input
-              defaultValue={data.homePageContent.headerText || ""}
+              defaultValue={data.homePageContent?.headerText || ""}
               ref={headerTextRef}
               type="text"
               placeholder="10% DISCOUNT FOR REGISTERED USERS & FREE SHIPPING FOR ORDERS OVER 900 PLUS FREE RETURNS"
