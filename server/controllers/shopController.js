@@ -27,7 +27,7 @@ exports.filterProducts = catchAsyncErrors(async (req, res, next) => {
   const minPrice = params.get("min") || 0;
   const maxPrice = params.get("max") || Number.MAX_SAFE_INTEGER;
 
-  //   console.log(variants);
+  // console.log(variants);
 
   const sortQuery =
     params.get("sort-by") === "low-high"
@@ -50,22 +50,37 @@ exports.filterProducts = catchAsyncErrors(async (req, res, next) => {
       },
       {
         "variants.values.variant": {
-          $in: variants.length
-            ? variants
-            : (await Attributes.find())
-                .map((attr) => attr.options.map((opt) => opt.variant).join(","))
-                .join(",")
-                .split(","),
+          $in:
+            variants.length && variants[0] !== ""
+              ? variants
+              : (await Attributes.find())
+                  .map((attr) =>
+                    attr.options.map((opt) => opt.variant).join(",")
+                  )
+                  .join(",")
+                  .split(","),
         },
       },
       {
         price: { $gte: minPrice, $lte: maxPrice },
       },
       {
-        name: {
-          $regex: params.get("query") || "",
-          $options: "i",
-        },
+        $or: params.get("query")
+          ? [
+              {
+                name: {
+                  $regex: params.get("query") || "",
+                  $options: "i",
+                },
+              },
+              {
+                "tags.tag": {
+                  $regex: params.get("query").split(" ").join("-") || "",
+                  $options: "i",
+                },
+              },
+            ]
+          : [{}],
       },
     ],
   };
