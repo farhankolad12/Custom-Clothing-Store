@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import { ProductType } from "../definations";
 import usePostReq from "../hooks/usePostReq";
 import { useState } from "react";
+import { Spinner } from "@material-tailwind/react";
 
 export default function WishlistButton({
   product,
@@ -46,7 +47,7 @@ export default function WishlistButton({
   return (
     <button disabled={loading} onClick={handleWishlist} className={classes}>
       {loading ? (
-        "..."
+        <Spinner className="w-14 h-14" />
       ) : (
         <i
           className={`bi bi-heart${isWish ? "-fill" : ""} text-lg font-bold`}

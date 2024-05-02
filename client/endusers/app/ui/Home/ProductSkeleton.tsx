@@ -5,16 +5,12 @@ export default function ProductSkeleton() {
   return (
     <ThemeProvider>
       <div
-        className="group p-6 relative border border-grey hover:border-black cursor-pointer flex flex-col justify-between animate-pulse"
+        className="group p-6 relative border border-grey transition hover:border-black cursor-pointer flex flex-col justify-between animate-pulse"
         style={{ height: "600px" }}
       >
-        <button className="h-14 w-14 rounded-full bg-gray-300 shadow-none hover:shadow-none absolute right-5 top-2">
+        <button className="h-14 w-14 transition rounded-full bg-gray-300 shadow-none hover:shadow-none absolute right-5 top-2">
           &nbsp;
         </button>
-        {/* <WishlistButton
-          classes="bg-transparent w-14 h-14 rounded-full items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-50"
-          product={product}
-        /> */}
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -40,7 +36,7 @@ export default function ProductSkeleton() {
               <span className="mt-4">&nbsp;</span>
             </div>
           </div>
-          <button className="bg-gray-300 shadow-none hover:shadow-none w-14 h-14 rounded-full items-center  absolute right-5 bottom-5">
+          <button className="bg-gray-300 shadow-none transition hover:shadow-none w-14 h-14 rounded-full items-center  absolute right-5 bottom-5">
             &nbsp;
           </button>
         </div>

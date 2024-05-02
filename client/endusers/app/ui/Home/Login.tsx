@@ -85,7 +85,7 @@ export default function Login({
       <button
         disabled={loading}
         type="submit"
-        className="bg-transparent w-full border border-black hover:bg-black hover:text-white text-black cursor-pointer uppercase font-bold py-3 my-5"
+        className="bg-transparent w-full transition border border-black hover:bg-black hover:text-white text-black cursor-pointer uppercase font-bold py-3 my-5"
       >
         {loading ? <Spinner className="w-8 h-8 mx-auto" /> : "login"}
       </button>

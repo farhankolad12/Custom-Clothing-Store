@@ -2,7 +2,12 @@ import { useAuth } from "@/app/context/AuthProvider";
 import { ProductType } from "@/app/definations";
 import usePostReq from "@/app/hooks/usePostReq";
 import { formatCurrency } from "@/app/utils/formatCurrency";
-import { Carousel, IconButton, ThemeProvider } from "@material-tailwind/react";
+import {
+  Carousel,
+  IconButton,
+  Spinner,
+  ThemeProvider,
+} from "@material-tailwind/react";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
@@ -114,13 +119,13 @@ export default function ProductList({
   return (
     <ThemeProvider>
       <div
-        className={`group p-6 relative border border-grey hover:border-black cursor-pointer flex flex-col justify-between ${
+        className={`group p-6 relative border border-grey transition hover:border-black cursor-pointer flex flex-col justify-between ${
           spanning ? span : ""
         }`}
         style={{ height: "600px" }}
       >
         <WishlistButton
-          classes="bg-transparent w-14 h-14 rounded-full items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-50"
+          classes="bg-transparent w-14 h-14 rounded-full transition items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-50"
           product={product}
         />
         <Carousel
@@ -228,9 +233,13 @@ export default function ProductList({
           <button
             disabled={loading}
             onClick={handleCart}
-            className="bg-transparent w-20 h-16 rounded-full items-center hover:bg-black hover:text-white cursor-pointer"
+            className="bg-transparent w-20 h-16 rounded-full transition items-center hover:bg-black hover:text-white cursor-pointer"
           >
-            {loading ? "..." : <i className="bi bi-bag text-lg font-bold" />}
+            {loading ? (
+              <Spinner className="w-16 h-16" />
+            ) : (
+              <i className="bi bi-bag text-lg font-bold" />
+            )}
           </button>
         </div>
       </div>

@@ -148,7 +148,7 @@ export default function Register() {
         <button
           disabled={loading}
           type="submit"
-          className="bg-transparent w-full border border-black hover:bg-black hover:text-white cursor-pointer uppercase font-bold py-3 my-5"
+          className="bg-transparent w-full border border-black hover:bg-black transition hover:text-white cursor-pointer uppercase font-bold py-3 my-5"
         >
           {loading ? <Spinner className="h-8 w-8 mx-auto" /> : "register"}
         </button>

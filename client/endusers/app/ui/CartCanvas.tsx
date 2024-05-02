@@ -18,12 +18,12 @@ export default function CartCanvas({
 
   return (
     <Drawer
-      placeholder="Cart"
-      open={openCart}
       placement="right"
+      open={openCart}
       onClose={closeDrawer}
       className="p-4 overflow-y-auto"
       size={500}
+      placeholder="Cart"
     >
       <div className="flex border-b-2 pb-3 items-center justify-between">
         <h1 color="blue-gray">Your Cart</h1>
