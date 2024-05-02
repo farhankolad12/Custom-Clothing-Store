@@ -18,6 +18,7 @@ export default function Page() {
 
   useEffect(() => {
     currentUser && router.replace("/");
+    // eslint-disable-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
   async function handleSubmit(e: FormEvent) {

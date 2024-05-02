@@ -22,6 +22,7 @@ export default function ProductCombinationRow({
           : p;
       });
     });
+    // eslint-disable-line react-hooks/exhaustive-deps
   }, [salePrice, price]);
 
   // console.log(combination);

@@ -2,7 +2,7 @@ import { Typography } from "@material-tailwind/react";
 
 export default function ShopSkeleton() {
   return (
-    <div className="grid grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
+    <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-6">
       {[...Array(6)].map(() => {
         return (
           <div

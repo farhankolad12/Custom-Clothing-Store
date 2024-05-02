@@ -27,6 +27,7 @@ const queries = require("./routes/queriesRoute");
 const payment = require("./routes/paymentRoute");
 const category = require("./routes/categoryRoute");
 const attribute = require("./routes/attributeRoute");
+const privacyTerms = require("./routes/privacyTerms");
 
 // Call Routers
 app.use("/api", user);
@@ -39,6 +40,9 @@ app.use("/api", product);
 app.use("/api", queries);
 app.use("/api", category);
 app.use("/api", attribute);
+app.use("/api", privacyTerms);
 app.use("/api/payment", payment);
 
-app.listen(4000);
+console.log(process.env.PORT || 4000);
+
+app.listen(process.env.PORT || 4000);

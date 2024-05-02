@@ -35,11 +35,23 @@ export default function CartCanvas({
         <div className="flex h-full flex-col justify-between gap-10">
           <div>
             <div className="flex flex-col gap-4 my-8">
-              {cartItems?.products.map((product: ProductType, i: number) => {
-                return (
-                  <CartCanvasRow key={product._id + i} product={product} />
-                );
-              })}
+              {cartItems && cartItems.products.length ? (
+                cartItems?.products.map((product: ProductType, i: number) => {
+                  return (
+                    <CartCanvasRow key={product._id + i} product={product} />
+                  );
+                })
+              ) : (
+                <div className="text-center">
+                  <h3 className="font-bold uppercase">your cart is empty</h3>
+                  <button
+                    onClick={() => router.push("/shop")}
+                    className="border-2 border-black uppercase py-3 hover:bg-black hover:text-white transition px-20 mt-4"
+                  >
+                    shop now
+                  </button>
+                </div>
+              )}
             </div>
           </div>
           {cartItems?.products.length ? (

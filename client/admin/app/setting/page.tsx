@@ -1,5 +1,6 @@
 "use client";
 
+import { toast } from "react-toastify";
 import useGetReq from "../hooks/useGetReq";
 import AboutPageSetting from "../ui/setting/AboutPageSetting";
 import HomePageSetting from "../ui/setting/HomePageSetting";
@@ -22,6 +23,18 @@ function Page() {
   } = useGetReq("/about-page", {
     isAdmin: true,
   });
+
+  const {
+    data: privacyTermsData,
+    error: __error,
+    loading: __loading,
+  } = useGetReq("/privacy-terms-page", {
+    isAdmin: true,
+  });
+
+  if (error || _error || __error) {
+    toast.error(error || _error || __error || "Something went wrong!");
+  }
 
   return (
     <main className="container">
@@ -76,13 +89,13 @@ function Page() {
           </li>
         </ul>
         <div className="tab-content" id="pills-tabContent">
-          {loading || _loading ? (
+          {loading || _loading || __loading ? (
             "loading..."
           ) : (
             <>
               <HomePageSetting data={homeData} />
               <AboutPageSetting data={aboutData} />
-              <PrivacyPageSetting />
+              <PrivacyPageSetting data={privacyTermsData} />
             </>
           )}
         </div>

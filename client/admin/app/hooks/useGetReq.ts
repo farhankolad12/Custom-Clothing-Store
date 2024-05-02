@@ -38,6 +38,7 @@ export default function useGetReq(url: string, params: any) {
         })
         .finally(() => setLoading(false));
     })();
+    // eslint-disable-line react-hooks/exhaustive-deps
   }, [params.searchParams]);
 
   return { loading, error, data, setData };

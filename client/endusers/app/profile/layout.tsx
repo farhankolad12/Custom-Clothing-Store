@@ -40,14 +40,14 @@ export default function Layout({
                   orders
                 </Link>
               </div>
-              <div className="py-4 w-full border-b-2 border-gray-300">
+              {/* <div className="py-4 w-full border-b-2 border-gray-300">
                 <Link
                   href="/profile/addresses"
                   className="uppercase font-bold text-xs "
                 >
                   addresses
                 </Link>
-              </div>
+              </div> */}
               <div className="py-4 w-full border-b-2 border-gray-300">
                 <Link
                   href="/profile/account-details"
