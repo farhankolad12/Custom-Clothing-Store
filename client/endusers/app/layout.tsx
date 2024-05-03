@@ -30,9 +30,19 @@ export default function RootLayout({
             href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
           />
           <meta
-            http-equiv="Content-Security-Policy"
+            httpEquiv="Content-Security-Policy"
             content="upgrade-insecure-requests"
           />
+          <script src="/facebook-script.js" />
+
+          <noscript>
+            <img
+              height="1"
+              width="1"
+              style={{ display: "none" }}
+              src="https://www.facebook.com/tr?id=443545498043908&ev=PageView&noscript=1"
+            />
+          </noscript>
         </head>
         <body className={`${roboto.className}`}>
           <AuthProvider>
