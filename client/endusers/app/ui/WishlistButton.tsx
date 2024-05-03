@@ -45,7 +45,12 @@ export default function WishlistButton({
   }
 
   return (
-    <button disabled={loading} onClick={handleWishlist} className={classes}>
+    <button
+      type="button"
+      disabled={loading}
+      onClick={handleWishlist}
+      className={classes + " z-50"}
+    >
       {loading ? (
         <Spinner className="w-14 h-14" />
       ) : (
