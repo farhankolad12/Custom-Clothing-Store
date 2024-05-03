@@ -33,7 +33,7 @@ export default function RootLayout({
             httpEquiv="Content-Security-Policy"
             content="upgrade-insecure-requests"
           />
-          <script src="/facebook-script.js" />
+          <script src="/facebook-script.js" defer />
 
           <noscript>
             <img
