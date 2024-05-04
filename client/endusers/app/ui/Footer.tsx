@@ -135,10 +135,18 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-5">
             <span className=" uppercase font-bold">social</span>
-            <a target="_blank" href="/" className="font-bold uppercase text-xs">
+            <a
+              target="_blank"
+              href="https://www.instagram.com/essentials.by.la"
+              className="font-bold uppercase text-xs"
+            >
               <i className="bi bi-instagram" /> Instagram
             </a>
-            <a target="_blank" href="/" className="font-bold uppercase text-xs">
+            <a
+              target="_blank"
+              href="https://www.facebook.com/profile.php?id=100083453085816"
+              className="font-bold uppercase text-xs"
+            >
               <i className="bi bi-facebook" /> facebook
             </a>
             <a target="_blank" href="/" className="font-bold uppercase text-xs">
