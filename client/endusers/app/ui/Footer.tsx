@@ -43,7 +43,14 @@ export default function Footer() {
     <footer className="pt-20" style={{ backgroundColor: "#eeedeb" }}>
       <div className="px-10">
         <div className="flex gap-10 lg:flex-row flex-col justify-between items-center pb-20">
-          <Image src="/logo.png" alt="Logo" width={200} height={200} />
+          <Image
+            src="/logo.png"
+            alt="Logo"
+            className="lg:w-1/6 w-full lg:h-auto h-50"
+            width={0}
+            unoptimized
+            height={0}
+          />
           <div className="flex lg:flex-row flex-col gap-10">
             <div className="flex justify-between lg:justify-start w-full items-center gap-10 ">
               <i className="bi bi-box2-fill text-6xl" />

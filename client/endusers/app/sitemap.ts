@@ -12,32 +12,32 @@ export default async function sitemap() {
 
   const staticRoutes = [
     {
-      url: "http://localhost:3000/",
+      url: "https://www.essentialsbyla.com",
       changeFrequency: "weekly",
       priority: 0.8,
     },
     {
-      url: "http://localhost:3000/shop",
+      url: "https://www.essentialsbyla.com/shop",
       changeFrequency: "daily",
       priority: 1,
     },
     {
-      url: "http://localhost:3000/about",
+      url: "https://www.essentialsbyla.com/about",
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
-      url: "http://localhost:3000/contact",
+      url: "https://www.essentialsbyla.com/contact",
       changeFrequency: "monthly",
       priority: 0.5,
     },
     {
-      url: "http://localhost:3000/privacy-policy",
+      url: "https://www.essentialsbyla.com/privacy-policy",
       changeFrequency: "yearly",
       priority: 0.5,
     },
     {
-      url: "http://localhost:3000/terms-condition",
+      url: "https://www.essentialsbyla.com/terms-condition",
       changeFrequency: "yearly",
       priority: 0.5,
     },
@@ -47,7 +47,7 @@ export default async function sitemap() {
     ...staticRoutes,
     ...products.map((product: ProductType) => {
       return {
-        url: `http://localhost:3000/product/${product._id}`,
+        url: `https://www.essentialsbyla.com/product/${product._id}`,
         changeFrequency: "monthly",
         priority: 1.0,
       };

@@ -51,17 +51,17 @@ export default function Header() {
         )}
         <section className="relative desktop-header">
           <nav
-            className={`lg:bg-transparent bg-white relative z-50 flex justify-between items-center w-full lg:border-0 border-b py-5 lg:py-0 px-3 lg:pe-0 lg:ps-3`}
+            className={`lg:bg-transparent bg-white relative z-50 flex justify-between lg:items-start items-center w-full lg:border-0 border-b py-0 lg:py-0 px-3 lg:pe-0 lg:ps-3`}
           >
             <Logo />
-            <ul className="hidden lg:flex gap-12">
+            <ul className="hidden mt-5 lg:flex gap-12">
               <CustomLink name="Home" to="/" />
               <CustomLink name="Shop" to="/shop" />
               <CustomLink name="About us" to="/about" />
               <CustomLink name="Contact us" to="/contact" />
               <CustomLink name="Blog" to="/blog" />
             </ul>
-            <ul className="flex items-center gap-4 lg:gap-4">
+            <ul className="flex justify-center items-center gap-4 lg:gap-4">
               <li>
                 <button
                   onClick={handleSearchOpen}

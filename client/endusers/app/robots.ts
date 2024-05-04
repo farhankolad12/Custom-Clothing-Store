@@ -32,6 +32,6 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
         };
       }),
     ],
-    sitemap: "http://localhost:3000/sitemap.xml",
+    sitemap: "https://www.essentialsbyla.com/sitemap.xml",
   };
 }

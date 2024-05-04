@@ -4,12 +4,19 @@ import Link from "next/link";
 export default function Logo() {
   return (
     <div>
-      <Link href="/" className="text-5xl">
+      <Link
+        style={{
+          backgroundColor: "transparent",
+        }}
+        href="/"
+        className="text-5xl"
+      >
         <Image
           unoptimized
           src="/logo.png"
           alt="Logo"
-          className="w-28 h-7"
+          className="lg:w-28 lg:h-20 w-24 h-24"
+          style={{ mixBlendMode: "multiply" }}
           width={0}
           height={0}
         />
