@@ -40,7 +40,7 @@ export default function SecondDynamicBanner() {
           //   style={{ width: "400px" }}
           className="absolute top-0 w-full lg:w-96 bottom-0 right-0 lg:right-10 lg:left-auto left-0 lg:px-0 px-2 flex flex-col gap-8 justify-center"
         >
-          <h1 className="uppercase  text-6xl font-bold">
+          <h1 className="uppercase text-5xl font-bold">
             {data?.homePageContent?.secondBanner?.title}
           </h1>
           <span>{data?.homePageContent?.secondBanner?.description}</span>

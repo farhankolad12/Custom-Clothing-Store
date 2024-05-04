@@ -40,7 +40,7 @@ export default function FirstDynamicBanner() {
           // style={{ width: "400px" }}
           className="absolute top-0 bottom-0 lg:right-0 lg:left-0 right-2 left-2 flex flex-col gap-8 justify-center items-center "
         >
-          <h1 className="uppercase text-5xl font-bold text-gray-800">
+          <h1 className="uppercase text-7xl font-bold text-gray-800">
             {data?.homePageContent?.firstBanner?.title}
           </h1>
           <span className="text-gray-800">
