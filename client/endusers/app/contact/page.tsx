@@ -64,33 +64,33 @@ export default function Page() {
             <i className="bi bi-box2 text-7xl"></i>
             <strong className="uppercase text-2xl font-bold">our vision</strong>
             <span>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Error
-              quidem numquam, omnis maiores corporis eveniet beatae dolor quod
-              itaque minima.
+              Empowering individuals to express their unique style and
+              confidence through fashionable clothing that inspires
             </span>
           </div>
           <div className="flex flex-col gap-4">
             <i className="bi bi-headphones text-7xl"></i>
             <strong className="uppercase text-2xl font-bold">what we do</strong>
             <span>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vitae
-              ullam placeat corporis id sint itaque aliquam rerum dignissimos,
-              explicabo ipsum!
+              We curate a diverse collection of trendy and timeless apparel,
+              offering our customers a seamless shopping experience filled with
+              quality, comfort, and style
             </span>
           </div>
           <div className="flex flex-col gap-4">
             <i className="bi bi-card-heading text-7xl"></i>
             <strong className="uppercase text-2xl font-bold">history</strong>
             <span>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
-              quod, est quae tempore id consectetur labore libero sequi eligendi
-              minima!
+              Since 2019, we've been your go-to for trendy fashion and quality
+              service. Evolving from humble roots, we're now a trusted style
+              destination, offering timeless apparel and a seamless shopping
+              experience.
             </span>
           </div>
         </div>
         <div className="lg:px-20 px-8 w-full my-20">
           <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224.1656879823397!2d72.83250242471694!3d18.95999427286403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7ce3c1e880121%3A0x5da7d8393a9b2a13!2sHazrat%20Peer%20Sayyad%20Jalaluddin%20Shah%20Qadri%20Rehmatullah%20Allaieh!5e1!3m2!1sen!2sin!4v1713594007720!5m2!1sen!2sin"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2418.768698570858!2d72.8890672044052!3d19.103230282764372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c871792258f9%3A0x9c3e2a0d864ebb0e!2s2%2C%20Kailash%20Puram%20Rd%2C%20Bandi%20Bazaar%2C%20Nair%20Wadi%2C%20Asalpha%2C%20Mumbai%2C%20Maharashtra%20400072!5e1!3m2!1sen!2sin!4v1714829062809!5m2!1sen!2sin"
             width="100%"
             height="650px"
             style={{ border: "0" }}
@@ -104,10 +104,9 @@ export default function Page() {
               GET IN TOUCH WITH US
             </strong>
             <span>
-              Lorem ipsum dolor sit amet, cons ectetur adipiscing elitull am
-              aliqu am, velit rutrum dictum lobortis, turpis justo auc tor quam,
-              a auctor. Vix ut ignota deseru nt partien ad, pros tale falli
-              periculis ad, idque deseruisse constituam.
+              Got questions or feedback? Reach out to us! Our dedicated team is
+              here to assist you with anything you need. Contact us via phone,
+              email. We look forward to hearing from you!
             </span>
             <div className="flex gap-5">
               <i className="bi bi-phone" />
