@@ -35,14 +35,9 @@ export default function RootLayout({
           />
           <script src="/facebook-script.js" defer />
 
-          <noscript>
-            <img
-              height="1"
-              width="1"
-              style={{ display: "none" }}
-              src="https://www.facebook.com/tr?id=443545498043908&ev=PageView&noscript=1"
-            />
-          </noscript>
+<noscript><img height="1" width="1" style={{ display: 'none' }}
+src="https://www.facebook.com/tr?id=461794643020066&ev=PageView&noscript=1"
+/></noscript>
         </head>
         <body className={`${roboto.className}`}>
           <AuthProvider>
