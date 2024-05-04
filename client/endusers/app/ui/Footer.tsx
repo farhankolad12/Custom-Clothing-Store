@@ -175,17 +175,19 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-5">
             <strong className="uppercase">mumbai</strong>
-            <strong className="text-xs">+91 9324288793</strong>
+            <strong className="text-xs">+91 8689913856</strong>
             <strong className="text-xs uppercase">
-              Kambekar Street Original <br /> Mumbai, MH 400009
+              H-A/2 Kailash Puram Mohili Village Opp. Peninsula Hotel Sakinak,
+              Andheri (east) <br /> Mumbai, MH 400972
             </strong>
             <strong className="text-xs uppercase">MON-SAT: 09:00-19:00</strong>
           </div>
           <div className="flex flex-col gap-5">
             <strong className="uppercase">mumbai</strong>
-            <strong className="text-xs">+91 9324288793</strong>
+            <strong className="text-xs">+91 8689913856</strong>
             <strong className="text-xs uppercase">
-              Kambekar Street Original <br /> Mumbai, MH 400009
+              Supariwala mansion, Room No A 1, 3 FLoor, 7, Dontad X Lane, Chinch
+              Bandar Khadak <br /> Mumbai, MH 400009
             </strong>
             <strong className="text-xs uppercase">MON-SAT: 09:00-19:00</strong>
           </div>
@@ -201,7 +203,7 @@ export default function Footer() {
         }}
       >
         <strong className="uppercase text-grey-300">
-          © 2024 Farhan Kolad, ALL RIGHTS RESERVED
+          © 2024 Essentials By LA, ALL RIGHTS RESERVED
         </strong>
       </div>
       <div className="footer-auth">

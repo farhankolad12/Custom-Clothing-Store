@@ -40,16 +40,22 @@ export default function SecondDynamicBanner() {
           //   style={{ width: "400px" }}
           className="absolute top-0 w-full lg:w-96 bottom-0 right-0 lg:right-10 lg:left-auto left-0 lg:px-0 px-2 flex flex-col gap-8 justify-center"
         >
-          <h1 className="uppercase text-5xl font-bold">
+          <h1
+            style={{ color: " #5C4033" }}
+            className="uppercase text-5xl font-bold"
+          >
             {data?.homePageContent?.secondBanner?.title}
           </h1>
-          <span>{data?.homePageContent?.secondBanner?.description}</span>
+          <span style={{ color: " #5C4033" }}>
+            {data?.homePageContent?.secondBanner?.description}
+          </span>
           <button
             onClick={() =>
               router.push(data?.homePageContent?.secondBanner?.buttonLink)
             }
             className="text-black hover:text-white border-2 border-black hover:bg-black transition px-5 py-5 flex justify-center font-bold"
             type="button"
+            style={{ color: " #5C4033" }}
           >
             {data?.homePageContent?.secondBanner?.buttonName}
           </button>
