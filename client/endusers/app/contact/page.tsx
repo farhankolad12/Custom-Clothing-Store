@@ -111,17 +111,20 @@ export default function Page() {
             </span>
             <div className="flex gap-5">
               <i className="bi bi-phone" />
-              <Link href="tel:+91 8524563245">+91 8524563245</Link>
+              <Link href="tel:+91 8689913856">+91 8689913856</Link>
             </div>
             <div className="flex gap-5">
               <i className="bi bi-envelope" />
-              <Link href="mailto:hamzaqadri@gmail.com">
-                hamzaqadri@gmail.com
+              <Link href="mailto:essentialsbyla@gmail.com">
+                essentialsbyla@gmail.com
               </Link>
             </div>
             <div className="flex gap-5">
               <i className="bi bi-geo-alt" />
-              <span>50 Kambekat street, Mumbai MH, India</span>
+              <span>
+                H-A/2 Kailash Puram Mohili Village Opp. Peninsula Hotel Sakinak,
+                Andheri (east), Mumbai-400972 MH, India
+              </span>
             </div>
           </div>
           <form onSubmit={handleSubmit} className="w-full flex flex-col gap-10">
