@@ -13,25 +13,23 @@ export default function Layout({
 }>) {
   return (
     <>
-      <html lang="en">
-        <head>
-          <link rel="canonical" href="https://www.essentialsbyla.com/about" />
-          <meta property="og:title" content="Who We Are" />
-          <meta
-            property="og:url"
-            content="https://www.essentialsbyla.com/about"
-          />
-          <meta
-            property="og:description"
-            content="Discover the story behind Essentials By LA. Explore our commitment to style, sustainability, and exceptional service. Join us in shaping the future of fashion."
-          />
+      <head>
+        <link rel="canonical" href="https://www.essentialsbyla.com/about" />
+        <meta property="og:title" content="Who We Are" />
+        <meta
+          property="og:url"
+          content="https://www.essentialsbyla.com/about"
+        />
+        <meta
+          property="og:description"
+          content="Discover the story behind Essentials By LA. Explore our commitment to style, sustainability, and exceptional service. Join us in shaping the future of fashion."
+        />
 
-          <meta property="og:site_name" content="IN About Essentials By LA" />
+        <meta property="og:site_name" content="IN About Essentials By LA" />
 
-          <meta property="og:type" content="website" />
-        </head>
-        <body>{children}</body>
-      </html>
+        <meta property="og:type" content="website" />
+      </head>
+      {children}
     </>
   );
 }

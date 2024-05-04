@@ -11,7 +11,7 @@ import Video from "./ui/Home/Video";
 
 export default function Home() {
   return (
-    <>
+    <div>
       <Header />
       <main /* className="relative" */>
         {/* <Carousel /> */}
@@ -24,6 +24,6 @@ export default function Home() {
         <SecondDynamicBanner />
       </main>
       <Footer />
-    </>
+    </div>
   );
 }

@@ -11,7 +11,7 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <>
       <head>
         <link rel="canonical" href="https://www.essentialsbyla.com/wishlist" />
         <meta property="og:title" content="Wishlist" />
@@ -31,7 +31,7 @@ export default function Layout({
 
         <meta property="og:type" content="website" />
       </head>
-      <body>{children}</body>
-    </html>
+      {children}
+    </>
   );
 }

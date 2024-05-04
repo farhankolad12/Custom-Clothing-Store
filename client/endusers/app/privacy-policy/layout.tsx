@@ -12,31 +12,29 @@ export default function Layout({
 }>) {
   return (
     <>
-      <html lang="en">
-        <head>
-          <link
-            rel="canonical"
-            href="https://www.essentialsbyla.com/privacy-policy"
-          />
-          <meta property="og:title" content="Privacy Policy" />
-          <meta
-            property="og:url"
-            content="https://www.essentialsbyla.com/privacy-policy"
-          />
-          <meta
-            property="og:description"
-            content="Privacy Policy Page of Essentials By LA"
-          />
+      <head>
+        <link
+          rel="canonical"
+          href="https://www.essentialsbyla.com/privacy-policy"
+        />
+        <meta property="og:title" content="Privacy Policy" />
+        <meta
+          property="og:url"
+          content="https://www.essentialsbyla.com/privacy-policy"
+        />
+        <meta
+          property="og:description"
+          content="Privacy Policy Page of Essentials By LA"
+        />
 
-          <meta
-            property="og:site_name"
-            content="IN Privacy Policy Page Essentials By LA"
-          />
+        <meta
+          property="og:site_name"
+          content="IN Privacy Policy Page Essentials By LA"
+        />
 
-          <meta property="og:type" content="website" />
-        </head>
-        <body>{children}</body>
-      </html>
+        <meta property="og:type" content="website" />
+      </head>
+      {children}
     </>
   );
 }
