@@ -40,15 +40,17 @@ export default function FirstDynamicBanner() {
           // style={{ width: "400px" }}
           className="absolute top-0 bottom-0 lg:right-0 lg:left-0 right-2 left-2 flex flex-col gap-8 justify-center items-center "
         >
-          <h1 className="uppercase lg:text-9xl text-7xl font-bold">
+          <h1 className="uppercase text-5xl font-bold text-gray-800">
             {data?.homePageContent?.firstBanner?.title}
           </h1>
-          <span>{data?.homePageContent?.firstBanner?.description}</span>
+          <span className="text-gray-800">
+            {data?.homePageContent?.firstBanner?.description}
+          </span>
           <button
             onClick={() =>
               router.push(data?.homePageContent?.firstBanner?.buttonLink)
             }
-            className="text-black hover:text-white border-2 border-black hover:bg-black transition px-16 py-5 font-bold"
+            className="text-black hover:text-white border-2 border-black hover:bg-black transition px-16 py-5 font-bold text-gray-800"
             type="button"
           >
             {data?.homePageContent?.firstBanner?.buttonName}
