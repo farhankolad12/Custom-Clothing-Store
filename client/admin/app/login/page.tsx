@@ -33,7 +33,7 @@ export default function Page() {
 
       if (res?.success) {
         setCurrentUser(res?.user);
-        router.replace("/");
+        return router.replace("/");
       }
 
       return toast.error(error || "Email/password is incorrect");
