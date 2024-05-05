@@ -172,18 +172,18 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
   try {
     const decodedData = jwt.verify(token, process.env.JWT_SECRET);
 
-  // console.log(decodedData);
+    // console.log(decodedData);
 
-  user = await Users.findOne(
-    { _id: decodedData?.id, role: "customer" },
-    { password: 0 }
-  );
+    user = await Users.findOne(
+      { _id: decodedData?.id, role: "customer" },
+      { password: 0 }
+    );
   } catch {
-     res.cookie("token", "", {
+    res.cookie("token", "", {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-    })
+    });
   }
 
   const fProducts = [];
@@ -356,7 +356,6 @@ exports.updateCart = catchAsyncErrors(async (req, res, next) => {
       success: false,
       message: "Please select quantity bigger than 0",
     });
-    return next(new ErrorHandler("Please select quantity bigger than 0", 401));
   }
 
   const currentUser = req.user;
@@ -512,24 +511,22 @@ exports.updateNewsletter = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.getProductsSitemap = catchAsyncErrors(async (req, res, next) => {
-  return res
-    .status(200)
-    .json(
-      await Products.find(
-        {},
-        {
-          category: 0,
-          combinations: 0,
-          createdAt: 0,
-          fullDescription: 0,
-          images: 0,
-          isFeatured: 0,
-          name: 0,
-          price: 0,
-          shortDescription: 0,
-          tags: 0,
-          variants: 0,
-        }
-      )
-    );
+  return res.status(200).json(
+    await Products.find(
+      {},
+      {
+        category: 0,
+        combinations: 0,
+        createdAt: 0,
+        fullDescription: 0,
+        images: 0,
+        isFeatured: 0,
+        name: 0,
+        price: 0,
+        shortDescription: 0,
+        tags: 0,
+        variants: 0,
+      }
+    )
+  );
 });

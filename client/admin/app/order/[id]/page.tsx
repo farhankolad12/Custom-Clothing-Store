@@ -51,11 +51,11 @@ function Page() {
     try {
       const res = await execute({ status: e.target.value, orderId: order._id });
 
-      if (!res?.success) {
-        return toast.error(res.message || _error || "Something went wrong");
+      if (res?.success) {
+        return toast.success("Status changed to " + e.target.value);
       }
 
-      return toast.success("Status changed to " + e.target.value);
+      return toast.error(res.message || _error || "Something went wrong");
     } catch (err: any) {
       console.log(err);
       toast.error(err || "Something went wrong");

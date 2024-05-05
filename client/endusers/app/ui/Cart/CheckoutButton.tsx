@@ -54,7 +54,7 @@ export default function CheckoutButton({
       setLoading(true);
       const res = await execute({});
 
-      if (!res.success) {
+      if (!res?.success) {
         return toast.error(res.message || error || "Something went wrong!");
       }
 
@@ -70,10 +70,10 @@ export default function CheckoutButton({
                 100)
           : (cartItems.subTotalPrice + cartItems.shippingPrice) * 100, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
         currency: "INR",
-        name: "TeeVerse", //your business name
+        name: "Essentials By LA", //your business name
         description: "Test Transaction",
-        image: "https://example.com/your_logo",
-        order_id: res.orderId, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+        image: "https://essentialsbyla.com/logo.png",
+        order_id: res.orderId,
         handler: async (response: any) => {
           const res = await _execute({
             ...response,

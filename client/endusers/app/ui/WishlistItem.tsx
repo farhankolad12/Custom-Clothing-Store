@@ -24,7 +24,7 @@ export default function WishlistItem({
         productId: wishlist._id,
       });
 
-      if (!res.success) {
+      if (!res?.success) {
         return toast.error(res.message || "Something went wrong!");
       }
 

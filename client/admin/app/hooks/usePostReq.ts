@@ -9,39 +9,33 @@ export default function usePostReq(url: string) {
     setLoading(true);
     setError("");
 
-    const headers = payload.toString().includes("FormData")
-      ? {
-          // "Content-Type": "application/x-www-form-urlencoded",
-          "Access-Control-Allow-Origin":
-            process.env.NEXT_PUBLIC_BACKEND_HOSTNAME,
-        }
-      : {
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Origin":
-            process.env.NEXT_PUBLIC_BACKEND_HOSTNAME,
-        };
+    const headers = new Headers();
 
-    return await axios
-      .post(
-        `${
-          process.env.NEXT_PUBLIC_BACKEND_HOSTNAME + url
-        }?${new URLSearchParams(`isAdmin=${true}`)}`,
-        payload.toString().includes("FormData")
-          ? payload
-          : JSON.stringify(payload),
-        { withCredentials: true, headers }
-      )
-      .then((res) => {
+    headers.append(
+      "Access-Control-Allow-Origin",
+      process.env.NEXT_PUBLIC_BACKEND_HOSTNAME || ""
+    );
+    headers.append(
+      "Content-Type",
+      payload.toString().includes("FormData")
+        ? "application/x-www-form-urlencoded"
+        : "application/json"
+    );
+
+    return await fetch(process.env.NEXT_PUBLIC_BACKEND_HOSTNAME + url, {
+      method: "POST",
+      body: payload.toString().includes("FormData")
+        ? payload
+        : JSON.stringify(payload),
+      credentials: "include",
+      headers,
+    })
+      .then(async (res1) => {
         setLoading(true);
-        return res.data;
+        const res = await res1.json();
+        return res;
       })
-      .catch((err) => {
-        const errString: string = err.response.data;
-
-        return setError(() =>
-          errString.slice(errString.indexOf(":"), errString.indexOf("<br>"))
-        );
-      })
+      .catch((err) => setError(err))
       .finally(() => setLoading(false));
   }
 

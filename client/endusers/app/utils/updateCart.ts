@@ -16,7 +16,7 @@ export async function updateCart(
     selectedCombination,
   });
 
-  if (!res.success) {
+  if (!res?.success) {
     return toast.error(res.message || "Something went wrong!");
   }
 

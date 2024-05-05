@@ -1,5 +1,4 @@
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
-const ErrorHandler = require("../utils/errorhandler");
 
 const bcrypt = require("bcrypt");
 
@@ -39,7 +38,9 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
           }
         );
       } else {
-        return next(new ErrorHandler("Current password is invalid!"));
+        return res
+          .status(401)
+          .json({ success: false, message: "Current password is invalid!" });
       }
 
       return res.status(200).json({ success: true });
@@ -63,7 +64,9 @@ exports.register = catchAsyncErrors(async (req, res, next) => {
   const emailExists = await Users.findOne({ email });
 
   if (emailExists) {
-    return next(new ErrorHandler("Email Already Exists", 401));
+    return res
+      .status(401)
+      .json({ success: false, message: "Email Already Exists" });
   }
 
   const hashPassword = await bcrypt.hash(pass, 10);
@@ -91,7 +94,9 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
       return sendToken({ user, cartItems: [] }, 200, res);
     }
 
-    return next(new ErrorHandler("Email/password is incorrect", 401));
+    return res
+      .status(401)
+      .json({ success: false, message: "Email/password is incorrect" });
   }
 
   const user = await Users.findOne({ email, role: "customer" });
@@ -100,12 +105,15 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
     return sendToken({ user, cartItems: [] }, 200, res);
   }
 
-  return next(new ErrorHandler("Email/password is incorrect", 401));
+  return res
+    .status(401)
+    .json({ success: false, message: "Email/password is incorrect" });
 });
 
 exports.logout = catchAsyncErrors(async (req, res, next) => {
-  
-  return res.status(200).cookie(req.user.role === "customer" ? "token" : "adminToken", "", {
+  return res
+    .status(200)
+    .cookie(req.user.role === "customer" ? "token" : "adminToken", "", {
       httpOnly: true,
       secure: true,
       sameSite: "none",

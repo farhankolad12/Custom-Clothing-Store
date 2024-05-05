@@ -51,7 +51,7 @@ export default function AttributeOffCanvas({
         _id: selectedAttribute ? selectedAttribute._id : undefined,
       });
 
-      if (!res) {
+      if (!res?.success) {
         return toast.error(error || "Something went wrong!", {
           position: "top-left",
         });

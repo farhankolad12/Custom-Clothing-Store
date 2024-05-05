@@ -3,6 +3,7 @@ import usePostReq from "@/app/hooks/usePostReq";
 import { Spinner } from "@material-tailwind/react";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useRef } from "react";
+import { toast } from "react-toastify";
 
 export default function Login({
   setSelectedAuth,
@@ -28,10 +29,12 @@ export default function Login({
         remember: rememberRef.current?.checked,
       });
 
-      if (res) {
+      if (res?.success) {
         setCurrentUser(res?.user);
         router.replace("/profile");
       }
+
+      setError(res.message);
     } catch (err: any) {
       console.log(err);
     }

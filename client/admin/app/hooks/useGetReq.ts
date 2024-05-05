@@ -11,31 +11,32 @@ export default function useGetReq(url: string, params: any) {
   useEffect(() => {
     (async () => {
       setData(undefined);
-      const headers = {
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": process.env.NEXT_PUBLIC_BACKEND_HOSTNAME,
-      };
+      const headers = new Headers();
 
-      return await axios
-        .get(
-          `${
-            process.env.NEXT_PUBLIC_BACKEND_HOSTNAME + url
-          }?${new URLSearchParams(
-            params /* .searchParams ? params.searchParams : params */
-          )}`,
-          { withCredentials: true, headers }
-        )
-        .then((res) => {
+      headers.append("Content-Type", "application/json");
+      headers.append(
+        "Access-Control-Allow-Origin",
+        process.env.NEXT_PUBLIC_BACKEND_HOSTNAME || ""
+      );
+
+      return await fetch(
+        `${
+          process.env.NEXT_PUBLIC_BACKEND_HOSTNAME + url
+        }?${new URLSearchParams(
+          params /* .searchParams ? params.searchParams : params */
+        )}`,
+        {
+          credentials: "include",
+          headers,
+          method: "GET",
+        }
+      )
+        .then(async (res1) => {
           setLoading(true);
-          return setData(res.data);
+          const res = await res1.json();
+          return setData(res);
         })
-        .catch((err) => {
-          const errString: string = err.response.data;
-
-          return setError(() =>
-            errString.slice(errString.indexOf(":"), errString.indexOf("<br>"))
-          );
-        })
+        .catch((err) => setError(err))
         .finally(() => setLoading(false));
     })();
     // eslint-disable-line react-hooks/exhaustive-deps

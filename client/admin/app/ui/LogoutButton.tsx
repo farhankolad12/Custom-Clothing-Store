@@ -11,12 +11,12 @@ export default function LogoutButton({ setOpenNav }: { setOpenNav: Function }) {
     try {
       const res = await execute({});
 
-      if (!res) {
-        return toast.error(error);
+      if (res?.success) {
+        setCurrentUser(undefined);
+        setOpenNav(false);
       }
 
-      setCurrentUser(undefined);
-      setOpenNav(false);
+      return toast.error(res.message);
     } catch (err: any) {
       console.log(err);
     }

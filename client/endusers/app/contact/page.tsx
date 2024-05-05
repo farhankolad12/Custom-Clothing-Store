@@ -26,7 +26,7 @@ export default function Page() {
         name: nameRef.current.value,
       });
 
-      if (!res.success) {
+      if (!res?.success) {
         return toast.error(res.message || error || "Something went wrong!");
       }
 

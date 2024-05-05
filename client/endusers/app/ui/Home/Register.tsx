@@ -38,8 +38,12 @@ export default function Register() {
         pass: passRef.current?.value,
       });
 
-      setCurrentUser(res.user);
-      router.replace("/profile");
+      if (res?.success) {
+        setCurrentUser(res.user);
+        router.replace("/profile");
+      }
+
+      setError(res.message);
     } catch (err: any) {
       console.log(err);
     }
@@ -47,6 +51,11 @@ export default function Register() {
 
   return (
     <form onSubmit={handleSubmit} className="h-96 overflow-y-scroll">
+      {error && (
+        <div className="text-red-900 my-2 font-bold text-center text-lg">
+          {error}
+        </div>
+      )}
       <div className="flex flex-col gap-10">
         <input
           type="text"

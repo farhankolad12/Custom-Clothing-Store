@@ -17,7 +17,7 @@ export default function ProductRow({
     try {
       const res = await execute({ _id: product._id });
 
-      if (!res) {
+      if (!res?.success) {
         return toast.error("Something went wrong!" || error);
       }
 

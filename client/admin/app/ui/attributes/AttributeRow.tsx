@@ -17,7 +17,7 @@ export default function AttributeRow({
     try {
       const res = await execute({ _id: attr._id });
 
-      if (!res) {
+      if (!res?.success) {
         return toast.error(error || "Something went wrong!");
       }
 

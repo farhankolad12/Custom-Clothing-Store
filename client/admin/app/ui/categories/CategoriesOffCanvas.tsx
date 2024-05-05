@@ -52,7 +52,7 @@ export default function CategoriesOffCanvas({
       }
       const res = await execute(formData);
 
-      if (!res) {
+      if (!res?.success) {
         return toast.error(error || "Something went wrong!", {
           position: "top-left",
         });

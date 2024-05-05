@@ -21,7 +21,7 @@ export function useGetReq(url: string, params: any) {
             "Content-Type": "application/json",
             "Access-Control-Allow-Origin":
               process.env.NEXT_PUBLIC_BACKEND_HOSTNAME || "",
-            "Access-Control-Allow-Headers": "Content-Type, Authorization",
+            // "Access-Control-Allow-Headers": "Content-Type, Authorization",
             // "Access-Control-Allow-Methods": "*",
           },
 

@@ -31,12 +31,12 @@ export default function Page() {
         isAdmin: true,
       });
 
-      if (!res) {
-        return toast.error(error || "Email/password is incorrect");
+      if (res?.success) {
+        setCurrentUser(res?.user);
+        router.replace("/");
       }
 
-      setCurrentUser(res?.user);
-      router.replace("/");
+      return toast.error(error || "Email/password is incorrect");
     } catch (err: any) {
       console.log(err);
     }

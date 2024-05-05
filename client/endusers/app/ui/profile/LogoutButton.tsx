@@ -25,6 +25,8 @@ export default function LogoutButton() {
         setCurrentUser(undefined);
         router.replace("/");
       }
+
+      toast.error(res.message || error);
     } catch (err: any) {
       console.log(err);
     }
