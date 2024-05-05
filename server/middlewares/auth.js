@@ -29,7 +29,11 @@ console.log(token)
     return next(new ErrorHandler("Please Login", 401, res));
   } catch (err) {
     console.log(err);
-    res.clearCookie(Boolean(isAdmin) ? "adminToken" : "token");
+    res.cookie(Boolean(isAdmin) ? "adminToken" : "token", "", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
 
     return next(new ErrorHandler("Please Login", 401, res));
   }
@@ -38,7 +42,11 @@ console.log(token)
 exports.authorizeRoles = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      res.clearCookie("adminToken");
+      res.cookie(Boolean("adminToken", "", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
       return next(
         ErrorHandler(
           `Role: ${req.user.role} is not allowed to access this resouce `,
