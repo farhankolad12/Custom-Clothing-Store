@@ -179,8 +179,11 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
     { password: 0 }
   );
   } catch {
-    res.clearCookie("adminToken");
-    res.clearCookie("token")
+     res.cookie(user.role === "customer" ? "token" : "adminToken", "", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    })
   }
 
   const fProducts = [];
