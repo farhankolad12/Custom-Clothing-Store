@@ -35,7 +35,7 @@ export default function CartCanvas({
         <div className="flex h-full flex-col justify-between gap-10">
           <div>
             <div className="flex flex-col gap-4 my-8">
-              {cartItems && cartItems.products.length ? (
+              {cartItems && cartItems.products?.length ? (
                 cartItems?.products.map((product: ProductType, i: number) => {
                   return (
                     <CartCanvasRow key={product._id + i} product={product} />
