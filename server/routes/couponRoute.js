@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const Multer = require("multer");
 
-const { isAuthenticate } = require("../middlewares/auth");
+const { isAuthenticate, authorizeRoles } = require("../middlewares/auth");
 const {
   addUpdateCoupon,
   getCoupons,
@@ -26,9 +26,9 @@ router.use(
   })
 );
 
-router.route("/coupon").post(isAuthenticate, upload.any(), addUpdateCoupon);
-router.route("/coupons").get(isAuthenticate, getCoupons);
-router.route("/remove-coupon").post(isAuthenticate, deleteCoupon);
+router.route("/coupon").post(isAuthenticate, authorizeRoles("admin"), upload.any(), addUpdateCoupon);
+router.route("/coupons").get(isAuthenticate, authorizeRoles("admin"), getCoupons);
+router.route("/remove-coupon").post(isAuthenticate, authorizeRoles("admin"), deleteCoupon);
 router.route("/check-code").post(isAuthenticate, checkCode);
 
 module.exports = router;
