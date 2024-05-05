@@ -173,7 +173,7 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
   // console.log(decodedData);
 
   const user = await Users.findOne(
-    { _id: decodedData.id, role: "customer" },
+    { _id: decodedData?.id, role: "customer" },
     { password: 0 }
   );
 
