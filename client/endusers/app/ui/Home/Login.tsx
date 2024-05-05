@@ -15,7 +15,7 @@ export default function Login({
   const rememberRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
-  const { setCurrentUser } = useAuth();
+  const { setCurrentUser, setCartItems } = useAuth();
   const { error, execute, loading, setError } = usePostReq("/login");
 
   async function handleSubmit(e: FormEvent) {
@@ -31,6 +31,7 @@ export default function Login({
 
       if (res?.success) {
         setCurrentUser(res?.user);
+        setCartItems(res.cartItems);
         router.replace("/profile");
       }
 
