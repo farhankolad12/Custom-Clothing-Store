@@ -54,7 +54,7 @@ export default function CartCanvas({
               )}
             </div>
           </div>
-          {cartItems?.products.length ? (
+          {cartItems?.products?.length ? (
             <div>
               <div className="flex flex-col h-100 w-100 align-end gap-3">
                 <div className="flex justify-between gap-4">

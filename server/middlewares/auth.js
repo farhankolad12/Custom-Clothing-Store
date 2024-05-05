@@ -27,11 +27,14 @@ exports.isAuthenticate = async (req, res, next) => {
     return res.status(401).json({ success: false, message: "Please Login" });
   } catch (err) {
     console.log(err);
-    res.cookie(Boolean(isAdmin) ? "adminToken" : "token", "", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "none",
-    });
+    res
+      .cookie(Boolean(isAdmin) ? "adminToken" : "token", "", {
+        httpOnly: true,
+        secure: true,
+        sameSite: "none",
+      })
+      .status(401)
+      .json({ success: false, message: "Please login again!" });
   }
 };
 
@@ -43,12 +46,10 @@ exports.authorizeRoles = (...roles) => {
         secure: true,
         sameSite: "none",
       });
-      return res
-        .status(403)
-        .json({
-          success: false,
-          message: `Role: ${req.user.role} is not allowed to access this resouce `,
-        });
+      return res.status(403).json({
+        success: false,
+        message: `Role: ${req.user.role} is not allowed to access this resouce `,
+      });
     }
 
     next();
