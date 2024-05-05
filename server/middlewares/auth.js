@@ -8,7 +8,7 @@ exports.isAuthenticate = async (req, res, next) => {
   const { isAdmin } = req.query;
 
   const token = Boolean(isAdmin) ? req.cookies.adminToken : req.cookies.token;
-
+console.log(token)
   if (!token) {
     return next(new ErrorHandler("Please Login", 401, res));
   }
