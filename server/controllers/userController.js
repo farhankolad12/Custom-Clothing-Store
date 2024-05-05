@@ -104,7 +104,8 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
 });
 
 exports.logout = catchAsyncErrors(async (req, res, next) => {
-  res.clearCookie(req.user.role === "customer" ? "token" : "adminToken")
+  console.log(req.user.role)
+    res.clearCookie(req.user.role === "customer" ? "token" : "adminToken")
   return res
     .status(200)
     .json({ success: true });
