@@ -168,17 +168,19 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
     });
   }
 
+  let user = undefined;
   try {
     const decodedData = jwt.verify(token, process.env.JWT_SECRET);
 
   // console.log(decodedData);
 
-  const user = await Users.findOne(
+  user = await Users.findOne(
     { _id: decodedData?.id, role: "customer" },
     { password: 0 }
   );
   } catch {
     res.clearCookie("adminToken");
+    res.clearCookie("token")
   }
 
   const fProducts = [];
