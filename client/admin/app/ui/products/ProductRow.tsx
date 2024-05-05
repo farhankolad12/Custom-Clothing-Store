@@ -1,5 +1,7 @@
 import { ProductType } from "@/app/definations";
 import usePostReq from "@/app/hooks/usePostReq";
+import formatCurrency from "@/app/utils/formatCurrency";
+import Link from "next/link";
 import { toast } from "react-toastify";
 
 export default function ProductRow({
@@ -38,10 +40,16 @@ export default function ProductRow({
     <tr>
       <td>{product.name}</td>
       <td>{product.category}</td>
-      <td>{product.price}</td>
-      <td>{product.price}</td>
+      <td>{formatCurrency(product.price)}</td>
+      <td>{formatCurrency(product.combinations[0].salePrice)}</td>
       <td>
-        <i className="bi bi-search" />
+        <Link
+          href={`https://www.essentialsbyla.com/product/${product._id}`}
+          target="_blank"
+          className="btn p-0 text-light "
+        >
+          <i className="bi bi-search" />
+        </Link>
       </td>
       <td className="d-flex gap-3">
         <button
