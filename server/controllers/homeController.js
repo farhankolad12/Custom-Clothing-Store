@@ -179,7 +179,7 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
     { password: 0 }
   );
   } catch {
-     res.cookie(user.role === "customer" ? "token" : "adminToken", "", {
+     res.cookie("token", "", {
       httpOnly: true,
       secure: true,
       sameSite: "none",
