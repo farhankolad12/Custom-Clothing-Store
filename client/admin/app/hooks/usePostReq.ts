@@ -15,12 +15,10 @@ export default function usePostReq(url: string) {
       "Access-Control-Allow-Origin",
       process.env.NEXT_PUBLIC_BACKEND_HOSTNAME || ""
     );
-    headers.append(
-      "Content-Type",
-      payload.toString().includes("FormData")
-        ? "application/x-www-form-urlencoded"
-        : "application/json"
-    );
+
+    if (!payload.toString().includes("FormData")) {
+      headers.append("Content-Type", "application/json");
+    }
 
     return await fetch(
       process.env.NEXT_PUBLIC_BACKEND_HOSTNAME +

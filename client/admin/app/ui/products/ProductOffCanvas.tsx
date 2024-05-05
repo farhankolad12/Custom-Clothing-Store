@@ -126,7 +126,7 @@ export default function ProductOffCanvas({
 
       setProducts((prev: any) => ({
         ...prev,
-        products: [res?.newProduct, ...prev.products],
+        products: [res?.product, ...prev.products],
       }));
 
       return toast.success("Product added!", {

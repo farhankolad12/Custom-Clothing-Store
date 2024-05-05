@@ -6,7 +6,7 @@ exports.isAuthenticate = async (req, res, next) => {
   const { isAdmin } = req.query;
 
   const token = Boolean(isAdmin) ? req.cookies.adminToken : req.cookies.token;
-  console.log(token);
+
   if (!token) {
     return res.status(401).json({ success: false, message: "Please Login" });
   }

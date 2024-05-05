@@ -14,7 +14,22 @@ export default function AttributeSelection({
       <label htmlFor="attributes">Select {attr.displayName}</label>
       <Select
         isMulti={true}
-        defaultValue={null}
+        defaultValue={
+          attr.values.map((option: any) => {
+            selectedAttribute.some((attr: any) =>
+              attr.values.find((val: any) => val.id == option.id)
+            )
+              ? {
+                  value: option.variant,
+                  label: option.variant,
+                  id: option.id,
+                  attrDisplayName: attr.value,
+                  attrTitle: attr.label,
+                  attrId: attr._id,
+                }
+              : {};
+          }) || null
+        }
         options={attr.values.map((option: any) => ({
           value: option.variant,
           label: option.variant,

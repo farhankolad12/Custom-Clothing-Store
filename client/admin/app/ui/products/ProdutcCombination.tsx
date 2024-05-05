@@ -43,7 +43,15 @@ export default function ProdutcCombination({
           {attributes && (
             <Select
               isMulti={true}
-              defaultValue={selectedAttribute}
+              defaultValue={
+                selectedAttribute?.map((attr) => ({
+                  value: attr.displayName,
+                  label: attr.title,
+                  _id: attr._id,
+                  type: attr.type,
+                  values: attr.options,
+                })) || null
+              }
               options={attributes.map((attr) => ({
                 value: attr.displayName,
                 label: attr.title,
@@ -67,7 +75,7 @@ export default function ProdutcCombination({
               <AttributeSelection
                 attr={attr}
                 key={attr._id}
-                selectedAttribute={variants}
+                selectedAttribute={selectedAttribute}
                 setSelectedAtLast={setVariants}
               />
             );

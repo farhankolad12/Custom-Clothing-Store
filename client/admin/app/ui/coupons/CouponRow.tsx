@@ -1,4 +1,5 @@
 import usePostReq from "@/app/hooks/usePostReq";
+import formatCurrency from "@/app/utils/formatCurrency";
 import Image from "next/image";
 import { toast } from "react-toastify";
 
@@ -54,11 +55,11 @@ export default function CouponRow({
       <td>{coupon.code}</td>
       <td>
         {coupon.type === "fixed"
-          ? `\$${coupon.discount}`
+          ? `${formatCurrency(coupon.discount)}`
           : `${coupon.discount}%`}
       </td>
-      <td>{coupon.createdAt}</td>
-      <td>{coupon.expiresAt}</td>
+      <td>{new Date(coupon.createdAt).toLocaleString()}</td>
+      <td>{new Date(coupon.expiresAt).toLocaleString()}</td>
       <td>{Date.now() > coupon.expiresAt ? "Expired" : "Active"}</td>
       <td>
         <div className="d-flex gap-3">

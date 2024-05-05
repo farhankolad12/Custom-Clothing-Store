@@ -66,7 +66,9 @@ export default function ProductBasicInfo({
           </label>
           <textarea
             ref={shortDescriptionRef}
-            defaultValue={selectedProduct ? selectedProduct.name : ""}
+            defaultValue={
+              selectedProduct ? selectedProduct.shortDescription : ""
+            }
             placeholder="Product Short Description"
             id="short-des"
             className="form-control w-lg-50 bg-transparent border-secondary text-light text-secondary"
@@ -78,7 +80,9 @@ export default function ProductBasicInfo({
           </label>
           <textarea
             ref={fullDescriptionRef}
-            defaultValue={selectedProduct ? selectedProduct.name : ""}
+            defaultValue={
+              selectedProduct ? selectedProduct.fullDescription : ""
+            }
             placeholder="Product Full Description"
             id="full-desc"
             className="form-control w-lg-50 bg-transparent border-secondary text-light text-secondary"
