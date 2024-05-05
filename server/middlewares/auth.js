@@ -29,7 +29,7 @@ console.log(token)
     return next(new ErrorHandler("Please Login", 401, res));
   } catch (err) {
     console.log(err);
-    res.cookie(Boolean(isAdmin) ? "adminToken" : "token", "", {
+    res.cookie(Boolean(isAdmin) ? "adminToken") : "token", "", {
       httpOnly: true,
       secure: true,
       sameSite: "none",
