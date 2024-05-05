@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 
-const { isAuthenticate } = require("../middlewares/auth");
+const { isAuthenticate, authorizeRoles } = require("../middlewares/auth");
 const {
   addAttributes,
   getAttributes,
@@ -19,8 +19,8 @@ router.use(
   })
 );
 
-router.route("/attributes").post(isAuthenticate, addAttributes);
-router.route("/attributes").get(isAuthenticate, getAttributes);
-router.route("/remove-attribute").post(isAuthenticate, deleteAttribute);
+router.route("/attributes").post(isAuthenticate, authorizeRoles("admin"), addAttributes);
+router.route("/attributes").get(isAuthenticate, authorizeRoles("admin"), getAttributes);
+router.route("/remove-attribute").post(isAuthenticate, authorizeRoles("admin"), deleteAttribute);
 
 module.exports = router;
