@@ -13,7 +13,7 @@ export default function LogoutButton({ setOpenNav }: { setOpenNav: Function }) {
 
       if (res?.success) {
         setCurrentUser(undefined);
-        setOpenNav(false);
+        return setOpenNav(false);
       }
 
       return toast.error(res.message);

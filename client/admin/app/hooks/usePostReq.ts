@@ -22,14 +22,20 @@ export default function usePostReq(url: string) {
         : "application/json"
     );
 
-    return await fetch(process.env.NEXT_PUBLIC_BACKEND_HOSTNAME + url, {
-      method: "POST",
-      body: payload.toString().includes("FormData")
-        ? payload
-        : JSON.stringify(payload),
-      credentials: "include",
-      headers,
-    })
+    return await fetch(
+      process.env.NEXT_PUBLIC_BACKEND_HOSTNAME +
+        url +
+        "?" +
+        new URLSearchParams(`isAdmin=${true}`),
+      {
+        method: "POST",
+        body: payload.toString().includes("FormData")
+          ? payload
+          : JSON.stringify(payload),
+        credentials: "include",
+        headers,
+      }
+    )
       .then(async (res1) => {
         setLoading(true);
         const res = await res1.json();
