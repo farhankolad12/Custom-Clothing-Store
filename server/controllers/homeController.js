@@ -168,7 +168,8 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
     });
   }
 
-  const decodedData = jwt.verify(token, process.env.JWT_SECRET);
+  try {
+    const decodedData = jwt.verify(token, process.env.JWT_SECRET);
 
   // console.log(decodedData);
 
@@ -176,6 +177,9 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
     { _id: decodedData?.id, role: "customer" },
     { password: 0 }
   );
+  } catch {
+    res.clearCookie("adminToken");
+  }
 
   const fProducts = [];
   const cProducts = [];
