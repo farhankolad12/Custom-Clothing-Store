@@ -42,7 +42,7 @@ console.log(token)
 exports.authorizeRoles = (...roles) => {
   return (req, res, next) => {
     if (!roles.includes(req.user.role)) {
-      res.cookie(Boolean("adminToken", "", {
+      res.cookie("adminToken", "", {
       httpOnly: true,
       secure: true,
       sameSite: "none",
