@@ -29,7 +29,7 @@ exports.getCategories = catchAsyncErrors(async (req, res, next) => {
 
 exports.addCategory = catchAsyncErrors(async (req, res, next) => {
   const { description, name, _id } = req.body;
-  const file = req.files[0];
+  const file = req.files?.[0];
 
   if (_id) {
     if (file) {

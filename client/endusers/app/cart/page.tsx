@@ -56,7 +56,7 @@ function Page() {
 
             if (!res?.success) {
               setIsValidCode(false);
-              setCartItems((prev: any) => {
+              return setCartItems((prev: any) => {
                 return {
                   ...prev,
                   coupon: {},

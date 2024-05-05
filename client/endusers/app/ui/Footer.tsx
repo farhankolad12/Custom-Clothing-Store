@@ -29,7 +29,7 @@ export default function Footer() {
       });
 
       if (!res?.success) {
-        toast.error(res.message || error);
+        return toast.error(res.message || error);
       }
 
       toast.success(res.message);

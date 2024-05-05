@@ -93,7 +93,7 @@ export default function CheckoutButton({
 
           if (!res?.success) {
             setLoading(false);
-            toast.error(res.message || _error || "Something went wrong");
+            return toast.error(res.message || _error || "Something went wrong");
           }
 
           setCartItems(undefined);

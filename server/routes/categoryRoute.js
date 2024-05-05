@@ -25,8 +25,14 @@ router.use(
   })
 );
 
-router.route("/category").post(isAuthenticate,authorizeRoles("admin"), upload.any(), addCategory);
-router.route("/category").get(isAuthenticate, authorizeRoles("admin"), getCategories);
-router.route("/remove-category").post(isAuthenticate, authorizeRoles("admin"), deleteCategory);
+router
+  .route("/category")
+  .post(isAuthenticate, authorizeRoles("admin"), upload.any(), addCategory);
+router
+  .route("/category")
+  .get(isAuthenticate, authorizeRoles("admin"), getCategories);
+router
+  .route("/remove-category")
+  .post(isAuthenticate, authorizeRoles("admin"), deleteCategory);
 
 module.exports = router;
