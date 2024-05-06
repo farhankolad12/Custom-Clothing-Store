@@ -41,7 +41,7 @@ export default function ProductRow({
       <td>{product.name}</td>
       <td>{product.category}</td>
       <td>{formatCurrency(product.price)}</td>
-      <td>{formatCurrency(product.combinations[0].salePrice)}</td>
+      <td>{formatCurrency(product.combinations[0]?.salePrice)}</td>
       <td>
         <Link
           href={`https://www.essentialsbyla.com/product/${product._id}`}
