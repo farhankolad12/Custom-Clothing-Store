@@ -3,7 +3,10 @@ const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const bcrypt = require("bcrypt");
 
 const Users = require("../models/userModel");
+const Orders = require("../models/orderModel");
+
 const sendToken = require("../utils/sendToken");
+const filterQuery = require("../utils/filterQuery");
 
 exports.register = catchAsyncErrors(async (req, res, next) => {
   const {
@@ -123,4 +126,58 @@ exports.logout = catchAsyncErrors(async (req, res, next) => {
 
 exports.forgetPassword = catchAsyncErrors(async (req, res, next) => {
   const { email } = req.body;
+});
+
+exports.getCustomers = catchAsyncErrors(async (req, res, next) => {
+  const { searchParams } = req.query;
+
+  const params = new URLSearchParams(searchParams);
+  const sort = params.get("sort");
+
+  const {
+    data: customers,
+    totalPages,
+    currentPage,
+    totalDocuments,
+    startDocument,
+    lastDocument,
+  } = await filterQuery(
+    searchParams,
+    ["fname", "lname", "email", "phone", "gender"],
+    Users,
+    sort,
+    "or"
+  );
+
+  return res.status(200).json({
+    customers,
+    totalPages,
+    currentPage,
+    totalDocuments,
+    startDocument,
+    lastDocument,
+  });
+});
+
+exports.getAdminUserOrders = catchAsyncErrors(async (req, res, next) => {
+  const { searchParams, id } = req.query;
+
+  const params = new URLSearchParams(searchParams);
+
+  const currentPage = Number(params.get("page")) || 1;
+  const pageSize = 5;
+  const totalDocuments = await Orders.countDocuments({ uid: id });
+
+  const orders = await Orders.find({ uid: id })
+    .limit(pageSize)
+    .skip(pageSize * (currentPage - 1));
+
+  return res.status(200).json({
+    orders,
+    totalPages: Math.ceil(totalDocuments / pageSize),
+    currentPage,
+    totalDocuments,
+    startDocument: pageSize * (currentPage - 1) + 1,
+    lastDocument: pageSize * (currentPage - 1) + orders.length,
+  });
 });
