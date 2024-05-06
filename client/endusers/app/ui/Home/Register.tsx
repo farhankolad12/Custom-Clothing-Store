@@ -82,14 +82,19 @@ export default function Register() {
           pattern="[0-9]{10}"
           placeholder="PHONE NUMBER*"
         />
-        <input
-          type="date"
-          ref={birthDateRef}
-          required
-          id="birth-date"
-          className="cursor-pointer bg-transparent outline-none border-b-2 border-black"
-          placeholder="Birthday*"
-        />
+        <div className="flex justify-between lg:flex-row flex-col gap-5 w-full">
+          <label htmlFor="birth-date" className="w-full">
+            DOB
+          </label>
+          <input
+            type="date"
+            ref={birthDateRef}
+            required
+            id="birth-date"
+            className="cursor-pointer w-full bg-transparent outline-none border-b-2 border-black"
+            placeholder="Birthday*"
+          />
+        </div>
         <div className="flex w-full justify-between">
           <strong>Gender: </strong>
           <div className="flex gap-2">
