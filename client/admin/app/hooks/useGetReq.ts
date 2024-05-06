@@ -10,13 +10,6 @@ export default function useGetReq(url: string, params: any) {
   useEffect(() => {
     (async () => {
       setData(undefined);
-      const headers = new Headers();
-
-      headers.append("Content-Type", "application/json");
-      headers.append(
-        "Access-Control-Allow-Origin",
-        process.env.NEXT_PUBLIC_BACKEND_HOSTNAME || ""
-      );
 
       return await fetch(
         `${
@@ -26,7 +19,11 @@ export default function useGetReq(url: string, params: any) {
         )}`,
         {
           credentials: "include",
-          headers,
+          headers: {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Origin":
+              process.env.NEXT_PUBLIC_BACKEND_HOSTNAME || "",
+          },
           method: "GET",
         }
       )
