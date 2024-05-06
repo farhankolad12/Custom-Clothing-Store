@@ -207,7 +207,7 @@ export default function ProductList({
               href={`/product/${product._id}`}
               className="text-gray-700 text-sm"
             >
-              TeeVerse
+              Essentials By LA
             </Link>
             <Link
               href={`/product/${product._id}`}
