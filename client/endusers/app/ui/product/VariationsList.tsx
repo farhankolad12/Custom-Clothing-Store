@@ -10,9 +10,9 @@ export default function VariationsList({
   setSelectedVariants: Function;
 }) {
   return (
-    <div className="flex border-b-2 last:border-b-0 items-center justify-between pb-4">
+    <div className="flex flex-wrap border-b-2 last:border-b-0 items-center justify-between pb-4">
       <strong className="uppercase font-bold">{variant.title}</strong>
-      <div className="flex gap-3">
+      <div className="flex flex-wrap gap-3">
         {variant.values.map((val: any) => {
           return (
             <Fragment key={val.id}>

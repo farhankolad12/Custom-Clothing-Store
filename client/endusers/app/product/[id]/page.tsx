@@ -114,7 +114,7 @@ export default function Page() {
     <div className="not-home">
       <Header />
       <main className="px-10 my-5">
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           <Link href="/" className="text-xs uppercase text-gray-500">
             home
           </Link>
@@ -139,7 +139,7 @@ export default function Page() {
             product={product}
           />
           <div className="w-lg-50">
-            <h1 className="uppercase font-bold text-6xl lg:text-8xl">
+            <h1 className="uppercase font-bold lg:text-6xl text-5xl lg:text-8xl">
               {product.name}
             </h1>
             <div className="my-5 flex gap-10">
@@ -166,7 +166,7 @@ export default function Page() {
                 );
               })}
             </div>
-            <div className="flex gap-4 my-10">
+            <div className="flex flex-wrap gap-4 my-10">
               <div className="border-2 lg:px-5 px-1 py-3">
                 <button
                   className="rounded-l px-3 py-1 outline-none focus:outline-none"
