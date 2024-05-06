@@ -14,6 +14,7 @@ export default function ProdutcCombination({
   setCombinations,
   selectedAttribute,
   setSelectedAttribute,
+  selectedProduct,
 }: {
   attributes: AttributesType[] | undefined;
   setVariants: Function;
@@ -22,6 +23,7 @@ export default function ProdutcCombination({
   setCombinations: Function;
   selectedAttribute: null | AttributesType[];
   setSelectedAttribute: Function;
+  selectedProduct: any;
 }) {
   async function handleVariants() {
     if (variants.length !== selectedAttribute?.length) {
@@ -44,19 +46,23 @@ export default function ProdutcCombination({
             <Select
               isMulti={true}
               defaultValue={
-                selectedAttribute?.map((attr) => ({
-                  value: attr.displayName,
-                  label: attr.title,
-                  _id: attr._id,
-                  type: attr.type,
-                  values: attr.options,
-                })) || null
+                selectedProduct
+                  ? selectedProduct?.variants?.map((attr: AttributesType) => {
+                      return {
+                        value: attr.displayName,
+                        label: attr.title,
+                        _id: attr._id,
+                        // type: attr.type,
+                        values: attr.values,
+                      };
+                    })
+                  : null
               }
               options={attributes.map((attr) => ({
                 value: attr.displayName,
                 label: attr.title,
                 _id: attr._id,
-                type: attr.type,
+                // type: attr.type,
                 values: attr.options,
               }))}
               styles={{
@@ -73,10 +79,12 @@ export default function ProdutcCombination({
           selectedAttribute.map((attr: any) => {
             return (
               <AttributeSelection
+                selectedProduct={selectedProduct}
                 attr={attr}
                 key={attr._id}
                 selectedAttribute={selectedAttribute}
                 setSelectedAtLast={setVariants}
+                attributes={attributes}
               />
             );
           })}

@@ -1,43 +1,65 @@
+import { AttributesType } from "@/app/definations";
 import Select from "react-select";
 
 export default function AttributeSelection({
   attr,
   setSelectedAtLast,
   selectedAttribute,
+  attributes,
+  selectedProduct,
 }: {
+  selectedProduct: any;
   attr: any;
   setSelectedAtLast: Function;
   selectedAttribute: any;
+  attributes: AttributesType[] | undefined;
 }) {
-  return (
-    <div className="d-flex flex-column gap-2">
-      <label htmlFor="attributes">Select {attr.displayName}</label>
-      <Select
-        isMulti={true}
-        defaultValue={
-          attr.values.map((option: any) => {
-            selectedAttribute.some((attr: any) =>
-              attr.values.find((val: any) => val.id == option.id)
-            )
-              ? {
-                  value: option.variant,
-                  label: option.variant,
-                  id: option.id,
-                  attrDisplayName: attr.value,
-                  attrTitle: attr.label,
-                  attrId: attr._id,
-                }
-              : {};
-          }) || null
-        }
-        options={attr.values.map((option: any) => ({
+  const allAttrOptions = attributes?.find((attr1) => {
+    if (attr1.displayName === (attr.label || attr.displayName)) {
+      return attr1.options.map((option) => {
+        return {
           value: option.variant,
           label: option.variant,
           id: option.id,
           attrDisplayName: attr.value,
           attrTitle: attr.label,
           attrId: attr._id,
-        }))}
+        };
+      });
+    }
+  });
+
+  return (
+    <div className="d-flex flex-column gap-2">
+      <label htmlFor="attributes">
+        Select {attr.label || attr.displayName}
+      </label>
+      <Select
+        isMulti={true}
+        defaultValue={
+          selectedProduct
+            ? attr.values.map((option: any) => {
+                return {
+                  value: option.variant,
+                  label: option.variant,
+                  id: option.id,
+                  attrDisplayName: attr.value,
+                  attrTitle: attr.label,
+                  attrId: attr._id,
+                };
+              })
+            : null
+        }
+        options={allAttrOptions?.options.map((option) => {
+          return {
+            value: option.variant,
+            label: option.variant,
+            id: option.id,
+            attrDisplayName: attr.value,
+            attrTitle: attr.label,
+            attrId: attr._id,
+          };
+        })}
         styles={{
           option: (styles) => ({
             ...styles,

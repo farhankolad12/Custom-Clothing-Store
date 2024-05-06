@@ -12,6 +12,12 @@ export type AttributesType = {
   title: string;
   displayName: string;
   type: string;
+  values: [
+    {
+      id: string;
+      variant: string;
+    }
+  ];
   options: [
     {
       id: string;

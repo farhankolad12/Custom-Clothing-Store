@@ -254,6 +254,7 @@ export default function ProductBasicInfo({
             </ul>
             <input
               onKeyDown={(e) => {
+                // e.preventDefault();
                 if (e.key.toLowerCase() === "enter") {
                   setTags((prev: { id: string; tag: string }[]) => [
                     ...prev,

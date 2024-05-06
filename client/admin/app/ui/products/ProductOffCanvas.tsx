@@ -34,17 +34,17 @@ export default function ProductOffCanvas({
 
   useEffect(() => {
     setImages((prev: any) =>
-      selectedProduct?.images ? selectedProduct.images : prev
+      selectedProduct?.images ? selectedProduct.images : []
     );
-    setTags((prev: any) => (selectedProduct ? selectedProduct.tags : prev));
+    setTags((prev: any) => (selectedProduct ? selectedProduct.tags : []));
     setVariants((prev: any) =>
-      selectedProduct ? selectedProduct.variants : prev
+      selectedProduct ? selectedProduct.variants : []
     );
     setCombinations((prev: any) =>
-      selectedProduct ? selectedProduct.combinations : prev
+      selectedProduct ? selectedProduct.combinations : []
     );
     setSelectedAttribute((prev) =>
-      selectedProduct ? selectedProduct.variants : prev
+      selectedProduct ? selectedProduct.variants : []
     );
   }, [selectedProduct]);
 
@@ -124,6 +124,24 @@ export default function ProductOffCanvas({
         });
       }
 
+      if (selectedProduct) {
+        toast.success("Product edited!", {
+          position: "top-right",
+        });
+
+        setSelectedProduct(undefined);
+        return setProducts((prev: any) => {
+          return {
+            ...prev,
+            products: prev.products.map((product: ProductType) => {
+              return product._id === selectedProduct._id
+                ? res?.product
+                : product;
+            }),
+          };
+        });
+      }
+
       setProducts((prev: any) => ({
         ...prev,
         products: [res?.product, ...prev.products],
@@ -158,9 +176,13 @@ export default function ProductOffCanvas({
         </div>
         <button
           type="button"
+          onClick={() => {
+            setSelectedProduct(undefined);
+            setCombinations([]);
+            setVariants([]);
+          }}
           className="ms-auto btn p-0 text-light"
           data-bs-dismiss="offcanvas"
-          onClick={() => setSelectedProduct(undefined)}
           aria-label="Close"
         >
           <i className="bi bi-x-lg fs-5" />
@@ -225,7 +247,17 @@ export default function ProductOffCanvas({
               aria-labelledby="combination-tab"
               tabIndex={0}
             >
-              {selectedProduct || !selectedProduct ? (
+              <ProdutcCombination
+                variants={variants}
+                selectedAttribute={selectedAttribute}
+                setSelectedAttribute={setSelectedAttribute}
+                setVariants={setVariants}
+                attributes={filters?.attributes}
+                combinations={combinations}
+                setCombinations={setCombinations}
+                selectedProduct={selectedProduct}
+              />
+              {/* {selectedProduct || !selectedProduct ? (
                 <ProdutcCombination
                   variants={variants}
                   selectedAttribute={selectedAttribute}
@@ -237,7 +269,7 @@ export default function ProductOffCanvas({
                 />
               ) : (
                 ""
-              )}
+              )} */}
             </div>
           </div>
         </form>
@@ -245,11 +277,11 @@ export default function ProductOffCanvas({
       <div style={{ backgroundColor: "#1f2937" }} className="offcanvas-footer">
         <div className="py-4 px-3 d-flex flex-lg-row flex-column gap-3">
           <button
+            onClick={() => setSelectedProduct(undefined)}
             data-bs-dismiss="offcanvas"
             aria-label="Close"
             type="button"
             className="btn btn-secondary w-100 py-2"
-            onClick={() => setSelectedProduct(undefined)}
           >
             Cancel
           </button>

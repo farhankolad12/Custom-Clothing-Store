@@ -123,7 +123,7 @@ exports.addProduct = catchAsyncErrors(async (req, res, next) => {
   });
 
   await newProduct.save();
-  return res.status(200).json({ success: true, newProduct });
+  return res.status(200).json({ success: true, product: newProduct });
 });
 
 exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
@@ -148,16 +148,16 @@ exports.getProduct = catchAsyncErrors(async (req, res, next) => {
   try {
     const decodedData = jwt.verify(token, process.env.JWT_SECRET);
 
-  user = await Users.findOne(
-    { _id: decodedData.id, role: "customer" },
-    { password: 0 }
-  );
+    user = await Users.findOne(
+      { _id: decodedData.id, role: "customer" },
+      { password: 0 }
+    );
   } catch {
     res.cookie("token", "", {
       httpOnly: true,
       secure: true,
       sameSite: "none",
-    })
+    });
   }
 
   if (user) {

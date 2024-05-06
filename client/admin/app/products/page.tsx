@@ -60,6 +60,7 @@ function Page() {
           </button>
           <button
             className="btn btn-success"
+            onClick={() => setSelectedProduct(undefined)}
             data-bs-toggle="offcanvas"
             data-bs-target="#productCanvas"
             aria-controls="productCanvas"
