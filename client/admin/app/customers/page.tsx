@@ -78,7 +78,7 @@ function Page() {
               ) : (
                 data?.customers?.map((customer: any) => {
                   return (
-                    <tr>
+                    <tr key={customer._id}>
                       <td>{customer._id}</td>
                       <td>{new Date(customer.createdAt).toLocaleString()}</td>
                       <td>{customer.fname + " " + customer.lname}</td>
