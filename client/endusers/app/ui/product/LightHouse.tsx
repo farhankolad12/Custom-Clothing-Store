@@ -14,7 +14,7 @@ export default function LightHouse({
   return (
     <div
       style={{ background: "rgba(0, 0, 0, 0.5)" }}
-      className="absolute top-0 bottom-0 right-0 left-0 w-full flex justify-center  items-center"
+      className="absolute top-0 bottom-0 right-0 left-0 w-full h-full flex justify-center z-50 items-center lg:pt-60 pt-0 px-5"
     >
       <button
         onClick={() => {
@@ -24,7 +24,7 @@ export default function LightHouse({
         }}
         className="absolute top-50 left-5"
       >
-        <i className="bi bi-arrow-left text-white text-xl" />
+        <i className="bi bi-arrow-left lg:text-white text-black text-xl" />
       </button>
       <button
         onClick={() => {
@@ -34,7 +34,7 @@ export default function LightHouse({
         }}
         className="absolute top-50 right-5"
       >
-        <i className="bi bi-arrow-right text-white text-xl" />
+        <i className="bi bi-arrow-right lg:text-white text-black text-xl" />
       </button>
       <div className="flex flex-col gap-3 items-end">
         <button onClick={() => setOpenLighthouse(false)} className="mt-5">

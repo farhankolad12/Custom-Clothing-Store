@@ -124,7 +124,7 @@ export default function Page() {
           </Link>
           <span className="text-xs uppercase">|</span>
           <Link
-            href={`/category/${product.category}`}
+            href={`/shop?category=${product.category}`}
             className="text-xs uppercase text-gray-500"
           >
             {product.category}
