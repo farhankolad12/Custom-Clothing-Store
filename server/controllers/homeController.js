@@ -141,7 +141,9 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
   const featuredProducts = await Products.find({ isFeatured: true }).limit(8);
   const newCollections = await Products.find({
     createdAt: { $gte: myEpoch, $lte: Date.now() },
-  }).limit(8);
+  })
+    .skip(1)
+    .limit(8);
 
   const categoriesC = await Categories.find();
 
@@ -201,13 +203,17 @@ exports.homePage = catchAsyncErrors(async (req, res, next) => {
 
       const inWishlist1 = await Wishlists.countDocuments({
         uid: user._id,
-        products: { $elemMatch: { productId: collectionProduct._id } },
+        products: { $elemMatch: { productId: collectionProduct?._id } },
       });
 
       if (inWishlist1 > 0) {
-        cProducts.push({ ...collectionProduct._doc, inWishlist: true });
+        if (collectionProduct) {
+          cProducts.push({ ...collectionProduct?._doc, inWishlist: true });
+        }
       } else {
-        cProducts.push({ ...collectionProduct._doc, inWishlist: false });
+        if (collectionProduct) {
+          cProducts.push({ ...collectionProduct?._doc, inWishlist: false });
+        }
       }
 
       if (inWishlist > 0) {
