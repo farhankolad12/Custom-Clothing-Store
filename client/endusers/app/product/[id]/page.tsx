@@ -26,6 +26,7 @@ import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
+import HTMLParser from "html-react-parser";
 
 export default function Page() {
   const [openLighthouse, setOpenLighthouse] = useState(false);
@@ -234,7 +235,7 @@ export default function Page() {
             </TabsHeader>
             <TabsBody placeholder="">
               <TabPanel key="Description" value="Description">
-                {product.fullDescription}
+                {HTMLParser(product.fullDescription)}
               </TabPanel>
               <TabPanel key="Review" value="Review">
                 Review

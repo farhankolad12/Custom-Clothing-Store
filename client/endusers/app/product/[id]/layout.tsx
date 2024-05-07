@@ -1,10 +1,5 @@
 import type { Metadata } from "next";
 
-// export const metadata: Metadata = {
-//   title: "Essentials By LA: Contact Us",
-//   description: "Contact Us Page of Essentials By LA",
-// };
-
 type Props = {
   params: { id: string };
 };
@@ -24,7 +19,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: product.name,
     description: product.shortDescription,
     openGraph: {
-      images: product.images.map((img: any) => img.link),
+      images: product?.images?.map((img: any) => img.link),
     },
   };
 }

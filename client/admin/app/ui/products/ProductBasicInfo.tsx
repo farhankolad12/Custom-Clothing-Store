@@ -1,21 +1,22 @@
 import { AttributesType, CategoriesType, ProductType } from "@/app/definations";
+import { Editor } from "@tinymce/tinymce-react";
 import Image from "next/image";
 import React, { Ref, useState } from "react";
 
 export default function ProductBasicInfo({
   nameRef,
   selectedProduct,
-  shortDescriptionRef,
   priceRef,
   setImages,
   images,
-  fullDescriptionRef,
   tags,
   setTags,
   isFeaturedRef,
   categoryRef,
   data,
   _loading,
+  shortDescriptionRef,
+  setFullDescription,
 }: {
   nameRef: Ref<HTMLInputElement>;
   shortDescriptionRef: Ref<HTMLTextAreaElement>;
@@ -23,7 +24,7 @@ export default function ProductBasicInfo({
   priceRef: Ref<HTMLInputElement>;
   setImages: Function;
   images: any;
-  fullDescriptionRef: Ref<HTMLTextAreaElement>;
+  setFullDescription: Function;
   tags: any;
   setTags: Function;
   isFeaturedRef: Ref<HTMLSelectElement>;
@@ -64,6 +65,7 @@ export default function ProductBasicInfo({
           <label htmlFor="short-des" className="text-secondary">
             Short Description
           </label>
+
           <textarea
             ref={shortDescriptionRef}
             defaultValue={
@@ -71,22 +73,36 @@ export default function ProductBasicInfo({
             }
             placeholder="Product Short Description"
             id="short-des"
-            className="form-control w-lg-50 bg-transparent border-secondary text-light text-secondary"
+            className="form-control w-lg-50 bg-transparent border-secondary text-light text-secondary "
           />
         </div>
         <div className="d-flex flex-lg-row flex-column gap-3 justify-content-between">
           <label htmlFor="full-desc" className="text-secondary">
             Full Description
           </label>
-          <textarea
+          <div className="w-lg-50 bg-transparent border-secondary text-light text-secondary">
+            <Editor
+              apiKey={process.env.NEXT_PUBLIC_EDITOR_KEY}
+              initialValue={
+                selectedProduct ? selectedProduct.fullDescription : ""
+              }
+              onChange={(e) => setFullDescription(e.target.getContent())}
+              id="full-desc"
+              init={{
+                toolbar:
+                  "insertfile a11ycheck undo redo | bold italic | forecolor backcolor | codesample | alignleft aligncenter alignright alignjustify | bullist numlist | link image",
+              }}
+            />
+          </div>
+          {/* <textarea
             ref={fullDescriptionRef}
             defaultValue={
               selectedProduct ? selectedProduct.fullDescription : ""
             }
             placeholder="Product Full Description"
             id="full-desc"
-            className="form-control w-lg-50 bg-transparent border-secondary text-light text-secondary"
-          />
+            className=""
+          /> */}
         </div>
         <div className="d-flex flex-lg-row flex-column gap-3 justify-content-between">
           <label htmlFor="category" className="text-secondary">

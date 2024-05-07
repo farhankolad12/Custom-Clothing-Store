@@ -2,8 +2,10 @@ const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 
 const bcrypt = require("bcrypt");
 
+const Cart = require("../models/cartModel");
 const Users = require("../models/userModel");
 const Orders = require("../models/orderModel");
+const Products = require("../models/productModel");
 
 const sendToken = require("../utils/sendToken");
 const filterQuery = require("../utils/filterQuery");
@@ -105,7 +107,31 @@ exports.login = catchAsyncErrors(async (req, res, next) => {
   const user = await Users.findOne({ email, role: "customer" });
 
   if (user && (await bcrypt.compare(password, user.password))) {
-    return sendToken({ user, cartItems: [] }, 200, res);
+    const userCart = await Cart.findOne({ uid: user._id });
+
+    // if (!userCart) {
+    //   return res.status(200).json({ products: [] });
+    // }
+
+    const resData = [];
+
+    for (let i = 0; i < userCart?.products.length; i++) {
+      const cartProduct = userCart.products[i];
+
+      const product = await Products.findOne({ _id: cartProduct.productId });
+
+      resData.push({
+        ...product._doc,
+        quantity: cartProduct.quantity,
+        selectedVariantIds: cartProduct.selectedVariationIds,
+        selectedCombination: cartProduct.selectedCombination,
+      });
+    }
+    return sendToken(
+      { user, cartItems: { ...userCart?._doc, products: resData || [] } },
+      200,
+      res
+    );
   }
 
   return res

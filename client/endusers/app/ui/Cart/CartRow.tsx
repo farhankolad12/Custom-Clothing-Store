@@ -26,19 +26,25 @@ export default function CartRow({ product }: { product: ProductType }) {
       toast.success(`${product.name} removed!`);
 
       setCartItems((prev: any) => {
+        const subTotalPrice = prev.products.some(
+          (productC: any) =>
+            productC._id === product._id &&
+            productC.selectedCombination.id === product.selectedCombination.id
+        )
+          ? (prev.subTotalPrice || 0) -
+            product.selectedCombination.salePrice * product.quantity
+          : (prev.subTotalPrice || 0) +
+            product.selectedCombination.salePrice * product.quantity;
+
         return {
           ...prev,
           // shippingPrice: 200,
-          // discountedPrice: 0,
-          subTotalPrice: prev.products.some(
-            (productC: any) =>
-              productC._id === product._id &&
-              productC.selectedCombination.id === product.selectedCombination.id
-          )
-            ? (prev.subTotalPrice || 0) -
-              product.selectedCombination.salePrice * product.quantity
-            : (prev.subTotalPrice || 0) +
-              product.selectedCombination.salePrice * product.quantity,
+          discountedPrice: prev.coupon.code
+            ? prev.coupon.minimumCartValue > subTotalPrice
+              ? 0
+              : prev.discountedPrice
+            : prev.discountedPrice,
+          subTotalPrice,
           products: prev.products.some(
             (productC: any) =>
               productC._id === product._id &&

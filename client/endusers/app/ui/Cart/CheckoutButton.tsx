@@ -99,7 +99,7 @@ export default function CheckoutButton({
           setCartItems(undefined);
           setLoading(false);
           toast.success("Order succesfully placed!");
-          router.push("/profile");
+          router.push("/profile/orders");
         },
         prefill: {
           //We recommend using the prefill parameter to auto-fill customer's contact information, especially their phone number

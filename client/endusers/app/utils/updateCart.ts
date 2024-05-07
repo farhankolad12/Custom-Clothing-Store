@@ -23,8 +23,8 @@ export async function updateCart(
   setCartItems((prev: any) => {
     return {
       ...prev,
-      shippingPrice: 200,
-      discountedPrice: 0,
+      shippingPrice: prev.shippingPrice ? prev.shippingPrice : 200,
+      discountedPrice: prev.discountedPrice ? prev.discountedPrice : 0,
       subTotalPrice: prev.products.some(
         (productC: any) =>
           productC._id === product._id &&

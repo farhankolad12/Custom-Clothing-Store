@@ -29,6 +29,9 @@ export default function ProductOffCanvas({
   const [selectedAttribute, setSelectedAttribute] = useState<
     null | AttributesType[]
   >(selectedProduct ? selectedProduct.variants : null);
+  const [fullDescription, setFullDescription] = useState(
+    selectedProduct ? selectedProduct.fullDescription : ""
+  );
 
   const { error, execute, loading } = usePostReq("/product");
 
@@ -46,11 +49,12 @@ export default function ProductOffCanvas({
     setSelectedAttribute((prev) =>
       selectedProduct ? selectedProduct.variants : []
     );
+    setFullDescription(selectedProduct ? selectedProduct.fullDescription : "");
   }, [selectedProduct]);
 
   const nameRef = useRef<HTMLInputElement>(null!);
   const shortDescriptionRef = useRef<HTMLTextAreaElement>(null!);
-  const fullDescriptionRef = useRef<HTMLTextAreaElement>(null!);
+  // const fullDescriptionRef = useRef<HTMLTextAreaElement>(null!);
   const priceRef = useRef<HTMLInputElement>(null!);
   const isFeaturedRef = useRef<HTMLSelectElement>(null!);
   const categoryRef = useRef<HTMLSelectElement>(null!);
@@ -60,7 +64,7 @@ export default function ProductOffCanvas({
 
     const name = nameRef.current.value;
     const shortDescription = shortDescriptionRef.current.value;
-    const fullDescription = fullDescriptionRef.current.value;
+    // const fullDescription = fullDescriptionRef.current.value;
     const price = priceRef.current.value;
     const isFeatured = isFeaturedRef.current.value;
     const category = categoryRef.current.value;
@@ -227,7 +231,7 @@ export default function ProductOffCanvas({
                 _loading={loading}
                 setImages={setImages}
                 images={images}
-                fullDescriptionRef={fullDescriptionRef}
+                setFullDescription={setFullDescription}
                 tags={tags}
                 setTags={setTags}
                 isFeaturedRef={isFeaturedRef}
