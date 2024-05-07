@@ -15,7 +15,7 @@ export default function FeatureProducts() {
     <section className="my-20 lg:px-10 px-5">
       <div className="text-center mb-16">
         <span className="text-xs">TEEVERSE COLLECTION</span>
-        <h2 className="lg:text-6xl text-5xl font-bold">FEATURED PRODUCTS</h2>
+        <h3 className="lg:text-6xl text-5xl font-bold">FEATURED PRODUCTS</h3>
       </div>
       <div className="">
         <div className="flex flex-wrap text-center justify-center gap-10">

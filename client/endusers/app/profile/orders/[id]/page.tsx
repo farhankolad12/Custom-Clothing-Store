@@ -110,7 +110,7 @@ function Page() {
                         src={product.images[0].link}
                         width={100}
                         height={100}
-                        alt="Product"
+                        alt={product.name}
                       />
                       <div className="flex flex-col gap-1">
                         <span>{product.name}</span>

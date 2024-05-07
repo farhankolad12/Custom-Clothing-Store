@@ -22,6 +22,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="canonical" href="https://www.essentialsbyla.com" />
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
         <meta property="og:title" content="Essentials By LA: Home" />
         <meta property="og:url" content="https://www.essentialsbyla.com" />
 
@@ -36,11 +40,9 @@ export default function RootLayout({
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
         />
-        <meta
-          httpEquiv="Content-Security-Policy"
-          content="upgrade-insecure-requests"
-        />
-        {/* <link rel="icon" href="/favicon.ico" /> */}
+
+        <link rel="icon" href="/logo-withbg.png" sizes="16x16" />
+        <link rel="apple-touch-icon" href="/logo-withbg.png" />
         <script src="/facebook-script.js" defer />
 
         <noscript>

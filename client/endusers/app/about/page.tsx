@@ -47,9 +47,9 @@ export default function Page() {
           </div>
           <section className="lg:px-20 px-5 flex lg:flex-row flex-col items-center justify-center w-full mt-20">
             <div className="flex flex-col w-full gap-5 ">
-              <h1 className="lg:text-6xl text-4xl lg:me-60 me-0 font-bold text-left">
+              <h2 className="lg:text-6xl text-4xl lg:me-60 me-0 font-bold text-left">
                 {data.firstAbout.title}
-              </h1>
+              </h2>
               <span className="lg:me-60 me-0">
                 {data.firstAbout.description}
               </span>
@@ -66,16 +66,16 @@ export default function Page() {
                 width={0}
                 height={0}
                 style={{ width: "100%", height: "700px", objectFit: "cover" }}
-                alt="About"
+                alt={data.firstAbout.title}
                 unoptimized
               />
             </div>
           </section>
           <section className="lg:px-20 px-5 flex lg:flex-row-reverse flex-col-reverse items-center justify-center w-full  ">
             <div className="flex flex-col w-full gap-5">
-              <h1 className="lg:text-6xl text-4xl font-bold lg:ms-60 ms-0">
+              <h2 className="lg:text-6xl text-4xl font-bold lg:ms-60 ms-0">
                 {data.secondAbout.title}
-              </h1>
+              </h2>
               <span className="lg:ms-60 ms-0">
                 {data.secondAbout.description}
               </span>
@@ -92,7 +92,7 @@ export default function Page() {
                 width={0}
                 height={0}
                 style={{ width: "100%", height: "700px", objectFit: "cover" }}
-                alt="About"
+                alt={data.secondAbout.title}
                 unoptimized
               />
             </div>

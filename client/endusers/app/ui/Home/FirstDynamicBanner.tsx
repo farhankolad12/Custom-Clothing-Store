@@ -34,7 +34,7 @@ export default function FirstDynamicBanner() {
           width={0}
           height={0}
           style={{ objectFit: "cover", width: "100%", height: "700px" }}
-          alt="Banner"
+          alt={data?.homePageContent?.firstBanner?.title}
         />
         <div
           // style={{ width: "400px" }}

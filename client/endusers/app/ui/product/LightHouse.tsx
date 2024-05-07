@@ -45,7 +45,7 @@ export default function LightHouse({
           src={product.images[currentImage].link}
           width={700}
           height={500}
-          alt="Product"
+          alt={product.name}
         />
       </div>
     </div>

@@ -75,7 +75,7 @@ export default function CartCanvasRow({ product }: { product: ProductType }) {
           src={product.images[0].link}
           width={100}
           height={100}
-          alt="product"
+          alt={product.name}
         />
         <div className="flex flex-col gap-1">
           <span>{product.category}</span>

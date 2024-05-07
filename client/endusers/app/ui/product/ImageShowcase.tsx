@@ -19,7 +19,7 @@ export default function ImageShowcase({
           unoptimized
           className="w-full h-full transition transition-transform hover:scale-150 cursor-pointer"
           src={selectedImg.link}
-          alt="Product"
+          alt={product.name}
           width={0}
           onClick={() => setOpenLighthouse(true)}
           height={0}
@@ -45,7 +45,12 @@ export default function ImageShowcase({
                 key={img.id}
                 onClick={() => setSelectedImg(img)}
               >
-                <Image alt="Product" width={150} height={150} src={img.link} />
+                <Image
+                  alt={product.name}
+                  width={150}
+                  height={150}
+                  src={img.link}
+                />
               </button>
             );
           })}

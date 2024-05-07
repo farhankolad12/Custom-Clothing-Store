@@ -104,13 +104,13 @@ export default function FirstBanner() {
               className="w-full h-full"
               width={0}
               height={0}
-              alt="Product"
+              alt={data?.featuredProducts[0].name}
             />
-            <h1
+            <h3
               className={`absolute text-5xl top-14 lg:text-left text-center left-0 right-0 lg:left-10 ${gochi.className}`}
             >
               Featured
-            </h1>
+            </h3>
             <button
               onClick={() => {
                 let selectedCombination;
@@ -173,9 +173,9 @@ export default function FirstBanner() {
                 </div>
               </div>
               <div>
-                <h1 className="ms-auto font-bold text-4xl">
+                <h3 className="ms-auto font-bold text-4xl">
                   {formatCurrency(data?.featuredProducts[0].price || 0)}
-                </h1>
+                </h3>
               </div>
             </div>
           </div>
@@ -194,14 +194,14 @@ export default function FirstBanner() {
               className="w-full h-full"
               width={0}
               height={0}
-              alt="Product"
+              alt={data?.newCollections[0].name}
               src={data?.newCollections[0]?.images[0].link || ""}
             />
-            <h1
+            <h3
               className={`absolute text-5xl top-14 lg:text-left text-center left-0 right-0 lg:left-10 ${gochi.className} text-white`}
             >
               New Collection
-            </h1>
+            </h3>
             <button
               onClick={() => {
                 let selectedCombination;
@@ -268,9 +268,9 @@ export default function FirstBanner() {
               </button> */}
               </div>
               <div>
-                <h1 className="ms-auto font-bold text-4xl">
+                <h3 className="ms-auto font-bold text-4xl">
                   {formatCurrency(data?.newCollections[0].price || 0)}
-                </h1>
+                </h3>
               </div>
             </div>
           </div>

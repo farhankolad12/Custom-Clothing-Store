@@ -26,7 +26,7 @@ export default function CartCanvas({
       placeholder="Cart"
     >
       <div className="flex border-b-2 pb-3 items-center justify-between">
-        <h1 color="blue-gray">Your Cart</h1>
+        <h3 color="blue-gray">Your Cart</h3>
         <button onClick={closeDrawer}>
           <i className="bi bi-x-lg" />
         </button>
@@ -94,7 +94,7 @@ export default function CartCanvas({
           )}
         </div>
       ) : (
-        <h1 className="text-center">Please login</h1>
+        <h3 className="text-center">Please login</h3>
       )}
     </Drawer>
   );

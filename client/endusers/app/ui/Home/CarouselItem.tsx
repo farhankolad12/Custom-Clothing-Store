@@ -22,7 +22,7 @@ export default function CarouselItem({
         width={0}
         height={0}
         src={slider.img.link}
-        alt={`Carousel ${i + 1}`}
+        alt={slider.title}
         className={`h-full animate__animated w-full ${
           active === i + 1 ? "animate__fadeIn" : ""
         }`}
