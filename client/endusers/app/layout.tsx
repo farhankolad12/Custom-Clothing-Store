@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   title: "Essentials By LA",
   description:
     "Welcome to Essentials By LA, your premier destination for the latest fashion trends and wardrobe essentials. Explore our curated collection of stylish clothing, from casual wear to formal attire, for men, women, and children. With a focus on quality, affordability, and diversity, we offer something for every style and occasion. Shop confidently with secure transactions, fast shipping, and hassle-free returns. Elevate your wardrobe and express your unique style with Essentials By LA today.",
+  icons: {
+    icon: "/logo-withbg.png",
+  },
 };
 
 export default function RootLayout({
