@@ -16,10 +16,6 @@ export default function Layout({
         <link rel="canonical" href="https://www.essentialsbyla.com/cart" />
         <meta property="og:title" content="Cart" />
         <meta property="og:url" content="https://www.essentialsbyla.com/cart" />
-        <meta
-          property="og:description"
-          content="Cart Page of Essentials By LA"
-        />
 
         <meta property="og:site_name" content="IN Cart Page Essentials By LA" />
 

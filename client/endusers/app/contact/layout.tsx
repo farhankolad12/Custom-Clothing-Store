@@ -19,10 +19,6 @@ export default function Layout({
           property="og:url"
           content="https://www.essentialsbyla.com/contact"
         />
-        <meta
-          property="og:description"
-          content="Contact Us Page of Essentials By LA"
-        />
 
         <meta
           property="og:site_name"

@@ -23,10 +23,6 @@ export default function Layout({
           property="og:url"
           content="https://www.essentialsbyla.com/profile"
         />
-        <meta
-          property="og:description"
-          content="Profile Page of Essentials By LA"
-        />
 
         <meta
           property="og:site_name"

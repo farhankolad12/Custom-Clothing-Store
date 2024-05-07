@@ -20,10 +20,6 @@ export default function Layout({
           property="og:url"
           content="https://www.essentialsbyla.com/about"
         />
-        <meta
-          property="og:description"
-          content="Discover the story behind Essentials By LA. Explore our commitment to style, sustainability, and exceptional service. Join us in shaping the future of fashion."
-        />
 
         <meta property="og:site_name" content="IN About Essentials By LA" />
 

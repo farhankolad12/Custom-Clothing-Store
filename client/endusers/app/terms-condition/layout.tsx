@@ -23,11 +23,6 @@ export default function Layout({
           content="https://www.essentialsbyla.com/terms-condition"
         />
         <meta
-          property="og:description"
-          content="Terms & Condition Page of Essentials By LA"
-        />
-
-        <meta
           property="og:site_name"
           content="IN Terms & Condition Page Essentials By LA"
         />

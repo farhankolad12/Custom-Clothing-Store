@@ -22,10 +22,6 @@ export default function Layout({
           property="og:url"
           content="https://www.essentialsbyla.com/privacy-policy"
         />
-        <meta
-          property="og:description"
-          content="Privacy Policy Page of Essentials By LA"
-        />
 
         <meta
           property="og:site_name"

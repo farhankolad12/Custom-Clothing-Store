@@ -19,10 +19,6 @@ export default function Layout({
           property="og:url"
           content="https://www.essentialsbyla.com/wishlist"
         />
-        <meta
-          property="og:description"
-          content="Wishlist Page of Essentials By LA"
-        />
 
         <meta
           property="og:site_name"

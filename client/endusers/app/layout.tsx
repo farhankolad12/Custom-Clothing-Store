@@ -24,10 +24,6 @@ export default function RootLayout({
         <link rel="canonical" href="https://www.essentialsbyla.com" />
         <meta property="og:title" content="Essentials By LA: Home" />
         <meta property="og:url" content="https://www.essentialsbyla.com" />
-        <meta
-          property="og:description"
-          content="Welcome to Essentials By LA, your premier destination for the latest fashion trends and wardrobe essentials. Explore our curated collection of stylish clothing, from casual wear to formal attire, for men, women, and children. With a focus on quality, affordability, and diversity, we offer something for every style and occasion. Shop confidently with secure transactions, fast shipping, and hassle-free returns. Elevate your wardrobe and express your unique style with Essentials By LA today."
-        />
 
         <meta property="og:site_name" content="IN Essentials By LA" />
 
@@ -44,7 +40,7 @@ export default function RootLayout({
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
-        <link rel="icon" href="/favicon.ico" />
+        {/* <link rel="icon" href="/favicon.ico" /> */}
         <script src="/facebook-script.js" defer />
 
         <noscript>
