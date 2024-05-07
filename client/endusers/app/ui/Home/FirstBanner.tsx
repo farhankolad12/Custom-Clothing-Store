@@ -105,6 +105,7 @@ export default function FirstBanner() {
               width={0}
               height={0}
               alt={data?.featuredProducts[0].name}
+              title={data?.featuredProducts[0].name}
             />
             <h3
               className={`absolute text-5xl top-14 lg:text-left text-center left-0 right-0 lg:left-10 ${gochi.className}`}
@@ -195,6 +196,7 @@ export default function FirstBanner() {
               width={0}
               height={0}
               alt={data?.newCollections[0].name}
+              title={data?.newCollections[0].name}
               src={data?.newCollections[0]?.images[0].link || ""}
             />
             <h3

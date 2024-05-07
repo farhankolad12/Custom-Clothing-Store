@@ -46,6 +46,7 @@ export default function LightHouse({
           width={700}
           height={500}
           alt={product.name}
+          title={product.name}
         />
       </div>
     </div>

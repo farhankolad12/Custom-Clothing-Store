@@ -111,6 +111,7 @@ function Page() {
                         width={100}
                         height={100}
                         alt={product.name}
+                        title={product.name}
                       />
                       <div className="flex flex-col gap-1">
                         <span>{product.name}</span>

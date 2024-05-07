@@ -54,6 +54,7 @@ export default function Page() {
             height={0}
             style={{ width: "100%", objectFit: "cover" }}
             alt="Contact"
+            title="Contact"
           />
           <h1 className="text-white absolute top-0 bottom-0 end-0 start-0 flex items-center justify-center lg:text-6xl text-4xl uppercase font-bold">
             Contact Us

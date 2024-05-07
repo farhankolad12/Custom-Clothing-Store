@@ -35,6 +35,7 @@ export default function SecondDynamicBanner() {
           height={0}
           style={{ objectFit: "cover", width: "100%", height: "700px" }}
           alt={data?.homePageContent?.secondBanner?.title}
+          title={data?.homePageContent?.secondBanner?.title}
         />
         <div
           //   style={{ width: "400px" }}

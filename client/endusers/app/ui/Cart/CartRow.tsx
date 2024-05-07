@@ -79,6 +79,7 @@ export default function CartRow({ product }: { product: ProductType }) {
               height={100}
               className="border-2"
               alt={product.name}
+              title={product.name}
             />
           </Link>
           <Link href={"/product/" + product._id}>

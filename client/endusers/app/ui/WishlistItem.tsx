@@ -52,6 +52,7 @@ export default function WishlistItem({
         <Image
           src={wishlist.images[0].link}
           alt={wishlist.name}
+          title={wishlist.name}
           width={100}
           height={100}
         />

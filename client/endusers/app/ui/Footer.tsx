@@ -46,6 +46,7 @@ export default function Footer() {
           <Image
             src="/logo.png"
             alt="Logo"
+            title="Logo"
             className="lg:w-1/6 w-full lg:h-auto h-50"
             width={0}
             unoptimized

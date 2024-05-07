@@ -15,6 +15,7 @@ export default function Logo() {
           unoptimized
           src="/logo.png"
           alt="Logo"
+          title="Logo"
           className="lg:w-28 lg:h-20 w-24 h-24"
           style={{ mixBlendMode: "multiply" }}
           width={0}

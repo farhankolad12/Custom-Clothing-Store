@@ -35,6 +35,7 @@ export default function Video() {
               style={{ width: "100%", height: "600px" }}
               // className="w-full h-1/2"
               alt="Video"
+              title="Video"
               unoptimized
             />
           )}
