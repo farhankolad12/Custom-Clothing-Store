@@ -48,6 +48,7 @@ export type ProductType = {
   inWishlist: boolean;
   quantity: number;
   createdAt: number;
+  productId: string;
 };
 
 export type CurrentUser = {

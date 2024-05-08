@@ -50,6 +50,31 @@ export default function CheckoutButton({
   const { cartItems, currentUser, setCartItems } = useAuth();
 
   async function handleCheckout() {
+    const fname = fnameRef.current?.value;
+    const lname = lnameRef.current?.value;
+    const country = countryRef.current?.value;
+    const streetAddr1 = streetAddr1Ref.current?.value;
+    const streetAddr2 = streetAddr2Ref.current?.value;
+    const city = cityRef.current?.value;
+    const state = stateRef.current?.value;
+    const zipCode = zipCodeRef.current?.value;
+    const phone = phoneRef.current?.value;
+    const email = emailRef.current?.value;
+
+    if (
+      fname === "" ||
+      lname === "" ||
+      country === "" ||
+      streetAddr1 === "" ||
+      city === "" ||
+      state === "" ||
+      zipCode === "" ||
+      phone === "" ||
+      email === ""
+    ) {
+      return toast.error("Please complete required field!");
+    }
+
     try {
       setLoading(true);
       const res = await execute({});
@@ -74,20 +99,21 @@ export default function CheckoutButton({
         description: "Test Transaction",
         image: "https://essentialsbyla.com/logo.png",
         order_id: res.orderId,
+
         handler: async (response: any) => {
           const res = await _execute({
             ...response,
             address: {
-              fname: fnameRef.current?.value,
-              lname: lnameRef.current?.value,
-              country: countryRef.current?.value,
-              streetAddr1: streetAddr1Ref.current?.value,
-              streetAddr2: streetAddr2Ref.current?.value,
-              city: cityRef.current?.value,
-              state: stateRef.current?.value,
-              zipCode: zipCodeRef.current?.value,
-              phone: phoneRef.current?.value,
-              email: emailRef.current?.value,
+              fname,
+              lname,
+              country,
+              streetAddr1,
+              streetAddr2,
+              city,
+              state,
+              zipCode,
+              phone,
+              email,
             },
           });
 
@@ -111,10 +137,13 @@ export default function CheckoutButton({
           address: "Razorpay Corporate Office",
         },
         theme: {
-          color: "#3399cc",
+          color: "#000",
         },
       };
       const rzp1 = new window.Razorpay(options);
+
+      rzp1.close();
+
       rzp1.on("payment.failed", (response: any) => {
         // console.log(response);
         setLoading(false);
@@ -122,6 +151,7 @@ export default function CheckoutButton({
         toast.error(response.error.reason);
       });
       rzp1.open();
+      setLoading(false);
     } catch (err: any) {
       console.log(err);
       return toast.error(err || "Something went wrong!");
