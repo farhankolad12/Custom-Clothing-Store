@@ -23,8 +23,6 @@ function Page() {
     toast.error(error || "Something went wrong!");
   }
 
-  console.log(wishlists);
-
   return loading ? (
     <LoadingSkeleton />
   ) : (

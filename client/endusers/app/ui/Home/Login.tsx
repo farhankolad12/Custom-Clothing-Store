@@ -32,7 +32,7 @@ export default function Login({
       if (res?.success) {
         setCurrentUser(res?.user);
         setCartItems(res.cartItems);
-        router.replace("/profile");
+        router.push("/profile");
       }
 
       setError(res.message);

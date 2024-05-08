@@ -28,10 +28,7 @@ function Page() {
   } = useGetReq("/orders", {
     isAdmin: true,
     searchParams,
-    // makeReq,
   });
-
-  //   console.log(data);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -45,7 +42,7 @@ function Page() {
     params.set("end-date", endDateRef.current.value);
     params.set("page", "1");
 
-    router.replace(`/orders?${params.toString()}`);
+    router.push(`/orders?${params.toString()}`);
 
     // setMakeReq(Math.random() * 99999);
   }
@@ -211,7 +208,7 @@ function Page() {
                           return (
                             <button
                               onClick={() =>
-                                router.replace(
+                                router.push(
                                   `/orders?query=${
                                     searchParams.get("query") || ""
                                   }&page=${ind + 1}`

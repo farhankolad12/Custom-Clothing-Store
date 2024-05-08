@@ -29,7 +29,7 @@ function Page() {
     params.set("query", q);
     params.set("page", "1");
 
-    router.replace(`/coupons?${params.toString()}`);
+    router.push(`/coupons?${params.toString()}`);
   }, 1000);
 
   return (
@@ -121,7 +121,7 @@ function Page() {
                           return (
                             <button
                               onClick={() =>
-                                router.replace(
+                                router.push(
                                   `/coupons?query=${
                                     searchParams.get("query") || ""
                                   }&page=${ind + 1}`

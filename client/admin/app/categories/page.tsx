@@ -30,7 +30,7 @@ function Page() {
     params.set("query", q);
     params.set("page", "1");
 
-    router.replace(`/categories?${params.toString()}`);
+    router.push(`/categories?${params.toString()}`);
   }, 1000);
 
   return (
@@ -120,7 +120,7 @@ function Page() {
                           return (
                             <button
                               onClick={() =>
-                                router.replace(
+                                router.push(
                                   `/categories?query=${
                                     searchParams.get("query") || ""
                                   }&page=${ind + 1}`

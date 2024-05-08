@@ -10,10 +10,10 @@ export default function SideNav({ setOpenNav }: { setOpenNav: Function }) {
 
   return (
     <div
-      style={{ backgroundColor: "#1f2937", width: "300px" }}
+      style={{ backgroundColor: "#1f2937", width: "300px", zIndex: "99" }}
       className="position-absolute py-4 start-0 top-0 bottom-0"
     >
-      <div className="d-flex flex-column justify-content-between h-100">
+      <div className="h-100 d-flex flex-column justify-content-between h-100">
         <div className="d-flex flex-column gap-4">
           <Image
             src="/logo.png"

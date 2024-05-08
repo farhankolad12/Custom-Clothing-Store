@@ -37,7 +37,7 @@ function Page() {
     params.set("query", q);
     params.set("page", "1");
 
-    router.replace(`/attributes?${params.toString()}`);
+    router.push(`/attributes?${params.toString()}`);
   }, 1000);
 
   return (
@@ -129,7 +129,7 @@ function Page() {
                             return (
                               <button
                                 onClick={() =>
-                                  router.replace(
+                                  router.push(
                                     `/attributes?query=${
                                       searchParams.get("query") || ""
                                     }&page=${ind + 1}`

@@ -20,7 +20,7 @@ function Page() {
     params.set("query", q);
     params.set("page", "1");
 
-    router.replace(`/customers?${params.toString()}`);
+    router.push(`/customers?${params.toString()}`);
   }, 1000);
 
   return (
@@ -113,8 +113,8 @@ function Page() {
                           return (
                             <button
                               onClick={() =>
-                                router.replace(
-                                  `/categories?query=${
+                                router.push(
+                                  `/customers?query=${
                                     searchParams.get("query") || ""
                                   }&page=${ind + 1}`
                                 )

@@ -44,7 +44,7 @@ function Page() {
     params.set("query", q);
     params.set("page", "1");
 
-    router.replace(`/products?${params.toString()}`);
+    router.push(`/products?${params.toString()}`);
   }, 1000);
 
   return (
@@ -94,7 +94,7 @@ function Page() {
 
               params.set("page", "1");
               params.set("category", e.target.value);
-              router.replace(`/products?${params.toString()}`);
+              router.push(`/products?${params.toString()}`);
             }}
           >
             <option disabled value="0">
@@ -120,7 +120,7 @@ function Page() {
 
               params.set("page", "1");
               params.set("sort", e.target.value);
-              router.replace(`/products?${params.toString()}`);
+              router.push(`/products?${params.toString()}`);
             }}
           >
             <option value="low-high">Low to high (price)</option>
@@ -188,8 +188,8 @@ function Page() {
                           return (
                             <button
                               onClick={() =>
-                                router.replace(
-                                  `/categories?query=${
+                                router.push(
+                                  `/products?query=${
                                     searchParams.get("query") || ""
                                   }&page=${ind + 1}`
                                 )

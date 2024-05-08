@@ -17,7 +17,7 @@ export default function Page() {
   const router = useRouter();
 
   useEffect(() => {
-    currentUser && router.replace("/");
+    currentUser && router.push("/");
     // eslint-disable-line react-hooks/exhaustive-deps
   }, [currentUser]);
 
@@ -33,7 +33,7 @@ export default function Page() {
 
       if (res?.success) {
         setCurrentUser(res?.user);
-        return router.replace("/");
+        return router.push("/");
       }
 
       return toast.error(error || "Email/password is incorrect");

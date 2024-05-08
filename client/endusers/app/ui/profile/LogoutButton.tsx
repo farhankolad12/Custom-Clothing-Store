@@ -23,7 +23,7 @@ export default function LogoutButton() {
 
       if (res?.success) {
         setCurrentUser(undefined);
-        return router.replace("/");
+        return router.push("/");
       }
 
       toast.error(res.message || error);

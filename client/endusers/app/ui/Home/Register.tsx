@@ -41,7 +41,7 @@ export default function Register() {
       if (res?.success) {
         setCurrentUser(res.user);
         // setCartItems({ products: [] });
-        router.replace("/profile");
+        router.push("/profile");
       }
 
       setError(res.message);

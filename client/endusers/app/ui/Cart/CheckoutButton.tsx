@@ -116,7 +116,7 @@ export default function CheckoutButton({
       };
       const rzp1 = new window.Razorpay(options);
       rzp1.on("payment.failed", (response: any) => {
-        console.log(response);
+        // console.log(response);
         setLoading(false);
         toast.error(response.error.description);
         toast.error(response.error.reason);

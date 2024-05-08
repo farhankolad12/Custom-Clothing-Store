@@ -76,9 +76,7 @@ function Page() {
                         return (
                           <button
                             onClick={() =>
-                              router.replace(
-                                `/user-orders/${id}page=${ind + 1}`
-                              )
+                              router.push(`/user-orders/${id}page=${ind + 1}`)
                             }
                             key={ind}
                             className={`btn btn-${

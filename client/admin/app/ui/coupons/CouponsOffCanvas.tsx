@@ -92,8 +92,6 @@ export default function CouponsOffCanvas({
         });
       }
 
-      console.log("new");
-
       setCoupon((prev: { coupons: any[] }) => ({
         ...prev,
         coupons: [res?.coupon, ...prev.coupons],
