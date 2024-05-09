@@ -30,22 +30,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export async function generateStaticParams() {
-  // fetch data
-  const productRes = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/all-products`
-  );
+// export async function generateStaticParams() {
+//   // fetch data
+//   const productRes = await fetch(
+//     `${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/all-products`
+//   );
 
-  console.log(productRes);
+//   console.log(productRes);
 
-  const products = productRes.status === 200 && (await productRes.json());
+//   const products = productRes.status === 200 && (await productRes.json());
 
-  // console.log(products);
+//   // console.log(products);
 
-  return products?.map((product: ProductType) => {
-    return product._id;
-  });
-}
+//   return products?.map((product: ProductType) => {
+//     return product._id;
+//   });
+// }
 
 export default function Layout({
   children,
