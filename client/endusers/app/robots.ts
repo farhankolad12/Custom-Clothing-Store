@@ -12,8 +12,6 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
   });
   const products: ProductType[] = await res.json();
 
-  console.log(products);
-
   const staticRules = [
     { userAgent: "*", allow: "/" },
     { userAgent: "*", allow: "/about" },
