@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const product = productRes.status === 200 && (await productRes?.json());
 
-  console.log(product);
+  // console.log(product);
 
   return {
     title: {
