@@ -9,6 +9,9 @@ export default function PrivacyPageSetting({ data }: { data: any }) {
     data?.termsConditions || ""
   );
   const [refundPolicy, setRefundPolicy] = useState(data?.refundPolicy || "");
+  const [shippingPolicy, setShippingPolicy] = useState(
+    data?.shippingPolicy || ""
+  );
 
   const { error, execute, loading } = usePostReq("/privacy-terms-page");
 
@@ -18,6 +21,7 @@ export default function PrivacyPageSetting({ data }: { data: any }) {
         privacyPolicy,
         termsConditions,
         refundPolicy,
+        shippingPolicy,
       });
 
       if (!res?.success) {
@@ -108,6 +112,32 @@ export default function PrivacyPageSetting({ data }: { data: any }) {
                 apiKey={process.env.NEXT_PUBLIC_EDITOR_KEY}
                 onChange={(e) => setRefundPolicy(e.target.getContent())}
                 initialValue={refundPolicy}
+              />
+            </div>
+          </div>
+          <button
+            disabled={loading}
+            type="button"
+            onClick={handleChanges}
+            className="btn btn-success d-flex mt-4 px-5 py-2 ms-auto me-5"
+          >
+            Save Changes
+          </button>
+        </section>
+        <section className="text-secondary fw-bold mt-5">
+          <div className="d-flex gap-2 pb-2 border-bottom border-white align-items-center">
+            <i className="bi bi-gear" />
+            <strong className="fw-bold">Shipping Policy</strong>
+          </div>
+          <div className="px-1 px-lg-5 mt-4 d-flex justify-content-between w-100 gap-1 flex-lg-row flex-column">
+            <label htmlFor="privacy-policy" className="w-100">
+              Shipping Policy
+            </label>
+            <div className="w-100">
+              <Editor
+                apiKey={process.env.NEXT_PUBLIC_EDITOR_KEY}
+                onChange={(e) => setShippingPolicy(e.target.getContent())}
+                initialValue={shippingPolicy}
               />
             </div>
           </div>

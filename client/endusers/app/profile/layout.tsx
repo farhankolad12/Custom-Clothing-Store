@@ -5,7 +5,7 @@ import Link from "next/link";
 import LogoutButton from "../ui/profile/LogoutButton";
 
 export const metadata: Metadata = {
-  title: "Essentials By LA: My Profile",
+  title: "My Profile",
   description: "Profile Page of Essentials By LA",
 };
 

@@ -173,10 +173,17 @@ export default function FirstBanner() {
                   />
                 </div>
               </div>
-              <div>
-                <h3 className="ms-auto font-bold text-4xl">
-                  {formatCurrency(data?.featuredProducts[0].price || 0)}
+              <div className="flex lg:flex-row flex-col items-start gap-5 lg:items-end">
+                <h3 className="font-bold text-3xl">
+                  {formatCurrency(
+                    data?.featuredProducts[0].combinations[0].salePrice || 0
+                  )}
                 </h3>
+                <del className="font-bold text-sm">
+                  {formatCurrency(
+                    data?.featuredProducts[0].combinations[0].price || 0
+                  )}
+                </del>
               </div>
             </div>
           </div>
@@ -269,10 +276,17 @@ export default function FirstBanner() {
                 <i className="bi bi-heart text-lg " />
               </button> */}
               </div>
-              <div>
-                <h3 className="ms-auto font-bold text-4xl">
-                  {formatCurrency(data?.newCollections[0].price || 0)}
+              <div className="flex lg:flex-row flex-col items-start gap-5 lg:items-end">
+                <h3 className="font-bold text-3xl">
+                  {formatCurrency(
+                    data?.newCollections[0].combinations[0].salePrice || 0
+                  )}
                 </h3>
+                <del className="font-bold text-sm">
+                  {formatCurrency(
+                    data?.newCollections[0].combinations[0].price || 0
+                  )}
+                </del>
               </div>
             </div>
           </div>

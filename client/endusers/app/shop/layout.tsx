@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Essentials By LA: Shop Page",
+  title: "Shop Page",
   description:
     "Explore the latest trends and timeless classics at Essentials By LA shop page. Browse our curated selection of clothing, shoes, bags, accessories, and more. Shop with confidence knowing you're getting high-quality fashion items from top brands. Elevate your wardrobe and express your unique style today.",
 };

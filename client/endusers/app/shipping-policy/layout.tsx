@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Wishlist",
-  description: "Wishlist Page of Essentials By LA",
+  title: "Shipping Policy",
+  description: "Shipping Policy Page of Essentials By LA",
 };
 
 export default function Layout({
@@ -13,16 +13,19 @@ export default function Layout({
   return (
     <>
       <head>
-        <link rel="canonical" href="https://www.essentialsbyla.com/wishlist" />
-        <meta property="og:title" content="Wishlist" />
+        <link
+          rel="canonical"
+          href="https://www.essentialsbyla.com/shipping-policy"
+        />
+        <meta property="og:title" content="Shipping Policy" />
         <meta
           property="og:url"
-          content="https://www.essentialsbyla.com/wishlist"
+          content="https://www.essentialsbyla.com/shipping-policy"
         />
 
         <meta
           property="og:site_name"
-          content="IN Wishlist Page Essentials By LA"
+          content="IN Shipping Policy Page Essentials By LA"
         />
 
         <meta property="og:type" content="website" />

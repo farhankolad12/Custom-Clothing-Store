@@ -27,6 +27,7 @@ import { notFound, useParams } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import HTMLParser from "html-react-parser";
+import Image from "next/image";
 
 export default function Page() {
   const [openLighthouse, setOpenLighthouse] = useState(false);
@@ -151,7 +152,28 @@ export default function Page() {
                 <del>{formatCurrency(selectedVariantPrice?.price || 0)}</del>
               </strong>
             </div>
-            <div className="my-5">Customer Reviews</div>
+            <div className="my-5 flex lg:flex-row md:flex-row flex-col gap-5 lg:items-center items-start">
+              <div>
+                {[...Array(5)].map((star, index) => {
+                  index += 1;
+                  return (
+                    <button
+                      disabled
+                      type="button"
+                      key={index}
+                      className={
+                        index <= product.totalRating
+                          ? "text-black btn p-0"
+                          : "text-gray-400 btn p-0"
+                      }
+                    >
+                      <span className="star text-3xl">&#9733;</span>
+                    </button>
+                  );
+                })}
+              </div>
+              ({product.reviews.length} customer review)
+            </div>
             <div className="my-5">
               <p>{product.shortDescription}</p>
             </div>
@@ -238,7 +260,63 @@ export default function Page() {
                 {HTMLParser(product.fullDescription)}
               </TabPanel>
               <TabPanel key="Review" value="Review">
-                Review
+                <div className="my-5">
+                  {product.reviews?.length ? (
+                    <>
+                      <strong className="uppercase font-bold">
+                        {product.reviews.length} review for {product.name}
+                      </strong>
+                      <div className="flex flex-col gap-4 my-5">
+                        {product.reviews.map((review: any) => {
+                          return (
+                            <div className="flex gap-10">
+                              <Image
+                                unoptimized
+                                src="/user-profile.png"
+                                alt="User Profile"
+                                width={0}
+                                height={0}
+                                className="lg:w-[100px] w-[50px] lg:h-[100px] h-[50px]"
+                              />
+                              <div className="flex flex-col gap-4">
+                                <div>
+                                  {[...Array(5)].map((star, index) => {
+                                    index += 1;
+                                    return (
+                                      <button
+                                        disabled
+                                        type="button"
+                                        key={index}
+                                        className={
+                                          index <= review.rating
+                                            ? "text-black btn p-0"
+                                            : "text-gray-400 btn p-0"
+                                        }
+                                      >
+                                        <span className="star text-2xl">
+                                          &#9733;
+                                        </span>
+                                      </button>
+                                    );
+                                  })}
+                                </div>
+                                <div className="flex gap-3">
+                                  <strong>
+                                    {review.username} -{" "}
+                                    {new Date(review.createdAt).toDateString()}
+                                  </strong>
+                                </div>
+                                <p>{review.message}</p>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </>
+                  ) : (
+                    <strong>There are no reviews yet.</strong>
+                  )}
+                </div>
               </TabPanel>
             </TabsBody>
           </Tabs>
@@ -246,7 +324,7 @@ export default function Page() {
         <div className="my-20">
           <h1 className="uppercase font-bold text-5xl">related products</h1>
           <div className="mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-grey">
-            {data?.featuredProducts.map((product: ProductType) => {
+            {product?.relatedProducts?.map((product: ProductType) => {
               return (
                 <ProductList
                   span={undefined}

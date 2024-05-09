@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Essentials By LA: Refund Policy",
+  title: "Refund Policy",
   description: "Refund Policy Page of Essentials By LA",
 };
 

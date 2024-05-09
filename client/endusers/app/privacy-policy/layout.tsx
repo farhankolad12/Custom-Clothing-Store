@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Essentials By LA: Privacy Policy",
+  title: "Privacy Policy",
   description: "Privacy Policy Page of Essentials By LA",
 };
 
