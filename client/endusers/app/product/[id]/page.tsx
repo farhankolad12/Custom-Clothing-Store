@@ -269,7 +269,7 @@ export default function Page() {
                       <div className="flex flex-col gap-4 my-5">
                         {product.reviews.map((review: any) => {
                           return (
-                            <div className="flex gap-10">
+                            <div key={review._id} className="flex gap-10">
                               <Image
                                 unoptimized
                                 src="/user-profile.png"
