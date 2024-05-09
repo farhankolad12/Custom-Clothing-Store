@@ -17,11 +17,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   const product = productRes.status === 200 && (await productRes?.json());
 
+  console.log(product);
+
   return {
     title: {
-      absolute: product.name,
+      absolute: product?.name,
     },
-    description: product.shortDescription,
+    description: product?.shortDescription,
     openGraph: {
       images: product?.images?.map((img: any) => img.link),
     },
@@ -34,9 +36,11 @@ export async function generateStaticParams() {
     `${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/all-products`
   );
 
-  const products = await productRes.json();
+  const products = productRes.status === 200 && (await productRes.json());
 
-  return products.map((product: ProductType) => {
+  console.log(products);
+
+  return products?.map((product: ProductType) => {
     return product._id;
   });
 }
