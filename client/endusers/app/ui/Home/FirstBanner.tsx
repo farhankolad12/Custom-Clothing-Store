@@ -152,7 +152,7 @@ export default function FirstBanner() {
             <div className="flex-col justify-between animate__animated animate__slideInUp absolute top-0 bottom-0 left-0 right-0 lg:bottom-20 lg:w-1/2 w-full lg:h-1/2 h-full lg:right-10 lg:top-auto lg:left-auto p-5 hidden group-hover:flex z-49 bg-white">
               <div className="flex justify-between items-start">
                 <div className="flex flex-col gap-2">
-                  <span className="mb-1 text-xs">TeeVerse</span>
+                  <span className="mb-1 text-xs">Essentials By LA</span>
                   <Link
                     href={`/product/${data?.featuredProducts[0]._id}`}
                     className="font-bold"
@@ -251,7 +251,7 @@ export default function FirstBanner() {
             <div className="flex-col justify-between animate__animated animate__slideInUp absolute top-0 bottom-0 left-0 right-0 lg:bottom-20 lg:w-1/2 w-full lg:h-1/2 h-full lg:right-10 lg:top-auto lg:left-auto bg-white p-5 hidden group-hover:flex z-49">
               <div className="flex justify-between items-start">
                 <div className="flex flex-col gap-2">
-                  <span className="mb-1 text-xs">TeeVerse</span>
+                  <span className="mb-1 text-xs">Essentials By LA</span>
                   <Link
                     href={`/product/${data?.newCollections[0]._id}`}
                     className="font-bold"

@@ -14,7 +14,7 @@ export default function FeatureProducts() {
   return (
     <section className="my-20 lg:px-10 px-5">
       <div className="text-center mb-16">
-        <span className="text-xs">TEEVERSE COLLECTION</span>
+        <span className="text-xs">Essentials By LA COLLECTION</span>
         <h3 className="lg:text-6xl text-5xl font-bold">FEATURED PRODUCTS</h3>
       </div>
       <div className="">
