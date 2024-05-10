@@ -56,7 +56,7 @@ export default function Footer() {
             <div className="flex justify-between lg:justify-start w-full items-center gap-10 ">
               <i className="bi bi-box2-fill text-6xl" />
               <strong className="uppercase">
-                free shipping on first order
+                free shipping on order above 1500₹
               </strong>
             </div>
             <div className="flex justify-between lg:justify-start w-full items-center gap-10 ">
@@ -86,8 +86,14 @@ export default function Footer() {
             >
               terms of sale
             </Link>
-            <Link href="/contact" className="font-bold uppercase text-xs">
-              contact us
+            <Link href="/refund-policy" className="font-bold uppercase text-xs">
+              Refund Policy
+            </Link>
+            <Link
+              href="/shipping-policy"
+              className="font-bold uppercase text-xs"
+            >
+              Shipping Policy
             </Link>
           </div>
           <div className="flex flex-col gap-5">
@@ -106,6 +112,12 @@ export default function Footer() {
             >
               sign up for deals
             </button>
+            <Link
+              className="p-0 font-bold uppercase text-xs text-left"
+              href="/contact"
+            >
+              customized products
+            </Link>
           </div>
           <div className="flex flex-col gap-5">
             <span className=" uppercase font-bold">account</span>
@@ -133,9 +145,20 @@ export default function Footer() {
             >
               account
             </button>
+            <button
+              className="text-left font-bold uppercase text-xs"
+              onClick={() =>
+                currentUser ? router.push("/profile/orders") : handleAuthOpen()
+              }
+            >
+              orders
+            </button>
           </div>
           <div className="flex flex-col gap-5">
             <span className=" uppercase font-bold">social</span>
+            <Link href="/contact" className="font-bold uppercase text-xs">
+              contact us
+            </Link>
             <a
               target="_blank"
               href="https://www.instagram.com/essentials.by.la"
@@ -158,9 +181,7 @@ export default function Footer() {
         <div className="flex flex-col gap-10 lg:flex-row justify-between py-20">
           <div className="flex flex-col gap-3">
             <strong className="uppercase">newsletter</strong>
-            <p>
-              Dunker has all of the best products from all of the top brands.
-            </p>
+            <p>Essentials By LA has all of the best products.</p>
             <form onSubmit={handleSubmit} className="w-full relative">
               <input
                 ref={emailRef}
@@ -203,7 +224,7 @@ export default function Footer() {
         </div>
       </div>
       <div
-        className="py-10 ps-20"
+        className="py-10 lg:ps-20 ps-0 lg:text-left text-center"
         style={{
           backgroundImage: "url('/video-img-1.jpg')",
           backgroundPosition: "center",
@@ -211,7 +232,7 @@ export default function Footer() {
           backgroundSize: "100%",
         }}
       >
-        <strong className="uppercase text-grey-300">
+        <strong className="uppercase text-white">
           © 2024 Essentials By LA, ALL RIGHTS RESERVED
         </strong>
       </div>

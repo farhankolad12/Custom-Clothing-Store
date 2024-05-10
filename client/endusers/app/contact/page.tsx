@@ -48,7 +48,7 @@ export default function Page() {
         <div className="relative">
           <Image
             unoptimized
-            src="/contact1.jpg"
+            src="/contact1.jpeg"
             className="h-96 lg:h-screen"
             width={0}
             height={0}
@@ -56,7 +56,7 @@ export default function Page() {
             alt="Contact"
             title="Contact"
           />
-          <h1 className="text-white absolute top-0 bottom-0 end-0 start-0 flex items-center justify-center lg:text-6xl text-4xl uppercase font-bold">
+          <h1 className="text-white mb-10 absolute top-0 bottom-0 end-0 start-0 flex items-center justify-center lg:text-6xl text-4xl uppercase font-bold">
             Contact Us
           </h1>
         </div>

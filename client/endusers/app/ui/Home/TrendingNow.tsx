@@ -16,12 +16,12 @@ export default function TrendingNow() {
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border border-grey">
         {homePageContentLoading
           ? [...new Array(4)].map(() => {
-              return <ProductSkeleton key={Math.random()} />;
+              return <ProductSkeleton key={Math.random() * 999999} />;
             })
           : data?.newCollections.map((product: any, i: number) => {
               return (
                 <ProductList
-                  key={product.id + i}
+                  key={product._id + i}
                   span={
                     i + 1 === 3 || i + 1 === 4
                       ? "lg:col-span-2 md:col-span-2 sm:col-span-1 bg-gray-100"

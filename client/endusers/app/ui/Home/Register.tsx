@@ -1,6 +1,7 @@
 import { useAuth } from "@/app/context/AuthProvider";
 import usePostReq from "@/app/hooks/usePostReq";
 import { Spinner } from "@material-tailwind/react";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { FormEvent, useRef, useState } from "react";
 import { toast } from "react-toastify";
@@ -160,6 +161,24 @@ export default function Register() {
           this website, to manage access to your account, and for other purposes
           described in our privacy policy.
         </span>
+        <div className="flex gap-3 my-2">
+          <input type="checkbox" id="terms-conditions" required />
+          <label htmlFor="terms-conditions" className="text-black">
+            By clicking here you agree to our{" "}
+            <Link href="/terms-conditions" className="underline">
+              Terms & Conditions
+            </Link>
+          </label>
+        </div>
+        <div className="flex gap-3 mb-2">
+          <input type="checkbox" id="privacy" required />
+          <label htmlFor="privacy" className="text-black">
+            By clicking here you agree to our{" "}
+            <Link href="/privacy-policy" className="underline">
+              Privacy Policy
+            </Link>
+          </label>
+        </div>
         <button
           disabled={loading}
           type="submit"
