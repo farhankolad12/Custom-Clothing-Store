@@ -56,7 +56,7 @@ export default function Footer() {
             <div className="flex justify-between lg:justify-start w-full items-center gap-10 ">
               <i className="bi bi-box2-fill text-6xl" />
               <strong className="uppercase">
-                free shipping on order above 1500₹
+                free shipping on order above 2000
               </strong>
             </div>
             <div className="flex justify-between lg:justify-start w-full items-center gap-10 ">
@@ -173,8 +173,12 @@ export default function Footer() {
             >
               <i className="bi bi-facebook" /> facebook
             </a>
-            <a target="_blank" href="/" className="font-bold uppercase text-xs">
-              <i className="bi bi-threads" /> Threads
+            <a
+              target="_blank"
+              href="https://wa.me/8689913856"
+              className="font-bold uppercase text-xs"
+            >
+              <i className="bi bi-whatsapp" /> WhatsApp
             </a>
           </div>
         </div>
