@@ -56,7 +56,7 @@ export default function Footer() {
             <div className="flex justify-between lg:justify-start w-full items-center gap-10 ">
               <i className="bi bi-box2-fill text-6xl" />
               <strong className="uppercase">
-                free shipping on order above 2000
+                free shipping on order above 2000₹
               </strong>
             </div>
             <div className="flex justify-between lg:justify-start w-full items-center gap-10 ">
