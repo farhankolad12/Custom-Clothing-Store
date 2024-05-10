@@ -39,10 +39,12 @@ export default function CartCanvasRow({ product }: { product: ProductType }) {
           : (prev.subTotalPrice || 0) +
             product.selectedCombination.salePrice * product.quantity;
 
+        console.log(subTotalPrice);
+
         return {
           ...prev,
           // shippingPrice: 200,
-          discountedPrice: prev.coupon.code
+          discountedPrice: prev.coupon?.code
             ? prev.coupon.minimumCartValue > subTotalPrice
               ? 0
               : prev.discountedPrice

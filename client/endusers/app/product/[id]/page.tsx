@@ -33,7 +33,7 @@ export default function Page() {
   const [openLighthouse, setOpenLighthouse] = useState(false);
   const [selectedVariants, setSelectedVariants] = useState<any>([]);
   const [selectedVariantPrice, setSelectedVariantPrice] = useState<any>();
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState(1);
 
   const { id } = useParams();
   const { data, setCartItems, currentUser } = useAuth();

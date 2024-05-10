@@ -38,28 +38,31 @@ export default function FirstDynamicBanner() {
           title={data?.homePageContent?.firstBanner?.title}
         />
         <div
-          // style={{ width: "400px" }}
-          className="absolute top-0 bottom-0 lg:right-0 lg:left-0 right-2 left-2 flex flex-col gap-8 justify-center items-center "
+        // style={{ width: "400px" }}
+        // className="relative"
         >
-          <h1
-            className="uppercase lg:text-7xl text-5xl font-bold"
-            style={{ color: " #5C4033" }}
-          >
-            {data?.homePageContent?.firstBanner?.title}
-          </h1>
-          <span className="" style={{ color: " #5C4033" }}>
-            {data?.homePageContent?.firstBanner?.description}
-          </span>
-          <button
-            onClick={() =>
-              router.push(data?.homePageContent?.firstBanner?.buttonLink)
-            }
-            className="text-black hover:text-white border-2 border-black hover:bg-black transition px-16 py-5 font-bold"
-            type="button"
-            style={{ color: " #5C4033" }}
-          >
-            {data?.homePageContent?.firstBanner?.buttonName}
-          </button>
+          <div className="absolute lg:top-0 lg:bottom-0 lg:right-0 lg:left-0 bottom-0 left-0 right-0 top-auto flex justify-center items-center gap-5 flex-col">
+            <h1
+              className="uppercase bg-[#e9e2d2] lg:text-7xl text-5xl font-bold"
+              style={{ color: "#5C4033" }}
+            >
+              {data?.homePageContent?.firstBanner?.title}
+            </h1>
+            <span className="bg-[#e9e2d2] text-[#5C4033]" style={{ color: "" }}>
+              {data?.homePageContent?.firstBanner?.description}
+            </span>
+          </div>
+          <div className="absolute lg:top-0 lg:bottom-[-16rem] lg:right-0 lg:left-0 top-0 left-0 right-0 bottom-auto flex justify-center items-center">
+            <button
+              onClick={() =>
+                router.push(data?.homePageContent?.firstBanner?.buttonLink)
+              }
+              className="text-[#5C4033] bg-[#e9e2d2] transition px-16 py-5 font-bold"
+              type="button"
+            >
+              {data?.homePageContent?.firstBanner?.buttonName}
+            </button>
+          </div>
         </div>
       </div>
     )

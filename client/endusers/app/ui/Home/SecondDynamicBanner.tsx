@@ -38,28 +38,34 @@ export default function SecondDynamicBanner() {
           title={data?.homePageContent?.secondBanner?.title}
         />
         <div
-          //   style={{ width: "400px" }}
-          className="absolute top-0 w-full lg:w-96 bottom-0 right-0 lg:right-10 lg:left-auto left-0 lg:px-0 px-2 flex flex-col gap-8 justify-center"
+        // style={{ width: "400px" }}
+        // className="relative"
         >
-          <h1
-            style={{ color: " #5C4033" }}
-            className="uppercase text-5xl font-bold"
-          >
-            {data?.homePageContent?.secondBanner?.title}
-          </h1>
-          <span style={{ color: " #5C4033" }}>
-            {data?.homePageContent?.secondBanner?.description}
-          </span>
-          <button
-            onClick={() =>
-              router.push(data?.homePageContent?.secondBanner?.buttonLink)
-            }
-            className="text-black hover:text-white border-2 border-black hover:bg-black transition px-5 py-5 flex justify-center font-bold"
-            type="button"
-            style={{ color: " #5C4033" }}
-          >
-            {data?.homePageContent?.secondBanner?.buttonName}
-          </button>
+          <div className="absolute lg:top-0 lg:bottom-0 lg:right-0 lg:left-0 bottom-0 left-0 right-0 top-auto flex justify-center items-center gap-5 flex-col">
+            <h1
+              className="uppercase bg-[#e9e2d2] lg:text-7xl text-5xl font-bold text-center"
+              style={{ color: "#5C4033" }}
+            >
+              {data?.homePageContent?.secondBanner?.title}
+            </h1>
+            <span
+              className="bg-[#e9e2d2] text-[#5C4033] text-center"
+              style={{ color: "" }}
+            >
+              {data?.homePageContent?.secondBanner?.description}
+            </span>
+          </div>
+          <div className="absolute lg:top-0 lg:bottom-[-16rem] lg:right-0 lg:left-0 top-0 left-0 right-0 bottom-auto flex justify-center items-center">
+            <button
+              onClick={() =>
+                router.push(data?.homePageContent?.secondBanner?.buttonLink)
+              }
+              className="text-[#5C4033] bg-[#e9e2d2] transition px-16 py-5 font-bold"
+              type="button"
+            >
+              {data?.homePageContent?.secondBanner?.buttonName}
+            </button>
+          </div>
         </div>
       </div>
     )
