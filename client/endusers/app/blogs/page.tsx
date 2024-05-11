@@ -102,7 +102,7 @@ export default function Page() {
             <div className="flex flex-col gap-4 mt-5">
               {blogsData?.relatedPosts?.map((blog: any) => {
                 return (
-                  <div className="flex gap-5 items-center">
+                  <div key={blog._id} className="flex gap-5 items-center">
                     <Image
                       src={blog.image.link}
                       alt={blog.title}
@@ -137,7 +137,7 @@ export default function Page() {
                 <div className="flex flex-col gap-20 w-full">
                   {blogsData.blogs.map((blog: any) => {
                     return (
-                      <div className="w-full">
+                      <div key={blog._id} className="w-full">
                         <Image
                           unoptimized
                           src={blog.image.link}
