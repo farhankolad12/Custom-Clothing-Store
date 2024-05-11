@@ -42,7 +42,7 @@ export default function SecondDynamicBanner() {
         // className="relative"
         >
           <div className="absolute lg:top-0 lg:bottom-0 lg:right-0 lg:left-0 bottom-0 left-0 right-0 top-auto flex justify-center items-center gap-5 flex-col">
-            <div className=" text-[#5C4033] bg-[#e9e2d2] flex flex-col gap-2 text-center">
+            <div className=" text-[#5C4033] bg-[#eddbb2] flex flex-col gap-2 text-center">
               <h1 className="uppercase lg:text-7xl text-5xl font-bold">
                 {data?.homePageContent?.secondBanner?.title}
               </h1>

@@ -42,7 +42,7 @@ export default function FirstDynamicBanner() {
         // className="relative"
         >
           <div className="absolute lg:top-0 lg:bottom-0 lg:right-0 lg:left-0 bottom-0 left-0 right-0 top-auto flex justify-center items-center gap-5 flex-col">
-            <div className="bg-[#e9e2d2] text-center flex flex-col gap-2">
+            <div className="bg-[#eddbb2] text-center flex flex-col gap-2">
               <h1
                 className="uppercase lg:text-7xl text-5xl font-bold"
                 style={{ color: "#5C4033" }}
