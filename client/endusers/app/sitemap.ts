@@ -1,14 +1,23 @@
 import { ProductType } from "./definations";
 
-const EXTERNAL_DATA_URL =
+const EXTERNAL_DATA_URL1 =
   process.env.NEXT_PUBLIC_BACKEND_HOSTNAME + "/products-sitemap";
 
+const EXTERNAL_DATA_URL2 =
+  process.env.NEXT_PUBLIC_BACKEND_HOSTNAME + "/blogs-sitemap";
+
 export default async function sitemap() {
-  const request = await fetch(EXTERNAL_DATA_URL, {
+  const request1 = await fetch(EXTERNAL_DATA_URL1, {
     credentials: "include",
     method: "GET",
   });
-  const products = await request.json();
+  const products = await request1.json();
+
+  const request2 = await fetch(EXTERNAL_DATA_URL2, {
+    credentials: "include",
+    method: "GET",
+  });
+  const blogs = await request2.json();
 
   const staticRoutes = [
     {
@@ -48,6 +57,13 @@ export default async function sitemap() {
     ...products.map((product: ProductType) => {
       return {
         url: `https://www.essentialsbyla.com/product/${product._id}`,
+        changeFrequency: "monthly",
+        priority: 1.0,
+      };
+    }),
+    ...blogs.map((blog: any) => {
+      return {
+        url: `https://www.essentialsbyla.com/blog/${blog._id}`,
         changeFrequency: "monthly",
         priority: 1.0,
       };
