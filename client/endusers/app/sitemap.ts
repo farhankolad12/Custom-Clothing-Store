@@ -50,6 +50,11 @@ export default async function sitemap() {
       changeFrequency: "yearly",
       priority: 0.5,
     },
+    {
+      url: "https://www.essentialsbyla.com/blogs",
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
   ];
 
   return [

@@ -26,6 +26,7 @@ export default async function robots(): Promise<MetadataRoute.Robots> {
     { userAgent: "*", allow: "/about" },
     { userAgent: "*", allow: "/contact" },
     { userAgent: "*", allow: "/shop" },
+    { userAgent: "*", allow: "/blogs" },
     { userAgent: "*", disallow: "/cart" },
     { userAgent: "*", disallow: "/profile" },
     { userAgent: "*", disallow: "/wishlist" },
