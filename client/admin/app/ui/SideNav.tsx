@@ -26,6 +26,7 @@ export default function SideNav({ setOpenNav }: { setOpenNav: Function }) {
             <CustomLink icon="grid" text="Dashboard" to="/" />
           </div>
           <CustomLink icon="shop" text="Products" to="/products" />
+          <CustomLink icon="file-post" text="Blogs" to="/blogs" />
           <CustomLink icon="list-ul" text="Categories" to="/categories" />
           <CustomLink
             icon="clipboard2-data"

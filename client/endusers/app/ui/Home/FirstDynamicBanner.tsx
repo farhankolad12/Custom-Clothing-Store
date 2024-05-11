@@ -42,17 +42,17 @@ export default function FirstDynamicBanner() {
         // className="relative"
         >
           <div className="absolute lg:top-0 lg:bottom-0 lg:right-0 lg:left-0 bottom-0 left-0 right-0 top-auto flex justify-center items-center gap-5 flex-col">
-            <h1
-              className="uppercase bg-[#e9e2d2] lg:text-7xl text-5xl font-bold"
-              style={{ color: "#5C4033" }}
-            >
-              {data?.homePageContent?.firstBanner?.title}
-            </h1>
-            <span className="bg-[#e9e2d2] text-[#5C4033]" style={{ color: "" }}>
-              {data?.homePageContent?.firstBanner?.description}
-            </span>
+            <div className="bg-[#e9e2d2] text-center flex flex-col gap-2">
+              <h1
+                className="uppercase lg:text-7xl text-5xl font-bold"
+                style={{ color: "#5C4033" }}
+              >
+                {data?.homePageContent?.firstBanner?.title}
+              </h1>
+              <span>{data?.homePageContent?.firstBanner?.description}</span>
+            </div>
           </div>
-          <div className="absolute lg:top-0 lg:bottom-[-16rem] lg:right-0 lg:left-0 top-0 left-0 right-0 bottom-auto flex justify-center items-center">
+          <div className="absolute lg:top-0 lg:bottom-[-16rem] lg:right-0 lg:left-0 top-0 left-auto right-0 bottom-auto flex justify-center items-center">
             <button
               onClick={() =>
                 router.push(data?.homePageContent?.firstBanner?.buttonLink)

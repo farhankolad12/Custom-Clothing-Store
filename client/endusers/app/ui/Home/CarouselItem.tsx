@@ -34,24 +34,32 @@ export default function CarouselItem({
         }`}
       >
         <div className="w-full flex flex-col lg:w-1/2 lg:text-start text-center">
-          <h1
-            style={{
-              color: " #5C4033",
-              backgroundColor: "#e9e2d2",
-            }}
-            className="lg:text-7xl font-bold text-4xl uppercase"
-          >
-            {slider.title}
-          </h1>
-          <span
-            style={{ color: " #5C4033", backgroundColor: "#e9e2d2" }}
-            className="my-4"
-          >
-            {slider.description}
-          </span>
+          <div className="text-[#5C4033] bg-[#e9e2d2] flex flex-col gap-2">
+            <h1
+              style={
+                {
+                  // color: " #5C4033",
+                  // backgroundColor: "#e9e2d2",
+                }
+              }
+              className="lg:text-7xl font-bold text-4xl uppercase"
+            >
+              {slider.title}
+            </h1>
+            <span
+              style={
+                {
+                  /* color: " #5C4033", backgroundColor: "#e9e2d2"  */
+                }
+              }
+              className="my-4"
+            >
+              {slider.description}
+            </span>
+          </div>
           <button
             onClick={() => router.push(slider.buttonLink)}
-            className="lg:text-black-900 lg:hover:text-white lg:hover:bg-black bg-[#e9e2d2] lg:bg-transparent lg:border-2 lg: border-black border-0 text-[#5C4033] focus:ring-4 focus:outline-none focus:ring-black-300 font-medium px-16 py-5 text-lg text-center me-auto ms-auto lg:ms-0 lg:me-auto transition"
+            className="lg:text-black-900 lg:hover:text-white lg:hover:bg-black bg-[#e9e2d2] lg:bg-transparent lg:border-2 lg: border-black border-0 text-[#5C4033] focus:ring-4 focus:outline-none focus:ring-black-300 font-medium px-16 py-5 text-lg text-center me-auto ms-auto lg:ms-0 lg:me-auto transition mt-5"
             style={{ color: "" }}
             type="button"
           >

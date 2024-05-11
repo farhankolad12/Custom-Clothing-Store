@@ -59,7 +59,7 @@ export default function Header() {
               <CustomLink name="Shop" to="/shop" />
               <CustomLink name="About us" to="/about" />
               <CustomLink name="Contact us" to="/contact" />
-              <CustomLink name="Blog" to="/blog" />
+              <CustomLink name="Blogs" to="/blogs" />
             </ul>
             <ul className="flex justify-center items-center gap-4 lg:gap-4">
               <li>
@@ -130,7 +130,7 @@ export default function Header() {
                 <CustomLink name="Shop" to="/shop" />
                 <CustomLink name="About us" to="/about" />
                 <CustomLink name="Contact us" to="/contact" />
-                <CustomLink name="Blog" to="/blog" />
+                <CustomLink name="Blogs" to="/blogs" />
               </ul>
             </section>
           </Collapse>
