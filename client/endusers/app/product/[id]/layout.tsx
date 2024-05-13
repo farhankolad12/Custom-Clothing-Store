@@ -21,7 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     title: {
-      absolute: product?.name,
+      absolute: product?.name || "Product Not Found",
     },
     description: product?.shortDescription,
     openGraph: {
@@ -31,7 +31,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: product?.shortDescription,
       url: `https://www.essentialsbyla.com/product/${product?._id}`,
     },
-    keywords: [...product?.tags.map((p: any) => p.tag), product?.category],
+    keywords: [
+      ...(product?.tags?.map((p: any) => p.tag) || ""),
+      product?.category,
+    ],
   };
 }
 

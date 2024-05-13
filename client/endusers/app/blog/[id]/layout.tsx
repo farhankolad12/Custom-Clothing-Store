@@ -18,18 +18,22 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const blog = blogRes.status === 200 && (await blogRes?.json());
 
   return {
-    title: blog?.title,
+    title: blog?.title || "Blog Not Found",
     description: blog?.shortDescription,
     openGraph: {
       type: "website",
       title: blog?.title,
       images: blog?.image?.link,
-      url: "https://essentialsbyla.com/blog/" + blog._id,
+      url: "https://essentialsbyla.com/blog/" + blog?._id,
+      description: blog?.shortDescription,
     },
     twitter: {
       card: "summary_large_image",
     },
-    keywords: [...blog?.tags.map((b: any) => b.tag), "Essentials By La Blogs"],
+    keywords: [
+      ...(blog?.tags?.map((b: any) => b.tag) || ""),
+      "Essentials By La Blogs",
+    ],
   };
 }
 
