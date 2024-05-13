@@ -46,7 +46,7 @@ export default function SecondDynamicBanner() {
               style={{ backgroundColor: "rgba(237,219,178,0.7)" }}
               className=" text-[#5C4033] flex flex-col gap-2 text-center"
             >
-              <h1 className="uppercase lg:text-7xl text-5xl font-bold">
+              <h1 className="uppercase lg:text-7xl text-4xl font-bold">
                 {data?.homePageContent?.secondBanner?.title}
               </h1>
               <span className="font-bold">

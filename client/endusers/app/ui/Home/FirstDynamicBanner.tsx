@@ -46,7 +46,7 @@ export default function FirstDynamicBanner() {
               style={{ backgroundColor: "rgba(237,219,178,0.7)" }}
               className="text-center flex flex-col gap-2"
             >
-              <h1 className="uppercase lg:text-7xl text-5xl font-bold text-[#5C4033]">
+              <h1 className="uppercase lg:text-7xl text-4xl font-bold text-[#5C4033]">
                 {data?.homePageContent?.firstBanner?.title}
               </h1>
               <span className="font-bold text-[#5C4033]">
