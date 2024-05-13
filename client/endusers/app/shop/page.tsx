@@ -135,7 +135,7 @@ export default function Page() {
             <div className="lg:w-3/5 w-full">
               <MultiRangeSlider
                 min={0}
-                max={20000}
+                max={5000}
                 onChange={({ min, max }: { min: number; max: number }) => {
                   setMinPrice(min);
                   setMaxPrice(max);
