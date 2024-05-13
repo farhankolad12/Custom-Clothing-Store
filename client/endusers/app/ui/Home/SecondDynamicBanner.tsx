@@ -59,6 +59,7 @@ export default function SecondDynamicBanner() {
               onClick={() =>
                 router.push(data?.homePageContent?.secondBanner?.buttonLink)
               }
+              style={{ backgroundColor: "rgba(237,219,178,0.9)" }}
               className="text-[#5C4033] bg-[#e9e2d2] transition px-16 py-5 font-bold"
               type="button"
             >

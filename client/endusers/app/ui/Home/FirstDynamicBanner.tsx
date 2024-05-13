@@ -56,6 +56,7 @@ export default function FirstDynamicBanner() {
           </div>
           <div className="absolute lg:top-0 lg:bottom-[-16rem] lg:right-0 lg:left-0 top-0 left-auto right-0 bottom-auto flex justify-center items-center">
             <button
+              style={{ backgroundColor: "rgba(237,219,178,0.9)" }}
               onClick={() =>
                 router.push(data?.homePageContent?.firstBanner?.buttonLink)
               }
