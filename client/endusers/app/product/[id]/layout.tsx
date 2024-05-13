@@ -25,8 +25,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     description: product?.shortDescription,
     openGraph: {
-      images: product?.images?.map((img: any) => img.link),
+      type: "website",
+      title: product?.title,
+      images: product?.images?.map((img: any) => ({ url: img.link })),
+      description: product?.shortDescription,
+      url: `https://www.essentialsbyla.com/product/${product?._id}`,
     },
+    keywords: [...product?.tags.map((p: any) => p.tag), product?.category],
   };
 }
 

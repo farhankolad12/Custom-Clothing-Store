@@ -21,8 +21,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title: blog?.title,
     description: blog?.shortDescription,
     openGraph: {
+      type: "website",
+      title: blog?.title,
       images: blog?.image?.link,
+      url: "https://essentialsbyla.com/blog/" + blog._id,
     },
+    twitter: {
+      card: "summary_large_image",
+    },
+    keywords: [...blog?.tags.map((b: any) => b.tag), "Essentials By La Blogs"],
   };
 }
 
