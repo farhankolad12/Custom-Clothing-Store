@@ -24,7 +24,7 @@ export default function Page() {
     Number(searchParams.get("min")) || 0
   );
   const [maxPrice, setMaxPrice] = useState(
-    Number(searchParams.get("max")) || 20000
+    Number(searchParams.get("max")) || 5000
   );
 
   const { data, error, loading } = useGetReq("/shop-page", {});
