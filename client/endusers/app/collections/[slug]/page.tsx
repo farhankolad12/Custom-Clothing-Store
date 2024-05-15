@@ -143,11 +143,11 @@ export default function Page() {
             </Select>
             {filters?.attributes?.map((attr: any) => {
               return (
-                <Select placeholder="" label={attr.title}>
+                <Select key={attr._id} placeholder="" label={attr.title}>
                   <div className="text-black flex flex-col gap-4">
                     {attr.options.map((val: any) => {
                       return (
-                        <div className="flex items-center gap-4">
+                        <div key={val.id} className="flex items-center gap-4">
                           <input
                             checked={params
                               .get("variants")
@@ -217,7 +217,7 @@ export default function Page() {
                 ?.split(",")
                 .map((variant: any) => {
                   return (
-                    <span className="rounded-full p-2 border">
+                    <span key={variant} className="rounded-full p-2 border">
                       {variant}
                       <button
                         type="button"

@@ -511,7 +511,9 @@ export default function HomePageSetting({ data }: { data: any }) {
                   </option>
                   {data?.categories.map((category: any) => {
                     return (
-                      <option value={category.name}>{category.name}</option>
+                      <option key={category._id} value={category.name}>
+                        {category.name}
+                      </option>
                     );
                   })}
                 </select>
@@ -617,7 +619,9 @@ export default function HomePageSetting({ data }: { data: any }) {
                   </option>
                   {data?.categories.map((category: any) => {
                     return (
-                      <option value={category.name}>{category.name}</option>
+                      <option key={category._id} value={category.name}>
+                        {category.name}
+                      </option>
                     );
                   })}
                 </select>
@@ -723,7 +727,9 @@ export default function HomePageSetting({ data }: { data: any }) {
                   </option>
                   {data?.categories.map((category: any) => {
                     return (
-                      <option value={category.name}>{category.name}</option>
+                      <option key={category._id} value={category.name}>
+                        {category.name}
+                      </option>
                     );
                   })}
                 </select>

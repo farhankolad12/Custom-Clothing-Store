@@ -36,6 +36,7 @@ export default function CategoryDrawer({
             {data?.categories?.map((category: any) => {
               return (
                 <CustomLink
+                  key={category._id}
                   name={category.name}
                   to={`/collections/${category.name}`}
                 />

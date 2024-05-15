@@ -76,11 +76,14 @@ export default function FilterSortDrawer({
           </Select>
           {filters?.attributes?.map((attr: any) => {
             return (
-              <Select placeholder="" label={attr.title}>
+              <Select key={attr._id} placeholder="" label={attr.title}>
                 <div className="text-black flex flex-col gap-4">
                   {attr.options.map((val: any) => {
                     return (
-                      <div className="flex items-center gap-4">
+                      <div
+                        key={val.variant}
+                        className="flex items-center gap-4"
+                      >
                         <input
                           checked={params
                             .get("variants")

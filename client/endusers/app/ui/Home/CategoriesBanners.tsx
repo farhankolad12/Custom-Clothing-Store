@@ -18,6 +18,7 @@ export default function CategoriesBanners() {
           : data?.categories.map((category: any) => {
               return (
                 <Link
+                  key={category._id}
                   href={"/collections/" + category.name}
                   className="relative group flex flex-col gap-5 cursor-pointer"
                 >

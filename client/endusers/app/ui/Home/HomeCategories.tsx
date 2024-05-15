@@ -12,6 +12,7 @@ export default function HomeCategories() {
       {data?.categories?.map((category: any) => {
         return (
           <Link
+            key={category._id}
             href={`/collections/${category.name}`}
             className="flex flex-col items-center gap-5"
           >
