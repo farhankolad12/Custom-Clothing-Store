@@ -94,7 +94,9 @@ export default function Page() {
     <>
       <Header />
       <main className="flex flex-col gap-5 lg:px-52 px-5">
-        <h1 className="text-4xl mt-5 uppercase">{slug.replace("%20", " ")}</h1>
+        <h1 className="text-4xl mt-5 uppercase">
+          {slug.replaceAll("%20", " ")}
+        </h1>
         <div className="lg:hidden flex justify-between">
           <button
             onClick={() => setOpenDrawer(true)}
