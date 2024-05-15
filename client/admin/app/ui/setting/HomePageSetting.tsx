@@ -57,6 +57,11 @@ export default function HomePageSetting({ data }: { data: any }) {
       ? data?.homePageContent?.secondBanner
       : undefined
   );
+  const [thirdBanner, setThirdBanner] = useState<any>(
+    data?.homePageContent?.thirdBanner
+      ? data?.homePageContent?.thirdBanner
+      : undefined
+  );
 
   const { error, execute, loading } = usePostReq("/home-page");
   const headerTextRef = useRef<HTMLInputElement>(null!);
@@ -91,7 +96,11 @@ export default function HomePageSetting({ data }: { data: any }) {
         }
       }
 
-      if (changeType === "firstBanner" || changeType === "secondBanner") {
+      if (
+        changeType === "firstBanner" ||
+        changeType === "secondBanner" ||
+        changeType === "thirdBanner"
+      ) {
         if (!data.img.id) {
           formData.append(changeType + "Img", data.img);
         }
@@ -406,236 +415,330 @@ export default function HomePageSetting({ data }: { data: any }) {
             Save Changes
           </button>
         </section>
-        <section className="text-secondary fw-bold">
-          <div className="d-flex gap-2 pb-2 border-bottom border-white align-items-center">
-            <i className="bi bi-gear" />
-            <strong className="fw-bold">First Banner</strong>
-          </div>
-          <div className="mt-4 d-flex flex-column gap-4 px-5">
-            <div className="d-flex flex-column gap-3">
+        <div className="d-flex gap-2 text-secondary pb-2 border-bottom border-white align-items-center">
+          <i className="bi bi-gear" />
+          <strong className="fw-bold">First Category Section</strong>
+        </div>
+        <div className="px-5">
+          <section className="text-secondary fw-bold mt-4">
+            <div className="d-flex gap-2 pb-2 border-bottom border-white align-items-center">
+              <i className="bi bi-gear" />
+              <strong className="fw-bold">First Banner</strong>
+            </div>
+            <div className="mt-4 d-flex flex-column gap-4 px-5">
+              <div className="d-flex flex-column gap-3">
+                <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
+                  <label htmlFor="banner1-img" className="w-100">
+                    Image
+                  </label>
+                  <input
+                    onChange={(e) => {
+                      setFirstBanner((prev: any) => {
+                        return { ...prev, img: e.target.files?.[0] };
+                      });
+                    }}
+                    type="file"
+                    id="banner1-img"
+                    className="form-control bg-secondary text-white w-100"
+                  />
+                </div>
+                {firstBanner?.img && (
+                  <div className="d-flex justify-content-end">
+                    <Image
+                      src={
+                        firstBanner.img.id
+                          ? firstBanner.img.link
+                          : URL.createObjectURL(firstBanner.img)
+                      }
+                      width={100}
+                      height={100}
+                      alt="Banner"
+                    />
+                  </div>
+                )}
+              </div>
               <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
-                <label htmlFor="banner1-img" className="w-100">
-                  Image
+                <label htmlFor="banner1-title" className="w-100">
+                  Title
                 </label>
                 <input
                   onChange={(e) => {
                     setFirstBanner((prev: any) => {
-                      return { ...prev, img: e.target.files?.[0] };
+                      return { ...prev, title: e.target.value };
                     });
                   }}
-                  type="file"
-                  id="banner1-img"
+                  value={firstBanner?.title || ""}
+                  type="text"
+                  placeholder="Banner title"
+                  id="banner1-title"
                   className="form-control bg-secondary text-white w-100"
                 />
               </div>
-              {firstBanner?.img && (
-                <div className="d-flex justify-content-end">
-                  <Image
-                    src={
-                      firstBanner.img.id
-                        ? firstBanner.img.link
-                        : URL.createObjectURL(firstBanner.img)
-                    }
-                    width={100}
-                    height={100}
-                    alt="Banner"
+              <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
+                <label htmlFor="banner1-description" className="w-100">
+                  Description
+                </label>
+                <textarea
+                  onChange={(e) => {
+                    setFirstBanner((prev: any) => {
+                      return { ...prev, description: e.target.value };
+                    });
+                  }}
+                  value={firstBanner?.description || ""}
+                  cols={7}
+                  placeholder="Banner Description"
+                  id="banner1-description"
+                  className="form-control bg-secondary text-white w-100"
+                />
+              </div>
+              <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
+                <label htmlFor="banner1-btn-link" className="w-100">
+                  Category
+                </label>
+                <select
+                  defaultValue={firstBanner?.categoryName || "0"}
+                  onChange={(e) => {
+                    setFirstBanner((prev: any) => {
+                      return { ...prev, categoryName: e.target.value };
+                    });
+                  }}
+                  name=""
+                  className="form-select"
+                  id=""
+                >
+                  <option value="0" disabled selected>
+                    Please select a category
+                  </option>
+                  {data?.categories.map((category: any) => {
+                    return (
+                      <option value={category.name}>{category.name}</option>
+                    );
+                  })}
+                </select>
+              </div>
+            </div>
+            <button
+              disabled={loading}
+              type="button"
+              onClick={() => handleChanges("firstBanner", firstBanner)}
+              className="btn btn-success d-flex mt-4 px-5 py-2 ms-auto me-5"
+            >
+              Save Changes
+            </button>
+          </section>
+          <section className="text-secondary fw-bold">
+            <div className="d-flex gap-2 pb-2 border-bottom border-white align-items-center">
+              <i className="bi bi-gear" />
+              <strong className="fw-bold">Second Banner</strong>
+            </div>
+            <div className="mt-4 d-flex flex-column gap-4 px-5">
+              <div className="d-flex flex-column gap-3">
+                <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
+                  <label htmlFor="banner2-img" className="w-100">
+                    Image
+                  </label>
+                  <input
+                    onChange={(e) => {
+                      setSecondBanner((prev: any) => {
+                        return { ...prev, img: e.target.files?.[0] };
+                      });
+                    }}
+                    type="file"
+                    id="banner2-img"
+                    className="form-control bg-secondary text-white w-100"
                   />
                 </div>
-              )}
-            </div>
-            <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
-              <label htmlFor="banner1-title" className="w-100">
-                Title
-              </label>
-              <input
-                onChange={(e) => {
-                  setFirstBanner((prev: any) => {
-                    return { ...prev, title: e.target.value };
-                  });
-                }}
-                value={firstBanner?.title || ""}
-                type="text"
-                placeholder="Banner title"
-                id="banner1-title"
-                className="form-control bg-secondary text-white w-100"
-              />
-            </div>
-            <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
-              <label htmlFor="banner1-description" className="w-100">
-                Description
-              </label>
-              <textarea
-                onChange={(e) => {
-                  setFirstBanner((prev: any) => {
-                    return { ...prev, description: e.target.value };
-                  });
-                }}
-                value={firstBanner?.description || ""}
-                cols={7}
-                placeholder="Banner Description"
-                id="banner1-description"
-                className="form-control bg-secondary text-white w-100"
-              />
-            </div>
-            <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
-              <label htmlFor="banner1-btn-name" className="w-100">
-                Button Name
-              </label>
-              <input
-                type="text"
-                onChange={(e) => {
-                  setFirstBanner((prev: any) => {
-                    return { ...prev, buttonName: e.target.value };
-                  });
-                }}
-                value={firstBanner?.buttonName || ""}
-                placeholder="Banner button name"
-                id="banner1-btn-name"
-                className="form-control bg-secondary text-white w-100"
-              />
-            </div>
-            <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
-              <label htmlFor="banner1-btn-link" className="w-100">
-                Button Link
-              </label>
-              <input
-                onChange={(e) => {
-                  setFirstBanner((prev: any) => {
-                    return { ...prev, buttonLink: e.target.value };
-                  });
-                }}
-                type="text"
-                value={firstBanner?.buttonLink || ""}
-                placeholder="Banner button link"
-                id="banner1-btn-link"
-                className="form-control bg-secondary text-white w-100"
-              />
-            </div>
-          </div>
-          <button
-            disabled={loading}
-            type="button"
-            onClick={() => handleChanges("firstBanner", firstBanner)}
-            className="btn btn-success d-flex mt-4 px-5 py-2 ms-auto me-5"
-          >
-            Save Changes
-          </button>
-        </section>
-        <section className="text-secondary fw-bold">
-          <div className="d-flex gap-2 pb-2 border-bottom border-white align-items-center">
-            <i className="bi bi-gear" />
-            <strong className="fw-bold">Second Banner</strong>
-          </div>
-          <div className="mt-4 d-flex flex-column gap-4 px-5">
-            <div className="d-flex flex-column gap-3">
+                {secondBanner?.img && (
+                  <div className="d-flex justify-content-end">
+                    <Image
+                      src={
+                        secondBanner.img.id
+                          ? secondBanner.img.link
+                          : URL.createObjectURL(secondBanner.img)
+                      }
+                      width={100}
+                      height={100}
+                      alt="Banner"
+                    />
+                  </div>
+                )}
+              </div>
               <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
-                <label htmlFor="banner2-img" className="w-100">
-                  Image
+                <label htmlFor="banner1-title" className="w-100">
+                  Title
                 </label>
                 <input
                   onChange={(e) => {
                     setSecondBanner((prev: any) => {
-                      return { ...prev, img: e.target.files?.[0] };
+                      return { ...prev, title: e.target.value };
                     });
                   }}
-                  type="file"
-                  id="banner2-img"
+                  value={secondBanner?.title || ""}
+                  type="text"
+                  placeholder="Banner title"
+                  id="banner1-title"
                   className="form-control bg-secondary text-white w-100"
                 />
               </div>
-              {secondBanner?.img && (
-                <div className="d-flex justify-content-end">
-                  <Image
-                    src={
-                      secondBanner.img.id
-                        ? secondBanner.img.link
-                        : URL.createObjectURL(secondBanner.img)
-                    }
-                    width={100}
-                    height={100}
-                    alt="Banner"
+              <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
+                <label htmlFor="banner1-description" className="w-100">
+                  Description
+                </label>
+                <textarea
+                  onChange={(e) => {
+                    setSecondBanner((prev: any) => {
+                      return { ...prev, description: e.target.value };
+                    });
+                  }}
+                  value={secondBanner?.description || ""}
+                  cols={7}
+                  placeholder="Banner Description"
+                  id="banner1-description"
+                  className="form-control bg-secondary text-white w-100"
+                />
+              </div>
+              <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
+                <label htmlFor="banner1-btn-link" className="w-100">
+                  Category
+                </label>
+                <select
+                  defaultValue={secondBanner?.categoryName || "0"}
+                  onChange={(e) => {
+                    setSecondBanner((prev: any) => {
+                      return { ...prev, categoryName: e.target.value };
+                    });
+                  }}
+                  name=""
+                  className="form-select"
+                  id=""
+                >
+                  <option value="0" disabled selected>
+                    Please select a category
+                  </option>
+                  {data?.categories.map((category: any) => {
+                    return (
+                      <option value={category.name}>{category.name}</option>
+                    );
+                  })}
+                </select>
+              </div>
+            </div>
+            <button
+              disabled={loading}
+              type="button"
+              onClick={() => handleChanges("secondBanner", secondBanner)}
+              className="btn btn-success d-flex mt-4 px-5 py-2 ms-auto me-5"
+            >
+              Save Changes
+            </button>
+          </section>
+          <section className="text-secondary fw-bold">
+            <div className="d-flex gap-2 pb-2 border-bottom border-white align-items-center">
+              <i className="bi bi-gear" />
+              <strong className="fw-bold">Third Banner</strong>
+            </div>
+            <div className="mt-4 d-flex flex-column gap-4 px-5">
+              <div className="d-flex flex-column gap-3">
+                <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
+                  <label htmlFor="banner2-img" className="w-100">
+                    Image
+                  </label>
+                  <input
+                    onChange={(e) => {
+                      setThirdBanner((prev: any) => {
+                        return { ...prev, img: e.target.files?.[0] };
+                      });
+                    }}
+                    type="file"
+                    id="banner2-img"
+                    className="form-control bg-secondary text-white w-100"
                   />
                 </div>
-              )}
+                {thirdBanner?.img && (
+                  <div className="d-flex justify-content-end">
+                    <Image
+                      src={
+                        thirdBanner.img.id
+                          ? thirdBanner.img.link
+                          : URL.createObjectURL(thirdBanner.img)
+                      }
+                      width={100}
+                      height={100}
+                      alt="Banner"
+                    />
+                  </div>
+                )}
+              </div>
+              <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
+                <label htmlFor="banner1-title" className="w-100">
+                  Title
+                </label>
+                <input
+                  onChange={(e) => {
+                    setThirdBanner((prev: any) => {
+                      return { ...prev, title: e.target.value };
+                    });
+                  }}
+                  value={thirdBanner?.title || ""}
+                  type="text"
+                  placeholder="Banner title"
+                  id="banner1-title"
+                  className="form-control bg-secondary text-white w-100"
+                />
+              </div>
+              <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
+                <label htmlFor="banner1-description" className="w-100">
+                  Description
+                </label>
+                <textarea
+                  onChange={(e) => {
+                    setThirdBanner((prev: any) => {
+                      return { ...prev, description: e.target.value };
+                    });
+                  }}
+                  value={thirdBanner?.description || ""}
+                  cols={7}
+                  placeholder="Banner Description"
+                  id="banner1-description"
+                  className="form-control bg-secondary text-white w-100"
+                />
+              </div>
+              <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
+                <label htmlFor="banner1-btn-link" className="w-100">
+                  Category
+                </label>
+                <select
+                  defaultValue={thirdBanner?.categoryName || "0"}
+                  onChange={(e) => {
+                    setThirdBanner((prev: any) => {
+                      return { ...prev, categoryName: e.target.value };
+                    });
+                  }}
+                  name=""
+                  className="form-select"
+                  id=""
+                >
+                  <option value="0" disabled selected>
+                    Please select a category
+                  </option>
+                  {data?.categories.map((category: any) => {
+                    return (
+                      <option value={category.name}>{category.name}</option>
+                    );
+                  })}
+                </select>
+              </div>
             </div>
-            <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
-              <label htmlFor="banner1-title" className="w-100">
-                Title
-              </label>
-              <input
-                onChange={(e) => {
-                  setSecondBanner((prev: any) => {
-                    return { ...prev, title: e.target.value };
-                  });
-                }}
-                value={secondBanner?.title || ""}
-                type="text"
-                placeholder="Banner title"
-                id="banner1-title"
-                className="form-control bg-secondary text-white w-100"
-              />
-            </div>
-            <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
-              <label htmlFor="banner1-description" className="w-100">
-                Description
-              </label>
-              <textarea
-                onChange={(e) => {
-                  setSecondBanner((prev: any) => {
-                    return { ...prev, description: e.target.value };
-                  });
-                }}
-                value={secondBanner?.description || ""}
-                cols={7}
-                placeholder="Banner Description"
-                id="banner1-description"
-                className="form-control bg-secondary text-white w-100"
-              />
-            </div>
-            <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
-              <label htmlFor="banner1-btn-name" className="w-100">
-                Button Name
-              </label>
-              <input
-                type="text"
-                onChange={(e) => {
-                  setSecondBanner((prev: any) => {
-                    return { ...prev, buttonName: e.target.value };
-                  });
-                }}
-                value={secondBanner?.buttonName || ""}
-                placeholder="Banner button name"
-                id="banner1-btn-name"
-                className="form-control bg-secondary text-white w-100"
-              />
-            </div>
-            <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
-              <label htmlFor="banner1-btn-link" className="w-100">
-                Button Link
-              </label>
-              <input
-                onChange={(e) => {
-                  setSecondBanner((prev: any) => {
-                    return { ...prev, buttonLink: e.target.value };
-                  });
-                }}
-                type="text"
-                value={secondBanner?.buttonLink || ""}
-                placeholder="Banner button link"
-                id="banner1-btn-link"
-                className="form-control bg-secondary text-white w-100"
-              />
-            </div>
-          </div>
-          <button
-            disabled={loading}
-            type="button"
-            onClick={() => handleChanges("secondBanner", secondBanner)}
-            className="btn btn-success d-flex mt-4 px-5 py-2 ms-auto me-5"
-          >
-            Save Changes
-          </button>
-        </section>
+            <button
+              disabled={loading}
+              type="button"
+              onClick={() => handleChanges("thirdBanner", thirdBanner)}
+              className="btn btn-success d-flex mt-4 px-5 py-2 ms-auto me-5"
+            >
+              Save Changes
+            </button>
+          </section>
+        </div>
       </div>
     </div>
   );

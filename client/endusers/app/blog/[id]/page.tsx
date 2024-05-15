@@ -62,7 +62,9 @@ export default function Page() {
             </div>
             <h2 className="text-6xl font-bold uppercase">{blog.title}</h2>
             <p className="my-6">{blog.shortDescription}</p>
-            <div>{HTMLParser(blog.fullDescription)}</div>
+            <div className="[&>img]:w-full">
+              {HTMLParser(blog.fullDescription)}
+            </div>
           </div>
         </div>
       </main>

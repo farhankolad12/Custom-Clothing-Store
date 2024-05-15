@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     remotePatterns: [
       {
-        hostname: "dunker.qodeinteractive.com",
+        hostname: "www.essentialsbyla.com",
       },
       {
         hostname: "res.cloudinary.com",

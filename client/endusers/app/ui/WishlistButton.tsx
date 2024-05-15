@@ -49,7 +49,7 @@ export default function WishlistButton({
       type="button"
       disabled={loading}
       onClick={handleWishlist}
-      className={classes + " z-50"}
+      className={classes + " z-49"}
     >
       {loading ? (
         <Spinner className="w-14 h-14" />

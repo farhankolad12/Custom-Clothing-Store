@@ -16,12 +16,24 @@ export default function CategoriesOffCanvas({
   const [catImg, setCatImg] = useState<
     File | undefined | string /* | { id: string; link: string } */
   >(undefined);
+  const [catBannerImg, setCatBannerImg] = useState<
+    File | undefined | string /* | { id: string; link: string } */
+  >(undefined);
+  const [tags, setTags] = useState<any>([]);
+  const [queryText, setQueryText] = useState("");
 
   useEffect(() => {
     if (selectedCategory) {
+      nameRef.current.value = selectedCategory ? selectedCategory.name : "";
+      descriptionRef.current.value = selectedCategory
+        ? selectedCategory.description
+        : "";
+      setTags(selectedCategory ? selectedCategory.tags : []);
       setCatImg(JSON.stringify(selectedCategory.icon));
+      setCatBannerImg(JSON.stringify(selectedCategory.bannerImg));
     } else {
       setCatImg(undefined);
+      setCatBannerImg(undefined);
     }
   }, [selectedCategory]);
 
@@ -34,17 +46,22 @@ export default function CategoriesOffCanvas({
     e.preventDefault();
 
     try {
-      if (!catImg) {
-        return toast.error("Please enter image!", {
+      if (!catImg || !catBannerImg) {
+        return toast.error("Please enter images!", {
           position: "top-left",
         });
       }
       const formData = new FormData();
       formData.append("description", descriptionRef.current.value);
       formData.append("name", nameRef.current.value);
+      formData.append("tags", JSON.stringify(tags));
 
       if (typeof catImg === "object") {
         formData.append("catImg", catImg);
+      }
+
+      if (typeof catBannerImg === "object") {
+        formData.append("catBannerImg", catBannerImg);
       }
 
       if (selectedCategory) {
@@ -65,7 +82,14 @@ export default function CategoriesOffCanvas({
       nameRef.current.value = "";
       descriptionRef.current.value = "";
       setCatImg(undefined);
+      setCatBannerImg(undefined);
+      setTags([]);
       if (selectedCategory) {
+        nameRef.current.value = "";
+        descriptionRef.current.value = "";
+        setTags([]);
+        setCatImg(undefined);
+        setCatBannerImg(undefined);
         return setCategory((prev: { categories: CategoriesType[] }) => {
           return {
             ...prev,
@@ -110,7 +134,14 @@ export default function CategoriesOffCanvas({
           type="button"
           className="ms-auto btn p-0 text-light"
           data-bs-dismiss="offcanvas"
-          onClick={() => setSelectedCategory(undefined)}
+          onClick={() => {
+            nameRef.current.value = "";
+            descriptionRef.current.value = "";
+            setCatImg(undefined);
+            setCatBannerImg(undefined);
+            setTags([]);
+            setSelectedCategory(undefined);
+          }}
           aria-label="Close"
         >
           <i className="bi bi-x-lg fs-5" />
@@ -147,7 +178,7 @@ export default function CategoriesOffCanvas({
           </div>
           <div className="d-flex flex-lg-row flex-column gap-3 justify-content-between">
             <label htmlFor="cat-img" className="text-secondary">
-              Category Image
+              Category Icon
             </label>
             <input
               id="cat-img"
@@ -173,6 +204,85 @@ export default function CategoriesOffCanvas({
               />
             </div>
           )}
+          <div className="d-flex flex-lg-row flex-column gap-3 justify-content-between">
+            <label htmlFor="cat-banner-img" className="text-secondary">
+              Category Banner Image
+            </label>
+            <input
+              id="cat-banner-img"
+              required
+              onChange={(e) => setCatBannerImg(e.target.files?.[0])}
+              type="file"
+              className="form-control w-lg-50 bg-transparent border-secondary text-light text-secondary"
+            />
+          </div>
+          {catBannerImg && (
+            <div className="ms-auto w-lg-50">
+              <Image
+                unoptimized
+                src={
+                  typeof catBannerImg === "string"
+                    ? JSON.parse(catBannerImg).link
+                    : URL.createObjectURL(catBannerImg)
+                }
+                alt="Category"
+                width={0}
+                height={300}
+                className="w-100"
+              />
+            </div>
+          )}
+
+          <div className="d-flex flex-lg-row flex-column gap-3 justify-content-between">
+            <label htmlFor="tags" className="text-secondary w-100">
+              Tags
+            </label>
+            <div className="w-100 h-auto d-flex overflow-y-auto align-items-center flex-wrap form-control pb-0 bg-transparent pt-3-">
+              <ul className="list-unstyled d-flex gap-2">
+                {tags.map((tag: { id: string; tag: string }) => (
+                  <li
+                    key={tag.id}
+                    className="d-flex rounded justify-content-between bg-dark px-3 text-light"
+                  >
+                    <span>{tag.tag}</span>
+                    <button
+                      type="button"
+                      onClick={() =>
+                        setTags((prev: { id: string; tag: string }[]) =>
+                          prev.filter((p) => p.id !== tag.id)
+                        )
+                      }
+                      className="btn p-0"
+                    >
+                      <i className="bi bi-x fs-6 text-light" />
+                    </button>
+                  </li>
+                ))}
+              </ul>
+              <input
+                onKeyDown={(e) => {
+                  // e.preventDefault();
+                  if (e.key.toLowerCase() === "enter") {
+                    setTags((prev: { id: string; tag: string }[]) => [
+                      ...prev,
+                      {
+                        id: Math.floor(Math.random() * 99999).toString(),
+                        tag: queryText,
+                      },
+                    ]);
+                    setQueryText("");
+                  }
+                }}
+                type="text"
+                id="tags"
+                placeholder="Press enter to add tags"
+                className="border-0 w-auto flex-grow-1 bg-transparent text-light text-secondary ms-2 mb-3"
+                style={{ outline: "none" }}
+                value={queryText}
+                onChange={(e) => setQueryText(e.target.value)}
+              />
+            </div>
+          </div>
         </form>
       </div>
       <div style={{ backgroundColor: "#1f2937" }} className="offcanvas-footer">
@@ -182,7 +292,14 @@ export default function CategoriesOffCanvas({
             aria-label="Close"
             type="button"
             className="btn btn-secondary w-100 py-2"
-            onClick={() => setSelectedCategory(undefined)}
+            onClick={() => {
+              nameRef.current.value = "";
+              descriptionRef.current.value = "";
+              setCatImg(undefined);
+              setCatBannerImg(undefined);
+              setTags([]);
+              setSelectedCategory(undefined);
+            }}
           >
             Cancel
           </button>

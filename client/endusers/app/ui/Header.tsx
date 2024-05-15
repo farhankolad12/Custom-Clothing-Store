@@ -10,21 +10,16 @@ import Authentication from "./Home/Authentication";
 import CartCanvas from "./CartCanvas";
 import HomeCarousel from "./Home/HomeCarousel";
 import SearchModel from "./SearchModel";
+import CategoryDrawer from "./Home/CategoryDrawer";
 
 export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
-  const [header, setHeader] = useState(true);
   const [menu, setMenu] = useState(false);
-  const [open, setOpen] = useState(false);
 
   const router = useRouter();
 
-  function handleOpen() {
-    setOpen(!open);
-  }
-
-  const { currentUser, cartItems, data } = useAuth();
+  const { currentUser, data, cartItems } = useAuth();
 
   const openDrawer = () => setOpenCart(true);
   const closeDrawer = () => setOpenCart(false);
@@ -33,34 +28,44 @@ export default function Header() {
 
   return (
     <>
-      <header className="flex flex-col ">
-        {data?.homePageContent?.headerText && header ? (
-          <div
-            style={{ backgroundColor: "#eeedeb" }}
-            className="flex justify-center w-full items-center py-1 hidden lg:flex "
-          >
-            <h1 className="text-xs text-gray-800">
+      <header className="flex flex-col">
+        {data?.homePageContent?.headerText ? (
+          <div className="flex justify-center bg-[#2f3324] w-full items-center py-2 px-10 text-center">
+            <span className="text-white text-sm">
               {data?.homePageContent?.headerText}
-            </h1>
-            <button className="ps-20" onClick={() => setHeader(false)}>
-              <i className="bi bi-x-lg" />
-            </button>
+            </span>
           </div>
         ) : (
           ""
         )}
-        <section className="relative desktop-header">
+        <section className="desktop-header">
           <nav
-            className={`lg:bg-transparent bg-white relative z-50 flex justify-between lg:items-start items-center w-full lg:border-0 border-b py-0 lg:py-0 px-3 lg:pe-0 lg:ps-3`}
+            className={`bg-white flex justify-between lg:px-[12rem] lg:items-center w-full lg:border-0 border-b px-[1rem]`}
           >
-            <Logo />
-            <ul className="hidden mt-5 lg:flex gap-12">
-              <CustomLink name="Home" to="/" />
-              <CustomLink name="Shop" to="/shop" />
-              <CustomLink name="About us" to="/about" />
-              <CustomLink name="Contact us" to="/contact" />
-              <CustomLink name="Blogs" to="/blogs" />
-            </ul>
+            <div className="lg:hidden flex">
+              <button
+                onClick={() => setMenu((prev) => !prev)}
+                type="button"
+                className="font-bold"
+              >
+                <i className="text-3xl bi bi-list" />
+              </button>
+            </div>
+            <div className="flex lg:gap-[2rem] gap-[0rem] items-center">
+              <Logo />
+              <ul className="hidden lg:flex gap-5">
+                {data?.categories.map((category: any) => {
+                  return (
+                    <CustomLink
+                      name={category.name}
+                      to={`/collections/${category.name}`}
+                    />
+                  );
+                })}
+                <CustomLink name="Shop" to="/shop" />
+                <CustomLink name="Blogs" to="/blogs" />
+              </ul>
+            </div>
             <ul className="flex justify-center items-center gap-4 lg:gap-4">
               <li>
                 <button
@@ -68,94 +73,93 @@ export default function Header() {
                   type="button"
                   className=" font-bold bg-transparent"
                 >
-                  <i className=" text-xl bi bi-search" />
+                  <i className="text-xl bi bi-search hover:text-2xl transition" />
                 </button>
               </li>
-              {currentUser ? (
-                <li>
-                  <button
-                    className="font-bold bg-transparent"
-                    onClick={() => router.push("/profile")}
-                  >
-                    <i className=" text-xl bi bi-person" />
-                  </button>
-                </li>
-              ) : (
-                <li>
-                  <Authentication handleOpen={() => handleOpen()} open={open} />
-                </li>
-              )}
-              <li className="hidden lg:block">
+              <li className="lg:flex hidden">
                 <button
-                  type="button"
-                  onClick={() => router.push("/wishlist")}
-                  className=" font-bold bg-transparent"
+                  className="font-bold bg-transparent"
+                  onClick={() =>
+                    router.push(currentUser ? "/profile" : "/login")
+                  }
                 >
-                  <i className="text-xl bi bi-heart" />
+                  <i className=" text-xl bi bi-person hover:text-2xl transition" />
                 </button>
               </li>
-              <li className="ms-0 lg:ms-5 bg-transparent lg:bg-black">
+              <li className="relative">
                 <button
                   type="button"
                   onClick={openDrawer}
-                  className="text-black lg:text-white font-bold lg:p-6 p-0"
+                  className="text-black"
                 >
-                  <i className=" text-xl bi bi-bag" />
-                  &nbsp;&nbsp;
-                  {currentUser ? cartItems?.products?.length || 0 : 0}
-                </button>
-              </li>
-              <li className="lg:hidden text-2xl">
-                <button
-                  onClick={() => setMenu((prev) => !prev)}
-                  type="button"
-                  className="font-bold"
-                >
-                  <i className=" text-xl bi bi-list" />
+                  <i className="text-xl bi bi-bag hover:text-2xl transition" />
+                  {currentUser ? (
+                    <span className="absolute right-[-.3rem] bottom-0 z-49 bg-gray-500 rounded-full w-4 h-4  text-white text-xs flex justify-center items-center">
+                      {cartItems.products?.length}
+                    </span>
+                  ) : (
+                    ""
+                  )}
                 </button>
               </li>
             </ul>
           </nav>
-          <section
-            // style={{ height: "500px" }}
-            className="absolute top-0 h-full left-0 right-0 carousel"
-          >
+          {/* <section className="h-full carousel">
             <HomeCarousel />
-          </section>
+          </section> */}
 
-          <Collapse className="relative z-40" open={menu}>
-            <section className="bg-white py-4 px-4">
-              <ul className="flex flex-col gap-4">
-                <CustomLink name="Home" to="/" />
-                <CustomLink name="Shop" to="/shop" />
-                <CustomLink name="About us" to="/about" />
-                <CustomLink name="Contact us" to="/contact" />
-                <CustomLink name="Blogs" to="/blogs" />
-              </ul>
-            </section>
-          </Collapse>
+          <CategoryDrawer open={menu} closeDrawer={() => setMenu(false)} />
         </section>
         <SearchModel
           closeSearchOpen={closeSearchOpen}
           handleOpen={handleSearchOpen}
           open={searchOpen}
         />
+        <nav className="lg:hidden md:hidden flex fixed bottom-0  left-0 right-0 bg-white z-50 justify-between items-center w-full gap-4 border-t border-2 border-gray-200">
+          <CustomMobileLink name="Home" to="/" icon="house" />
+          <CustomMobileLink icon="grid" name="Collections" to="/collections" />
+          <CustomMobileLink icon="person" name="Account" to="/profile" />
+          <CustomMobileLink icon="chat-left-text" name="Blogs" to="/blogs" />
+        </nav>
       </header>
       <CartCanvas closeDrawer={closeDrawer} openCart={openCart} />
     </>
   );
 }
 
-const CustomLink = ({ to, name }: { to: string; name: string }) => {
+export const CustomLink = ({ to, name }: { to: string; name: string }) => {
   const pathname = usePathname();
 
   const isPage = pathname === to ? "border-b-2 border-black" : "";
 
   return (
-    <li>
-      <Link className={`py-1 text-sm uppercase font-bold ${isPage}`} href={to}>
+    <li className="transition text-[#727273] hover:underline hover:underline-offset-4">
+      <Link className={`py-1 lg:text-sm text-xl ${isPage}`} href={to}>
         {name}
       </Link>
     </li>
+  );
+};
+
+const CustomMobileLink = ({
+  to,
+  name,
+  icon,
+}: {
+  to: string;
+  name: string;
+  icon: string;
+}) => {
+  const pathname = usePathname();
+
+  const isPage = pathname === to ? "border-t-2 border-black" : "";
+  return (
+    <Link
+      href={to}
+      className={`${isPage} p-5 flex flex-col gap-2 items-center justify-center`}
+    >
+      <i className={`bi bi-${icon}${isPage ? "-fill" : ""} `} />
+      <span className={`text-sm ${isPage ? "font-bold" : ""} `}>{name}</span>
+    </Link>
   );
 };

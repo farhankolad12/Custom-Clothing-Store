@@ -1,11 +1,14 @@
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
+import { Montserrat } from "next/font/google";
 import "./globals.css";
 import AuthProvider from "./context/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
 import ToastProvider from "./ui/ToastProvider";
 
-const roboto = Roboto({ weight: ["400", "500", "700"], subsets: ["latin"] });
+const montserrat = Montserrat({
+  weight: ["400", "500", "700"],
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   title: {
@@ -138,7 +141,7 @@ export default function RootLayout({
           />
         </noscript>
       </head>
-      <body className={`${roboto.className}`}>
+      <body className={`${montserrat.className}`}>
         <AuthProvider>
           <ToastProvider>{children}</ToastProvider>
         </AuthProvider>

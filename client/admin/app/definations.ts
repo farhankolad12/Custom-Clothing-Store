@@ -32,6 +32,16 @@ export type CategoriesType = {
     id: string;
     link: string;
   };
+  bannerImg: {
+    id: string;
+    link: string;
+  };
+  tags: [
+    {
+      id: string;
+      tag: string;
+    }
+  ];
   name: string;
   description: string;
 };

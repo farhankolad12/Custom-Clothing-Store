@@ -119,13 +119,13 @@ export default function ProductList({
   return (
     <ThemeProvider>
       <div
-        className={`group p-6 relative border border-grey transition hover:border-black cursor-pointer flex flex-col justify-between ${
+        className={`group p-6 relative transition cursor-pointer flex flex-col justify-between ${
           spanning ? span : ""
         }`}
         style={{ height: "600px" }}
       >
         <WishlistButton
-          classes="bg-transparent w-14 h-14 rounded-full transition items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-50"
+          classes="bg-transparent w-14 h-14 rounded-full transition items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-49"
           product={product}
         />
         <Carousel
@@ -234,7 +234,7 @@ export default function ProductList({
             disabled={loading}
             onClick={handleCart}
             type="button"
-            className="bg-transparent z-50 w-20 h-16 rounded-full transition items-center hover:bg-black hover:text-white cursor-pointer"
+            className="bg-transparent z-49 w-20 h-16 rounded-full transition items-center hover:bg-black hover:text-white cursor-pointer"
           >
             {loading ? (
               <Spinner className="w-16 h-16" />

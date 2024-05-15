@@ -7,7 +7,7 @@ const withAuth = (Component: any) => {
     const { currentUser } = useAuth();
 
     if (!currentUser) {
-      return router.replace("/");
+      return router.replace("/login");
       // return <Login />;
     }
 

@@ -85,10 +85,7 @@ export default function FirstBanner() {
     <FirstBannerSkeleton />
   ) : (
     data?.featuredProducts?.length && data?.newCollections?.length && (
-      <section
-        className="container mx-auto px-5"
-        style={{ paddingTop: "45rem" }}
-      >
+      <section className="container mx-auto px-5 pt-[5rem]">
         <div
           style={{ height: "700px" }}
           className="flex lg:flex-row flex-col w-full lg:flex-row"

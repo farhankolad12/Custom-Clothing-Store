@@ -32,6 +32,10 @@ function Page() {
     isAdmin: true,
   });
 
+  const {} = useGetReq("/", {
+    isAdmin: true,
+  });
+
   if (error || _error || __error) {
     toast.error(error || _error || __error || "Something went wrong!");
   }

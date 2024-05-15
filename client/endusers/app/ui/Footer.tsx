@@ -1,24 +1,14 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useAuth } from "../context/AuthProvider";
-import { useRouter } from "next/navigation";
-import Authentication from "./Home/Authentication";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useRef } from "react";
 import usePostReq from "../hooks/usePostReq";
 import { toast } from "react-toastify";
 import { Spinner } from "@material-tailwind/react";
 
 export default function Footer() {
-  const [open, setOpen] = useState(false);
-
   const { error, execute, loading } = usePostReq("/newsletter");
   const emailRef = useRef<HTMLInputElement>(null!);
-  const { currentUser } = useAuth();
-  const router = useRouter();
-
-  const handleAuthOpen = () => setOpen(!open);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -40,8 +30,73 @@ export default function Footer() {
   }
 
   return (
-    <footer className="pt-20" style={{ backgroundColor: "#eeedeb" }}>
-      <div className="px-10">
+    <footer className="bg-black flex justify-between flex-col lg:px-[10rem] px-[2rem] py-[2rem] text-[#828282] gap-32 lg:pb-[2rem] md:pb-[2rem] pb-28">
+      <div className="flex lg:flex-row flex-col gap-20 items-center lg:items-end justify-between ">
+        <form
+          onSubmit={handleSubmit}
+          className="flex  flex-col gap-[1rem] lg:w-1/2 w-full relative"
+        >
+          <label htmlFor="subscribe-email" className="text-white text-lg">
+            Subscribe to our emails
+          </label>
+          <input
+            ref={emailRef}
+            required
+            id="subscribe-email"
+            type="email"
+            placeholder="Email"
+            className="border-2 p-3 text-white border-white bg-transparent outline-none"
+          />
+          <button
+            disabled={loading}
+            type="submit"
+            className="absolute top-[2.7rem] bottom-0 right-2"
+          >
+            {loading ? (
+              <Spinner className="w-6 h-6" />
+            ) : (
+              <i className="bi bi-arrow-right text-xl text-white" />
+            )}
+          </button>
+        </form>
+        <div className="flex gap-4 text-white">
+          <a
+            target="_blank"
+            href="https://www.instagram.com/essentials.by.la"
+            className="font-bold uppercase text-lg"
+          >
+            <i className="bi bi-instagram" />
+          </a>
+          <a
+            target="_blank"
+            href="https://www.facebook.com/profile.php?id=100083453085816"
+            className="font-bold uppercase text-lg"
+          >
+            <i className="bi bi-facebook" />
+          </a>
+          <a
+            target="_blank"
+            href="https://wa.me/8689913856"
+            className="font-bold uppercase text-lg"
+          >
+            <i className="bi bi-whatsapp" />
+          </a>
+        </div>
+      </div>
+      <div className="flex flex-wrap lg:justify-start justify-center gap-5 text-xs font-bold">
+        <span>&copy; {new Date().getFullYear()}, Essentials By LA</span>
+        <Link href="/about"> &bull; About Us</Link>
+        <Link href="/refund-policy"> &bull; Refund Policy</Link>
+        <Link href="/privacy-policy"> &bull; Privacy Policy</Link>
+        <Link href="/terms-condition"> &bull; Terms & Conditions</Link>
+        <Link href="/shipping-policy"> &bull; Shipping Policy</Link>
+        <Link href="/Contact"> &bull; Contact Information</Link>
+      </div>
+    </footer>
+  );
+}
+
+/*   <div className="px-10">
         <div className="flex gap-10 lg:flex-row flex-col justify-between items-center pb-20">
           <Image
             src="/logo.png"
@@ -242,7 +297,4 @@ export default function Footer() {
       </div>
       <div className="footer-auth">
         <Authentication handleOpen={() => handleAuthOpen()} open={open} />
-      </div>
-    </footer>
-  );
-}
+      </div>*/

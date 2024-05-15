@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/app/context/AuthProvider";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function FirstDynamicBanner() {
@@ -27,17 +28,82 @@ export default function FirstDynamicBanner() {
     </div>
   ) : (
     data?.homePageContent?.firstBanner && (
-      <div className="relative">
-        <Image
-          unoptimized
-          src={data?.homePageContent?.firstBanner?.img.link}
-          width={0}
-          height={0}
-          style={{ objectFit: "cover", width: "100%", height: "700px" }}
-          alt={data?.homePageContent?.firstBanner?.title}
-          title={data?.homePageContent?.firstBanner?.title}
-        />
-        <div
+      <div className="flex lg:flex-row justify-center items-center lg:p-0 px-3 flex-col gap-3">
+        <Link
+          href={
+            "/collections/" + data?.homePageContent?.firstBanner?.categoryName
+          }
+          className="relative group flex flex-col gap-5 cursor-pointer"
+        >
+          <div className="overflow-hidden">
+            <Image
+              unoptimized
+              src={data?.homePageContent?.firstBanner?.img.link}
+              width={0}
+              height={0}
+              style={{ objectFit: "cover", width: "400px", height: "400px" }}
+              alt={data?.homePageContent?.firstBanner?.title}
+              title={data?.homePageContent?.firstBanner?.title}
+              className=" group-hover:scale-150 transition"
+            />
+          </div>
+          <h3 className="text-lg">
+            {data?.homePageContent?.firstBanner?.title}{" "}
+            <i className="bi bi-arrow-right group-hover:text-2  xl transition" />
+          </h3>
+        </Link>
+        <Link
+          href={
+            "/collections" + data?.homePageContent?.secondBanner?.categoryName
+          }
+          className="relative group flex flex-col gap-5 cursor-pointer"
+        >
+          <div className="overflow-hidden">
+            <Image
+              unoptimized
+              src={data?.homePageContent?.secondBanner?.img.link}
+              width={0}
+              height={0}
+              style={{ objectFit: "cover", width: "400px", height: "400px" }}
+              alt={data?.homePageContent?.secondBanner?.title}
+              title={data?.homePageContent?.secondBanner?.title}
+              className=" group-hover:scale-150 transition"
+            />
+          </div>
+          <h3 className="text-lg">
+            {data?.homePageContent?.secondBanner?.title}{" "}
+            <i className="bi bi-arrow-right group-hover:text-2  xl transition" />
+          </h3>
+        </Link>
+        <Link
+          href={
+            "/collections" + data?.homePageContent?.thirdBanner?.categoryName
+          }
+          className="relative group flex flex-col gap-5 cursor-pointer"
+        >
+          <div className="overflow-hidden">
+            <Image
+              unoptimized
+              src={data?.homePageContent?.thirdBanner?.img.link}
+              width={0}
+              height={0}
+              style={{ objectFit: "cover", width: "400px", height: "400px" }}
+              alt={data?.homePageContent?.thirdBanner?.title}
+              title={data?.homePageContent?.thirdBanner?.title}
+              className=" group-hover:scale-150 transition"
+            />
+          </div>
+          <h3 className="text-lg">
+            {data?.homePageContent?.thirdBanner?.title}{" "}
+            <i className="bi bi-arrow-right group-hover:text-2  xl transition" />
+          </h3>
+        </Link>
+      </div>
+    )
+  );
+}
+
+/* <div
         // style={{ width: "400px" }}
         // className="relative"
         >
@@ -66,8 +132,4 @@ export default function FirstDynamicBanner() {
               {data?.homePageContent?.firstBanner?.buttonName}
             </button>
           </div>
-        </div>
-      </div>
-    )
-  );
-}
+        </div> */

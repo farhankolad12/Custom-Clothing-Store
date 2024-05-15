@@ -16,7 +16,7 @@ export default function Logo() {
           src="/logo.png"
           alt="Logo"
           title="Logo"
-          className="lg:w-28 lg:h-20 w-24 h-24"
+          className="lg:w-28 lg:h-20 w-24 h-20"
           style={{ mixBlendMode: "multiply" }}
           width={0}
           height={0}
