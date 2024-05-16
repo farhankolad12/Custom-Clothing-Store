@@ -15,26 +15,27 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   return {
     keywords: [
-      ...data.tags.map((tag: any) => {
+      ...data?.tags.map((tag: any) => {
         return tag.tag;
       }),
+      data?.name,
       "Essentials By LA",
       "collections of essentialsbyla",
       "essentialsbyla collections website",
     ],
-    title: data.name + " - Essentials By LA",
+    title: data?.name + " - Essentials By LA",
     description:
       "Welcome to Essentials By LA Categories Page! Explore our extensive range of products carefully curated into distinct categories to enhance your shopping experience. From fashion essentials to tech gadgets, home decor to fitness gear, we have everything you need conveniently organized for effortless browsing. Discover top-quality products, unbeatable deals, and the latest trends across various categories. Start exploring now and find exactly what you're looking for, all in one place, with Essentials By LA. Shop smart, shop seamlessly, only with us!" +
-      data.description,
+      data?.description,
     openGraph: {
       type: "website",
       title: "collections",
       url: "https://www.essentialsbyla.com/collections",
       description:
         "Welcome to Essentials By LA Categories Page! Explore our extensive range of products carefully curated into distinct categories to enhance your shopping experience. From fashion essentials to tech gadgets, home decor to fitness gear, we have everything you need conveniently organized for effortless browsing. Discover top-quality products, unbeatable deals, and the latest trends across various categories. Start exploring now and find exactly what you're looking for, all in one place, with Essentials By LA. Shop smart, shop seamlessly, only with us!" +
-        data.description,
+        data?.description,
       images: {
-        url: data.bannerImg.link,
+        url: data?.bannerImg.link,
       },
     },
     twitter: {
