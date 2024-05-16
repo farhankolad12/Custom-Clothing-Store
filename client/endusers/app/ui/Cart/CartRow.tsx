@@ -45,6 +45,11 @@ export default function CartRow({ product }: { product: ProductType }) {
               : prev.discountedPrice
             : prev.discountedPrice,
           subTotalPrice,
+          coupon: prev.coupon.code
+            ? prev.coupon.minimumCartValue > subTotalPrice
+              ? {}
+              : prev.coupon
+            : prev.coupon,
           products: prev.products.some(
             (productC: any) =>
               productC._id === product._id &&
