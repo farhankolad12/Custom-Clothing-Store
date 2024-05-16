@@ -96,7 +96,7 @@ export default function Header() {
                   <i className="text-xl bi bi-bag hover:text-2xl transition" />
                   {currentUser ? (
                     <span className="absolute right-[-.3rem] bottom-0 z-49 bg-gray-500 rounded-full w-4 h-4  text-white text-xs flex justify-center items-center">
-                      {cartItems.products?.length}
+                      {cartItems?.products?.length}
                     </span>
                   ) : (
                     ""
