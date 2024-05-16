@@ -292,7 +292,7 @@ export default function Page() {
                     onClick={() => {
                       const params = new URLSearchParams(searchParams);
                       params.set("page", (ind + 1).toString());
-                      router.push(`/shop?${params.toString()}`);
+                      router.push(`/collections/${slug}?${params.toString()}`);
                     }}
                     key={ind}
                     className={`border-2 border-black p-3 transition hover:bg-black hover:text-white rounded ${
