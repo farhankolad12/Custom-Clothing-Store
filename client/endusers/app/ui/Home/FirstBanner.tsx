@@ -151,12 +151,14 @@ export default function FirstBanner() {
                 <div className="flex flex-col gap-2">
                   <span className="mb-1 text-xs">Essentials By LA</span>
                   <Link
+                    shallow={true}
                     href={`/product/${data?.featuredProducts[0]._id}`}
                     className="font-bold"
                   >
                     {data?.featuredProducts[0].name}
                   </Link>
                   <Link
+                    shallow={true}
                     href={`/shop?category=${data?.featuredProducts[0].category}`}
                   >
                     {data?.featuredProducts[0].category}
@@ -250,12 +252,14 @@ export default function FirstBanner() {
                 <div className="flex flex-col gap-2">
                   <span className="mb-1 text-xs">Essentials By LA</span>
                   <Link
+                    shallow={true}
                     href={`/product/${data?.newCollections[0]._id}`}
                     className="font-bold"
                   >
                     {data?.newCollections[0].name}
                   </Link>
                   <Link
+                    shallow={true}
                     href={`/shop?category=${data?.newCollections[0].category}`}
                   >
                     {data?.newCollections[0].category}

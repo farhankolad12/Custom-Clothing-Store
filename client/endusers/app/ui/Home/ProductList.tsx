@@ -204,18 +204,21 @@ export default function ProductList({
         <div className="flex justify-between items-end mt-4 w-full">
           <div className="flex flex-col w-full h-full">
             <Link
+              shallow={true}
               href={`/product/${product._id}`}
               className="text-gray-700 text-sm"
             >
               Essentials By LA
             </Link>
             <Link
+              shallow={true}
               href={`/product/${product._id}`}
               className="fw-bold uppercase"
             >
               {product.name}
             </Link>
             <Link
+              shallow={true}
               href={`/product/${product._id}`}
               className="text-gray-700 font-bold text-sm"
             >

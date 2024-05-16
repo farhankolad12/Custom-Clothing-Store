@@ -165,7 +165,7 @@ export default function Register() {
           <input type="checkbox" id="terms-conditions" required />
           <label htmlFor="terms-conditions" className="text-black">
             By clicking here you agree to our{" "}
-            <Link href="/terms-conditions" className="underline">
+            <Link shallow={true} href="/terms-conditions" className="underline">
               Terms & Conditions
             </Link>
           </label>
@@ -174,7 +174,7 @@ export default function Register() {
           <input type="checkbox" id="privacy" required />
           <label htmlFor="privacy" className="text-black">
             By clicking here you agree to our{" "}
-            <Link href="/privacy-policy" className="underline">
+            <Link shallow={true} href="/privacy-policy" className="underline">
               Privacy Policy
             </Link>
           </label>

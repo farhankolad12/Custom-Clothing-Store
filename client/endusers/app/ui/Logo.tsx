@@ -5,6 +5,7 @@ export default function Logo() {
   return (
     <div>
       <Link
+        shallow={true}
         style={{
           backgroundColor: "transparent",
         }}

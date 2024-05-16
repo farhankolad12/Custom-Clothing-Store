@@ -65,7 +65,7 @@ export default function Page() {
     <main className="bg-[#f5f5f5] flex flex-col justify-center items-center">
       <div className="bg-white p-6 flex flex-col gap-5 lg:w-1/2 w-full m-10">
         <div className="flex justify-center">
-          <Link href="/">
+          <Link shallow={true} href="/">
             <Image
               src="https://www.essentialsbyla.com/logo.png"
               alt="Logo"
@@ -184,7 +184,11 @@ export default function Page() {
               <input type="checkbox" id="terms-conditions" required />
               <label htmlFor="terms-conditions" className="text-black">
                 By clicking here you agree to our{" "}
-                <Link href="/terms-conditions" className="underline">
+                <Link
+                  shallow={true}
+                  href="/terms-conditions"
+                  className="underline"
+                >
                   Terms & Conditions
                 </Link>
               </label>
@@ -193,7 +197,11 @@ export default function Page() {
               <input type="checkbox" id="privacy" required />
               <label htmlFor="privacy" className="text-black">
                 By clicking here you agree to our{" "}
-                <Link href="/privacy-policy" className="underline">
+                <Link
+                  shallow={true}
+                  href="/privacy-policy"
+                  className="underline"
+                >
                   Privacy Policy
                 </Link>
               </label>
@@ -210,7 +218,7 @@ export default function Page() {
         <div className="text-center">
           <span>
             Already have an account?{" "}
-            <Link href="/login" className="underline">
+            <Link shallow={true} href="/login" className="underline">
               Login
             </Link>
           </span>

@@ -49,7 +49,7 @@ export default function Page() {
     <main className="bg-[#f5f5f5] flex flex-col justify-center items-center h-screen">
       <div className="bg-white p-6 flex flex-col gap-5">
         <div className="flex justify-center">
-          <Link href="/">
+          <Link shallow={true} href="/">
             <Image
               src="https://www.essentialsbyla.com/logo.png"
               alt="Logo"
@@ -81,6 +81,7 @@ export default function Page() {
           </div>
           <div className="mt-10 flex justify-between items-center gap-4">
             <Link
+              shallow={true}
               href="/forget-password"
               className="bg-transparent uppercase text-sm font-bold text-black"
             >
@@ -98,7 +99,7 @@ export default function Page() {
         <div className="text-center">
           <span>
             Don't have an account?{" "}
-            <Link href="/signup" className="underline">
+            <Link shallow={true} href="/signup" className="underline">
               Sign Up
             </Link>
           </span>

@@ -30,7 +30,11 @@ function Page() {
       <Header />
       <main className="px-10 my-5">
         <div className="flex gap-2">
-          <Link href="/" className="text-xs uppercase text-gray-400">
+          <Link
+            shallow={true}
+            href="/"
+            className="text-xs uppercase text-gray-400"
+          >
             home
           </Link>
           <span className="text-xs uppercase">|</span>

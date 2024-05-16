@@ -72,7 +72,7 @@ export default function CartRow({ product }: { product: ProductType }) {
           <button onClick={handleDelete}>
             <i className="bi bi-x-lg" />
           </button>
-          <Link href={"/product/" + product._id}>
+          <Link shallow={true} href={"/product/" + product._id}>
             <Image
               src={product.images[0].link}
               width={100}
@@ -82,7 +82,7 @@ export default function CartRow({ product }: { product: ProductType }) {
               title={product.name}
             />
           </Link>
-          <Link href={"/product/" + product._id}>
+          <Link shallow={true} href={"/product/" + product._id}>
             <strong className="uppercase">{product.name}</strong>
           </Link>
         </div>

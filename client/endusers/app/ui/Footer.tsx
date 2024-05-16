@@ -85,12 +85,30 @@ export default function Footer() {
       </div>
       <div className="flex flex-wrap lg:justify-start justify-center gap-5 text-xs font-bold">
         <span>&copy; {new Date().getFullYear()}, Essentials By LA</span>
-        <Link href="/about"> &bull; About Us</Link>
-        <Link href="/refund-policy"> &bull; Refund Policy</Link>
-        <Link href="/privacy-policy"> &bull; Privacy Policy</Link>
-        <Link href="/terms-condition"> &bull; Terms & Conditions</Link>
-        <Link href="/shipping-policy"> &bull; Shipping Policy</Link>
-        <Link href="/Contact"> &bull; Contact Information</Link>
+        <Link shallow={true} href="/about">
+          {" "}
+          &bull; About Us
+        </Link>
+        <Link shallow={true} href="/refund-policy">
+          {" "}
+          &bull; Refund Policy
+        </Link>
+        <Link shallow={true} href="/privacy-policy">
+          {" "}
+          &bull; Privacy Policy
+        </Link>
+        <Link shallow={true} href="/terms-condition">
+          {" "}
+          &bull; Terms & Conditions
+        </Link>
+        <Link shallow={true} href="/shipping-policy">
+          {" "}
+          &bull; Shipping Policy
+        </Link>
+        <Link shallow={true} href="/Contact">
+          {" "}
+          &bull; Contact Information
+        </Link>
       </div>
     </footer>
   );
@@ -129,22 +147,22 @@ export default function Footer() {
         <div className="container px-5 border-y-2 border-gray-400 py-20 flex lg:flex-row flex-col justify-between gap-10">
           <div className="flex flex-col gap-5">
             <span className="uppercase font-bold">information</span>
-            <Link
+            <Link shallow={true}
               href="/privacy-policy"
               className="font-bold uppercase text-xs"
             >
               privacy policy
             </Link>
-            <Link
+            <Link shallow={true}
               href="/terms-condition"
               className="font-bold uppercase text-xs"
             >
               terms of sale
             </Link>
-            <Link href="/refund-policy" className="font-bold uppercase text-xs">
+            <Link shallow={true} href="/refund-policy" className="font-bold uppercase text-xs">
               Refund Policy
             </Link>
-            <Link
+            <Link shallow={true}
               href="/shipping-policy"
               className="font-bold uppercase text-xs"
             >
@@ -153,10 +171,10 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-5">
             <span className=" uppercase font-bold">shop</span>
-            <Link href="/shop" className="font-bold uppercase text-xs">
+            <Link shallow={true} href="/shop" className="font-bold uppercase text-xs">
               our store
             </Link>
-            <Link href="/shop?category" className="font-bold uppercase text-xs">
+            <Link shallow={true} href="/shop?category" className="font-bold uppercase text-xs">
               shop by category
             </Link>
             <button
@@ -167,7 +185,7 @@ export default function Footer() {
             >
               sign up for deals
             </button>
-            <Link
+            <Link shallow={true}
               className="p-0 font-bold uppercase text-xs text-left"
               href="/contact"
             >
@@ -211,7 +229,7 @@ export default function Footer() {
           </div>
           <div className="flex flex-col gap-5">
             <span className=" uppercase font-bold">social</span>
-            <Link href="/contact" className="font-bold uppercase text-xs">
+            <Link shallow={true} href="/contact" className="font-bold uppercase text-xs">
               contact us
             </Link>
             <a

@@ -117,15 +117,24 @@ export default function Page() {
       <Header />
       <main className="px-10 my-5">
         <div className="flex flex-wrap gap-2">
-          <Link href="/" className="text-xs uppercase text-gray-500">
+          <Link
+            shallow={true}
+            href="/"
+            className="text-xs uppercase text-gray-500"
+          >
             home
           </Link>
           <span className="text-xs uppercase">|</span>
-          <Link href="/shop" className="text-xs uppercase text-gray-500">
+          <Link
+            shallow={true}
+            href="/shop"
+            className="text-xs uppercase text-gray-500"
+          >
             shop
           </Link>
           <span className="text-xs uppercase">|</span>
           <Link
+            shallow={true}
             href={`/shop?category=${product.category}`}
             className="text-xs uppercase text-gray-500"
           >

@@ -101,7 +101,11 @@ export default function Page() {
     <div className="not-home">
       <Header />
       <div className="flex gap-3 lg:px-10 lg:px-16 px-5 mt-8">
-        <Link href="/" className="uppercase text-xs text-gray-600 font-bold">
+        <Link
+          shallow={true}
+          href="/"
+          className="uppercase text-xs text-gray-600 font-bold"
+        >
           home
         </Link>
         <span className="uppercase text-xs font-bold">|</span>

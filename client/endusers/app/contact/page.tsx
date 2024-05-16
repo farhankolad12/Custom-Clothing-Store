@@ -111,11 +111,13 @@ export default function Page() {
             </span>
             <div className="flex gap-5">
               <i className="bi bi-phone" />
-              <Link href="tel:+91 8689913856">+91 8689913856</Link>
+              <Link shallow={true} href="tel:+91 8689913856">
+                +91 8689913856
+              </Link>
             </div>
             <div className="flex gap-5">
               <i className="bi bi-envelope" />
-              <Link href="mailto:essentialsbyla@gmail.com">
+              <Link shallow={true} href="mailto:essentialsbyla@gmail.com">
                 essentialsbyla@gmail.com
               </Link>
             </div>

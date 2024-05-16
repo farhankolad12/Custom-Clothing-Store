@@ -30,6 +30,7 @@ export default function FirstDynamicBanner() {
     data?.homePageContent?.firstBanner && (
       <div className="flex lg:flex-row justify-center items-center lg:p-0 px-3 flex-col gap-3">
         <Link
+          shallow={true}
           href={
             "/collections/" + data?.homePageContent?.firstBanner?.categoryName
           }
@@ -53,8 +54,9 @@ export default function FirstDynamicBanner() {
           </h3>
         </Link>
         <Link
+          shallow={true}
           href={
-            "/collections" + data?.homePageContent?.secondBanner?.categoryName
+            "/collections/" + data?.homePageContent?.secondBanner?.categoryName
           }
           className="relative group flex flex-col gap-5 cursor-pointer"
         >
@@ -76,8 +78,9 @@ export default function FirstDynamicBanner() {
           </h3>
         </Link>
         <Link
+          shallow={true}
           href={
-            "/collections" + data?.homePageContent?.thirdBanner?.categoryName
+            "/collections/" + data?.homePageContent?.thirdBanner?.categoryName
           }
           className="relative group flex flex-col gap-5 cursor-pointer"
         >

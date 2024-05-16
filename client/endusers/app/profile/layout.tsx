@@ -37,6 +37,7 @@ export default function Layout({
           <section>
             <div className="flex gap-2 text-xs lg:px-0 px-5 my-4">
               <Link
+                shallow={true}
                 className="uppercase font-bold text-gray-700 hover:text-black"
                 href="/"
               >
@@ -49,6 +50,7 @@ export default function Layout({
               <div className="lg:w-1/4 w-full flex flex-col gap-4">
                 <div className="py-4 w-full border-b-2 border-gray-300">
                   <Link
+                    shallow={true}
                     href="/profile/orders"
                     className="uppercase font-bold text-xs "
                   >
@@ -56,7 +58,7 @@ export default function Layout({
                   </Link>
                 </div>
                 {/* <div className="py-4 w-full border-b-2 border-gray-300">
-                <Link
+                <Link shallow={true}
                   href="/profile/addresses"
                   className="uppercase font-bold text-xs "
                 >
@@ -65,6 +67,7 @@ export default function Layout({
               </div> */}
                 <div className="py-4 w-full border-b-2 border-gray-300">
                   <Link
+                    shallow={true}
                     href="/profile/account-details"
                     className="uppercase font-bold text-xs "
                   >

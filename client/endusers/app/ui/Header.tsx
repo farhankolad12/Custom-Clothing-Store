@@ -116,10 +116,14 @@ export default function Header() {
           handleOpen={handleSearchOpen}
           open={searchOpen}
         />
-        <nav className="lg:hidden md:hidden flex fixed bottom-0  left-0 right-0 bg-white z-50 justify-between items-center w-full gap-4 border-t border-2 border-gray-200">
+        <nav className="lg:hidden md:hidden flex fixed bottom-0 left-0 right-0 bg-white px-3 gap-4 z-50 justify-between items-center w-full border-t border-2 border-gray-200">
           <CustomMobileLink name="Home" to="/" icon="house" />
           <CustomMobileLink icon="grid" name="Collections" to="/collections" />
-          <CustomMobileLink icon="person" name="Account" to="/profile" />
+          <CustomMobileLink
+            icon="person"
+            name="Account"
+            to={currentUser ? "/profile" : "/login"}
+          />
           <CustomMobileLink icon="chat-left-text" name="Blogs" to="/blogs" />
         </nav>
       </header>
@@ -135,7 +139,11 @@ export const CustomLink = ({ to, name }: { to: string; name: string }) => {
 
   return (
     <li className="transition text-[#727273] hover:underline hover:underline-offset-4">
-      <Link className={`py-1 lg:text-sm text-xl ${isPage}`} href={to}>
+      <Link
+        shallow={true}
+        className={`py-1 lg:text-sm text-xl ${isPage}`}
+        href={to}
+      >
         {name}
       </Link>
     </li>
@@ -156,8 +164,9 @@ const CustomMobileLink = ({
   const isPage = pathname === to ? "border-t-2 border-black" : "";
   return (
     <Link
+      shallow={true}
       href={to}
-      className={`${isPage} p-5 flex flex-col gap-2 items-center justify-center`}
+      className={`${isPage} py-4 flex flex-col gap-2 items-center justify-center`}
     >
       <i className={`bi bi-${icon}${isPage ? "-fill" : ""} `} />
       <span className={`text-sm ${isPage ? "font-bold" : ""} `}>{name}</span>
