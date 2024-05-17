@@ -37,27 +37,28 @@ export default function Navbar() {
             ""
           )}
           <div className="d-flex gap-3 align-items-center">
-            <button
-              role="button"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-              className="btn p-0 position-relative "
-            >
-              <i className="bi bi-bell text-success fw-bold fs-5" />
-              {!loading && notifications?.[0]?.username ? (
-                <span
-                  className="position-absolute rounded-circle d-flex justify-content-center align-items-center bg-danger text-white start-0 top-0"
-                  style={{ width: "16px", height: "16px", fontSize: ".7rem" }}
-                >
-                  {notifications?.reduce((total: number, prev: any) => {
-                    return !prev.isRead ? total + 1 : total + 0;
-                  }, 0) || 0}
-                </span>
-              ) : (
-                ""
-              )}
-            </button>
-
+            {currentUser && (
+              <button
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                className="btn p-0 position-relative "
+              >
+                <i className="bi bi-bell text-success fw-bold fs-5" />
+                {!loading && notifications?.[0]?.username ? (
+                  <span
+                    className="position-absolute rounded-circle d-flex justify-content-center align-items-center bg-danger text-white start-0 top-0"
+                    style={{ width: "16px", height: "16px", fontSize: ".7rem" }}
+                  >
+                    {notifications?.reduce((total: number, prev: any) => {
+                      return !prev.isRead ? total + 1 : total + 0;
+                    }, 0) || 0}
+                  </span>
+                ) : (
+                  ""
+                )}
+              </button>
+            )}
             {loading ? (
               ""
             ) : (
