@@ -47,7 +47,7 @@ export default function Navbar() {
                   className="position-absolute rounded-circle d-flex justify-content-center align-items-center bg-danger text-white start-0 top-0"
                   style={{ width: "16px", height: "16px", fontSize: ".7rem" }}
                 >
-                  {notifications.reduce((total: number, prev: any) => {
+                  {notifications?.reduce((total: number, prev: any) => {
                     return !prev.isRead ? total + 1 : total + 0;
                   }, 0)}
                 </span>
