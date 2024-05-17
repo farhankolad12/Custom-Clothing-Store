@@ -149,17 +149,21 @@ exports.updateHomePage = catchAsyncErrors(async (req, res, next) => {
 exports.homePage = catchAsyncErrors(async (req, res, next) => {
   const date = new Date();
 
-  // Add five days to current date
   date.setDate(date.getDate() - 6);
 
-  const myDate = new Date(date); // Your timezone!
-  const myEpoch = myDate.getTime() / 1000.0;
+  const myDate = new Date(date);
+  const myEpoch = myDate.getTime();
 
-  const featuredProducts = await Products.find({ isFeatured: true }).limit(8);
   const newCollections = await Products.find({
     createdAt: { $gte: myEpoch, $lte: Date.now() },
   })
-    .skip(1)
+    .sort({ createdAt: -1 })
+    .limit(8);
+  const featuredProducts = await Products.find({
+    _id: { $nin: newCollections.map((p1) => p1._id) },
+    isFeatured: true,
+  })
+    .sort({ createdAt: -1 })
     .limit(8);
 
   const categoriesC = await Categories.find();
