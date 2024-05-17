@@ -105,7 +105,7 @@ export default function Footer() {
           {" "}
           &bull; Shipping Policy
         </Link>
-        <Link shallow={true} href="/Contact">
+        <Link shallow={true} href="/contact">
           {" "}
           &bull; Contact Information
         </Link>

@@ -1,5 +1,6 @@
 import { ProductType } from "@/app/definations";
 import { formatCurrency } from "@/app/utils/formatCurrency";
+import Image from "next/image";
 import { Ref } from "react";
 
 export default function InvoicePDF({
@@ -51,11 +52,18 @@ export default function InvoicePDF({
             gap: ".5rem",
           }}
         >
-          <h3 style={{ color: "black" }}>Logo</h3>
-          <span>Kambekar street Original, Mumbai MH, India</span>
-          <span>9324288793</span>
-          <span>hamzaqadri@gmail.com</span>
-          <span>admin website</span>
+          <Image
+            src="https://www.essentialsbyla.com/logo-withbg.png"
+            alt="Logo"
+            width={100}
+            height={100}
+          />
+          <span>H-A/2 Kailash Puram Mohili Village</span>
+          <span>Opp. Peninsula Hotel Sakinak</span>
+          <span>Andheri (east), Mumbai-400972 MH, India</span>
+          <span>8689913856</span>
+          <span>essentialsbyla@gmail.com</span>
+          <span>admin.essentialsbyla.com</span>
         </div>
       </div>
       <div

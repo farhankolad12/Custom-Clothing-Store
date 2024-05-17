@@ -12,6 +12,7 @@ import html2pdf from "html2pdf.js";
 import formatCurrency from "@/app/utils/formatCurrency";
 import { useReactToPrint } from "react-to-print";
 import usePostReq from "@/app/hooks/usePostReq";
+import Image from "next/image";
 
 function Page() {
   const { id } = useParams();
@@ -106,11 +107,18 @@ function Page() {
               </span>
             </div>
             <div className="text-secondary d-flex flex-column align-items-end gap-1">
-              <h3 className="text-white">Logo</h3>
-              <span>Kambekar street Original, Mumbai MH, India</span>
-              <span>9324288793</span>
-              <span>hamzaqadri@gmail.com</span>
-              <span>admin website</span>
+              <Image
+                src="https://www.essentialsbyla.com/logo-withbg.png"
+                alt="Logo"
+                width={100}
+                height={100}
+              />
+              <span>H-A/2 Kailash Puram Mohili Village</span>
+              <span>Opp. Peninsula Hotel Sakinak</span>
+              <span>Andheri (east), Mumbai-400972 MH, India</span>
+              <span>8689913856</span>
+              <span>essentialsbyla@gmail.com</span>
+              <span>admin.essentialsbyla.com</span>
             </div>
           </div>
           <div className="d-flex flex-lg-row flex-column gap-3 justify-content-between mt-4">

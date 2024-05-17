@@ -23,9 +23,9 @@ export async function updateCart(
   setCartItems((prev: any) => {
     return {
       ...prev,
-      shippingPrice: prev.shippingPrice ? prev.shippingPrice : 100,
-      discountedPrice: prev.discountedPrice ? prev.discountedPrice : 0,
-      subTotalPrice: prev.products.some(
+      shippingPrice: prev?.shippingPrice ? prev.shippingPrice : 100,
+      discountedPrice: prev?.discountedPrice ? prev.discountedPrice : 0,
+      subTotalPrice: prev?.products.some(
         (productC: any) =>
           productC._id === product._id &&
           productC.selectedCombination.id === selectedCombination.id
@@ -34,18 +34,18 @@ export async function updateCart(
           selectedCombination.salePrice * quantity -
           selectedCombination.salePrice
         : (prev.subTotalPrice || 0) + selectedCombination.salePrice * quantity,
-      products: prev.products.some(
+      products: prev?.products.some(
         (productC: any) =>
           productC._id === product._id &&
           productC.selectedCombination.id === selectedCombination.id
       )
-        ? prev.products.map((productC: any) => {
+        ? prev?.products.map((productC: any) => {
             return productC._id === product._id &&
               productC.selectedCombination.id === selectedCombination.id
               ? { ...productC, quantity }
               : productC;
           })
-        : prev.products.some(
+        : prev?.products.some(
             (productC: any) =>
               productC._id === product._id &&
               productC.selectedCombination.id !== selectedCombination.id

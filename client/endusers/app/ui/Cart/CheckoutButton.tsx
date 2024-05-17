@@ -122,7 +122,12 @@ export default function CheckoutButton({
             return toast.error(res.message || _error || "Something went wrong");
           }
 
-          setCartItems(undefined);
+          setCartItems({
+            coupon: {},
+            shippingPrice: 0,
+            products: [],
+            subTotalPrice: 0,
+          });
           setLoading(false);
           toast.success("Order succesfully placed!");
           router.push("/profile/orders");
