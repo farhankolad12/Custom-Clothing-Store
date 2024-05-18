@@ -35,7 +35,7 @@ export default function HomeCategories() {
         );
       }) ||
         [...new Array(5)].map(() => {
-          return <Spinner className="w-28 h-28" />;
+          return <Spinner key={Math.random()} className="w-28 h-28" />;
         })}
     </div>
   );
