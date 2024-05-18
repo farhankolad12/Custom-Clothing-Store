@@ -145,10 +145,7 @@ export default function Page() {
         </div>
 
         <div className="flex lg:flex-row flex-col gap-20 items-start w-full my-20">
-          <Image
-            unoptimized
-            quality={100}
-            Showcase
+          <ImageShowcase
             setOpenLighthouse={setOpenLighthouse}
             product={product}
           />
@@ -283,8 +280,6 @@ export default function Page() {
                           return (
                             <div key={review._id} className="flex gap-10">
                               <Image
-                                unoptimized
-                                quality={100}
                                 src="/user-profile.png"
                                 alt="User Profile"
                                 width={0}
