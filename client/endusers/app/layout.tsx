@@ -148,7 +148,7 @@ export default function RootLayout({
         </AuthProvider>
         <Script
           src="https://checkout.razorpay.com/v1/checkout.js"
-          strategy="lazyOnload"
+          strategy="worker"
         />
       </body>
     </html>

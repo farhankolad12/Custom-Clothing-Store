@@ -1,6 +1,7 @@
 "use client";
 
 import { useAuth } from "@/app/context/AuthProvider";
+import { Spinner } from "@material-tailwind/react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -32,7 +33,10 @@ export default function HomeCategories() {
             <span className="text-xl">{category.name}</span>
           </Link>
         );
-      })}
+      }) ||
+        [...new Array(5)].map(() => {
+          return <Spinner className="w-28 h-28" />;
+        })}
     </div>
   );
 }

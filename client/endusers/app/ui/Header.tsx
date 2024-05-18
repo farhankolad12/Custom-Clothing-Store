@@ -29,15 +29,14 @@ export default function Header() {
   return (
     <>
       <header className="flex flex-col">
-        {data?.homePageContent?.headerText ? (
-          <div className="flex justify-center bg-[#2f3324] w-full items-center py-2 px-10 text-center">
-            <span className="text-white text-sm">
-              {data?.homePageContent?.headerText}
-            </span>
-          </div>
-        ) : (
-          ""
-        )}
+        <div className="flex justify-center bg-[#2f3324] w-full items-center py-2 px-10 text-center">
+          <span className="text-white text-sm">
+            {data?.homePageContent?.headerText
+              ? data?.homePageContent?.headerText
+              : "Loading..."}
+          </span>
+        </div>
+
         <section className="desktop-header">
           <nav
             className={`bg-white flex justify-between lg:px-[12rem] lg:items-center w-full lg:border-0 border-b px-[1rem]`}
