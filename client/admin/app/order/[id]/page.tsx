@@ -238,9 +238,7 @@ function Page() {
                 total amount
               </span>
               <span className="text-success fw-bold fs-5">
-                {formatCurrency(
-                  order.subtotal + order.shippingPrice - order.discountedPrice
-                )}
+                {formatCurrency(order.subtotal + order.shippingPrice)}
               </span>
             </div>
           </div>

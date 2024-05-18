@@ -39,13 +39,13 @@ export default function CartRow({ product }: { product: ProductType }) {
         return {
           ...prev,
           // shippingPrice: 200,
-          discountedPrice: prev.coupon.code
-            ? prev.coupon.minimumCartValue > subTotalPrice
+          discountedPrice: prev.coupon?.code
+            ? prev.coupon?.minimumCartValue > subTotalPrice
               ? 0
               : prev.discountedPrice
             : prev.discountedPrice,
           subTotalPrice,
-          coupon: prev.coupon.code
+          coupon: prev.coupon?.code
             ? prev.coupon.minimumCartValue > subTotalPrice
               ? {}
               : prev.coupon

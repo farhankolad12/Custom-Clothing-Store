@@ -24,11 +24,7 @@ export default function OrderRow({ order }: { order: any }) {
             "Kambekar street"}
         </td>
         <td>{order.method || "UPI"}</td>
-        <td>
-          {formatCurrency(
-            order.subtotal + order.shippingPrice - order.discountedPrice
-          )}
-        </td>
+        <td>{formatCurrency(order.subtotal + order.shippingPrice)}</td>
         <td>{order.status[order.status.length - 1].name}</td>
         <td>
           <div className="d-flex gap-3">

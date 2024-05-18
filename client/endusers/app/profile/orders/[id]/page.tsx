@@ -226,7 +226,9 @@ function Page() {
             <span className="font-bold mb-3">Order Summary</span>
             <div className="flex justify-between">
               <span>Item(s) Subtotal:</span>
-              <span>{formatCurrency(order.subtotal)}</span>
+              <span>
+                {formatCurrency(order.subtotal + order.discountedPrice)}
+              </span>
             </div>
             <div className="flex justify-between">
               <span>Shipping</span>
@@ -239,9 +241,7 @@ function Page() {
             <div className="flex justify-between">
               <span>Total</span>
               <span>
-                {formatCurrency(
-                  order.subtotal + order.shippingPrice - order.discountedPrice
-                )}
+                {formatCurrency(order.subtotal + order.shippingPrice)}
               </span>
             </div>
           </div>

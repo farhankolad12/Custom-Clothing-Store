@@ -44,7 +44,7 @@ function Page() {
     if (cartItems?.coupon) {
       (async () => {
         await fetch(process.env.NEXT_PUBLIC_BACKEND_HOSTNAME + "/check-code", {
-          body: JSON.stringify({ code: cartItems.coupon.code }),
+          body: JSON.stringify({ code: cartItems.coupon?.code }),
           credentials: "include",
           method: "POST",
           headers: {
@@ -90,9 +90,9 @@ function Page() {
           ...prev,
           coupon: res.coupon,
           discountedPrice:
-            res.coupon.type === "fixed"
-              ? res.coupon.discount
-              : (res.coupon.discount / 100) * prev.subTotalPrice,
+            res.coupon?.type === "fixed"
+              ? res.coupon?.discount
+              : (res.coupon?.discount / 100) * prev.subTotalPrice,
         };
       });
 

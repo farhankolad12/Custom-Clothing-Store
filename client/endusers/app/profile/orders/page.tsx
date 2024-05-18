@@ -65,9 +65,7 @@ function Page() {
                   {order.status[order.status.length - 1].name}
                 </td>
                 <td className={classes}>
-                  {formatCurrency(
-                    order.subtotal + order.shippingPrice - order.discountedPrice
-                  )}
+                  {formatCurrency(order.subtotal + order.shippingPrice)}
                 </td>
                 <td className={classes}>
                   <button

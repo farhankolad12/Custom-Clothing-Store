@@ -294,9 +294,7 @@ export default function InvoicePDF({
               fontSize: "1.2rem",
             }}
           >
-            {formatCurrency(
-              order.subtotal + order.shippingPrice - order.discountedPrice
-            )}
+            {formatCurrency(order.subtotal + order.shippingPrice)}
           </span>
         </div>
       </div>
