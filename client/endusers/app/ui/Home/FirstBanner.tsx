@@ -92,6 +92,8 @@ export default function FirstBanner() {
         >
           <div className="featured-box bg-gray-100 relative z-50 lg:h-auto h-96 lg:w-1/2 w-full group">
             <Image
+              unoptimized
+              quality={100}
               src={data?.featuredProducts[0]?.images[0].link || ""}
               style={{
                 mixBlendMode: "multiply",
@@ -192,6 +194,8 @@ export default function FirstBanner() {
             }}
           >
             <Image
+              unoptimized
+              quality={100}
               style={{
                 mixBlendMode: "multiply",
                 objectFit: "cover",

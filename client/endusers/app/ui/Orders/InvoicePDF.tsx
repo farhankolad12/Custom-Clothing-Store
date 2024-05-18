@@ -53,6 +53,8 @@ export default function InvoicePDF({
           }}
         >
           <Image
+            unoptimized
+            quality={100}
             src="https://www.essentialsbyla.com/logo-withbg.png"
             alt="Logo"
             width={100}

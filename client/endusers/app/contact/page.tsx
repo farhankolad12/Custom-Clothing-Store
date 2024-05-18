@@ -47,6 +47,8 @@ export default function Page() {
       <main>
         <div className="relative">
           <Image
+            unoptimized
+            quality={100}
             src="/contact1.jpeg"
             className="h-96 lg:h-screen"
             width={0}

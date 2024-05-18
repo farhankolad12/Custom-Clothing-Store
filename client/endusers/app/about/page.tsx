@@ -33,6 +33,7 @@ export default function Page() {
         <main>
           <div className="relative">
             <Image
+              unoptimized
               title="About"
               src={data.topImage.link}
               className="h-96 lg:h-screen"
@@ -62,6 +63,7 @@ export default function Page() {
             </div>
             <div className="w-full lg:my-0 my-10">
               <Image
+                unoptimized
                 title={data.firstAbout.title}
                 src={data.firstAbout.img.link}
                 width={0}
@@ -88,6 +90,7 @@ export default function Page() {
             </div>
             <div className="w-full lg:my-0 my-10">
               <Image
+                unoptimized
                 src={data.secondAbout.img.link}
                 width={0}
                 height={0}
@@ -107,6 +110,7 @@ export default function Page() {
               </button>
               {data?.videoSection.thumbnail && (
                 <Image
+                  unoptimized
                   src={data?.videoSection.thumbnail.link}
                   width={0}
                   height={0}

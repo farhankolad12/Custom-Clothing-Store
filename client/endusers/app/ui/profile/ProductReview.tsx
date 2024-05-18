@@ -27,6 +27,8 @@ export default function ProductReview({
       <div className="flex justify-between items-center">
         <strong className="uppercase">{review.name}</strong>
         <Image
+          unoptimized
+          quality={100}
           src={review.images[0].link}
           alt={review.name}
           className="rounded"

@@ -4,6 +4,7 @@ import "./globals.css";
 import AuthProvider from "./context/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
 import ToastProvider from "./ui/ToastProvider";
+import Script from "next/script";
 
 const montserrat = Montserrat({
   weight: ["400", "500", "700"],
@@ -145,7 +146,10 @@ export default function RootLayout({
         <AuthProvider>
           <ToastProvider>{children}</ToastProvider>
         </AuthProvider>
-        <script src="https://checkout.razorpay.com/v1/checkout.js" defer />
+        <Script
+          src="https://checkout.razorpay.com/v1/checkout.js"
+          strategy="lazyOnload"
+        />
       </body>
     </html>
   );

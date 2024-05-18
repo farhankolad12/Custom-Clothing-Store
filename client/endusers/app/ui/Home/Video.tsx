@@ -29,6 +29,8 @@ export default function Video() {
           </button>
           {data?.homePageContent?.videoSection.thumbnailImg && (
             <Image
+              unoptimized
+              quality={100}
               src={data?.homePageContent?.videoSection.thumbnailImg.link}
               width={0}
               height={0}

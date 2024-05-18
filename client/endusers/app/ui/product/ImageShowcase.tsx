@@ -16,6 +16,8 @@ export default function ImageShowcase({
     <div className="flex flex-col w-lg-50 border-2">
       <div className="overflow-hidden inline-block">
         <Image
+          unoptimized
+          quality={100}
           className="w-full h-full transition transition-transform hover:scale-150 cursor-pointer"
           src={selectedImg.link}
           alt={product.name}
@@ -46,6 +48,8 @@ export default function ImageShowcase({
                 onClick={() => setSelectedImg(img)}
               >
                 <Image
+                  unoptimized
+                  quality={100}
                   alt={product.name}
                   title={product.name}
                   width={150}

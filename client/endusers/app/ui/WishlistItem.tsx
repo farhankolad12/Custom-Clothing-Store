@@ -50,6 +50,8 @@ export default function WishlistItem({
           )}
         </button>
         <Image
+          unoptimized
+          quality={100}
           src={wishlist.images[0].link}
           alt={wishlist.name}
           title={wishlist.name}

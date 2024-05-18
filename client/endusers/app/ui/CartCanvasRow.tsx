@@ -74,6 +74,8 @@ export default function CartCanvasRow({ product }: { product: ProductType }) {
     <div className="flex items-start justify-between">
       <div className="flex items-center gap-4">
         <Image
+          unoptimized
+          quality={100}
           src={product.images[0].link}
           width={100}
           height={100}

@@ -49,6 +49,8 @@ export default function Page() {
         </div>
         <div className="mt-10">
           <Image
+            unoptimized
+            quality={100}
             src={blog.image.link}
             alt={blog.title}
             width={0}

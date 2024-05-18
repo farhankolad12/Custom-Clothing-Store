@@ -127,6 +127,8 @@ function Page() {
                     <td className="p-4 border-b border-blue-gray-50">
                       <div className="flex gap-2 items-center">
                         <Image
+                          unoptimized
+                          quality={100}
                           src={product.images[0].link}
                           width={100}
                           height={100}

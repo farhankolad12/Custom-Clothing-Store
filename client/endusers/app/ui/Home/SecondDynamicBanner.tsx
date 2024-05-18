@@ -29,6 +29,8 @@ export default function SecondDynamicBanner() {
     data?.homePageContent?.secondBanner && (
       <div className="relative">
         <Image
+          unoptimized
+          quality={100}
           src={data?.homePageContent?.secondBanner?.img.link}
           width={0}
           height={0}

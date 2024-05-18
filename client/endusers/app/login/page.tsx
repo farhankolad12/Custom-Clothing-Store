@@ -51,6 +51,8 @@ export default function Page() {
         <div className="flex justify-center">
           <Link shallow={true} href="/">
             <Image
+              unoptimized
+              quality={100}
               src="https://www.essentialsbyla.com/logo.png"
               alt="Logo"
               width={200}
