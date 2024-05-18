@@ -30,7 +30,6 @@ export default function Page() {
                   >
                     <div className="overflow-hidden">
                       <Image
-                        unoptimized
                         src={category.bannerImg.link}
                         width={0}
                         height={0}

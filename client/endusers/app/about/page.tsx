@@ -33,7 +33,6 @@ export default function Page() {
         <main>
           <div className="relative">
             <Image
-              unoptimized
               title="About"
               src={data.topImage.link}
               className="h-96 lg:h-screen"
@@ -69,7 +68,6 @@ export default function Page() {
                 height={0}
                 style={{ width: "100%", height: "700px", objectFit: "cover" }}
                 alt={data.firstAbout.title}
-                unoptimized
               />
             </div>
           </section>
@@ -96,7 +94,6 @@ export default function Page() {
                 style={{ width: "100%", height: "700px", objectFit: "cover" }}
                 alt={data.secondAbout.title}
                 title={data.secondAbout.title}
-                unoptimized
               />
             </div>
           </section>
@@ -117,7 +114,6 @@ export default function Page() {
                   // className="w-full h-1/2"
                   alt="Video"
                   title="Video"
-                  unoptimized
                 />
               )}
             </div>

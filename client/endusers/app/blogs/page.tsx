@@ -112,7 +112,6 @@ export default function Page() {
                       alt={blog.title}
                       width={0}
                       height={0}
-                      unoptimized
                       className="w-[80px] h-[80px]"
                       style={{ objectFit: "cover" }}
                     />
@@ -143,7 +142,6 @@ export default function Page() {
                     return (
                       <div key={blog._id} className="w-full">
                         <Image
-                          unoptimized
                           src={blog.image.link}
                           width={0}
                           height={500}

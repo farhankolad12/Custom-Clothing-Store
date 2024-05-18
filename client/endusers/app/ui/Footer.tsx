@@ -122,7 +122,7 @@ export default function Footer() {
             title="Logo"
             className="lg:w-1/6 w-full lg:h-auto h-50"
             width={0}
-            unoptimized
+            
             height={0}
           />
           <div className="flex lg:flex-row flex-col gap-10">

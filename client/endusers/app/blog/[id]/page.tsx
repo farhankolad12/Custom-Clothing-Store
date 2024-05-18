@@ -54,7 +54,6 @@ export default function Page() {
             width={0}
             height={0}
             className="w-full h-auto"
-            unoptimized
           />
           <div className="my-6">
             <div className="flex gap-3 mb-5">

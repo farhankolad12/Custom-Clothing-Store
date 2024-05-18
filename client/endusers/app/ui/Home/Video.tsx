@@ -36,7 +36,6 @@ export default function Video() {
               // className="w-full h-1/2"
               alt="Video"
               title="Video"
-              unoptimized
             />
           )}
         </div>

@@ -16,7 +16,6 @@ export default function ImageShowcase({
     <div className="flex flex-col w-lg-50 border-2">
       <div className="overflow-hidden inline-block">
         <Image
-          unoptimized
           className="w-full h-full transition transition-transform hover:scale-150 cursor-pointer"
           src={selectedImg.link}
           alt={product.name}

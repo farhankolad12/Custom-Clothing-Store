@@ -13,7 +13,6 @@ export default function Logo() {
         className="text-5xl"
       >
         <Image
-          unoptimized
           src="/logo.png"
           alt="Logo"
           title="Logo"

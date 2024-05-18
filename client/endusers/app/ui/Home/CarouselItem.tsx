@@ -17,7 +17,6 @@ export default function CarouselItem({
   return (
     <div className="relative">
       <Image
-        unoptimized
         style={{ width: "100%", height: "700px", objectFit: "cover" }}
         width={0}
         height={0}
