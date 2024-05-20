@@ -123,7 +123,7 @@ export default function ProductOffCanvas({
       const res = await execute(formData);
 
       if (!res?.success) {
-        return toast.error("Something went wrong!" || error, {
+        return toast.error(error.toString() || error || "Something went wrong!", {
           position: "top-left",
         });
       }
