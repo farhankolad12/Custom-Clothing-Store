@@ -1,8 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useAuth } from "../context/AuthProvider";
 
 export default function Logo() {
-  return (
+  const { data, homePageContentLoading } = useAuth();
+
+  return homePageContentLoading ? (
+    "..."
+  ) : (
     <div>
       <Link
         shallow={true}
@@ -10,16 +17,14 @@ export default function Logo() {
           backgroundColor: "transparent",
         }}
         href="/"
-        className="text-5xl"
       >
         <Image
           unoptimized
           quality={100}
-          src="/logo.png"
+          src={data?.homePageContent.logo.link || "/logo.png"}
           alt="Logo"
           title="Logo"
-          className="lg:w-36 lg:h-28 w-32 h-22"
-          style={{ mixBlendMode: "multiply", objectFit: "cover" }}
+          className="lg:w-36 lg:h-28 w-[140px] h-[50px] object-cover"
           width={0}
           height={0}
         />

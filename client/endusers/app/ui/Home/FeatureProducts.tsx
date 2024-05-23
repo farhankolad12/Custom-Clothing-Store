@@ -14,7 +14,7 @@ export default function FeatureProducts() {
   return (
     <section className="my-20 flex flex-col justify-center lg:px-28 px-5">
       <h3 className="text-2xl lg:px-5 px-0">Featured Products</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+      <div className="lg:grid md:grid md:grid-cols-2 lg:grid-cols-4 flex lg:overflow-x-hidden md:overflow-x-hidden overflow-x-scroll gap-0">
         {homePageContentLoading
           ? [...new Array(4)].map(() => {
               return <ProductSkeleton key={Math.random()} />;

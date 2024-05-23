@@ -97,16 +97,15 @@ export default function Page() {
         <h1 className="text-4xl mt-5 uppercase">
           {slug.replaceAll("%20", " ")}
         </h1>
-        <div className="lg:hidden flex justify-between">
+        <div className="lg:hidden flex w-full items-center gap-3 justify-between">
           <button
             onClick={() => setOpenDrawer(true)}
-            className="flex items-start"
+            className="flex items-start w-full"
           >
             <i className="bi bi-sliders" /> &nbsp;&nbsp; Filter & Sort
           </button>
-          <span className="uppercase font-bold text-xs">
-            showing {collection?.startDocument}-{collection?.lastDocument} of{" "}
-            {collection?.totalDocuments} results
+          <span className="uppercase font-bold w-full text-xs text-end">
+            {collection?.totalDocuments} Products
           </span>
         </div>
         <section className="lg:flex flex-wrap items-center gap-5 hidden mt-10">
@@ -186,8 +185,7 @@ export default function Page() {
             </Select>
           </div>
           <span className="uppercase font-bold text-xs">
-            showing {collection?.startDocument}-{collection?.lastDocument} of{" "}
-            {collection?.totalDocuments} results
+            {collection?.totalDocuments} products
           </span>
         </section>
         {searchParams.size ? (
@@ -285,7 +283,7 @@ export default function Page() {
                 );
               })}
             </section>
-            <div className="flex items-center flex-wrap gap-2 my-10 justify-center items-ceter">
+            <div className="flex items-center flex-wrap gap-2 my-10 justify-center items-center">
               {[...Array(collection.totalPages)].map((c, ind) => {
                 return (
                   <button

@@ -6,6 +6,7 @@ import AboutPageSetting from "../ui/setting/AboutPageSetting";
 import HomePageSetting from "../ui/setting/HomePageSetting";
 import PrivacyPageSetting from "../ui/setting/PrivacyPageSetting";
 import withAuth from "../utils/PrivateRoutes";
+import Setting from "../ui/setting/Setting";
 
 function Page() {
   const {
@@ -91,6 +92,20 @@ function Page() {
               Privacy Policy and T&C
             </button>
           </li>
+          <li className="nav-item" role="presentation">
+            <button
+              className="nav-link w-100  border-black border-start border-end rounded-0 text-white py-3"
+              id="pills-settings-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#pills-settings"
+              type="button"
+              role="tab"
+              aria-controls="pills-settings"
+              aria-selected="false"
+            >
+              Settings
+            </button>
+          </li>
         </ul>
         <div className="tab-content" id="pills-tabContent">
           {loading || _loading || __loading ? (
@@ -100,6 +115,7 @@ function Page() {
               <HomePageSetting data={homeData} />
               <AboutPageSetting data={aboutData} />
               <PrivacyPageSetting data={privacyTermsData} />
+              <Setting data={homeData} />
             </>
           )}
         </div>

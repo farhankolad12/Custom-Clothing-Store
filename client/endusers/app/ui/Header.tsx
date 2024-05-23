@@ -30,7 +30,7 @@ export default function Header() {
     <>
       <header className="flex flex-col">
         <div className="flex justify-center bg-[#2f3324] w-full items-center py-2 px-10 text-center">
-          <span className="text-white text-sm">
+          <span className="text-white lg:text-sm text-xs">
             {data?.homePageContent?.headerText
               ? data?.homePageContent?.headerText
               : "Loading..."}
@@ -39,7 +39,7 @@ export default function Header() {
 
         <section className="desktop-header">
           <nav
-            className={`bg-white flex justify-between lg:px-[12rem] lg:items-center w-full lg:border-0 border-b px-[1rem]`}
+            className={`bg-white flex justify-between lg:px-[12rem] lg:items-center w-full lg:py-0 py-3 lg:border-0 border-b px-[1rem]`}
           >
             <div className="lg:hidden flex">
               <button
@@ -66,7 +66,7 @@ export default function Header() {
                 <CustomLink name="Blogs" to="/blogs" />
               </ul>
             </div>
-            <ul className="flex justify-center items-center gap-4 lg:gap-4">
+            <ul className="flex justify-center items-center gap-3">
               <li>
                 <button
                   onClick={handleSearchOpen}

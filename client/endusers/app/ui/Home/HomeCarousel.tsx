@@ -5,7 +5,7 @@ import CarouselH from "./Carousel";
 
 export default function HomeCarousel() {
   return (
-    <section className="w-full">
+    <section className="w-full overflow-hidden">
       <ThemeProvider>
         <CarouselH />
       </ThemeProvider>

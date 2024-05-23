@@ -206,21 +206,21 @@ export default function ProductList({
             <Link
               shallow={true}
               href={`/product/${product._id}`}
-              className="text-gray-700 text-sm"
+              className="text-gray-700 text-xs"
             >
               Essentials By LA
             </Link>
             <Link
               shallow={true}
               href={`/product/${product._id}`}
-              className="fw-bold uppercase"
+              className="fw-bold lg:text-sm text-xs uppercase"
             >
               {product.name}
             </Link>
             <Link
               shallow={true}
               href={`/product/${product._id}`}
-              className="text-gray-700 font-bold text-sm"
+              className="text-gray-700 font-bold lg:text-sm text-xs"
             >
               {product.category}
             </Link>
