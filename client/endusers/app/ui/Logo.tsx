@@ -21,7 +21,7 @@ export default function Logo() {
         <Image
           unoptimized
           quality={100}
-          src={data?.homePageContent.logo.link || "/logo.png"}
+          src={data?.homePageContent.logo?.link || "/logo.png"}
           alt="Logo"
           title="Logo"
           className="lg:w-36 lg:h-28 w-[140px] h-[50px] object-cover"
