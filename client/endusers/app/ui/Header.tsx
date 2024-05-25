@@ -77,14 +77,12 @@ export default function Header() {
                 </button>
               </li>
               <li className="lg:flex hidden">
-                <button
+                <Link
                   className="font-bold bg-transparent"
-                  onClick={() =>
-                    router.push(currentUser ? "/profile" : "/login")
-                  }
+                  href={currentUser ? "/profile" : "/login"}
                 >
                   <i className=" text-xl bi bi-person hover:text-2xl transition" />
-                </button>
+                </Link>
               </li>
               <li className="relative">
                 <button
@@ -120,7 +118,7 @@ export default function Header() {
           <CustomMobileLink icon="grid" name="Collections" to="/collections" />
           <CustomMobileLink
             icon="person"
-            name="Account"
+            name={currentUser ? "Account" : "Login"}
             to={currentUser ? "/profile" : "/login"}
           />
           <CustomMobileLink icon="chat-left-text" name="Blogs" to="/blogs" />

@@ -6,11 +6,13 @@ import { FormEvent, useRef, useState } from "react";
 import usePostReq from "../hooks/usePostReq";
 import { toast } from "react-toastify";
 import { Spinner } from "@material-tailwind/react";
+import { useAuth } from "../context/AuthProvider";
 
 export default function Page() {
   const [success, setSuccess] = useState("");
 
   const { execute, loading } = usePostReq("/reset-password");
+  const { data } = useAuth();
 
   const emailRef = useRef<HTMLInputElement>(null!);
 
@@ -38,7 +40,10 @@ export default function Page() {
             <Image
               unoptimized
               quality={100}
-              src="https://www.essentialsbyla.com/logo.png"
+              src={
+                data?.homePageContent.logo?.link ||
+                "https://www.essentialsbyla.com/logo.png"
+              }
               alt="Logo"
               width={200}
               height={200}

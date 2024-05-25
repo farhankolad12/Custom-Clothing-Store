@@ -20,7 +20,7 @@ export default function Page() {
   const repPassRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
-  const { setCurrentUser, currentUser } = useAuth();
+  const { setCurrentUser, currentUser, data } = useAuth();
   const { execute, loading, error } = usePostReq("/register");
 
   useEffect(() => {
@@ -69,7 +69,10 @@ export default function Page() {
             <Image
               unoptimized
               quality={100}
-              src="https://www.essentialsbyla.com/logo.png"
+              src={
+                data?.homePageContent.logo?.link ||
+                "https://www.essentialsbyla.com/logo.png"
+              }
               alt="Logo"
               width={200}
               height={200}

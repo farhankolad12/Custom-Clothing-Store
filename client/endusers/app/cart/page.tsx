@@ -340,12 +340,13 @@ function Page() {
                 <h1 className="font-bold uppercase">your cart is empty</h1>
               </div>
               <div className="flex justify-center w-full my-10">
-                <button
+                <Link
+                  shallow={true}
                   className="border-2 px-10 py-3 border-black uppercase font-bold hover:bg-black hover:text-white transition"
-                  onClick={() => router.push("/shop")}
+                  href="/shop"
                 >
                   return to shop
-                </button>
+                </Link>
               </div>
             </div>
           )}

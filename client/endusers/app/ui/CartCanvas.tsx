@@ -5,6 +5,7 @@ import { ProductType } from "../definations";
 import CartCanvasRow from "./CartCanvasRow";
 import { formatCurrency } from "../utils/formatCurrency";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function CartCanvas({
   openCart,
@@ -44,12 +45,12 @@ export default function CartCanvas({
               ) : (
                 <div className="text-center">
                   <h3 className="font-bold uppercase">your cart is empty</h3>
-                  <button
-                    onClick={() => router.push("/shop")}
+                  <Link
+                    href="/shop"
                     className="border-2 border-black uppercase py-3 hover:bg-black hover:text-white transition px-20 mt-4"
                   >
                     shop now
-                  </button>
+                  </Link>
                 </div>
               )}
             </div>
@@ -82,12 +83,12 @@ export default function CartCanvas({
                   </strong>
                 </div>
               </div>
-              <button
-                onClick={() => router.push("/cart")}
+              <Link
+                href="/cart"
                 className="border-2 border-black uppercase py-3 hover:bg-black hover:text-white transition w-full mt-4"
               >
                 View cart & checkout
-              </button>
+              </Link>
             </div>
           ) : (
             ""

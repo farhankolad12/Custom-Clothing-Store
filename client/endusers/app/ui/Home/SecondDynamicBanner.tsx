@@ -2,6 +2,7 @@
 
 import { useAuth } from "@/app/context/AuthProvider";
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function SecondDynamicBanner() {
@@ -56,16 +57,14 @@ export default function SecondDynamicBanner() {
             </div>
           </div>
           <div className="absolute lg:top-0 lg:bottom-[-16rem] lg:right-0 lg:left-0 top-0 left-auto right-0 bottom-auto flex justify-center items-center">
-            <button
-              onClick={() =>
-                router.push(data?.homePageContent?.secondBanner?.buttonLink)
-              }
+            <Link
+              href={data?.homePageContent?.secondBanner?.buttonLink}
               style={{ backgroundColor: "rgba(237,219,178,0.9)" }}
               className="text-[#5C4033] bg-[#e9e2d2] transition px-16 py-5 font-bold"
               type="button"
             >
               {data?.homePageContent?.secondBanner?.buttonName}
-            </button>
+            </Link>
           </div>
         </div>
       </div>

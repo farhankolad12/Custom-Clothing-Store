@@ -173,12 +173,12 @@ export default function Page() {
                             {blog.title}
                           </h2>
                           <p className="my-6">{blog.shortDescription}</p>
-                          <button
-                            onClick={() => router.push(`/blog/${blog._id}`)}
+                          <Link
+                            href={`/blog/${blog._id}`}
                             className="border-2 border-black py-5 px-10 uppercase hover:bg-black hover:text-white transition w-auto"
                           >
                             read more
-                          </button>
+                          </Link>
                         </div>
                       </div>
                     );

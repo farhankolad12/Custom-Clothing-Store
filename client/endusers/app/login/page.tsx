@@ -16,7 +16,7 @@ export default function Page() {
   const router = useRouter();
 
   const { error, execute, loading } = usePostReq("/login");
-  const { setCurrentUser, setCartItems, currentUser } = useAuth();
+  const { setCurrentUser, setCartItems, currentUser, data } = useAuth();
 
   useEffect(() => {
     if (currentUser) {
@@ -53,7 +53,10 @@ export default function Page() {
             <Image
               unoptimized
               quality={100}
-              src="https://www.essentialsbyla.com/logo.png"
+              src={
+                data?.homePageContent.logo?.link ||
+                "https://www.essentialsbyla.com/logo.png"
+              }
               alt="Logo"
               width={200}
               height={200}

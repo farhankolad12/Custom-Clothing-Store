@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function CarouselItem({
@@ -45,14 +46,14 @@ export default function CarouselItem({
             </h1>
             <span className="my-4 font-bold">{slider.description}</span>
           </div>
-          <button
+          <Link
             style={{ backgroundColor: "rgba(237,219,178,0.9)" }}
-            onClick={() => router.push(slider.buttonLink)}
+            href={slider.buttonLink}
             className="lg:text-black-900 lg:hover:text-white lg:hover:bg-black bg-[#e9e2d2] lg:bg-transparent border-2 border-[#724e2c] text-[#5C4033] focus:ring-4 focus:outline-none focus:ring-black-300 font-medium px-16 py-5 text-lg text-center me-auto ms-auto lg:ms-0 lg:me-auto transition mt-5"
             type="button"
           >
             {slider.buttonName}
-          </button>
+          </Link>
         </div>
       </div>
     </div>

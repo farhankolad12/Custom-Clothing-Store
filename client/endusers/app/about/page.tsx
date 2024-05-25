@@ -9,6 +9,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { Dialog } from "@material-tailwind/react";
+import Link from "next/link";
 
 export default function Page() {
   const [open, setOpen] = useState(false);
@@ -54,12 +55,13 @@ export default function Page() {
               <span className="lg:me-60 me-0">
                 {data.firstAbout.description}
               </span>
-              <button
-                onClick={() => router.push(data.firstAbout.buttonLink)}
+              <Link
+                shallow={true}
+                href={data.firstAbout.buttonLink}
                 className="border-2 px-10 py-3 border-black uppercase font-bold hover:bg-black hover:text-white transition me-auto"
               >
                 {data.firstAbout.buttonName}
-              </button>
+              </Link>
             </div>
             <div className="w-full lg:my-0 my-10">
               <Image
@@ -81,12 +83,13 @@ export default function Page() {
               <span className="lg:ms-60 ms-0">
                 {data.secondAbout.description}
               </span>
-              <button
-                onClick={() => router.push(data.secondAbout.buttonLink)}
+              <Link
+                shallow={true}
+                href={data.secondAbout.buttonLink}
                 className="border-2 px-10 py-3 border-black uppercase font-bold hover:bg-black hover:text-white transition lg:ms-auto me-auto lg:mb-0 mb-5"
               >
                 {data.secondAbout.buttonName}
-              </button>
+              </Link>
             </div>
             <div className="w-full lg:my-0 my-10">
               <Image

@@ -9,6 +9,7 @@ import ProductList from "@/app/ui/Home/ProductList";
 import FilterSortDrawer from "@/app/ui/collections/FilterSortDrawer";
 import { formatCurrency } from "@/app/utils/formatCurrency";
 import { Option, Select } from "@material-tailwind/react";
+import Link from "next/link";
 import {
   notFound,
   useParams,
@@ -309,12 +310,9 @@ export default function Page() {
         ) : (
           <div className="text-2xl text-center my-10">
             <h3>No products found</h3>
-            <button
-              className="underline"
-              onClick={() => router.push(`/collections/${slug}`)}
-            >
+            <Link className="underline" href={`/collections/${slug}`}>
               Use fewer filters or remove all
-            </button>
+            </Link>
           </div>
         )}
       </main>

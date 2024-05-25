@@ -4,6 +4,7 @@ import { useGetReq } from "@/app/hooks/useGetReq";
 import LoadingSkeleton from "@/app/loading";
 import withAuth from "@/app/utils/PrivateRoutes";
 import { formatCurrency } from "@/app/utils/formatCurrency";
+import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { toast } from "react-toastify";
 
@@ -68,12 +69,13 @@ function Page() {
                   {formatCurrency(order.subtotal + order.shippingPrice)}
                 </td>
                 <td className={classes}>
-                  <button
-                    onClick={() => router.push(`/profile/orders/${order._id}`)}
+                  <Link
+                    shallow={true}
+                    href={`/profile/orders/${order._id}`}
                     className="border-2 border-black font-bold uppercase hover:bg-black hover:text-white rounded transition px-4 py-2"
                   >
                     view order
-                  </button>
+                  </Link>
                 </td>
               </tr>
             );
@@ -96,10 +98,8 @@ function Page() {
                   <div className="flex items-center flex-wrap gap-2">
                     {[...Array(data.totalPages)].map((c, ind) => {
                       return (
-                        <button
-                          onClick={() =>
-                            router.push(`/profile/orders?page=${ind + 1}`)
-                          }
+                        <Link
+                          href={`/profile/orders?page=${ind + 1}`}
                           key={ind}
                           className={`border-2 border-black p-3 transition hover:bg-black hover:text-white rounded ${
                             (!searchParams.get("page") && ind === 0) ||
@@ -109,7 +109,7 @@ function Page() {
                           }`}
                         >
                           {ind + 1}
-                        </button>
+                        </Link>
                       );
                     })}
                   </div>

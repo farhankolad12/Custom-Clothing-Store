@@ -5,6 +5,7 @@ import { Drawer } from "@material-tailwind/react";
 import { onClose } from "@material-tailwind/react/types/components/alert";
 import { CustomLink } from "../Header";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 export default function CategoryDrawer({
   open,
@@ -13,9 +14,7 @@ export default function CategoryDrawer({
   open: boolean;
   closeDrawer: onClose;
 }) {
-  const { data } = useAuth();
-
-  const router = useRouter();
+  const { data, currentUser } = useAuth();
 
   return (
     <Drawer
@@ -46,9 +45,10 @@ export default function CategoryDrawer({
           </ul>
         </div>
         <div className="bg-[#f8f8f8] p-[2rem] w-full flex flex-col gap-4 items-start">
-          <button onClick={() => router.push("/login")}>
-            <i className="bi bi-person text-2xl" /> &nbsp; Log in
-          </button>
+          <Link href={currentUser ? "/profile" : "/login"}>
+            <i className="bi bi-person text-2xl" /> &nbsp;{" "}
+            {currentUser ? "Profile" : "Log in"}
+          </Link>
           <div className="flex gap-[2rem]">
             <a
               target="_blank"
