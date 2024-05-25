@@ -11,6 +11,13 @@ const montserrat = Montserrat({
   subsets: ["latin"],
 });
 
+declare global {
+  interface Window {
+    // ⚠️ notice that "Window" is capitalized here
+    dataLayer: any;
+  }
+}
+
 export const metadata: Metadata = {
   title: {
     default: "Essentials By LA",
@@ -27,7 +34,9 @@ export const metadata: Metadata = {
     images: {
       url: "/open-graph-img.jpeg",
     },
+    siteName: "Essentials by LA",
   },
+
   twitter: {
     card: "summary_large_image",
   },
@@ -39,7 +48,7 @@ export const metadata: Metadata = {
     "tote bags embroidered",
     "t-shirt tote bag",
     "personalised tote bags india",
-    "printed tote bag",
+    "printed tote bags",
     "q-tees tote bags",
     "reusable bag from t-shirt",
     "customized t shirts near me",
@@ -90,6 +99,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-0B0VE36B84"
+        />
+        <script defer src="/google-analytics-script.js" />
         <link rel="canonical" href="https://www.essentialsbyla.com" />
         <meta
           httpEquiv="Content-Security-Policy"
