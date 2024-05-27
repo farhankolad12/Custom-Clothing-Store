@@ -81,8 +81,6 @@ export default async function Layout({
 
   const product = await (productRes.status === 200 && productRes?.json());
 
-  console.log(product);
-
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -95,13 +93,17 @@ export default async function Layout({
     datePublished: new Date(product?.createdAt).toLocaleDateString(),
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: product?.totalRating ? product.totalRating.toString() : "0",
-      reviewCount: product?.reviews ? product.reviews.length.toString() : "0",
+      ratingValue: await (product?.totalRating
+        ? product.totalRating.toString()
+        : "0"),
+      reviewCount: await (product?.reviews
+        ? product.reviews.length.toString()
+        : "0"),
     },
     offers: {
       "@type": "Offer",
       availability: "https://schema.org/InStock",
-      price: product?.combinations[0].salePrice.toString(),
+      price: product?.combinations?.[0].salePrice.toString(),
       priceCurrency: "INR",
     },
     review: product?.reviews?.map((review: any) => {
