@@ -71,6 +71,9 @@ export default async function Layout({
   ).catch(() => notFound());
 
   const product = productRes.status === 200 && (await productRes?.json());
+
+  console.log(product?.totalRating);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
@@ -78,7 +81,7 @@ export default async function Layout({
     url: "https://www.essentialsbyla.com/product/" + product?._id,
     alternateName: "Essentials By LA",
     name: "Buy " + product?.name,
-    image: product?.images?.[0].link,
+    image: product?.images?.map((img: any) => img.link),
     description: product?.shortDescription,
     datePublished: new Date(product?.createdAt).toLocaleDateString(),
     aggregateRating: {
@@ -98,7 +101,7 @@ export default async function Layout({
         author: review.username,
         datePublished: new Date(review.createdAt).toLocaleString(),
         reviewBody: review.message,
-        name: "Not a happy camper",
+        name: review.name,
         reviewRating: {
           "@type": "Rating",
           bestRating: "5",
