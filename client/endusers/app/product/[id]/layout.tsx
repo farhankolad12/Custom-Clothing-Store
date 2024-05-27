@@ -70,7 +70,7 @@ export default async function Layout({
     `${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/product?id=${id}`
   ).catch(() => notFound());
 
-  const product = productRes.status === 200 && (await productRes?.json());
+  const product = await (productRes.status === 200 && productRes?.json());
 
   console.log(product);
 
