@@ -72,7 +72,7 @@ export default async function Layout({
 
   const product = productRes.status === 200 && (await productRes?.json());
 
-  console.log(product?.totalRating);
+  console.log(product);
 
   const jsonLd = {
     "@context": "https://schema.org",
