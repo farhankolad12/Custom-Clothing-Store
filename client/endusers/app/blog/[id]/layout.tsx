@@ -69,15 +69,58 @@ export default async function Layout({
   const blog = blogRes.status === 200 && (await blogRes?.json());
 
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "BlogPage",
-    "@id": "https://www.essentialsbyla.com/blog/" + blog?.title,
-    url: "https://www.essentialsbyla.com/blog/" + blog?.title,
-    alternateName: "Essentials By LA",
+    "@context": "https://schema.org/",
+    "@type": "BlogPosting",
+    "@id": "https://essentialsbyla.com/" + blog?._id,
+    mainEntityOfPage: "https://essentialsbyla.com/",
+    headline: blog?.title,
     name: blog?.title,
-    image: blog?.image?.link,
     description: blog?.shortDescription,
-    datePublished: new Date(blog.createdAt).toLocaleDateString(),
+    datePublished: new Date(blog?.createdAt).toLocaleString(),
+    author: {
+      "@type": "Person",
+      "@id": "https://essentialsbyla.com",
+      name: "Laraib Siddique",
+      url: "https://essentialsbyla.com",
+      image: {
+        "@type": "ImageObject",
+        "@id": blog?.image?.link,
+        url: blog?.image?.link,
+        height: "96",
+        width: "96",
+      },
+    },
+    publisher: {
+      "@type": "Organization",
+      "@id": "https://essentialsbyla.com",
+      name: "Laraib Siddique",
+      logo: {
+        "@type": "ImageObject",
+        "@id": "https://www.essentialsbyla.com/logo.png",
+        url: "https://www.essentialsbyla.com/logo.png",
+        width: "600",
+        height: "60",
+      },
+    },
+    image: {
+      "@type": "ImageObject",
+      "@id": blog?.image?.link,
+      url: blog?.image?.link,
+      height: "362",
+      width: "388",
+    },
+    url: "https://essentialsbyla.com",
+    about: [
+      {
+        "@type": blog?.category,
+        "@id": `https://essentialsbyla.com/collections/${blog?.category}/`,
+        name: blog?.category,
+      },
+    ],
+    keywords: [
+      ...(blog?.tags?.map((b: any) => b.tag) || ""),
+      "Essentials By La Blogs",
+    ],
   };
   return (
     <>

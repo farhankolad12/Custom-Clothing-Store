@@ -29,7 +29,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     },
     openGraph: {
       type: "website",
-      title: product?.title,
+      title: product?.name,
       images: product?.images?.map((img: any) => ({ url: img.link })),
       description: product?.shortDescription,
       url: `https://www.essentialsbyla.com/product/${product?._id}`,
@@ -74,13 +74,39 @@ export default async function Layout({
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Product",
-    "@id": "https://www.essentialsbyla.com/product/" + product?.name,
-    url: "https://www.essentialsbyla.com/product/" + product?.name,
+    "@id": "https://www.essentialsbyla.com/product/" + product?._id,
+    url: "https://www.essentialsbyla.com/product/" + product?._id,
     alternateName: "Essentials By LA",
-    name: "Buy " + product?.title,
-    images: product?.images?.map((img: any) => ({ url: img.link })),
+    name: "Buy " + product?.name,
+    image: product?.images?.[0].link,
     description: product?.shortDescription,
     datePublished: new Date(product?.createdAt).toLocaleDateString(),
+    aggregateRating: {
+      "@type": "AggregateRating",
+      ratingValue: product?.totalRating.toString() || "0",
+      reviewCount: product?.reviews?.length.toString() || "0",
+    },
+    offers: {
+      "@type": "Offer",
+      availability: "https://schema.org/InStock",
+      price: product?.combinations[0].salePrice.toString(),
+      priceCurrency: "INR",
+    },
+    review: product?.reviews.map((review: any) => {
+      return {
+        "@type": "Review",
+        author: review.username,
+        datePublished: new Date(review.createdAt).toLocaleString(),
+        reviewBody: review.message,
+        name: "Not a happy camper",
+        reviewRating: {
+          "@type": "Rating",
+          bestRating: "5",
+          ratingValue: review.rating.toString(),
+          worstRating: "1",
+        },
+      };
+    }),
   };
   return (
     <>

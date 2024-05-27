@@ -63,15 +63,16 @@ export default async function Layout({
   const data = await res.json();
 
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "@id": "https://www.essentialsbyla.com/collections/" + data?.name,
-    url: "https://www.essentialsbyla.com/collections/" + data?.name,
-    alternateName: "Essentials By LA",
-    name: "Buy " + data?.name,
-    image: data?.bannerImg.link,
-    description: data?.description,
-    datePublished: new Date(data?.createdAt).toLocaleDateString(),
+    "@context": "https://schema.org/",
+    "@type": "CategoryCodeSet",
+    "@id": data?.name,
+    name: data?.name,
+    hasCategoryCode: {
+      "@type": "CategoryCode",
+      name: data?.name,
+      description: data?.description,
+      inCodeSet: data?.name,
+    },
   };
 
   return (
