@@ -109,7 +109,10 @@ export default async function Layout({
     review: product?.reviews?.map((review: any) => {
       return {
         "@type": "Review",
-        author: review.username,
+        author: {
+          "@type": "Person",
+          name: review.username,
+        },
         datePublished: new Date(review.createdAt).toLocaleString(),
         reviewBody: review.message,
         name: review.name,
