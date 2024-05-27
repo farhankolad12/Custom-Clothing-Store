@@ -152,13 +152,15 @@ exports.getProduct = catchAsyncErrors(async (req, res, next) => {
   let totalRating = 0;
   let productReviews = [];
   let relatedProducts = [];
+  let sumOfRating = 0;
 
   if (product) {
     productReviews = await Reviews.find({ productId: product?._id });
     const sumOfMaxRatingOfUserCount = productReviews.length * 5;
-    const sumOfRating = productReviews.reduce((prev, review) => {
-      return prev + review.rating;
-    }, 0);
+    for (let i = 0; i < productReviews.length; i++) {
+      const review = productReviews[i];
+      sumOfRating = sumOfRating + review.rating;
+    }
 
     totalRating = Math.ceil((sumOfRating * 5) / sumOfMaxRatingOfUserCount);
   }
@@ -192,11 +194,13 @@ exports.getProduct = catchAsyncErrors(async (req, res, next) => {
   }
 
   if (!token) {
+    console.log(totalRating);
+    console.log(productReviews);
     return res.status(200).json({
-      ...product?._doc,
       reviews: productReviews,
       totalRating,
       relatedProducts,
+      ...product?._doc,
     });
   }
 
