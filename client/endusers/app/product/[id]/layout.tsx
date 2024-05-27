@@ -92,7 +92,7 @@ export default async function Layout({
       price: product?.combinations[0].salePrice.toString(),
       priceCurrency: "INR",
     },
-    review: product?.reviews.map((review: any) => {
+    review: product?.reviews?.map((review: any) => {
       return {
         "@type": "Review",
         author: review.username,
