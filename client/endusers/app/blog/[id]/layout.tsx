@@ -26,6 +26,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: blog?.image?.link,
       url: "https://essentialsbyla.com/blog/" + blog?._id,
       description: blog?.shortDescription,
+      siteName: "Essentials By LA",
+    },
+    alternates: {
+      canonical: "https://essentialsbyla.com/blog/" + blog?._id,
     },
     twitter: {
       card: "summary_large_image",
@@ -50,17 +54,38 @@ export async function generateStaticParams() {
   });
 }
 
-export default function Layout({
+export default async function Layout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { id: string };
 }>) {
+  const id = params.id;
+  const blogRes = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/blog-id?id=${id}`
+  ).catch(() => notFound());
+
+  const blog = blogRes.status === 200 && (await blogRes?.json());
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPage",
+    "@id": "https://www.essentialsbyla.com/blog/" + blog?.title,
+    url: "https://www.essentialsbyla.com/blog/" + blog?.title,
+    alternateName: "Essentials By LA",
+    name: blog?.title,
+    image: blog?.image?.link,
+    description: blog?.shortDescription,
+    datePublished: new Date(blog.createdAt).toLocaleDateString(),
+  };
   return (
     <>
-      <head>
-        <meta property="og:type" content="website" />
-      </head>
       {children}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </>
   );
 }

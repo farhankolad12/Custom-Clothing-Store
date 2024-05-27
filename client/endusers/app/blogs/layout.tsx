@@ -13,6 +13,10 @@ export const metadata: Metadata = {
     images: {
       url: "/open-graph-img1.avif",
     },
+    siteName: "Essentials By LA,",
+  },
+  alternates: {
+    canonical: "https://www.essentialsbyla.com/blogs",
   },
   twitter: {
     card: "summary_large_image",
@@ -29,21 +33,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <>
-      <head>
-        <link rel="canonical" href="https://www.essentialsbyla.com/blogs" />
-        <meta property="og:title" content="Who We Are" />
-        <meta
-          property="og:url"
-          content="https://www.essentialsbyla.com/blogs"
-        />
-
-        <meta property="og:site_name" content="IN Blogs Essentials By LA" />
-
-        <meta property="og:type" content="website" />
-      </head>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

@@ -23,20 +23,25 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       "collections of essentialsbyla",
       "essentialsbyla collections website",
     ],
-    title: data?.name + " - Essentials By LA",
-    description:
-      "Welcome to Essentials By LA Categories Page! Explore our extensive range of products carefully curated into distinct categories to enhance your shopping experience. From fashion essentials to tech gadgets, home decor to fitness gear, we have everything you need conveniently organized for effortless browsing. Discover top-quality products, unbeatable deals, and the latest trends across various categories. Start exploring now and find exactly what you're looking for, all in one place, with Essentials By LA. Shop smart, shop seamlessly, only with us!" +
-      data?.description,
+    title: {
+      absolute: "Buy " + data?.name,
+    },
+    description: data?.description,
+    alternates: {
+      canonical: "https://www.essentialsbyla.com/collections/" + data?.name,
+    },
     openGraph: {
+      siteName: "Essentials By LA",
       type: "website",
-      title: "collections",
-      url: "https://www.essentialsbyla.com/collections",
-      description:
-        "Welcome to Essentials By LA Categories Page! Explore our extensive range of products carefully curated into distinct categories to enhance your shopping experience. From fashion essentials to tech gadgets, home decor to fitness gear, we have everything you need conveniently organized for effortless browsing. Discover top-quality products, unbeatable deals, and the latest trends across various categories. Start exploring now and find exactly what you're looking for, all in one place, with Essentials By LA. Shop smart, shop seamlessly, only with us!" +
-        data?.description,
+      title: {
+        absolute: "Buy " + data?.name,
+      },
+      url: "https://www.essentialsbyla.com/collections/" + data?.name,
+      description: data?.description,
       images: {
         url: data?.bannerImg.link,
       },
+      locale: "en_US",
     },
     twitter: {
       card: "summary_large_image",
@@ -44,32 +49,38 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-export default function Layout({
+export default async function Layout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: { slug: string };
 }>) {
+  const name = params.slug;
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/category-name?name=${name}`
+  ).catch(() => notFound());
+  const data = await res.json();
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://www.essentialsbyla.com/collections/" + data?.name,
+    url: "https://www.essentialsbyla.com/collections/" + data?.name,
+    alternateName: "Essentials By LA",
+    name: "Buy " + data?.name,
+    image: data?.bannerImg.link,
+    description: data?.description,
+    datePublished: new Date(data?.createdAt).toLocaleDateString(),
+  };
+
   return (
     <>
-      <head>
-        <link
-          rel="canonical"
-          href="https://www.essentialsbyla.com/collections"
-        />
-        <meta property="og:title" content="Collections of all types" />
-        <meta
-          property="og:url"
-          content="https://www.essentialsbyla.com/collections"
-        />
-
-        <meta
-          property="og:site_name"
-          content="IN collections Essentials By LA"
-        />
-
-        <meta property="og:type" content="website" />
-      </head>
       {children}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </>
   );
 }

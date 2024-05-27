@@ -8,6 +8,9 @@ export const metadata: Metadata = {
     "Login essentialsbyla",
     "Essentials by la login",
   ],
+  alternates: {
+    canonical: "https://www.essentialsbyla.com/login",
+  },
 };
 
 export default function Layout({
@@ -15,21 +18,5 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <>
-      <head>
-        <link rel="canonical" href="https://www.essentialsbyla.com/login" />
-        <meta property="og:title" content="Login" />
-        <meta
-          property="og:url"
-          content="https://www.essentialsbyla.com/login"
-        />
-
-        <meta property="og:site_name" content="Login Essentials By LA" />
-
-        <meta property="og:type" content="website" />
-      </head>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 }

@@ -36,7 +36,9 @@ export const metadata: Metadata = {
     },
     siteName: "Essentials by LA",
   },
-
+  alternates: {
+    canonical: "https://www.essentialsbyla.com",
+  },
   twitter: {
     card: "summary_large_image",
   },
@@ -48,7 +50,7 @@ export const metadata: Metadata = {
     "tote bags embroidered",
     "t-shirt tote bag",
     "personalised tote bags india",
-    "printed tote bags",
+    "printed tote bag",
     "q-tees tote bags",
     "reusable bag from t-shirt",
     "customized t shirts near me",
@@ -88,6 +90,24 @@ export const metadata: Metadata = {
     "custom keychain ideas",
     "name customized pendant",
     "personalised party accessories",
+    "printed shirts for men",
+    "best tote bags for women luxury",
+    "best tote bags for college students",
+    "best printed t shirts",
+    "best printed hoodies",
+    "best custom hoodies",
+    "best of billie eilish",
+    "best oversized t shirt for mens",
+    "best oversized t shirt for women",
+    "best handbags in Mumbai",
+    "best handbags for women",
+    "best handbags for women under 1000",
+    "best handbags for college girl",
+    "best luxury handbags for moms",
+    "best tshirts online",
+    "best shirts for men under 500",
+    "best shirts for summer",
+    "best shirts for skinny guys",
   ],
 };
 
@@ -104,17 +124,10 @@ export default function RootLayout({
           src="https://www.googletagmanager.com/gtag/js?id=G-0B0VE36B84"
         />
         <script defer src="/google-analytics-script.js" />
-        <link rel="canonical" href="https://www.essentialsbyla.com" />
         <meta
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
-        <meta property="og:title" content="Essentials By LA: Home" />
-        <meta property="og:url" content="https://www.essentialsbyla.com" />
-
-        <meta property="og:site_name" content="IN Essentials By LA" />
-
-        <meta property="og:type" content="website" />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"

@@ -33,6 +33,10 @@ export async function generateMetadata(): Promise<Metadata> {
           url: cat.bannerImg.link,
         };
       }),
+      siteName: "Essentials By LA",
+    },
+    alternates: {
+      canonical: "https://www.essentialsbyla.com/collections",
     },
     twitter: {
       card: "summary_large_image",
@@ -40,32 +44,40 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-export default function Layout({
+export default async function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/categories-sitemap`
+  ).catch(() => notFound());
+  const categories = await res.json();
+
+  const jsonLd = [];
+
+  for (let i = 0; i < categories.length; i++) {
+    const data = categories[i];
+    jsonLd.push({
+      "@context": "https://schema.org",
+      "@type": "Collection",
+      "@id": "https://www.essentialsbyla.com/collections/" + data?.name,
+      url: "https://www.essentialsbyla.com/collections/" + data?.name,
+      alternateName: "Essentials By LA",
+      name: "Buy " + data?.name,
+      image: data?.bannerImg.link,
+      description: data?.description,
+      datePublished: new Date(data?.createdAt).toLocaleDateString(),
+    });
+  }
+
   return (
     <>
-      <head>
-        <link
-          rel="canonical"
-          href="https://www.essentialsbyla.com/collections"
-        />
-        <meta property="og:title" content="Collections of all types" />
-        <meta
-          property="og:url"
-          content="https://www.essentialsbyla.com/collections"
-        />
-
-        <meta
-          property="og:site_name"
-          content="IN collections Essentials By LA"
-        />
-
-        <meta property="og:type" content="website" />
-      </head>
       {children}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </>
   );
 }
