@@ -84,7 +84,7 @@ export default async function Layout({
     aggregateRating: {
       "@type": "AggregateRating",
       ratingValue: product?.totalRating?.toString() || "0",
-      reviewCount: product?.reviews?.length?.toString() || "0",
+      reviewCount: product?.reviews?.length?.toString() || "1",
     },
     offers: {
       "@type": "Offer",
