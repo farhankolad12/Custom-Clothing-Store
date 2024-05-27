@@ -67,7 +67,16 @@ export default async function Layout({
 
   // fetch data
   const productRes = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/product?id=${id}`
+    `${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/product?id=${id}`,
+    {
+      credentials: "include",
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Origin":
+          process.env.NEXT_PUBLIC_BACKEND_HOSTNAME || "",
+      },
+    }
   ).catch(() => notFound());
 
   const product = await (productRes.status === 200 && productRes?.json());
