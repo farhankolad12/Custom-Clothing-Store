@@ -83,8 +83,8 @@ export default async function Layout({
     datePublished: new Date(product?.createdAt).toLocaleDateString(),
     aggregateRating: {
       "@type": "AggregateRating",
-      ratingValue: product?.totalRating?.toString() || "0",
-      reviewCount: product?.reviews?.length.toString(),
+      ratingValue: product?.totalRating ? product.totalRating.toString() : "0",
+      reviewCount: product?.reviews ? product.reviews.length.toString() : "0",
     },
     offers: {
       "@type": "Offer",
