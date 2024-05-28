@@ -4,11 +4,8 @@ import Link from "next/link";
 import Logo from "./Logo";
 import { usePathname, useRouter } from "next/navigation";
 import { useState } from "react";
-import { Collapse } from "@material-tailwind/react";
 import { useAuth } from "../context/AuthProvider";
-import Authentication from "./Home/Authentication";
 import CartCanvas from "./CartCanvas";
-import HomeCarousel from "./Home/HomeCarousel";
 import SearchModel from "./SearchModel";
 import CategoryDrawer from "./Home/CategoryDrawer";
 
