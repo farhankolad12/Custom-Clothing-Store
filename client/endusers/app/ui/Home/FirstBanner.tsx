@@ -73,7 +73,8 @@ export default function FirstBanner() {
         selectedVariants,
         quantity,
         selectedCombination,
-        setCartItems
+        setCartItems,
+        data?.homePageContent?.shippingConfig
       );
     } catch (err: any) {
       console.log(err);
