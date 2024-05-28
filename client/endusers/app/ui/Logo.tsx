@@ -3,12 +3,22 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useAuth } from "../context/AuthProvider";
+import { Typography } from "@material-tailwind/react";
 
 export default function Logo() {
   const { data, homePageContentLoading } = useAuth();
 
   return homePageContentLoading ? (
-    "..."
+    <div className="animate-pulse flex justify-center items-center">
+      <Typography
+        placeholder=""
+        as="div"
+        variant="h1"
+        className="lg:w-36 lg:h-28 w-[140px] h-[50px] rounded-full bg-gray-300"
+      >
+        &nbsp;
+      </Typography>
+    </div>
   ) : (
     <div>
       <Link

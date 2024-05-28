@@ -14,13 +14,13 @@ export default function Home() {
       <main /* className="relative" */>
         <HomeCarousel />
         <HomeCategories />
+        <FeatureProducts />
         {/* <FirstBanner /> */}
         {/* <Video /> */}
         {/* <Categories /> */}
         <FirstDynamicBanner />
         <NewCollections />
         <CategoriesBanners />
-        <FeatureProducts />
         {/* <TrendingNow /> */}
         {/* <SecondDynamicBanner /> */}
       </main>
