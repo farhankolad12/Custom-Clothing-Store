@@ -84,6 +84,7 @@ export default function CartRow({ product }: { product: ProductType }) {
           <Link shallow={true} href={"/product/" + product._id}>
             <Image
               unoptimized
+              loading="eager"
               quality={100}
               src={product.images[0].link}
               width={100}

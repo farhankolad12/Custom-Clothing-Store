@@ -69,6 +69,7 @@ export default function Page() {
             <Image
               unoptimized
               quality={100}
+              loading="eager"
               src={
                 data?.homePageContent.logo?.link ||
                 "https://www.essentialsbyla.com/logo.png"

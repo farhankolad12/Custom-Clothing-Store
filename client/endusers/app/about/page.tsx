@@ -41,6 +41,7 @@ export default function Page() {
               width={0}
               height={0}
               style={{ width: "100%", objectFit: "cover" }}
+              loading="eager"
               alt="About Us"
             />
             <h1 className="text-white absolute top-0 bottom-0 end-0 start-0 flex items-center justify-center lg:text-6xl text-4xl uppercase font-bold">
@@ -65,6 +66,7 @@ export default function Page() {
             </div>
             <div className="w-full lg:my-0 my-10">
               <Image
+                loading="eager"
                 unoptimized
                 title={data.firstAbout.title}
                 src={data.firstAbout.img.link}
@@ -93,6 +95,7 @@ export default function Page() {
             </div>
             <div className="w-full lg:my-0 my-10">
               <Image
+                loading="eager"
                 unoptimized
                 src={data.secondAbout.img.link}
                 width={0}
@@ -114,6 +117,7 @@ export default function Page() {
               {data?.videoSection.thumbnail && (
                 <Image
                   unoptimized
+                  loading="eager"
                   src={data?.videoSection.thumbnail.link}
                   width={0}
                   height={0}

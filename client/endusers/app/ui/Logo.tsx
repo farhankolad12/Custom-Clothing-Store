@@ -30,6 +30,7 @@ export default function Logo() {
       >
         <Image
           unoptimized
+          loading="eager"
           quality={100}
           src={data?.homePageContent.logo?.link || "/logo.png"}
           alt="Logo"

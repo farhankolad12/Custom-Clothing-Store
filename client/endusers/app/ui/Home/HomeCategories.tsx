@@ -23,6 +23,7 @@ export default function HomeCategories() {
                 unoptimized
                 quality={100}
                 src={category.icon.link}
+                loading="eager"
                 width={0}
                 height={0}
                 className="w-28 h-28 rounded-full"

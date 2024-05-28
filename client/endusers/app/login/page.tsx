@@ -51,6 +51,7 @@ export default function Page() {
         <div className="flex justify-center">
           <Link shallow={true} href="/">
             <Image
+              loading="eager"
               unoptimized
               quality={100}
               src={

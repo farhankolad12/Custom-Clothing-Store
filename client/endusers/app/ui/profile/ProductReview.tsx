@@ -28,6 +28,7 @@ export default function ProductReview({
         <strong className="uppercase">{review.name}</strong>
         <Image
           unoptimized
+          loading="eager"
           quality={100}
           src={review.images[0].link}
           alt={review.name}

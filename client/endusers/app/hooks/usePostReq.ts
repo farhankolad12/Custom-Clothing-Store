@@ -1,6 +1,5 @@
 "use client";
 
-import axios, { AxiosRequestConfig } from "axios";
 import { useState } from "react";
 
 export default function usePostReq(url: string) {

@@ -15,14 +15,9 @@ export default function Home() {
         <HomeCarousel />
         <HomeCategories />
         <FeatureProducts />
-        {/* <FirstBanner /> */}
-        {/* <Video /> */}
-        {/* <Categories /> */}
         <FirstDynamicBanner />
         <NewCollections />
         <CategoriesBanners />
-        {/* <TrendingNow /> */}
-        {/* <SecondDynamicBanner /> */}
       </main>
       <Footer />
     </div>

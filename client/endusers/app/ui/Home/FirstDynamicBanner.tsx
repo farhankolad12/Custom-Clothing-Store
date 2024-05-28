@@ -44,6 +44,7 @@ export default function FirstDynamicBanner() {
         >
           <div className="overflow-hidden">
             <Image
+              loading="eager"
               unoptimized
               quality={100}
               src={data?.homePageContent?.firstBanner?.img.link}
@@ -69,6 +70,7 @@ export default function FirstDynamicBanner() {
         >
           <div className="overflow-hidden">
             <Image
+              loading="eager"
               unoptimized
               quality={100}
               src={data?.homePageContent?.secondBanner?.img.link}
@@ -95,6 +97,7 @@ export default function FirstDynamicBanner() {
           <div className="overflow-hidden">
             <Image
               unoptimized
+              loading="eager"
               quality={100}
               src={data?.homePageContent?.thirdBanner?.img.link}
               width={0}

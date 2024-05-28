@@ -41,6 +41,7 @@ export default function LightHouse({
           <i className="bi bi-x-lg text-white" />
         </button>
         <Image
+          loading="eager"
           unoptimized
           quality={100}
           src={product.images[currentImage].link}

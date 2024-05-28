@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@material-tailwind/react": "^2.1.9",
-    "axios": "^1.6.7",
     "html-react-parser": "^5.1.10",
     "html2pdf.js": "^0.10.1",
     "next": "14.1.0",

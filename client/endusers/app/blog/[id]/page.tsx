@@ -49,6 +49,7 @@ export default function Page() {
         </div>
         <div className="mt-10">
           <Image
+            loading="eager"
             unoptimized
             quality={100}
             src={blog.image.link}

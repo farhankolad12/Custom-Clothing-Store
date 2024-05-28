@@ -47,6 +47,7 @@ export default function Page() {
       <main>
         <div className="relative">
           <Image
+            loading="eager"
             unoptimized
             quality={100}
             src="/contact1.jpeg"

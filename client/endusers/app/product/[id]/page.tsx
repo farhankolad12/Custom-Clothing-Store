@@ -281,6 +281,7 @@ export default function Page() {
                           return (
                             <div key={review._id} className="flex gap-10">
                               <Image
+                                loading="eager"
                                 src="/user-profile.png"
                                 alt="User Profile"
                                 width={0}

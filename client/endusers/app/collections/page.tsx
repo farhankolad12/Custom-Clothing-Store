@@ -30,6 +30,7 @@ export default function Page() {
                   >
                     <div className="overflow-hidden">
                       <Image
+                        loading="eager"
                         unoptimized
                         quality={100}
                         src={category.bannerImg.link}

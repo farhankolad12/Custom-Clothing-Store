@@ -108,6 +108,7 @@ export default function Page() {
                 return (
                   <div key={blog._id} className="flex gap-5 items-center">
                     <Image
+                      loading="eager"
                       unoptimized
                       quality={100}
                       src={blog.image.link}
@@ -144,6 +145,7 @@ export default function Page() {
                     return (
                       <div key={blog._id} className="w-full">
                         <Image
+                          loading="eager"
                           unoptimized
                           quality={100}
                           src={blog.image.link}
