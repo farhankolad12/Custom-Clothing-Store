@@ -102,7 +102,7 @@ export default function ProductOffCanvas({
       formData.append("shortDescription", shortDescription);
       formData.append("fullDescription", fullDescription);
       formData.append("price", price);
-      formData.append("isFeatured", isFeatured === "yes" ? "true" : "false");
+      formData.append("isFeatured", isFeatured);
       formData.append("category", category);
       formData.append("tags", JSON.stringify(tags));
       formData.append("variants", JSON.stringify(variants));
