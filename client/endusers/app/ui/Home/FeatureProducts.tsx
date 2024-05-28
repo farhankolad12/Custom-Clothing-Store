@@ -16,7 +16,7 @@ export default function FeatureProducts() {
     <section className="my-20 flex flex-col justify-center lg:px-28 px-5">
       <div className="flex justify-between items-center gap-2">
         <h3 className="lg:text-2xl text-xl lg:px-5 px-0">Featured Products</h3>
-        <Link href="/shop" className="text-sm">
+        <Link href="/feature-products" className="text-sm">
           View All <i className="bi bi-arrow-right text-sm" />
         </Link>
       </div>

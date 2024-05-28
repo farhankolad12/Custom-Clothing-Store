@@ -40,6 +40,11 @@ export default async function sitemap() {
       priority: 1,
     },
     {
+      url: "https://www.essentialsbyla.com/feature-products",
+      changeFrequency: "daily",
+      priority: 1,
+    },
+    {
       url: "https://www.essentialsbyla.com/about",
       changeFrequency: "monthly",
       priority: 0.5,
