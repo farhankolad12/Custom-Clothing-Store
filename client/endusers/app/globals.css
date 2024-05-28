@@ -30,18 +30,12 @@ body {
   scrollbar-width: none; /* Firefox */
 }
 
-/* .container {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-} */
-
 input[type="date"] {
   display: block;
   -webkit-appearance: textfield;
   -moz-appearance: textfield;
   min-height: 1.2em;
+  appearance: inherit;
 }
 
 .slider {
@@ -138,10 +132,6 @@ input[type="date"] {
   margin-top: 4px;
   pointer-events: all;
   position: relative;
-}
-
-.not-home .desktop-header .carousel {
-  display: none;
 }
 
 .footer-auth .icon-people {
