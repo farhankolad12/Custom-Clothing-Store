@@ -9,7 +9,7 @@ import { toast } from "react-toastify";
 
 export default function CartRow({ product }: { product: ProductType }) {
   const { error, execute, loading } = usePostReq("/delete-cart");
-  const { setCartItems } = useAuth();
+  const { setCartItems, data } = useAuth();
 
   async function handleDelete() {
     try {
@@ -38,7 +38,11 @@ export default function CartRow({ product }: { product: ProductType }) {
 
         return {
           ...prev,
-          // shippingPrice: 200,
+          shippingPrice: data?.homePageContent.shippingConfig?.minimumAmount
+            ? data?.homePageContent.shippingConfig.minimumAmount < subTotalPrice
+              ? 0
+              : data?.homePageContent.shippingConfig.shippingCharge
+            : data?.homePageContent.shippingConfig?.shippingCharge,
           discountedPrice: prev.coupon?.code
             ? prev.coupon?.minimumCartValue > subTotalPrice
               ? 0

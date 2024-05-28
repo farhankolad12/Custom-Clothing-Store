@@ -29,6 +29,8 @@ export default function ProductList({
 
   const { error, execute, loading } = usePostReq("/update-cart");
 
+  const { data } = useAuth();
+
   if (error) {
     toast.error(error || "Something went wrong!");
   }
@@ -108,7 +110,8 @@ export default function ProductList({
         selectedVariants,
         quantity,
         selectedCombination,
-        setCartItems
+        setCartItems,
+        data?.homePageContent?.shippingConfig
       );
     } catch (err: any) {
       console.log(err);
@@ -125,7 +128,7 @@ export default function ProductList({
         style={{ height: "600px" }}
       >
         <WishlistButton
-          classes="bg-transparent w-14 h-14 rounded-full transition items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-49"
+          classes="bg-transparent w-14 h-14 rounded-full transition items-center hover:bg-black hover:text-white absolute right-5 top-5 cursor-pointer z-50"
           product={product}
         />
         <Carousel

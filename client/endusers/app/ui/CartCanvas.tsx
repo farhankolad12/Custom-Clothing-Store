@@ -43,11 +43,11 @@ export default function CartCanvas({
                   );
                 })
               ) : (
-                <div className="text-center">
+                <div className="text-center flex flex-col gap-4">
                   <h3 className="font-bold uppercase">your cart is empty</h3>
                   <Link
                     href="/shop"
-                    className="border-2 border-black uppercase py-3 hover:bg-black hover:text-white transition px-20 mt-4"
+                    className="border-2 border-black uppercase py-3 hover:bg-black hover:text-white transition px-20"
                   >
                     shop now
                   </Link>
@@ -60,7 +60,15 @@ export default function CartCanvas({
               <div className="flex flex-col h-100 w-100 align-end gap-3">
                 <div className="flex justify-between gap-4">
                   <strong>Shipping Price:</strong>
-                  <strong>{formatCurrency(cartItems.shippingPrice)}</strong>
+                  <strong>
+                    {cartItems.shippingPrice === 0 && (
+                      <span className="uppercase px-5 text-xs py-1 bg-black text-white rounded-full">
+                        free
+                      </span>
+                    )}
+                    &nbsp;&nbsp;&nbsp;
+                    {formatCurrency(cartItems.shippingPrice)}
+                  </strong>
                 </div>
                 <div className="flex justify-between gap-4">
                   <strong>Discounted Price:</strong>
@@ -83,12 +91,11 @@ export default function CartCanvas({
                   </strong>
                 </div>
               </div>
-              <Link
-                href="/cart"
-                className="border-2 border-black uppercase py-3 hover:bg-black hover:text-white transition w-full mt-4"
-              >
-                View cart & checkout
-              </Link>
+              <div className="w-full mt-4 border-2 text-center border-black uppercase py-3 hover:bg-black hover:text-white transition">
+                <Link href="/cart" className="">
+                  View cart & checkout
+                </Link>
+              </div>
             </div>
           ) : (
             ""

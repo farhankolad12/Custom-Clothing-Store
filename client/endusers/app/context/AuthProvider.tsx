@@ -70,7 +70,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
 
   return (
     <AuthContext.Provider value={value}>
-      {loading /* ||  _loading ||  __loading */ ? (
+      {loading || __loading /* ||  _loading || */ ? (
         <LoadingSkeleton />
       ) : (
         children

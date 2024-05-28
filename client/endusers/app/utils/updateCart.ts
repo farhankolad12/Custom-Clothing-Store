@@ -7,7 +7,8 @@ export async function updateCart(
   selectedVariants: any,
   quantity: number,
   selectedCombination: any,
-  setCartItems: Function
+  setCartItems: Function,
+  shippingConfig: any
 ) {
   const res = await execute({
     productId: product._id,
@@ -21,19 +22,24 @@ export async function updateCart(
   }
 
   setCartItems((prev: any) => {
+    const subTotalPrice = prev?.products.some(
+      (productC: any) =>
+        productC._id === product._id &&
+        productC.selectedCombination.id === selectedCombination.id
+    )
+      ? (prev.subTotalPrice || 0) +
+        selectedCombination.salePrice * quantity -
+        selectedCombination.salePrice
+      : (prev.subTotalPrice || 0) + selectedCombination.salePrice * quantity;
     return {
       ...prev,
-      shippingPrice: prev?.shippingPrice ? prev.shippingPrice : 100,
+      shippingPrice: shippingConfig?.minimumAmount
+        ? shippingConfig.minimumAmount < subTotalPrice
+          ? 0
+          : shippingConfig.shippingCharge
+        : shippingConfig?.shippingCharge,
       discountedPrice: prev?.discountedPrice ? prev.discountedPrice : 0,
-      subTotalPrice: prev?.products.some(
-        (productC: any) =>
-          productC._id === product._id &&
-          productC.selectedCombination.id === selectedCombination.id
-      )
-        ? (prev.subTotalPrice || 0) +
-          selectedCombination.salePrice * quantity -
-          selectedCombination.salePrice
-        : (prev.subTotalPrice || 0) + selectedCombination.salePrice * quantity,
+      subTotalPrice,
       products: prev?.products.some(
         (productC: any) =>
           productC._id === product._id &&

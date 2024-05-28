@@ -7,7 +7,7 @@ import { useAuth } from "../context/AuthProvider";
 import Image from "next/image";
 
 export default function CartCanvasRow({ product }: { product: ProductType }) {
-  const { setCartItems, cartItems } = useAuth();
+  const { setCartItems, data } = useAuth();
   const { error, execute, loading } = usePostReq("/delete-cart");
 
   if (error) {
@@ -39,11 +39,14 @@ export default function CartCanvasRow({ product }: { product: ProductType }) {
           : (prev.subTotalPrice || 0) +
             product.selectedCombination.salePrice * product.quantity;
 
-        console.log(subTotalPrice);
-
         return {
           ...prev,
-          // shippingPrice: 200,
+          shippingPrice: data?.homePageContent?.shippingConfig?.minimumAmount
+            ? data?.homePageContent?.shippingConfig.minimumAmount <
+              subTotalPrice
+              ? 0
+              : data?.homePageContent?.shippingConfig.shippingCharge
+            : data?.homePageContent?.shippingConfig?.shippingCharge,
           discountedPrice: prev.coupon?.code
             ? prev.coupon.minimumCartValue > subTotalPrice
               ? 0

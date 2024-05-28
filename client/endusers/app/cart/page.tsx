@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 import { Spinner } from "@material-tailwind/react";
 
 function Page() {
-  const [loadingCode, setLoadingCode] = useState(false);
+  const [loadingCode, setLoadingCode] = useState(true);
   const [isValidCode, setIsValidCode] = useState(false);
 
   const router = useRouter();
@@ -40,19 +40,20 @@ function Page() {
   const codeRef = useRef<HTMLInputElement>(null!);
 
   useEffect(() => {
-    setLoadingCode(true);
     if (cartItems?.coupon) {
       (async () => {
         await fetch(process.env.NEXT_PUBLIC_BACKEND_HOSTNAME + "/check-code", {
+          method: "POST",
           body: JSON.stringify({ code: cartItems.coupon?.code }),
           credentials: "include",
-          method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
         })
           .then(async (res1) => {
             const res = await res1.json();
+
+            console.log(res1);
 
             if (!res?.success) {
               setIsValidCode(false);
@@ -71,8 +72,6 @@ function Page() {
           .catch((err) => toast.error(err || "Something went wrong!"));
       })();
     }
-    setLoadingCode(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   async function checkCode() {
@@ -285,7 +284,15 @@ function Page() {
                   </div>
                   <div className="border-b-2 flex justify-between pb-4">
                     <strong>Shipping Price:</strong>
-                    <strong>{formatCurrency(cartItems.shippingPrice)}</strong>
+                    <strong>
+                      {cartItems.shippingPrice === 0 && (
+                        <span className="uppercase px-5 text-xs py-1 bg-black text-white rounded-full">
+                          free
+                        </span>
+                      )}
+                      &nbsp;&nbsp;&nbsp;
+                      {formatCurrency(cartItems.shippingPrice)}
+                    </strong>
                   </div>
                   <div className="border-b-2 flex justify-between pb-4">
                     <strong>Sub Total:</strong>

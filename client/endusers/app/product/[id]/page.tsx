@@ -102,7 +102,8 @@ export default function Page() {
         selectedVariants,
         value,
         selectedVariantPrice,
-        setCartItems
+        setCartItems,
+        data?.homePageContent?.shippingConfig
       );
     } catch (err: any) {
       console.log(err);
