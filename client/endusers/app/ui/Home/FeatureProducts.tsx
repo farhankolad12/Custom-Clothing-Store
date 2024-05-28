@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import ProductList from "./ProductList";
 import { useAuth } from "@/app/context/AuthProvider";
 import { ProductType } from "@/app/definations";
@@ -8,8 +7,6 @@ import ProductSkeleton from "./ProductSkeleton";
 import Link from "next/link";
 
 export default function FeatureProducts() {
-  const [selectCategory, setSelectCategory] = useState("all");
-
   const { data, homePageContentLoading } = useAuth();
 
   return (
