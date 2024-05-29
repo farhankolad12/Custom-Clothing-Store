@@ -122,6 +122,7 @@ export default function RootLayout({
       <head>
         <Script
           strategy="afterInteractive"
+          defer
           src="https://www.googletagmanager.com/gtag/js?id=G-0B0VE36B84"
         />
         <Script strategy="afterInteractive" src="/google-analytics-script.js" />
@@ -129,6 +130,9 @@ export default function RootLayout({
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
         />
+        <link rel="preconnect" href="https://res.cloudinary.com" />
+        <link rel="preconnect" href="https://api.essentialsbyla.com" />
+        <link rel="preconnect" href="https://connect.facebook.net" />
         <link
           rel="stylesheet"
           href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
