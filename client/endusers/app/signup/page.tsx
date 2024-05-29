@@ -20,7 +20,7 @@ export default function Page() {
   const repPassRef = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
-  const { setCurrentUser, currentUser, data } = useAuth();
+  const { setCurrentUser, currentUser, data, setCartItems } = useAuth();
   const { execute, loading, error } = usePostReq("/register");
 
   useEffect(() => {
@@ -49,7 +49,7 @@ export default function Page() {
 
       if (res?.success) {
         setCurrentUser(res.user);
-        // setCartItems({ products: [] });
+        setCartItems({ products: [] });
         return router.push("/profile");
       }
 
