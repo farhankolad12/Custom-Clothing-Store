@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Cart",
@@ -20,6 +21,10 @@ export default function Layout({
         <meta property="og:site_name" content="IN Cart Page Essentials By LA" />
 
         <meta property="og:type" content="website" />
+        <Script
+          strategy="afterInteractive"
+          src="https://checkout.razorpay.com/v1/checkout.js"
+        />
       </head>
       {children}
     </>

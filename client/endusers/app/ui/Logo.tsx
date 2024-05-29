@@ -21,21 +21,16 @@ export default function Logo() {
     </div>
   ) : (
     <div>
-      <Link
-        shallow={true}
-        style={{
-          backgroundColor: "transparent",
-        }}
-        href="/"
-      >
+      <Link shallow={true} className="bg-transparent" href="/">
         <Image
           unoptimized
           loading="eager"
           quality={100}
           src={data?.homePageContent.logo?.link || "/logo.png"}
           alt="Logo"
+          priority={true}
           title="Logo"
-          className="lg:w-36 lg:h-28 w-[140px] h-[50px] object-cover"
+          className="lg:w-36 lg:h-28 w-[160px] ms-5 h-[50px] object-cover"
           width={0}
           height={0}
         />

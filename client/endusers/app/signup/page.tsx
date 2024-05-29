@@ -69,6 +69,7 @@ export default function Page() {
             <Image
               unoptimized
               quality={100}
+              priority={true}
               loading="eager"
               src={
                 data?.homePageContent.logo?.link ||

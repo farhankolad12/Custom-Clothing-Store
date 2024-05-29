@@ -130,7 +130,6 @@ export default async function Layout({
     <>
       {children}
       <Script
-        strategy="worker"
         id={id}
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

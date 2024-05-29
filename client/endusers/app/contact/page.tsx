@@ -51,10 +51,10 @@ export default function Page() {
             unoptimized
             quality={100}
             src="/contact1.jpeg"
-            className="h-96 lg:h-screen"
+            className="h-96 w-full object-cover lg:h-screen"
             width={0}
+            priority={true}
             height={0}
-            style={{ width: "100%", objectFit: "cover" }}
             alt="Contact"
             title="Contact"
           />
@@ -96,8 +96,8 @@ export default function Page() {
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2418.768698570858!2d72.8890672044052!3d19.103230282764372!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c871792258f9%3A0x9c3e2a0d864ebb0e!2s2%2C%20Kailash%20Puram%20Rd%2C%20Bandi%20Bazaar%2C%20Nair%20Wadi%2C%20Asalpha%2C%20Mumbai%2C%20Maharashtra%20400072!5e1!3m2!1sen!2sin!4v1714829062809!5m2!1sen!2sin"
             width="100%"
             height="650px"
-            style={{ border: "0" }}
             loading="lazy"
+            className="border-0"
             referrerPolicy="no-referrer-when-downgrade"
           ></iframe>
         </div>

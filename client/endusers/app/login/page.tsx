@@ -59,6 +59,7 @@ export default function Page() {
                 "https://www.essentialsbyla.com/logo.png"
               }
               alt="Logo"
+              priority={true}
               width={200}
               height={200}
             />

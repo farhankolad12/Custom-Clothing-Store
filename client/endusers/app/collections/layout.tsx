@@ -76,7 +76,6 @@ export default async function Layout({
     <>
       {children}
       <Script
-        strategy="worker"
         id="schema_coll_script"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

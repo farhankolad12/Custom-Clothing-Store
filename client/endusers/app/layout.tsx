@@ -121,10 +121,10 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <Script
-          strategy="worker"
+          strategy="afterInteractive"
           src="https://www.googletagmanager.com/gtag/js?id=G-0B0VE36B84"
         />
-        <Script strategy="worker" src="/google-analytics-script.js" />
+        <Script strategy="afterInteractive" src="/google-analytics-script.js" />
         <meta
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
@@ -159,14 +159,14 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        <Script strategy="worker" src="/facebook-script.js" />
+        <Script strategy="afterInteractive" src="/facebook-script.js" />
 
         <noscript>
           <Image
             alt=""
             height={1}
             width={1}
-            style={{ display: "none" }}
+            className="hidden"
             src="https://www.facebook.com/tr?id=461794643020066&ev=PageView&noscript=1"
           />
         </noscript>
@@ -175,10 +175,6 @@ export default function RootLayout({
         <AuthProvider>
           <ToastProvider>{children}</ToastProvider>
         </AuthProvider>
-        <Script
-          src="https://checkout.razorpay.com/v1/checkout.js"
-          strategy="worker"
-        />
       </body>
     </html>
   );

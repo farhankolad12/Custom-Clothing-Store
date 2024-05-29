@@ -43,10 +43,7 @@ export default function Page() {
       <main className="my-20 lg:px-20 px-10">
         <div className="my-5 flex flex-col justify-center">
           <h3 className="font-bold mb-4 text-center">Reset your account</h3>
-          <div
-            // style={{ border: "1px solid #000" }}
-            className=" border-2"
-          >
+          <div className=" border-2">
             <form
               onSubmit={handleSubmit}
               className="flex p-5 flex-col gap-3 py-3"

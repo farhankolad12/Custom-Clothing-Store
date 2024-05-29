@@ -22,6 +22,7 @@ export default function ImageShowcase({
           className="w-full h-full transition transition-transform hover:scale-150 cursor-pointer"
           src={selectedImg.link}
           alt={product.name}
+          priority={true}
           title={product.name}
           width={0}
           onClick={() => setOpenLighthouse(true)}

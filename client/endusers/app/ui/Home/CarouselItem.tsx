@@ -21,13 +21,13 @@ export default function CarouselItem({
         unoptimized
         loading="eager"
         quality={100}
-        style={{ width: "100%", height: "700px", objectFit: "cover" }}
         width={0}
         height={0}
+        priority={true}
         src={slider.img.link}
         alt={slider.title}
         title={slider.title}
-        className={`h-full animate__animated w-full ${
+        className={`h-[700px] w-full object-cover animate__animated w-full ${
           active === i + 1 ? "animate__fadeIn" : ""
         }`}
       />

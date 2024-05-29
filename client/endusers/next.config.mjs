@@ -9,10 +9,10 @@ const nextConfig = {
       {
         hostname: "res.cloudinary.com",
       },
+      {
+        hostname: "www.facebook.com",
+      },
     ],
-  },
-  experimental: {
-    nextScriptWorkers: true,
   },
 };
 

@@ -36,14 +36,10 @@ export default function Page() {
                         src={category.bannerImg.link}
                         width={0}
                         height={0}
-                        style={{
-                          // objectFit: "cover",
-                          width: "400px",
-                          height: "400px",
-                        }}
+                        priority={true}
                         alt={category.description}
                         title={category.name}
-                        className=" group-hover:scale-150 transition"
+                        className=" group-hover:scale-150 w-[400px] h-[400px] transition"
                       />
                     </div>
                     <h3 className="text-lg">

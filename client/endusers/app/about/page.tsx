@@ -37,11 +37,11 @@ export default function Page() {
               unoptimized
               title="About"
               src={data.topImage.link}
-              className="h-96 lg:h-screen"
+              className="h-96 w-full object-cover lg:h-screen"
               width={0}
               height={0}
-              style={{ width: "100%", objectFit: "cover" }}
               loading="eager"
+              priority={true}
               alt="About Us"
             />
             <h1 className="text-white absolute top-0 bottom-0 end-0 start-0 flex items-center justify-center lg:text-6xl text-4xl uppercase font-bold">
@@ -72,7 +72,7 @@ export default function Page() {
                 src={data.firstAbout.img.link}
                 width={0}
                 height={0}
-                style={{ width: "100%", height: "700px", objectFit: "cover" }}
+                className="w-full h-[700px] object-cover"
                 alt={data.firstAbout.title}
               />
             </div>
@@ -100,7 +100,7 @@ export default function Page() {
                 src={data.secondAbout.img.link}
                 width={0}
                 height={0}
-                style={{ width: "100%", height: "700px", objectFit: "cover" }}
+                className="w-full h-[700px] object-cover"
                 alt={data.secondAbout.title}
                 title={data.secondAbout.title}
               />
@@ -121,8 +121,7 @@ export default function Page() {
                   src={data?.videoSection.thumbnail.link}
                   width={0}
                   height={0}
-                  style={{ width: "100%", height: "600px", objectFit: "cover" }}
-                  // className="w-full h-1/2"
+                  className="w-full h-[600px] object-cover"
                   alt="Video"
                   title="Video"
                 />
@@ -134,7 +133,7 @@ export default function Page() {
               <iframe
                 src={data?.videoSection.video.link}
                 width="100%"
-                style={{ width: "100%" }}
+                className="w-full"
                 height="500"
                 allow="autoplay; fullscreen; picture-in-picture"
               />

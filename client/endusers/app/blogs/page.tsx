@@ -115,8 +115,7 @@ export default function Page() {
                       alt={blog.title}
                       width={0}
                       height={0}
-                      className="w-[80px] h-[80px]"
-                      style={{ objectFit: "cover" }}
+                      className="w-[80px] h-[80px] object-cover"
                     />
                     <div className="flex flex-col gap-1">
                       <span className="text-xs uppercase font-bold text-gray-800">
@@ -151,8 +150,7 @@ export default function Page() {
                           src={blog.image.link}
                           width={0}
                           height={500}
-                          className="w-full"
-                          style={{ objectFit: "cover" }}
+                          className="w-full object-cover"
                           alt={blog.title}
                         />
                         <div className="flex flex-col gap-3 mt-10">
