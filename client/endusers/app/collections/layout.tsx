@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 
 export async function generateMetadata(): Promise<Metadata> {
   const res = await fetch(
@@ -74,7 +75,9 @@ export default async function Layout({
   return (
     <>
       {children}
-      <script
+      <Script
+        strategy="worker"
+        id="schema_coll_script"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />

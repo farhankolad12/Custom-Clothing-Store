@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import Script from "next/script";
 
 type Props = {
   params: { slug: string };
@@ -78,7 +79,9 @@ export default async function Layout({
   return (
     <>
       {children}
-      <script
+      <Script
+        id={name}
+        strategy="worker"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />

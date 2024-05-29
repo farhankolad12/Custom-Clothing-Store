@@ -5,6 +5,7 @@ import AuthProvider from "./context/AuthProvider";
 import "react-toastify/dist/ReactToastify.css";
 import ToastProvider from "./ui/ToastProvider";
 import Script from "next/script";
+import Image from "next/image";
 
 const montserrat = Montserrat({
   weight: ["400", "500", "700"],
@@ -119,11 +120,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <script
-          async
+        <Script
+          strategy="worker"
           src="https://www.googletagmanager.com/gtag/js?id=G-0B0VE36B84"
         />
-        <script defer src="/google-analytics-script.js" />
+        <Script strategy="worker" src="/google-analytics-script.js" />
         <meta
           httpEquiv="Content-Security-Policy"
           content="upgrade-insecure-requests"
@@ -158,12 +159,13 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        <script src="/facebook-script.js" defer />
+        <Script strategy="worker" src="/facebook-script.js" />
 
         <noscript>
-          <img
-            height="1"
-            width="1"
+          <Image
+            alt=""
+            height={1}
+            width={1}
             style={{ display: "none" }}
             src="https://www.facebook.com/tr?id=461794643020066&ev=PageView&noscript=1"
           />

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "Featured Products",
@@ -44,7 +45,9 @@ export default async function Layout({
   return (
     <>
       {children}
-      <script
+      <Script
+        strategy="worker"
+        id="schame_feat_prod"
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />

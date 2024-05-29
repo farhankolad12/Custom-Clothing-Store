@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@builder.io/partytown": "^0.10.2",
     "@material-tailwind/react": "^2.1.9",
     "html-react-parser": "^5.1.10",
     "html2pdf.js": "^0.10.1",
