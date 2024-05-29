@@ -32,7 +32,6 @@ export default function Page() {
                       <Image
                         loading="eager"
                         unoptimized
-                        quality={100}
                         src={category.bannerImg.link}
                         width={0}
                         height={0}

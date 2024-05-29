@@ -116,7 +116,7 @@ export default function Footer() {
 
 /*   <div className="px-10">
         <div className="flex gap-10 lg:flex-row flex-col justify-between items-center pb-20">
-          <Image unoptimized  quality={100} 
+          <Image unoptimized   
             src="/logo.png"
             alt="Logo"
             title="Logo"

@@ -46,7 +46,6 @@ export default function FirstDynamicBanner() {
             <Image
               loading="eager"
               unoptimized
-              quality={100}
               src={data?.homePageContent?.firstBanner?.img.link}
               width={0}
               height={0}
@@ -72,7 +71,6 @@ export default function FirstDynamicBanner() {
             <Image
               loading="eager"
               unoptimized
-              quality={100}
               src={data?.homePageContent?.secondBanner?.img.link}
               width={0}
               height={0}
@@ -98,7 +96,6 @@ export default function FirstDynamicBanner() {
             <Image
               unoptimized
               loading="eager"
-              quality={100}
               src={data?.homePageContent?.thirdBanner?.img.link}
               width={0}
               height={0}

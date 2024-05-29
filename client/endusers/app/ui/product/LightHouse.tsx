@@ -43,7 +43,6 @@ export default function LightHouse({
         <Image
           loading="eager"
           unoptimized
-          quality={100}
           src={product.images[currentImage].link}
           width={700}
           height={500}

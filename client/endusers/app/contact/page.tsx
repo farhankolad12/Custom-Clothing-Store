@@ -49,7 +49,6 @@ export default function Page() {
           <Image
             loading="eager"
             unoptimized
-            quality={100}
             src="/contact1.jpeg"
             className="h-96 w-full object-cover lg:h-screen"
             width={0}

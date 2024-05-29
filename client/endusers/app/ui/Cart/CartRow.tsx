@@ -85,7 +85,6 @@ export default function CartRow({ product }: { product: ProductType }) {
             <Image
               unoptimized
               loading="eager"
-              quality={100}
               src={product.images[0].link}
               width={100}
               height={100}

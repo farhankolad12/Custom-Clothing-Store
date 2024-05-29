@@ -29,7 +29,6 @@ export default function ProductReview({
         <Image
           unoptimized
           loading="eager"
-          quality={100}
           src={review.images[0].link}
           alt={review.name}
           className="rounded"

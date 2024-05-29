@@ -21,7 +21,6 @@ export default function HomeCategories() {
             <div className="rounded-full w-32 h-32 bg-[#ececec] flex items-center justify-center flex-col">
               <Image
                 unoptimized
-                quality={100}
                 src={category.icon.link}
                 loading="eager"
                 width={0}

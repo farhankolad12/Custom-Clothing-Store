@@ -68,7 +68,6 @@ export default function Page() {
           <Link shallow={true} href="/">
             <Image
               unoptimized
-              quality={100}
               priority={true}
               loading="eager"
               src={

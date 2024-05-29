@@ -51,7 +51,6 @@ export default function Page() {
           <Image
             loading="eager"
             unoptimized
-            quality={100}
             priority={true}
             src={blog.image.link}
             alt={blog.title}

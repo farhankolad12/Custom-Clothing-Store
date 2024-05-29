@@ -110,7 +110,6 @@ export default function Page() {
                     <Image
                       loading="eager"
                       unoptimized
-                      quality={100}
                       src={blog.image.link}
                       alt={blog.title}
                       width={0}
@@ -146,7 +145,6 @@ export default function Page() {
                         <Image
                           loading="eager"
                           unoptimized
-                          quality={100}
                           src={blog.image.link}
                           width={0}
                           height={500}

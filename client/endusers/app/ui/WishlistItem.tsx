@@ -52,7 +52,6 @@ export default function WishlistItem({
         <Image
           loading="eager"
           unoptimized
-          quality={100}
           src={wishlist.images[0].link}
           alt={wishlist.name}
           title={wishlist.name}

@@ -20,7 +20,6 @@ export default function CarouselItem({
       <Image
         unoptimized
         loading="eager"
-        quality={100}
         width={0}
         height={0}
         priority={true}

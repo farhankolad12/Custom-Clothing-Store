@@ -18,7 +18,6 @@ export default function ImageShowcase({
         <Image
           loading="eager"
           unoptimized
-          quality={100}
           className="w-full h-full transition transition-transform hover:scale-150 cursor-pointer"
           src={selectedImg.link}
           alt={product.name}
@@ -52,7 +51,6 @@ export default function ImageShowcase({
                 <Image
                   loading="eager"
                   unoptimized
-                  quality={100}
                   alt={product.name}
                   title={product.name}
                   width={150}
