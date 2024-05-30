@@ -166,16 +166,6 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
         <Script strategy="beforeInteractive" src="/facebook-script.js" />
-
-        <noscript>
-          <Image
-            alt=""
-            height={1}
-            width={1}
-            className="hidden"
-            src="https://www.facebook.com/tr?id=461794643020066&ev=PageView&noscript=1"
-          />
-        </noscript>
       </head>
       <body className={`${montserrat.className}`}>
         <AuthProvider>
