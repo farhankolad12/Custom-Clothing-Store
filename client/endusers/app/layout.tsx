@@ -165,7 +165,15 @@ export default function RootLayout({
         <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        <script defer src="/facebook-script.js" />
+        <script src="/facebook-script.js" />
+        <noscript>
+          <img
+            height="1"
+            width="1"
+            style={{ display: "none" }}
+            src="https://www.facebook.com/tr?id=979444420235515&ev=PageView&noscript=1"
+          />
+        </noscript>
       </head>
       <body className={`${montserrat.className}`}>
         <AuthProvider>
