@@ -240,7 +240,7 @@ export default function ProductList({
             disabled={loading}
             onClick={handleCart}
             type="button"
-            className="bg-transparent z-49 w-20 h-16 rounded-full transition items-center hover:bg-black hover:text-white cursor-pointer"
+            className="bg-transparent z-50 w-20 h-16 rounded-full transition items-center hover:bg-black hover:text-white cursor-pointer"
           >
             {loading ? (
               <Spinner className="w-16 h-16" />
