@@ -19,7 +19,7 @@ export default function CategoryDrawer({
   return (
     <Drawer
       placeholder="Menu"
-      className="h-full w-full"
+      className={`h-full w-full ${open === true ? "no-doc-scroll" : ""}`}
       open={open}
       onClose={closeDrawer}
     >

@@ -34,7 +34,9 @@ export default function FilterSortDrawer({
     <Drawer
       placeholder=""
       placement="right"
-      className="flex flex-col justify-between"
+      className={`flex flex-col justify-between ${
+        open === true ? "no-doc-scroll" : ""
+      }`}
       open={open}
       onClose={closeDrawer}
     >

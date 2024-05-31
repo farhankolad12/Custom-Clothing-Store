@@ -14,7 +14,7 @@ export default function LightHouse({
   return (
     <div
       style={{ background: "rgba(0, 0, 0, 0.5)" }}
-      className="absolute top-0 bottom-0 right-0 left-0 w-full h-full flex justify-center z-50 items-center lg:pt-60 pt-0 px-5"
+      className="fixed no-doc-scroll top-0 bottom-0 right-0 left-0 w-full h-full flex justify-center z-50 items-center px-5"
     >
       <button
         onClick={() => {
@@ -44,8 +44,9 @@ export default function LightHouse({
           loading="eager"
           unoptimized
           src={product.images[currentImage].link}
-          width={700}
-          height={500}
+          width={500}
+          className="h-[500px] object-cover"
+          height={0}
           alt={product.name}
           title={product.name}
         />

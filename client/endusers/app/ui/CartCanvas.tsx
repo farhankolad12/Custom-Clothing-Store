@@ -4,7 +4,6 @@ import { useAuth } from "../context/AuthProvider";
 import { ProductType } from "../definations";
 import CartCanvasRow from "./CartCanvasRow";
 import { formatCurrency } from "../utils/formatCurrency";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function CartCanvas({
@@ -15,14 +14,15 @@ export default function CartCanvas({
   closeDrawer: any;
 }) {
   const { cartItems, currentUser } = useAuth();
-  const router = useRouter();
 
   return (
     <Drawer
       placement="right"
       open={openCart}
       onClose={closeDrawer}
-      className="p-4 overflow-y-auto"
+      className={`p-4 overflow-y-auto ${
+        openCart === true ? "no-doc-scroll" : ""
+      }`}
       size={500}
       placeholder="Cart"
     >

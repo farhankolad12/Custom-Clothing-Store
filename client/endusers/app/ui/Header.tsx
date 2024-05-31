@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import Logo from "./Logo";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { useAuth } from "../context/AuthProvider";
 import CartCanvas from "./CartCanvas";
@@ -13,8 +13,6 @@ export default function Header() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [menu, setMenu] = useState(false);
-
-  const router = useRouter();
 
   const { currentUser, data, cartItems } = useAuth();
 
