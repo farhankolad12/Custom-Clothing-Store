@@ -53,8 +53,6 @@ function Page() {
           .then(async (res1) => {
             const res = await res1.json();
 
-            console.log(res1);
-
             if (!res?.success) {
               setIsValidCode(false);
               return setCartItems((prev: any) => {

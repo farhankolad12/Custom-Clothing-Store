@@ -143,6 +143,7 @@ function Page() {
                 <th className="text-secondary">CATEGORY</th>
                 <th className="text-secondary">PRICE</th>
                 <th className="text-secondary">SALE PRICE</th>
+                <th className="text-secondary">IN STOCK</th>
                 <th className="text-secondary">VIEW</th>
                 <th className="text-secondary">ACTIONS</th>
               </tr>
@@ -150,6 +151,7 @@ function Page() {
             <tbody>
               {loading ? (
                 <tr>
+                  <td></td>
                   <td></td>
                   <td></td>
                   <td></td>
@@ -174,7 +176,7 @@ function Page() {
                 )
               )}
               <tr>
-                <td colSpan={6}>
+                <td colSpan={7}>
                   <div className="d-flex justify-content-between py-2 align-items-center">
                     <div>
                       <strong className="text-uppercase">

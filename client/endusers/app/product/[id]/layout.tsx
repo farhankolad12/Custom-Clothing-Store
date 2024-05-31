@@ -13,12 +13,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
   // fetch data
   const productRes = await fetch(
-    `${process.env.NEXT_PUBLIC_BACKEND_HOSTNAME}/product?id=${id}`
+    process.env.NEXT_PUBLIC_BACKEND_HOSTNAME +
+      "/product" +
+      "?" +
+      new URLSearchParams({ id })
   ).catch(() => notFound());
 
-  const product = productRes.status === 200 && (await productRes?.json());
-
-  // console.log(product);
+  const product = await (productRes.status === 200 &&
+    (await productRes?.json()));
 
   return {
     title: {

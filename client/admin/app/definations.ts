@@ -89,4 +89,5 @@ export type ProductType = {
   isFeatured: boolean;
   category: string;
   createdAt: number;
+  inStock: boolean;
 };

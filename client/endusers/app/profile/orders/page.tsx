@@ -72,7 +72,7 @@ function Page() {
                   <Link
                     shallow={true}
                     href={`/profile/orders/${order._id}`}
-                    className="border-2 border-black font-bold uppercase hover:bg-black hover:text-white rounded transition px-4 py-2"
+                    className="border-2 border-black font-bold uppercase hover:bg-black hover:text-white rounded transition text-xs p-2"
                   >
                     view order
                   </Link>

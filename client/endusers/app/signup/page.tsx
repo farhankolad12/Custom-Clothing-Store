@@ -55,8 +55,6 @@ export default function Page() {
 
       toast.error(res.message || error);
     } catch (err: any) {
-      console.log(error);
-
       console.log(err);
     }
   }

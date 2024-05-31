@@ -150,7 +150,6 @@ export default function CheckoutButton({
       rzp1.close();
 
       rzp1.on("payment.failed", (response: any) => {
-        // console.log(response);
         setLoading(false);
         toast.error(response.error.description);
         toast.error(response.error.reason);

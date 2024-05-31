@@ -89,6 +89,7 @@ function Page() {
             >
               <option value="Pending">Pending</option>
               <option value="Processing">Processing</option>
+              <option value="Shipped">Shipped</option>
               <option value="Delivered">Delivered</option>
               <option value="Cancel">Cancel</option>
             </select>

@@ -70,8 +70,6 @@ export default function ReviewsModel({
     }
   }
 
-  console.log(error);
-
   return (
     <Dialog placeholder="Review Modal" open={open} handler={handleOpen}>
       <DialogHeader placeholder="">Write Review</DialogHeader>
