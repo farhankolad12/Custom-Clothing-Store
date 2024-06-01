@@ -70,6 +70,7 @@ function Page() {
           .catch((err) => toast.error(err || "Something went wrong!"));
       })();
     }
+    setLoadingCode(false);
   }, []);
 
   async function checkCode() {
