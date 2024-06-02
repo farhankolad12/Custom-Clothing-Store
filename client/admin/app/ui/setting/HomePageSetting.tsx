@@ -1,4 +1,5 @@
 import usePostReq from "@/app/hooks/usePostReq";
+import { Editor } from "@tinymce/tinymce-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
@@ -257,22 +258,29 @@ export default function HomePageSetting({ data }: { data: any }) {
                       >
                         Description
                       </label>
-                      <textarea
-                        onChange={(e) => {
-                          setMainSlider((prev: any) => {
-                            return prev.map((slider1: any) => {
-                              return slider1.id === slider.id
-                                ? { ...slider1, description: e.target.value }
-                                : slider1;
+                      <div className="w-100 bg-transparent border-secondary text-light text-secondary">
+                        <Editor
+                          apiKey={process.env.NEXT_PUBLIC_EDITOR_KEY}
+                          init={{
+                            toolbar:
+                              "insertfile a11ycheck undo redo | bold italic | forecolor backcolor | codesample | alignleft aligncenter alignright alignjustify | bullist numlist | link image",
+                          }}
+                          onChange={(e) => {
+                            setMainSlider((prev: any) => {
+                              return prev.map((slider1: any) => {
+                                return slider1.id === slider.id
+                                  ? {
+                                      ...slider1,
+                                      description: e.target.getContent(),
+                                    }
+                                  : slider1;
+                              });
                             });
-                          });
-                        }}
-                        value={slider.description}
-                        cols={7}
-                        placeholder="Slider Description"
-                        id={`slider-description${i + 1}`}
-                        className="form-control bg-secondary text-white w-100"
-                      />
+                          }}
+                          initialValue={slider.description}
+                          id={`slider-description${i + 1}`}
+                        />
+                      </div>
                     </div>
                     <div className="d-flex justify-content-between gap-1 flex-lg-row flex-column">
                       <label

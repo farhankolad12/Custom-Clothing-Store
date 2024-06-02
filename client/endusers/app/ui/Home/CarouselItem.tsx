@@ -1,5 +1,6 @@
 "use client";
 
+import HTMLParser from "html-react-parser";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -43,7 +44,9 @@ export default function CarouselItem({
             <h1 className="lg:text-7xl font-bold text-4xl uppercase">
               {slider.title}
             </h1>
-            <span className="my-4 font-bold">{slider.description}</span>
+            <span className="my-4 font-bold">
+              {HTMLParser(slider.description)}
+            </span>
           </div>
           <Link
             style={{ backgroundColor: "rgba(237,219,178,0.9)" }}
