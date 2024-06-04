@@ -23,7 +23,7 @@ import {
   TabsHeader,
 } from "@material-tailwind/react";
 import Link from "next/link";
-import { notFound, useParams } from "next/navigation";
+import { notFound, useParams, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { toast } from "react-toastify";
 import HTMLParser from "html-react-parser";
@@ -35,6 +35,7 @@ export default function Page() {
   const [selectedVariantPrice, setSelectedVariantPrice] = useState<any>();
   const [value, setValue] = useState(1);
 
+  const router = useRouter();
   const { id } = useParams();
   const { data, setCartItems, currentUser } = useAuth();
   const {
@@ -88,7 +89,8 @@ export default function Page() {
 
   async function handleCart() {
     if (!currentUser) {
-      return toast.error("Please login!");
+      router.push("/signup");
+      return toast.error("Please login or signup!");
     }
 
     if (value === 0) {
@@ -136,7 +138,7 @@ export default function Page() {
           <span className="text-xs uppercase">|</span>
           <Link
             shallow={true}
-            href={`/shop?category=${product.category}`}
+            href={`/collections/${product.category}`}
             className="text-xs uppercase text-gray-500"
           >
             {product.category}
@@ -249,7 +251,7 @@ export default function Page() {
           </div>
         </div>
         <div>
-          <Tabs value="html">
+          <Tabs value="Description">
             <TabsHeader
               className="rounded-none border-b border-blue-gray-50 bg-transparent p-0"
               indicatorProps={{

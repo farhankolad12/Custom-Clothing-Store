@@ -4,6 +4,7 @@ import { ProductType } from "../definations";
 import usePostReq from "../hooks/usePostReq";
 import { useState } from "react";
 import { Spinner } from "@material-tailwind/react";
+import { useRouter } from "next/navigation";
 
 export default function WishlistButton({
   product,
@@ -16,13 +17,17 @@ export default function WishlistButton({
 
   const { currentUser } = useAuth();
   const { error, execute, loading, setError } = usePostReq("/update-wishlist");
+  const router = useRouter();
 
   if (error) {
     toast.error(error || "Something went wrong!");
   }
 
   async function handleWishlist() {
-    if (!currentUser) return toast.error("Please login first!");
+    if (!currentUser) {
+      router.push("/signup");
+      return toast.error("Please login or signup!");
+    }
 
     try {
       const res = await execute({

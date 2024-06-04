@@ -13,6 +13,7 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import WishlistButton from "../WishlistButton";
 import { updateCart } from "@/app/utils/updateCart";
+import { useRouter } from "next/navigation";
 
 export default function ProductList({
   product,
@@ -30,6 +31,8 @@ export default function ProductList({
   const { error, execute, loading } = usePostReq("/update-cart");
 
   const { data } = useAuth();
+
+  const router = useRouter();
 
   if (error) {
     toast.error(error || "Something went wrong!");
@@ -69,7 +72,8 @@ export default function ProductList({
 
   async function handleCart() {
     if (!currentUser) {
-      return toast.error("Please login!");
+      router.push("/signup");
+      return toast.error("Please login or signup!");
     }
 
     let quantity = 1;
