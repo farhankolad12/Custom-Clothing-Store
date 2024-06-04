@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import html2pdf from "html2pdf.js";
 import { Spinner } from "@material-tailwind/react";
 import ReviewsModel from "@/app/ui/profile/ReviewsModel";
+import Link from "next/link";
 
 function Page() {
   const [dLoading, setDLoading] = useState(false);
@@ -172,7 +173,13 @@ function Page() {
           </table>
         </div>
         <div className="w-full h-full overflow-x-scroll lg:overflow-auto my-12">
-          <h3 className="font-bold text-xl mb-3">Track Your Order</h3>
+          <Link
+            target="_blank"
+            href="https://essentialsbyla.shiprocket.co/tracking"
+            className="underline font-bold text-xl mb-3"
+          >
+            Track Your Order
+          </Link>
           <table className="w-full table-auto text-left">
             <thead>
               <tr>

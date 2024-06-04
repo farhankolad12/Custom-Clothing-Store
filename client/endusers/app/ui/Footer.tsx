@@ -85,6 +85,13 @@ export default function Footer() {
       </div>
       <div className="flex flex-wrap lg:justify-start justify-center gap-5 text-xs font-bold">
         <span>&copy; {new Date().getFullYear()}, Essentials By LA</span>
+        <Link
+          target="_blank"
+          href="https://essentialsbyla.shiprocket.co/tracking"
+        >
+          {" "}
+          &bull; Track Your Order
+        </Link>
         <Link shallow={true} href="/about">
           {" "}
           &bull; About Us

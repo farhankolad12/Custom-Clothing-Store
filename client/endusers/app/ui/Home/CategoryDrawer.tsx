@@ -42,6 +42,12 @@ export default function CategoryDrawer({
               );
             })}
             <CustomLink name="Shop" to="/shop" />
+            <Link
+              target="_blank"
+              href="https://essentialsbyla.shiprocket.co/tracking"
+            >
+              Track Your Order
+            </Link>
           </ul>
         </div>
         <div className="bg-[#f8f8f8] p-[2rem] w-full flex flex-col gap-4 items-start">
