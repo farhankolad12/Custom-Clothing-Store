@@ -183,7 +183,7 @@ function Page() {
                           <Link
                             className="link-underline-primary"
                             target="_blank"
-                            href={`https://www.essentialsbyla.com/product/${product._id}`}
+                            href={`https://www.essentialsbyla.com/product/${product.productId}`}
                           >
                             {product.name}
                           </Link>
