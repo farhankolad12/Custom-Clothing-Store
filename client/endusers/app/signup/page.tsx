@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { FormEvent, useEffect, useRef } from "react";
@@ -10,11 +11,12 @@ import { Spinner } from "@material-tailwind/react";
 import { toast } from "react-toastify";
 
 export default function Page() {
+  const [gender, setGender] = useState("");
+
   const fnameRef = useRef<HTMLInputElement>(null);
   const lnameRef = useRef<HTMLInputElement>(null);
   const phoneRef = useRef<HTMLInputElement>(null);
   const birthDateRef = useRef<HTMLInputElement>(null);
-  const genderRef = useRef<HTMLInputElement>(null);
   const emailRef = useRef<HTMLInputElement>(null);
   const passRef = useRef<HTMLInputElement>(null);
   const repPassRef = useRef<HTMLInputElement>(null);
@@ -42,7 +44,7 @@ export default function Page() {
         lname: lnameRef.current?.value,
         phone: phoneRef.current?.value,
         birthDate: birthDateRef.current?.value,
-        gender: genderRef.current?.value,
+        gender,
         email: emailRef.current?.value,
         pass: passRef.current?.value,
       });
@@ -125,7 +127,7 @@ export default function Page() {
               <div className="flex gap-2">
                 <div className="flex items-center gap-2">
                   <input
-                    ref={genderRef}
+                    onClick={() => setGender("Male")}
                     type="radio"
                     name="gender"
                     value="Male"
@@ -135,7 +137,7 @@ export default function Page() {
                 </div>
                 <div className="flex items-center gap-2">
                   <input
-                    ref={genderRef}
+                    onClick={() => setGender("Female")}
                     type="radio"
                     name="gender"
                     value="Female"
@@ -146,7 +148,7 @@ export default function Page() {
 
                 <div className="flex items-center gap-2">
                   <input
-                    ref={genderRef}
+                    onClick={() => setGender("Other")}
                     type="radio"
                     name="gender"
                     value="Other"
@@ -159,6 +161,7 @@ export default function Page() {
             <input
               type="email"
               id="email"
+              required
               className="cursor-pointer bg-transparent outline-none border-b-2 border-black"
               ref={emailRef}
               placeholder="EMAIL*"
