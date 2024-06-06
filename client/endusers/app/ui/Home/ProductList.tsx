@@ -117,6 +117,7 @@ export default function ProductList({
         setCartItems,
         data?.homePageContent?.shippingConfig
       );
+      router.push("/cart")
     } catch (err: any) {
       console.log(err);
       toast.error(err || "Wrong!");
