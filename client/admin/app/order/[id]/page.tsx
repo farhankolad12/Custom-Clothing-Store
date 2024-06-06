@@ -13,6 +13,7 @@ import formatCurrency from "@/app/utils/formatCurrency";
 import { useReactToPrint } from "react-to-print";
 import usePostReq from "@/app/hooks/usePostReq";
 import Image from "next/image";
+import Link from "next/link";
 
 function Page() {
   const { id } = useParams();
@@ -179,7 +180,13 @@ function Page() {
                       <td>{i + 1}</td>
                       <td>
                         <div className="d-flex flex-column">
-                          <span>{product.name}</span>
+                          <Link
+                            className="link-underline-primary"
+                            target="_blank"
+                            href={`https://www.essentialsbyla.com/product/${product._id}`}
+                          >
+                            {product.name}
+                          </Link>
                           {product.selectedCombination.combinations.map(
                             (combination) => {
                               return (
