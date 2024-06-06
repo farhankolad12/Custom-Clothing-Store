@@ -47,6 +47,7 @@ export type CategoriesType = {
 };
 
 export type ProductType = {
+  productId: string;
   quantity: number;
   selectedCombination: {
     id: string;
