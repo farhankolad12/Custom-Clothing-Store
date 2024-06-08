@@ -17,7 +17,7 @@ export default function UserCartRow({
           <Link
             className="link-underline-primary"
             target="_blank"
-            href={`http://localhost:3000/product/${product._id}`}
+            href={`https://essentialsbyla.com/product/${product._id}`}
           >
             {product.name}
           </Link>
