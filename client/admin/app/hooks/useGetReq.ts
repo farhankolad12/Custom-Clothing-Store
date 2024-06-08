@@ -9,7 +9,7 @@ export default function useGetReq(url: string, params: any) {
 
   useEffect(() => {
     (async () => {
-      setData(undefined);
+      // setData(undefined);
 
       return await fetch(
         `${
